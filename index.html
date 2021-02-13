@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta property="og:type" content="website">
@@ -145,7 +145,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/02/08/nodeJSupdate/">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/02/08/nodeJS-update/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -159,7 +159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/08/nodeJSupdate/" class="post-title-link" itemprop="url">Node.js 與 npm 更新的方式</a>
+            <a href="/2021/02/08/nodeJS-update/" class="post-title-link" itemprop="url">Node.js 與 npm 更新的方式</a>
         </h2>
 
         <div class="post-meta">
@@ -168,10 +168,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-02-08 22:46:49 / 修改時間：22:56:17" itemprop="dateCreated datePublished" datetime="2021-02-08T22:46:49+08:00">2021-02-08</time>
+              <time title="創建時間：2021-02-08 22:46:49" itemprop="dateCreated datePublished" datetime="2021-02-08T22:46:49+08:00">2021-02-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-02-09 23:09:44" itemprop="dateModified" datetime="2021-02-09T23:09:44+08:00">2021-02-09</time>
+              </span>
 
           
 
@@ -184,12 +190,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Node-js-更新"><a href="#Node-js-更新" class="headerlink" title="Node.js 更新"></a>Node.js 更新<br></h2><h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac<br></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm cache clean -f</span><br><span class="line">npm install -g n</span><br><span class="line"><span class="comment">// 若要更新到最後一個版本</span></span><br><span class="line">n latest</span><br><span class="line"><span class="comment">// 若要更新到穩定版本</span></span><br><span class="line">n stable</span><br></pre></td></tr></table></figure>
-<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows<br></h3><p>上面的方法用在 windows 是行不通的，由於 n 模塊不支援 windows，需在瀏覽器中打開 node 官網下載 LTS 版本的 node 安裝包，安裝後覆蓋同路徑即可。<br><br>查看 node 安裝路徑<br></p>
+          <h2 id="Node-js-更新"><a href="#Node-js-更新" class="headerlink" title="Node.js 更新"></a>Node.js 更新</h2><h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm cache clean -f</span><br><span class="line">npm install -g n</span><br><span class="line"><span class="comment">// 若要更新到最後一個版本</span></span><br><span class="line">n latest</span><br><span class="line"><span class="comment">// 若要更新到穩定版本</span></span><br><span class="line">n stable</span><br></pre></td></tr></table></figure>
+<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>上面的方法用在 windows 是行不通的，由於 n 模塊不支援 windows，需在瀏覽器中打開 node 官網下載 LTS 版本的 node 安裝包，安裝後覆蓋同路徑即可。<br><br>查看 node 安裝路徑<br></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">where</span> node</span><br></pre></td></tr></table></figure>
-<h2 id="檢查-Node-js-版本"><a href="#檢查-Node-js-版本" class="headerlink" title="檢查 Node.js 版本"></a>檢查 Node.js 版本<br></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
-<h2 id="NPM-更新"><a href="#NPM-更新" class="headerlink" title="NPM 更新"></a>NPM 更新<br></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g npm</span><br></pre></td></tr></table></figure>
-<h2 id="檢查-NPM-版本"><a href="#檢查-NPM-版本" class="headerlink" title="檢查 NPM 版本"></a>檢查 NPM 版本<br></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<h2 id="檢查-Node-js-版本"><a href="#檢查-Node-js-版本" class="headerlink" title="檢查 Node.js 版本"></a>檢查 Node.js 版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+<h2 id="NPM-更新"><a href="#NPM-更新" class="headerlink" title="NPM 更新"></a>NPM 更新</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g npm</span><br></pre></td></tr></table></figure>
+<h2 id="檢查-NPM-版本"><a href="#檢查-NPM-版本" class="headerlink" title="檢查 NPM 版本"></a>檢查 NPM 版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
 <p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
 
       
@@ -372,7 +378,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">John Doe</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
   </div>
 
         
@@ -398,7 +404,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
@@ -426,5 +432,8 @@
 
   
 
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
 </body>
 </html>
