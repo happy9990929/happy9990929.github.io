@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://happy9990929.github.io/2021/03/02/Vue3/</loc>
+    
+    <lastmod>2021-03-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/2021/02/08/nodeJS-update/</loc>
     
     <lastmod>2021-02-16</lastmod>
@@ -25,22 +32,29 @@
 
   <url>
     <loc>https://happy9990929.github.io/</loc>
-    <lastmod>2021-03-02</lastmod>
+    <lastmod>2021-03-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
+    <loc>https://happy9990929.github.io/tags/VueJs/</loc>
+    <lastmod>2021-03-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/nodeJs/</loc>
-    <lastmod>2021-03-02</lastmod>
+    <lastmod>2021-03-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/npm/</loc>
-    <lastmod>2021-03-02</lastmod>
+    <lastmod>2021-03-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -48,8 +62,15 @@
 
   
   <url>
+    <loc>https://happy9990929.github.io/categories/VueJs3/</loc>
+    <lastmod>2021-03-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/categories/nodeJs/</loc>
-    <lastmod>2021-03-02</lastmod>
+    <lastmod>2021-03-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
