@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://happy9990929.github.io/2021/03/05/axios-api/</loc>
+    
+    <lastmod>2021-03-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/2021/03/05/lifecycle-hooks/</loc>
+    
+    <lastmod>2021-03-05</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/2021/03/02/vue3-base1/</loc>
     
     <lastmod>2021-03-05</lastmod>
@@ -124,6 +138,13 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/v-bind/</loc>
+    <lastmod>2021-03-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/</loc>
     <lastmod>2021-03-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

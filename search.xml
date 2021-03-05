@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>非同步處理 Axios</title>
+      <link href="2021/03/05/axios-api/"/>
+      <url>2021/03/05/axios-api/</url>
+      
+        <content type="html"><![CDATA[<h1 id="使用-Axios-取得-API"><a href="#使用-Axios-取得-API" class="headerlink" title="使用 Axios 取得 API"></a>使用 Axios 取得 API</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">axios.get(<span class="string">&quot;https://vue-lessons-api.herokuapp.com/photo/list&quot;</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res.data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><a id="more"></a><hr><p>未完待續</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>VUE的生命週期</title>
+      <link href="2021/03/05/lifecycle-hooks/"/>
+      <url>2021/03/05/lifecycle-hooks/</url>
+      
+        <content type="html"><![CDATA[<h1 id="VUE-的生命週期-Lifecycle-Hooks"><a href="#VUE-的生命週期-Lifecycle-Hooks" class="headerlink" title="VUE 的生命週期(Lifecycle Hooks)"></a>VUE 的生命週期(Lifecycle Hooks)</h1><p><strong>setup</strong> =&gt; vue 掛載到 app 上面後執行<br><strong>onBeforeMount</strong> =&gt; DOM 渲染前執行<br><strong>onMounted</strong> =&gt; DOM 渲染完成後執行<br><strong>onBeforeUpdate</strong> =&gt; 資料更新 DOM 更改前執行<br><strong>onUpdated</strong> =&gt; 資料更新 DOM 更改後執行</p><a id="more"></a><p><strong>onBeforeUnmount</strong> =&gt; 組件銷毀前執行<br><strong>onUnmounted</strong> =&gt; 組件銷毀後執行<br><strong>onErrorCaptured</strong> =&gt; 當組件發出錯誤時後調用<br><strong>onRenderTracked</strong> =&gt; 監控 virtual DOM 重新選染時調用 ( 此事件告訴你操作什麼監聽了組件以及該操作的物件)<br><strong>onRenderTriggered</strong> =&gt; 監控 virtual DOM 重新選染時調用 ( 此事件告訴你操作什麼觸發了重新渲染，以及該操作的物件)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> VueJs3 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 生命週期 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Vue3.0基本操作-2</title>
       <link href="2021/03/04/vue3-base2/"/>
       <url>2021/03/04/vue3-base2/</url>

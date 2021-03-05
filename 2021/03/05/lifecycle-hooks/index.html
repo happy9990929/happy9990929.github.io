@@ -21,18 +21,20 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一文前端筆記">
-<meta property="og:url" content="https://happy9990929.github.io/categories/VueJs3/index.html">
+  <meta name="description" content="VUE 的生命週期(Lifecycle Hooks)setup &#x3D;&gt; vue 掛載到 app 上面後執行onBeforeMount &#x3D;&gt; DOM 渲染前執行onMounted &#x3D;&gt; DOM 渲染完成後執行onBeforeUpdate &#x3D;&gt; 資料更新 DOM 更改前執行onUpdated &#x3D;&gt; 資料更新 DOM 更改後執行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VUE的生命週期">
+<meta property="og:url" content="https://happy9990929.github.io/2021/03/05/lifecycle-hooks/index.html">
 <meta property="og:site_name" content="一文前端筆記">
-<meta property="og:description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+<meta property="og:description" content="VUE 的生命週期(Lifecycle Hooks)setup &#x3D;&gt; vue 掛載到 app 上面後執行onBeforeMount &#x3D;&gt; DOM 渲染前執行onMounted &#x3D;&gt; DOM 渲染完成後執行onBeforeUpdate &#x3D;&gt; 資料更新 DOM 更改前執行onUpdated &#x3D;&gt; 資料更新 DOM 更改後執行">
 <meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-03-05T13:14:22.000Z">
+<meta property="article:modified_time" content="2021-03-05T13:38:48.333Z">
 <meta property="article:author" content="Yi Wen Wang">
-<meta property="article:tag" content="VUE, Javascript, JS, HTML, CSS">
+<meta property="article:tag" content="生命週期">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://happy9990929.github.io/categories/VueJs3/">
+<link rel="canonical" href="https://happy9990929.github.io/2021/03/05/lifecycle-hooks/">
 
 
 <script id="page-configurations">
@@ -40,12 +42,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-TW'
   };
 </script>
 
-  <title>分類: VueJs3 | 一文前端筆記</title>
+  <title>VUE的生命週期 | 一文前端筆記</title>
   
 
 
@@ -182,97 +184,136 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/05/lifecycle-hooks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VUE的生命週期
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-03-05 21:14:22 / 修改時間：21:38:48" itemprop="dateCreated datePublished" datetime="2021-03-05T21:14:22+08:00">2021-03-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">VueJs3
-          <small>分類</small>
-        </h2>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/03/05/lifecycle-hooks/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/05/lifecycle-hooks/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        <h1 id="VUE-的生命週期-Lifecycle-Hooks"><a href="#VUE-的生命週期-Lifecycle-Hooks" class="headerlink" title="VUE 的生命週期(Lifecycle Hooks)"></a>VUE 的生命週期(Lifecycle Hooks)</h1><p><strong>setup</strong> =&gt; vue 掛載到 app 上面後執行<br><strong>onBeforeMount</strong> =&gt; DOM 渲染前執行<br><strong>onMounted</strong> =&gt; DOM 渲染完成後執行<br><strong>onBeforeUpdate</strong> =&gt; 資料更新 DOM 更改前執行<br><strong>onUpdated</strong> =&gt; 資料更新 DOM 更改後執行</p>
+<a id="more"></a>
+
+<p><strong>onBeforeUnmount</strong> =&gt; 組件銷毀前執行<br><strong>onUnmounted</strong> =&gt; 組件銷毀後執行<br><strong>onErrorCaptured</strong> =&gt; 當組件發出錯誤時後調用<br><strong>onRenderTracked</strong> =&gt; 監控 virtual DOM 重新選染時調用 ( 此事件告訴你操作什麼監聽了組件以及該操作的物件)<br><strong>onRenderTriggered</strong> =&gt; 監控 virtual DOM 重新選染時調用 ( 此事件告訴你操作什麼觸發了重新渲染，以及該操作的物件)</p>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-05T21:14:22+08:00"
-              content="2021-03-05">
-          03-05
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/" rel="tag"># 生命週期</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/05/lifecycle-hooks/" itemprop="url">
-            <span itemprop="name">VUE的生命週期</span>
-          </a>
-      </div>
+        
 
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-04T20:44:53+08:00"
-              content="2021-03-04">
-          03-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/04/vue3-base2/" itemprop="url">
-            <span itemprop="name">Vue3.0基本操作-2</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-02T20:52:45+08:00"
-              content="2021-03-02">
-          03-02
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/02/vue3-base1/" itemprop="url">
-            <span itemprop="name">Vue3.0基本操作-1</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/04/vue3-base2/" rel="prev" title="Vue3.0基本操作-2">
+      <i class="fa fa-chevron-left"></i> Vue3.0基本操作-2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/05/axios-api/" rel="next" title="非同步處理 Axios">
+      非同步處理 Axios <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-  </div>
+      </footer>
+    
+  </article>
   
   
-  
-
   
 
 
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -319,6 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VUE-%E7%9A%84%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F-Lifecycle-Hooks"><span class="nav-number">1.</span> <span class="nav-text">VUE 的生命週期(Lifecycle Hooks)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -465,6 +507,26 @@
   }
   // defer loading until the whole page loading is completed
   window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2021/03/05/lifecycle-hooks/";
+    this.page.identifier = "2021/03/05/lifecycle-hooks/";
+    this.page.title = "VUE的生命週期";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
 </script>
 
   
