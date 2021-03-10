@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>環境建置 &amp; Vue-cli專案</title>
+      <link href="2021/03/08/vue-cli/"/>
+      <url>2021/03/08/vue-cli/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Node-js-環境建置"><a href="#Node-js-環境建置" class="headerlink" title="Node.js 環境建置"></a>Node.js 環境建置</h1><h2 id="下載-NVM"><a href="#下載-NVM" class="headerlink" title="下載 NVM"></a>下載 NVM</h2><p>nvm 是 Node.js 的版本管理器 (version manager)，可在同一台主機上安裝多個版本的 Node.js 環境，因為不同專案可能會使用不同的 Node.js 版本，那就需要透過一個版本管理器來切換不同的 Node.js 版本。<br><br>NVM install - 點選右邊的 releases<br><a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a></p><a id="more"></a><p>NVM 常用指令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nvm list // 列出目前電腦有安裝的 nodejs 版本</span><br><span class="line">nvm list available // 目前網路上可用的 nodejs 版本列表</span><br><span class="line">nvm install v12.19.0 // 該 nodejs 版本下載安裝</span><br><span class="line">nvm uninstall v12.19.0 // 移除該 nodejs 版本</span><br><span class="line">nvm use v12.19.0 // 使用該 nodejs 版本</span><br><span class="line">nvm -v // 目前該 nvm 版本</span><br></pre></td></tr></table></figure><h2 id="下載-node-js"><a href="#下載-node-js" class="headerlink" title="下載 node.js"></a>下載 node.js</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nvm install v12.19.0 // 該 nodejs 版本下載安裝</span><br><span class="line">nvm use v12.19.0 // 使用該 nodejs 版本</span><br><span class="line">node -v // 目前該 node 版本</span><br></pre></td></tr></table></figure><h2 id="檢查-npm-是否安裝成功"><a href="#檢查-npm-是否安裝成功" class="headerlink" title="檢查 npm 是否安裝成功"></a>檢查 npm 是否安裝成功</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm -v // 目前該 npm 版本</span><br></pre></td></tr></table></figure><hr><h1 id="安裝-Vue-cli"><a href="#安裝-Vue-cli" class="headerlink" title="安裝 Vue-cli"></a>安裝 Vue-cli</h1><p>Vue CLI 是一個基於 Vue.js 進行快速開發的完整系統，確保各種構建工具能夠平穩銜接，使開發人員可以專注在撰寫應用上，而不必花好幾天去糾結配置的問題。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br></pre></td></tr></table></figure><h1 id="建構一個新的-Vue-專案"><a href="#建構一個新的-Vue-專案" class="headerlink" title="建構一個新的 Vue 專案"></a>建構一個新的 Vue 專案</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vue create my-project // my-project 為要創建的資料夾名稱</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">vue ui // ui介面設定</span><br></pre></td></tr></table></figure><br>Please pick a preset: (請選擇一個預設)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Manually select features //手動選擇功能</span><br></pre></td></tr></table></figure><br>Check the features needed for your project: (檢查項目所需的功能)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Choose Vue version //選擇 Vue 版本</span><br><span class="line">Babel //JavaScript 轉譯器，可將 ES6+ 程式碼轉為等效的 ES5 程式碼</span><br><span class="line">Router // 路由</span><br><span class="line">CSS pre-processors //CSS 預處理器</span><br></pre></td></tr></table></figure><br>Choose a version of Vue.js that you want to start the project with (選擇Vue版本)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.x (Preview)</span><br></pre></td></tr></table></figure><br>Use history mode for router?<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y</span><br></pre></td></tr></table></figure><br>Pick a CSS pre-processor<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sass/SCSS (with node-sass)</span><br></pre></td></tr></table></figure><br>Where do you prefer placing config for Babel, ESLint, etc.?<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">In package.json</span><br></pre></td></tr></table></figure><br>Save this as a preset for future projects?<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y</span><br></pre></td></tr></table></figure><p>Save preset as: 直接 ENTER<br><br></p><p>建立完後啟動 serve</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> my-project // 進入資料夾</span><br><span class="line">npm run serve // 開啟serve</span><br><span class="line">npm run build // 建立dist</span><br></pre></td></tr></table></figure><hr><h1 id="Vue-cli-專案結構解析"><a href="#Vue-cli-專案結構解析" class="headerlink" title="Vue-cli 專案結構解析"></a>Vue-cli 專案結構解析</h1><p>node_modules：透過 npm 下載的套件跟工具都會放在這個資料夾裡面<br><br>package.json：關於這整包專案所有的資訊，包含安裝套件版本、專案版本、npm 指令都可以在這個 json 檔案裡面找得到，之後要搬移專案重新安裝套件也需要靠這個 json 檔案<br><br>package-lock.json：專門紀錄 package.json 裡面更細節的內容，例如安裝的套件的詳細版本，或是確認你的 dependency (依賴)是被哪個函式庫所要求的等等</p><hr><p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>非同步處理 Axios</title>
       <link href="2021/03/05/axios-api/"/>
       <url>2021/03/05/axios-api/</url>
@@ -20,11 +33,11 @@
       
         <tags>
             
-            <tag> axios </tag>
-            
             <tag> Vue.js </tag>
             
             <tag> javascript </tag>
+            
+            <tag> axios </tag>
             
         </tags>
       
@@ -49,11 +62,11 @@
       
         <tags>
             
+            <tag> 生命週期 </tag>
+            
             <tag> Vue.js </tag>
             
             <tag> javascript </tag>
-            
-            <tag> 生命週期 </tag>
             
         </tags>
       

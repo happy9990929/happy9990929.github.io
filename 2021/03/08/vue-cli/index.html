@@ -21,22 +21,20 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="VUE 的生命週期(Lifecycle Hooks)setup &#x3D;&gt; vue 掛載到 app 上面後執行onBeforeMount &#x3D;&gt; DOM 渲染前執行onMounted &#x3D;&gt; DOM 渲染完成後執行onBeforeUpdate &#x3D;&gt; 資料更新 DOM 更改前執行onUpdated &#x3D;&gt; 資料更新 DOM 更改後執行">
+  <meta name="description" content="Node.js 環境建置下載 NVMnvm 是 Node.js 的版本管理器 (version manager)，可在同一台主機上安裝多個版本的 Node.js 環境，因為不同專案可能會使用不同的 Node.js 版本，那就需要透過一個版本管理器來切換不同的 Node.js 版本。NVM install - 點選右邊的 releaseshttps:&#x2F;&#x2F;github.com&#x2F;coreybutler&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VUE的生命週期">
-<meta property="og:url" content="https://happy9990929.github.io/2021/03/05/lifecycle-hooks/index.html">
+<meta property="og:title" content="環境建置 &amp; Vue-cli專案">
+<meta property="og:url" content="https://happy9990929.github.io/2021/03/08/vue-cli/index.html">
 <meta property="og:site_name" content="一文前端筆記">
-<meta property="og:description" content="VUE 的生命週期(Lifecycle Hooks)setup &#x3D;&gt; vue 掛載到 app 上面後執行onBeforeMount &#x3D;&gt; DOM 渲染前執行onMounted &#x3D;&gt; DOM 渲染完成後執行onBeforeUpdate &#x3D;&gt; 資料更新 DOM 更改前執行onUpdated &#x3D;&gt; 資料更新 DOM 更改後執行">
+<meta property="og:description" content="Node.js 環境建置下載 NVMnvm 是 Node.js 的版本管理器 (version manager)，可在同一台主機上安裝多個版本的 Node.js 環境，因為不同專案可能會使用不同的 Node.js 版本，那就需要透過一個版本管理器來切換不同的 Node.js 版本。NVM install - 點選右邊的 releaseshttps:&#x2F;&#x2F;github.com&#x2F;coreybutler&#x2F;">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2021-03-05T13:14:22.000Z">
-<meta property="article:modified_time" content="2021-03-08T13:16:52.444Z">
+<meta property="article:published_time" content="2021-03-08T14:59:21.000Z">
+<meta property="article:modified_time" content="2021-03-10T13:05:22.536Z">
 <meta property="article:author" content="Yi Wen Wang">
-<meta property="article:tag" content="生命週期">
-<meta property="article:tag" content="Vue.js">
-<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="VUE, Javascript, JS, HTML, CSS">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://happy9990929.github.io/2021/03/05/lifecycle-hooks/">
+<link rel="canonical" href="https://happy9990929.github.io/2021/03/08/vue-cli/">
 
 
 <script id="page-configurations">
@@ -49,7 +47,7 @@
   };
 </script>
 
-  <title>VUE的生命週期 | 一文前端筆記</title>
+  <title>環境建置 & Vue-cli專案 | 一文前端筆記</title>
   
 
 
@@ -193,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/05/lifecycle-hooks/">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/08/vue-cli/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -206,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          VUE的生命週期
+          環境建置 & Vue-cli專案
         </h1>
 
         <div class="post-meta">
@@ -216,24 +214,15 @@
               </span>
               <span class="post-meta-item-text">發表於</span>
 
-              <time title="創建時間：2021-03-05 21:14:22" itemprop="dateCreated datePublished" datetime="2021-03-05T21:14:22+08:00">2021-03-05</time>
+              <time title="創建時間：2021-03-08 22:59:21" itemprop="dateCreated datePublished" datetime="2021-03-08T22:59:21+08:00">2021-03-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-03-08 21:16:52" itemprop="dateModified" datetime="2021-03-08T21:16:52+08:00">2021-03-08</time>
+                <time title="修改時間：2021-03-10 21:05:22" itemprop="dateModified" datetime="2021-03-10T21:05:22+08:00">2021-03-10</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
-                </span>
-            </span>
 
           
             <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
@@ -251,8 +240,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2021/03/05/lifecycle-hooks/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/05/lifecycle-hooks/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/03/08/vue-cli/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/08/vue-cli/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -267,10 +256,50 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="VUE-的生命週期-Lifecycle-Hooks"><a href="#VUE-的生命週期-Lifecycle-Hooks" class="headerlink" title="VUE 的生命週期(Lifecycle Hooks)"></a>VUE 的生命週期(Lifecycle Hooks)</h1><p><strong>setup</strong> =&gt; vue 掛載到 app 上面後執行<br><strong>onBeforeMount</strong> =&gt; DOM 渲染前執行<br><strong>onMounted</strong> =&gt; DOM 渲染完成後執行<br><strong>onBeforeUpdate</strong> =&gt; 資料更新 DOM 更改前執行<br><strong>onUpdated</strong> =&gt; 資料更新 DOM 更改後執行</p>
+        <h1 id="Node-js-環境建置"><a href="#Node-js-環境建置" class="headerlink" title="Node.js 環境建置"></a>Node.js 環境建置</h1><h2 id="下載-NVM"><a href="#下載-NVM" class="headerlink" title="下載 NVM"></a>下載 NVM</h2><p>nvm 是 Node.js 的版本管理器 (version manager)，可在同一台主機上安裝多個版本的 Node.js 環境，因為不同專案可能會使用不同的 Node.js 版本，那就需要透過一個版本管理器來切換不同的 Node.js 版本。<br><br>NVM install - 點選右邊的 releases<br><a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a></p>
 <a id="more"></a>
 
-<p><strong>onBeforeUnmount</strong> =&gt; 組件銷毀前執行<br><strong>onUnmounted</strong> =&gt; 組件銷毀後執行<br><strong>onErrorCaptured</strong> =&gt; 當組件發出錯誤時後調用<br><strong>onRenderTracked</strong> =&gt; 監控 virtual DOM 重新選染時調用 ( 此事件告訴你操作什麼監聽了組件以及該操作的物件)<br><strong>onRenderTriggered</strong> =&gt; 監控 virtual DOM 重新選染時調用 ( 此事件告訴你操作什麼觸發了重新渲染，以及該操作的物件)</p>
+<p>NVM 常用指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nvm list // 列出目前電腦有安裝的 nodejs 版本</span><br><span class="line">nvm list available // 目前網路上可用的 nodejs 版本列表</span><br><span class="line">nvm install v12.19.0 // 該 nodejs 版本下載安裝</span><br><span class="line">nvm uninstall v12.19.0 // 移除該 nodejs 版本</span><br><span class="line">nvm use v12.19.0 // 使用該 nodejs 版本</span><br><span class="line">nvm -v // 目前該 nvm 版本</span><br></pre></td></tr></table></figure>
+<h2 id="下載-node-js"><a href="#下載-node-js" class="headerlink" title="下載 node.js"></a>下載 node.js</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nvm install v12.19.0 // 該 nodejs 版本下載安裝</span><br><span class="line">nvm use v12.19.0 // 使用該 nodejs 版本</span><br><span class="line">node -v // 目前該 node 版本</span><br></pre></td></tr></table></figure>
+<h2 id="檢查-npm-是否安裝成功"><a href="#檢查-npm-是否安裝成功" class="headerlink" title="檢查 npm 是否安裝成功"></a>檢查 npm 是否安裝成功</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm -v // 目前該 npm 版本</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="安裝-Vue-cli"><a href="#安裝-Vue-cli" class="headerlink" title="安裝 Vue-cli"></a>安裝 Vue-cli</h1><p>Vue CLI 是一個基於 Vue.js 進行快速開發的完整系統，確保各種構建工具能夠平穩銜接，使開發人員可以專注在撰寫應用上，而不必花好幾天去糾結配置的問題。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br></pre></td></tr></table></figure>
+<h1 id="建構一個新的-Vue-專案"><a href="#建構一個新的-Vue-專案" class="headerlink" title="建構一個新的 Vue 專案"></a>建構一個新的 Vue 專案</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vue create my-project // my-project 為要創建的資料夾名稱</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">vue ui // ui介面設定</span><br></pre></td></tr></table></figure>
+<br>
+Please pick a preset: (請選擇一個預設)
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Manually select features //手動選擇功能</span><br></pre></td></tr></table></figure>
+<br>
+Check the features needed for your project: (檢查項目所需的功能)
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Choose Vue version //選擇 Vue 版本</span><br><span class="line">Babel //JavaScript 轉譯器，可將 ES6+ 程式碼轉為等效的 ES5 程式碼</span><br><span class="line">Router // 路由</span><br><span class="line">CSS pre-processors //CSS 預處理器</span><br></pre></td></tr></table></figure>
+<br>
+Choose a version of Vue.js that you want to start the project with (選擇Vue版本)
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.x (Preview)</span><br></pre></td></tr></table></figure>
+<br>
+Use history mode for router?
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y</span><br></pre></td></tr></table></figure>
+<br>
+Pick a CSS pre-processor
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sass/SCSS (with node-sass)</span><br></pre></td></tr></table></figure>
+<br>
+Where do you prefer placing config for Babel, ESLint, etc.?
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">In package.json</span><br></pre></td></tr></table></figure>
+<br>
+Save this as a preset for future projects?
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y</span><br></pre></td></tr></table></figure>
+<p>Save preset as: 直接 ENTER<br><br></p>
+<p>建立完後啟動 serve</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> my-project // 進入資料夾</span><br><span class="line">npm run serve // 開啟serve</span><br><span class="line">npm run build // 建立dist</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Vue-cli-專案結構解析"><a href="#Vue-cli-專案結構解析" class="headerlink" title="Vue-cli 專案結構解析"></a>Vue-cli 專案結構解析</h1><p>node_modules：透過 npm 下載的套件跟工具都會放在這個資料夾裡面<br><br>package.json：關於這整包專案所有的資訊，包含安裝套件版本、專案版本、npm 指令都可以在這個 json 檔案裡面找得到，之後要搬移專案重新安裝套件也需要靠這個 json 檔案<br><br>package-lock.json：專門紀錄 package.json 裡面更細節的內容，例如安裝的套件的詳細版本，或是確認你的 dependency (依賴)是被哪個函式庫所要求的等等</p>
 <hr>
 <p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
 
@@ -288,11 +317,6 @@
     
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/" rel="tag"># 生命週期</a>
-              <a href="/tags/Vue-js/" rel="tag"># Vue.js</a>
-              <a href="/tags/javascript/" rel="tag"># javascript</a>
-          </div>
 
         
 
@@ -300,13 +324,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/04/vue3-base2/" rel="prev" title="Vue3.0基本操作-2">
-      <i class="fa fa-chevron-left"></i> Vue3.0基本操作-2
+    <a href="/2021/03/05/axios-api/" rel="prev" title="非同步處理 Axios">
+      <i class="fa fa-chevron-left"></i> 非同步處理 Axios
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/03/05/axios-api/" rel="next" title="非同步處理 Axios">
-      非同步處理 Axios <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -372,7 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VUE-%E7%9A%84%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F-Lifecycle-Hooks"><span class="nav-number">1.</span> <span class="nav-text">VUE 的生命週期(Lifecycle Hooks)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Node-js-%E7%92%B0%E5%A2%83%E5%BB%BA%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">Node.js 環境建置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89-NVM"><span class="nav-number">1.1.</span> <span class="nav-text">下載 NVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89-node-js"><span class="nav-number">1.2.</span> <span class="nav-text">下載 node.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AA%A2%E6%9F%A5-npm-%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%9D%E6%88%90%E5%8A%9F"><span class="nav-number">1.3.</span> <span class="nav-text">檢查 npm 是否安裝成功</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-Vue-cli"><span class="nav-number">2.</span> <span class="nav-text">安裝 Vue-cli</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BB%BA%E6%A7%8B%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84-Vue-%E5%B0%88%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">建構一個新的 Vue 專案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-cli-%E5%B0%88%E6%A1%88%E7%B5%90%E6%A7%8B%E8%A7%A3%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">Vue-cli 專案結構解析</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -522,9 +543,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "https://happy9990929.github.io/2021/03/05/lifecycle-hooks/";
-    this.page.identifier = "2021/03/05/lifecycle-hooks/";
-    this.page.title = "VUE的生命週期";
+    this.page.url = "https://happy9990929.github.io/2021/03/08/vue-cli/";
+    this.page.identifier = "2021/03/08/vue-cli/";
+    this.page.title = "環境建置 & Vue-cli專案";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
