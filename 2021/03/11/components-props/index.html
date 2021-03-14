@@ -21,15 +21,15 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="組件資料傳遞 Props上層的 data 透過 props 往下傳，不會往上傳回 data，所以下層的資料改變不會影響到上層(data) App.vue 1234567891011121314151617&lt;script&gt;import PropsTest from &amp;#x27;@&#x2F;components&#x2F;PropsTest.vue&amp;#x27;import &amp;#123; ref &amp;#125;">
+  <meta name="description" content="組件資料傳遞 Props (父傳子)上層的 data 透過 props 往下傳，不會往上傳回 data，所以下層的資料改變不會影響到上層(data) App.vue 1234567891011121314151617&lt;script&gt;import PropsTest from &amp;#x27;@&#x2F;components&#x2F;PropsTest.vue&amp;#x27;import &amp;#123; ref">
 <meta property="og:type" content="article">
 <meta property="og:title" content="組件資料傳遞 Props">
 <meta property="og:url" content="https://happy9990929.github.io/2021/03/11/components-props/index.html">
 <meta property="og:site_name" content="一文前端筆記">
-<meta property="og:description" content="組件資料傳遞 Props上層的 data 透過 props 往下傳，不會往上傳回 data，所以下層的資料改變不會影響到上層(data) App.vue 1234567891011121314151617&lt;script&gt;import PropsTest from &amp;#x27;@&#x2F;components&#x2F;PropsTest.vue&amp;#x27;import &amp;#123; ref &amp;#125;">
+<meta property="og:description" content="組件資料傳遞 Props (父傳子)上層的 data 透過 props 往下傳，不會往上傳回 data，所以下層的資料改變不會影響到上層(data) App.vue 1234567891011121314151617&lt;script&gt;import PropsTest from &amp;#x27;@&#x2F;components&#x2F;PropsTest.vue&amp;#x27;import &amp;#123; ref">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-03-11T13:06:41.000Z">
-<meta property="article:modified_time" content="2021-03-11T14:52:24.332Z">
+<meta property="article:modified_time" content="2021-03-14T03:16:49.548Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="Vue.js">
 <meta property="article:tag" content="javascript">
@@ -215,10 +215,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-03-11 21:06:41 / 修改時間：22:52:24" itemprop="dateCreated datePublished" datetime="2021-03-11T21:06:41+08:00">2021-03-11</time>
+              <time title="創建時間：2021-03-11 21:06:41" itemprop="dateCreated datePublished" datetime="2021-03-11T21:06:41+08:00">2021-03-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-03-14 11:16:49" itemprop="dateModified" datetime="2021-03-14T11:16:49+08:00">2021-03-14</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -261,7 +267,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="組件資料傳遞-Props"><a href="#組件資料傳遞-Props" class="headerlink" title="組件資料傳遞 Props"></a>組件資料傳遞 Props</h1><p>上層的 data 透過 props 往下傳，不會往上傳回 data，所以下層的資料改變不會影響到上層(data)</p>
+        <h1 id="組件資料傳遞-Props-父傳子"><a href="#組件資料傳遞-Props-父傳子" class="headerlink" title="組件資料傳遞 Props (父傳子)"></a>組件資料傳遞 Props (父傳子)</h1><p>上層的 data 透過 props 往下傳，不會往上傳回 data，所以下層的資料改變不會影響到上層(data)</p>
 <p>App.vue</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> PropsTest <span class="keyword">from</span> <span class="string">&#x27;@/components/PropsTest.vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    PropsTest</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> data = ref(<span class="string">&#x27;hello Vue!&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span>&#123; data &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;PropsTest :msg=<span class="string">&quot;data&quot;</span>/&gt; <span class="comment">// :子層屬性=&quot;父層 data&quot;</span></span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -310,7 +316,10 @@
     <a href="/2021/03/10/components-base/" rel="prev" title="Vue Component 組件基本介紹">
       <i class="fa fa-chevron-left"></i> Vue Component 組件基本介紹
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/14/components-emit/" rel="next" title="組件資料傳遞 emit">
+      組件資料傳遞 emit <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -376,7 +385,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%84%E4%BB%B6%E8%B3%87%E6%96%99%E5%82%B3%E9%81%9E-Props"><span class="nav-number">1.</span> <span class="nav-text">組件資料傳遞 Props</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Props-%E5%9E%8B%E6%85%8B"><span class="nav-number">2.</span> <span class="nav-text">Props 型態</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Props-%E5%AE%9A%E7%BE%A9%E5%90%84%E5%80%8B%E5%9E%8B%E5%88%A5%E7%9A%84%E9%A0%90%E8%A8%AD%E5%80%BC"><span class="nav-number">3.</span> <span class="nav-text">Props 定義各個型別的預設值</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%84%E4%BB%B6%E8%B3%87%E6%96%99%E5%82%B3%E9%81%9E-Props-%E7%88%B6%E5%82%B3%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">組件資料傳遞 Props (父傳子)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Props-%E5%9E%8B%E6%85%8B"><span class="nav-number">2.</span> <span class="nav-text">Props 型態</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Props-%E5%AE%9A%E7%BE%A9%E5%90%84%E5%80%8B%E5%9E%8B%E5%88%A5%E7%9A%84%E9%A0%90%E8%A8%AD%E5%80%BC"><span class="nav-number">3.</span> <span class="nav-text">Props 定義各個型別的預設值</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -390,7 +399,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -403,7 +412,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
