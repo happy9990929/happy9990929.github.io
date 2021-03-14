@@ -188,6 +188,201 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/14/vue-router/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/14/vue-router/" class="post-title-link" itemprop="url">Vue Router 網址路由</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-03-14 21:36:26 / 修改時間：23:01:59" itemprop="dateCreated datePublished" datetime="2021-03-14T21:36:26+08:00">2021-03-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/03/14/vue-router/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/14/vue-router/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="單頁式應用"><a href="#單頁式應用" class="headerlink" title="單頁式應用"></a>單頁式應用</h1><p>single-page application，縮寫 SPA<br>透過 JS 動態渲染當前頁面來與使用者互動，而非傳統的從伺服器重新載入整個新頁面。這種方法避免了頁面之間切換打斷用戶體驗，使應用程式更像一個桌面應用程式。</p>
+<h1 id="router-view"><a href="#router-view" class="headerlink" title="router-view"></a>router-view</h1><p>將會改變的區塊使用 router-view 顯示</p>
+<p>App.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="設定路由"><a href="#設定路由" class="headerlink" title="設定路由"></a>設定路由</h1><p>將 Home、404 頁面直接一進入就 import，其他頁面使用動態 import 組件，點擊該頁面時，才會載入組件。<br>動態 import 組件 build 時每個頁面會是一支獨立的 JS。<br>如全部頁面直接一進入就 import，頁面一多時會影響效能; 但如果是小專案，頁面很少時，可以直接全部 import，減少 request 的數量。</p>
+<p>router index.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">&quot;../views/Home.vue&quot;</span>; <span class="comment">// 直接 import</span></span><br><span class="line"><span class="keyword">import</span> NotFoundComponent <span class="keyword">from</span> <span class="string">&quot;../views/NotFoundComponent.vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;Home&quot;</span>,</span><br><span class="line">    component: Home,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/rwd&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;rwd&quot;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;../views/Rwd.vue&quot;</span>), <span class="comment">// 動態 import</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/vuejs&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;vuejs&quot;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;../views/Vuejs.vue&quot;</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/reactjs&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;reactjs&quot;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;../views/Reactjs.vue&quot;</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/html5&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;html5&quot;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;../views/Html5.vue&quot;</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/nodejs&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;nodejs&quot;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;../views/Nodejs.vue&quot;</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">&quot;/:pathMatch(.*)&quot;</span>, <span class="attr">component</span>: NotFoundComponent &#125;, <span class="comment">// 需放最下面，上面的path都沒有時即顯示此頁面</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span><br><span class="line">  history: createWebHistory(process.env.BASE_URL),</span><br><span class="line">  routes,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router;</span><br></pre></td></tr></table></figure>
+<h2 id="router-例外處理-404"><a href="#router-例外處理-404" class="headerlink" title="router 例外處理(404)"></a>router 例外處理(404)</h2><p>{ path: “/:pathMatch(.*)”, component: NotFoundComponent }<br>404 頁面的 path 需放最下面，載入時會從上到下開始跑，上面的 path 都沒有 Match 時即會顯示此頁面<br></p>
+<h2 id="History-modes"><a href="#History-modes" class="headerlink" title="History modes"></a>History modes</h2><p><b>createWebHashHistory()</b><br>會透過 # 字號來當作網址切換的操作，但是會跟錨點相撞，對 SEO 有不利的影響<br><br><b>createWebHistory()</b><br>需要跟後端搭配重新配置根目錄下的 router，還要自己配置例外處理的頁面例如 404 等</p>
+<br>
+
+<h1 id="router-link"><a href="#router-link" class="headerlink" title="router-link"></a>router-link</h1><p>設定 router-link 指向連結頁面</p>
+<p>header.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/rwd&quot;</span>&gt;</span>RWD<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/vuejs&quot;</span>&gt;</span>VUEJS<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/reactjs&quot;</span>&gt;</span>REACTJS<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/html5&quot;</span>&gt;</span>HTML5<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/nodejs&quot;</span>&gt;</span>NODEJS<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+
+          <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/14/vue-slot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/14/vue-slot/" class="post-title-link" itemprop="url">Slot 插槽</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-03-14 21:06:24 / 修改時間：21:31:00" itemprop="dateCreated datePublished" datetime="2021-03-14T21:06:24+08:00">2021-03-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/03/14/vue-slot/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/14/vue-slot/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Slot-插槽"><a href="#Slot-插槽" class="headerlink" title="Slot 插槽"></a>Slot 插槽</h1><p>在子元件上面開個洞， 由外層元件將內容置放在至子層元件指定的位置中<br>可解決樣式一樣，但內容不一樣的組件</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/14/vue-slot/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/14/vue-directive/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -213,7 +408,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-03-14 17:41:51 / 修改時間：18:31:13" itemprop="dateCreated datePublished" datetime="2021-03-14T17:41:51+08:00">2021-03-14</time>
+              <time title="創建時間：2021-03-14 17:41:51 / 修改時間：21:13:23" itemprop="dateCreated datePublished" datetime="2021-03-14T17:41:51+08:00">2021-03-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,7 +416,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
                 </span>
             </span>
 
@@ -302,7 +497,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-03-14 17:32:42 / 修改時間：17:37:47" itemprop="dateCreated datePublished" datetime="2021-03-14T17:32:42+08:00">2021-03-14</time>
+              <time title="創建時間：2021-03-14 17:32:42 / 修改時間：21:31:39" itemprop="dateCreated datePublished" datetime="2021-03-14T17:32:42+08:00">2021-03-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -310,7 +505,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
                 </span>
             </span>
 
@@ -340,17 +535,14 @@
 
       
           <h1 id="透過-ref-綁定，取得-DOM-元素"><a href="#透過-ref-綁定，取得-DOM-元素" class="headerlink" title="透過 ref 綁定，取得 DOM 元素"></a>透過 ref 綁定，取得 DOM 元素</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted, ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> inputText = ref(<span class="literal">null</span>); <span class="comment">// 變數需跟綁定的ref一樣名稱</span></span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      inputText.value.focus(); <span class="comment">// 回傳後即可使用inputText</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      inputText, <span class="comment">// 回傳inputText</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">&quot;inputText&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> /&gt;</span> // 綁定ref</span><br></pre></td></tr></table></figure>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
-
-          <div>
-  <script type="text/javascript">
-    document.write(
-      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
-      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
-  </script>
-<div>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/14/vue-template-refs/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -394,7 +586,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-03-14 17:14:09 / 修改時間：17:37:44" itemprop="dateCreated datePublished" datetime="2021-03-14T17:14:09+08:00">2021-03-14</time>
+              <time title="創建時間：2021-03-14 17:14:09 / 修改時間：21:13:19" itemprop="dateCreated datePublished" datetime="2021-03-14T17:14:09+08:00">2021-03-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -402,7 +594,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
                 </span>
             </span>
 
@@ -484,7 +676,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-03-14 16:12:22 / 修改時間：17:13:18" itemprop="dateCreated datePublished" datetime="2021-03-14T16:12:22+08:00">2021-03-14</time>
+              <time title="創建時間：2021-03-14 16:12:22 / 修改時間：21:13:31" itemprop="dateCreated datePublished" datetime="2021-03-14T16:12:22+08:00">2021-03-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -492,7 +684,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
                 </span>
             </span>
 
@@ -573,7 +765,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-03-14 11:16:08 / 修改時間：16:50:52" itemprop="dateCreated datePublished" datetime="2021-03-14T11:16:08+08:00">2021-03-14</time>
+              <time title="創建時間：2021-03-14 11:16:08 / 修改時間：21:13:50" itemprop="dateCreated datePublished" datetime="2021-03-14T11:16:08+08:00">2021-03-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -581,7 +773,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
                 </span>
             </span>
 
@@ -668,7 +860,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-03-14 16:50:41" itemprop="dateModified" datetime="2021-03-14T16:50:41+08:00">2021-03-14</time>
+                <time title="修改時間：2021-03-14 21:13:44" itemprop="dateModified" datetime="2021-03-14T21:13:44+08:00">2021-03-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -676,7 +868,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
                 </span>
             </span>
 
@@ -766,7 +958,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-03-14 16:52:46" itemprop="dateModified" datetime="2021-03-14T16:52:46+08:00">2021-03-14</time>
+                <time title="修改時間：2021-03-14 21:13:55" itemprop="dateModified" datetime="2021-03-14T21:13:55+08:00">2021-03-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -774,7 +966,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
                 </span>
             </span>
 
@@ -862,7 +1054,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-03-14 16:10:53" itemprop="dateModified" datetime="2021-03-14T16:10:53+08:00">2021-03-14</time>
+                <time title="修改時間：2021-03-14 21:13:27" itemprop="dateModified" datetime="2021-03-14T21:13:27+08:00">2021-03-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -870,7 +1062,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
                 </span>
             </span>
 
@@ -903,196 +1095,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/03/08/vue-cli/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/05/axios-api/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文前端筆記">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/05/axios-api/" class="post-title-link" itemprop="url">非同步處理 Axios</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-03-05 21:36:48" itemprop="dateCreated datePublished" datetime="2021-03-05T21:36:48+08:00">2021-03-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-03-08 21:16:47" itemprop="dateModified" datetime="2021-03-08T21:16:47+08:00">2021-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2021/03/05/axios-api/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/05/axios-api/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="使用-Axios-取得-API"><a href="#使用-Axios-取得-API" class="headerlink" title="使用 Axios 取得 API"></a>使用 Axios 取得 API</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; onMounted &#125; = Vue;</span><br><span class="line"><span class="keyword">const</span> app = &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 在DOM元素渲染完成後執行</span></span><br><span class="line">      axios</span><br><span class="line">        .get(<span class="string">&quot;https://vue-lessons-api.herokuapp.com/photo/list&quot;</span>)</span><br><span class="line">        .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(res.data);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/05/axios-api/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/05/lifecycle-hooks/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文前端筆記">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/05/lifecycle-hooks/" class="post-title-link" itemprop="url">VUE的生命週期</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-03-05 21:14:22" itemprop="dateCreated datePublished" datetime="2021-03-05T21:14:22+08:00">2021-03-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-03-08 21:16:52" itemprop="dateModified" datetime="2021-03-08T21:16:52+08:00">2021-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VueJs3/" itemprop="url" rel="index"><span itemprop="name">VueJs3</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2021/03/05/lifecycle-hooks/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/05/lifecycle-hooks/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="VUE-的生命週期-Lifecycle-Hooks"><a href="#VUE-的生命週期-Lifecycle-Hooks" class="headerlink" title="VUE 的生命週期(Lifecycle Hooks)"></a>VUE 的生命週期(Lifecycle Hooks)</h1><p><strong>setup</strong> =&gt; vue 掛載到 app 上面後執行<br><strong>onBeforeMount</strong> =&gt; DOM 渲染前執行<br><strong>onMounted</strong> =&gt; DOM 渲染完成後執行<br><strong>onBeforeUpdate</strong> =&gt; 資料更新 DOM 更改前執行<br><strong>onUpdated</strong> =&gt; 資料更新 DOM 更改後執行</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/05/lifecycle-hooks/#more" rel="contents">
                 閱讀全文 &raquo;
               </a>
             </div>
@@ -1181,20 +1183,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
