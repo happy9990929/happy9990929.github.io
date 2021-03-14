@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://happy9990929.github.io/2021/03/14/vue-directive/</loc>
+    
+    <lastmod>2021-03-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/2021/03/14/vue-template-refs/</loc>
+    
+    <lastmod>2021-03-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/2021/03/14/vue-event-return/</loc>
+    
+    <lastmod>2021-03-14</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/2021/03/14/transitions/</loc>
     
     <lastmod>2021-03-14</lastmod>
@@ -116,14 +137,14 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/Vue-cli/</loc>
+    <loc>https://happy9990929.github.io/tags/emit/</loc>
     <lastmod>2021-03-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/emit/</loc>
+    <loc>https://happy9990929.github.io/tags/Vue-cli/</loc>
     <lastmod>2021-03-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -158,28 +179,21 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/VueJs/</loc>
+    <loc>https://happy9990929.github.io/tags/transition/</loc>
     <lastmod>2021-03-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/computed/</loc>
+    <loc>https://happy9990929.github.io/tags/directive/</loc>
     <lastmod>2021-03-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/watch/</loc>
-    <lastmod>2021-03-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/watchEffect/</loc>
+    <loc>https://happy9990929.github.io/tags/event/</loc>
     <lastmod>2021-03-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -243,6 +257,34 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/v-bind/</loc>
+    <lastmod>2021-03-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/VueJs/</loc>
+    <lastmod>2021-03-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/computed/</loc>
+    <lastmod>2021-03-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/watch/</loc>
+    <lastmod>2021-03-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/watchEffect/</loc>
     <lastmod>2021-03-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
