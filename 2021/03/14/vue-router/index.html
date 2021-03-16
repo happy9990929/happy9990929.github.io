@@ -29,7 +29,7 @@
 <meta property="og:description" content="單頁式應用single-page application，縮寫 SPA透過 JS 動態渲染當前頁面來與使用者互動，而非傳統的從伺服器重新載入整個新頁面。這種方法避免了頁面之間切換打斷用戶體驗，使應用程式更像一個桌面應用程式。 router-view將會改變的區塊使用 router-view 顯示">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-03-14T13:36:26.000Z">
-<meta property="article:modified_time" content="2021-03-16T06:54:44.039Z">
+<meta property="article:modified_time" content="2021-03-16T08:04:10.949Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="Vue.js">
 <meta property="article:tag" content="javascript">
@@ -223,7 +223,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-03-16 14:54:44" itemprop="dateModified" datetime="2021-03-16T14:54:44+08:00">2021-03-16</time>
+                <time title="修改時間：2021-03-16 16:04:10" itemprop="dateModified" datetime="2021-03-16T16:04:10+08:00">2021-03-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,7 +275,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 <br>
 
-<h1 id="設定路由"><a href="#設定路由" class="headerlink" title="設定路由"></a>設定路由</h1><p>將 Home、404 頁面直接一進入就 import，其他頁面使用動態 import 組件，點擊該頁面時，才會載入組件。<br>動態 import 組件 build 時每個頁面會是一支獨立的 JS。<br>如全部頁面直接一進入就 import，頁面一多時會影響效能; 但如果是小專案，頁面很少時，可以直接全部 import，減少 request 的數量。</p>
+<h1 id="設定路由"><a href="#設定路由" class="headerlink" title="設定路由"></a>設定路由</h1><p>將 Home、404 頁面直接一進入就 import，其他頁面使用動態 import 組件，點擊該頁面時，才會載入組件。<br>動態 import 組件 build 時每個頁面會是一支獨立的 JS。<br>如全部頁面直接一進入就 import，頁面一多時會影響效能; 但如果是小專案，頁面很少時，可以直接全部 import，減少 request 的數量。<br>大網站 =&gt; 動態載入，不吃效能<br>小網站 =&gt; 直接載入，減少 request 數量</p>
 <p>router index.js</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">&quot;../views/Home.vue&quot;</span>; <span class="comment">// 直接 import</span></span><br><span class="line"><span class="keyword">import</span> NotFoundComponent <span class="keyword">from</span> <span class="string">&quot;../views/NotFoundComponent.vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;Home&quot;</span>,</span><br><span class="line">    component: Home,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/rwd&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;rwd&quot;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;../views/Rwd.vue&quot;</span>), <span class="comment">// 動態 import</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/vuejs&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;vuejs&quot;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;../views/Vuejs.vue&quot;</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/reactjs&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;reactjs&quot;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;../views/Reactjs.vue&quot;</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/html5&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;html5&quot;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;../views/Html5.vue&quot;</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/nodejs&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;nodejs&quot;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;../views/Nodejs.vue&quot;</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">&quot;/:pathMatch(.*)&quot;</span>, <span class="attr">component</span>: NotFoundComponent &#125;, <span class="comment">// 需放最下面，上面的path都沒有時即顯示此頁面</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span><br><span class="line">  history: createWebHistory(process.env.BASE_URL),</span><br><span class="line">  routes,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router;</span><br></pre></td></tr></table></figure>
 <h2 id="router-例外處理-404"><a href="#router-例外處理-404" class="headerlink" title="router 例外處理(404)"></a>router 例外處理(404)</h2><p>{ path: “/:pathMatch(.*)”, component: NotFoundComponent }<br>404 頁面的 path 需放最下面，載入時會從上到下開始跑，上面的 path 都沒有 Match 時即會顯示此頁面<br></p>
@@ -400,7 +400,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -413,7 +413,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
