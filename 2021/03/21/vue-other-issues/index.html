@@ -21,22 +21,22 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="$event 事件回傳取得事件的 target 12345678910export default &amp;#123;  setup() &amp;#123;    const clickFn &#x3D; (e) &#x3D;&gt; &amp;#123;      console.log(e.target);    &amp;#125;;    return &amp;#123;      clickFn,    &amp;#125;;  &amp;#125;,&amp;#">
+  <meta name="description" content="Vue3 還有很多新功能官方正在進行中，目前有幾個差不多定案的新功能">
 <meta property="og:type" content="article">
-<meta property="og:title" content="$event事件回傳">
-<meta property="og:url" content="https://happy9990929.github.io/2021/03/14/vue-event-return/index.html">
+<meta property="og:title" content="Vue3 setup、CSS新寫法">
+<meta property="og:url" content="https://happy9990929.github.io/2021/03/21/vue-other-issues/index.html">
 <meta property="og:site_name" content="一文前端筆記">
-<meta property="og:description" content="$event 事件回傳取得事件的 target 12345678910export default &amp;#123;  setup() &amp;#123;    const clickFn &#x3D; (e) &#x3D;&gt; &amp;#123;      console.log(e.target);    &amp;#125;;    return &amp;#123;      clickFn,    &amp;#125;;  &amp;#125;,&amp;#">
+<meta property="og:description" content="Vue3 還有很多新功能官方正在進行中，目前有幾個差不多定案的新功能">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2021-03-14T09:14:09.000Z">
-<meta property="article:modified_time" content="2021-03-14T13:13:19.709Z">
+<meta property="article:published_time" content="2021-03-21T09:01:28.000Z">
+<meta property="article:modified_time" content="2021-03-21T12:47:45.850Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="Vue.js">
 <meta property="article:tag" content="javascript">
-<meta property="article:tag" content="event">
+<meta property="article:tag" content="Composition API">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://happy9990929.github.io/2021/03/14/vue-event-return/">
+<link rel="canonical" href="https://happy9990929.github.io/2021/03/21/vue-other-issues/">
 
 
 <script id="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>$event事件回傳 | 一文前端筆記</title>
+  <title>Vue3 setup、CSS新寫法 | 一文前端筆記</title>
   
 
 
@@ -193,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/14/vue-event-return/">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/21/vue-other-issues/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -206,7 +206,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          $event事件回傳
+          Vue3 setup、CSS新寫法
         </h1>
 
         <div class="post-meta">
@@ -217,7 +217,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-03-14 17:14:09 / 修改時間：21:13:19" itemprop="dateCreated datePublished" datetime="2021-03-14T17:14:09+08:00">2021-03-14</time>
+              <time title="創建時間：2021-03-21 17:01:28 / 修改時間：20:47:45" itemprop="dateCreated datePublished" datetime="2021-03-21T17:01:28+08:00">2021-03-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -245,8 +245,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2021/03/14/vue-event-return/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/14/vue-event-return/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/03/21/vue-other-issues/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/21/vue-other-issues/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -261,14 +261,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="event-事件回傳"><a href="#event-事件回傳" class="headerlink" title="$event 事件回傳"></a>$event 事件回傳</h1><p>取得事件的 target</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> clickFn = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(e.target);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      clickFn,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        <p>Vue3 還有很多新功能官方正在進行中，目前有幾個差不多定案的新功能</p>
 <a id="more"></a>
 
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;clickFn($event)&quot;</span>&gt;</span>CLICK<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如有多個參數，$event 事件需放在最後面</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> clickFn = <span class="function">(<span class="params">num, e</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(num, e.target);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      clickFn,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;clickFn(100, $event)&quot;</span>&gt;</span>CLICK<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="Script-Setup"><a href="#Script-Setup" class="headerlink" title="Script Setup"></a>Script Setup</h1><p><b>原本寫法</b></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      name,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<p><b>新寫法</b><br>直接將 Setup 寫在 script 上，不用 export、return<br>如果沒有在 template 寫變數，就自動不會 return 出來</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123;ref&#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="變數綁定-CSS"><a href="#變數綁定-CSS" class="headerlink" title="變數綁定 CSS"></a>變數綁定 CSS</h1><p>用 v-bind 綁定 JS 變數，可以直接變換屬性的值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; ref &#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">const colorBlue = ref(<span class="string">&quot;#000FFF&quot;</span>);</span><br><span class="line">const changeColor = () =&gt; &#123;</span><br><span class="line">  colorBlue.value = <span class="string">&quot;#FF0000&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;changeColor&quot;</span>&gt;</span>changeColor<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">v-bind</span>(colorBlue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
 
@@ -289,7 +298,7 @@
           <div class="post-tags">
               <a href="/tags/Vue-js/" rel="tag"># Vue.js</a>
               <a href="/tags/javascript/" rel="tag"># javascript</a>
-              <a href="/tags/event/" rel="tag"># event</a>
+              <a href="/tags/Composition-API/" rel="tag"># Composition API</a>
           </div>
 
         
@@ -298,12 +307,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/14/transitions/" rel="prev" title="transition 動畫過渡組件">
-      <i class="fa fa-chevron-left"></i> transition 動畫過渡組件
+    <a href="/2021/03/21/vue-composition-api/" rel="prev" title="Composition API 共用邏輯的封裝">
+      <i class="fa fa-chevron-left"></i> Composition API 共用邏輯的封裝
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/03/14/vue-template-refs/" rel="next" title="透過ref綁定，取得DOM元素">
-      透過ref綁定，取得DOM元素 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/03/21/vue-modifiers/" rel="next" title="修飾符">
+      修飾符 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -370,7 +379,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#event-%E4%BA%8B%E4%BB%B6%E5%9B%9E%E5%82%B3"><span class="nav-number">1.</span> <span class="nav-text">$event 事件回傳</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Script-Setup"><span class="nav-number">1.</span> <span class="nav-text">Script Setup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%8A%E6%95%B8%E7%B6%81%E5%AE%9A-CSS"><span class="nav-number">2.</span> <span class="nav-text">變數綁定 CSS</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -520,9 +529,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "https://happy9990929.github.io/2021/03/14/vue-event-return/";
-    this.page.identifier = "2021/03/14/vue-event-return/";
-    this.page.title = "$event事件回傳";
+    this.page.url = "https://happy9990929.github.io/2021/03/21/vue-other-issues/";
+    this.page.identifier = "2021/03/21/vue-other-issues/";
+    this.page.title = "Vue3 setup、CSS新寫法";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
