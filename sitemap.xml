@@ -221,14 +221,14 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/props/</loc>
+    <loc>https://happy9990929.github.io/tags/emit/</loc>
     <lastmod>2021-06-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/emit/</loc>
+    <loc>https://happy9990929.github.io/tags/props/</loc>
     <lastmod>2021-06-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -263,13 +263,6 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/transition/</loc>
-    <lastmod>2021-06-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/nodeJs/</loc>
     <lastmod>2021-06-13</lastmod>
     <changefreq>daily</changefreq>
@@ -278,6 +271,13 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/npm/</loc>
+    <lastmod>2021-06-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/transition/</loc>
     <lastmod>2021-06-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -298,14 +298,14 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/event/</loc>
+    <loc>https://happy9990929.github.io/tags/router/</loc>
     <lastmod>2021-06-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/router/</loc>
+    <loc>https://happy9990929.github.io/tags/event/</loc>
     <lastmod>2021-06-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
