@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+  <meta name="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
 <meta property="og:type" content="website">
-<meta property="og:title" content="一文烤布蕾">
+<meta property="og:title" content="一文前端大小事">
 <meta property="og:url" content="https://happy9990929.github.io/index.html">
-<meta property="og:site_name" content="一文烤布蕾">
-<meta property="og:description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+<meta property="og:site_name" content="一文前端大小事">
+<meta property="og:description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="Vue.js, Javascript, JS, Vue3">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>一文烤布蕾</title>
+  <title>一文前端大小事</title>
   
 
 
@@ -96,7 +96,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">一文烤布蕾</h1>
+      <h1 class="site-title">一文前端大小事</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">FRONT END IS NEVER END</p>
@@ -188,16 +188,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/06/15/js-import-export/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端大小事">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/15/js-import-export/" class="post-title-link" itemprop="url">ES6-import & export 怎麼用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-06-15 20:17:13" itemprop="dateCreated datePublished" datetime="2021-06-15T20:17:13+08:00">2021-06-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-16 21:15:47" itemprop="dateModified" datetime="2021-06-16T21:15:47+08:00">2021-06-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/06/15/js-import-export/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/06/15/js-import-export/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://imgur.com/2Auy2fY.jpg" alt="Imgur"></p>
+<p>ES6 推出了管理 javascript 模組的語法，透過 import、export 可以將每個檔案視為獨立模組，讓檔案不會過於龐大，且可讀性也比較高，每個系統都有相對的模組，在程式碼的管理與組織方便了許多。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/06/15/js-import-export/" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/06/14/js-hoisting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -283,11 +379,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -379,11 +475,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -474,11 +570,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -563,11 +659,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -652,11 +748,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -743,11 +839,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -832,11 +928,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -921,11 +1017,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -982,95 +1078,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/03/16/vue-nested-routes/" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/16/vue-dynamic-router/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/16/vue-dynamic-router/" class="post-title-link" itemprop="url">Vue 動態路由</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2021-03-16 14:59:14 / 修改時間：15:53:25" itemprop="dateCreated datePublished" datetime="2021-03-16T14:59:14+08:00">2021-03-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2021/03/16/vue-dynamic-router/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/16/vue-dynamic-router/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="設定動態網址"><a href="#設定動態網址" class="headerlink" title="設定動態網址"></a>設定動態網址</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/16/vue-dynamic-router/" rel="contents">
                 閱讀全文 &raquo;
               </a>
             </div>
@@ -1152,14 +1159,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Yi Wen Wang</p>
-  <div class="site-description" itemprop="description">這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^</div>
+  <div class="site-description" itemprop="description">記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -1172,7 +1179,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

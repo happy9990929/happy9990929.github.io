@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+  <meta name="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
 <meta property="og:type" content="website">
-<meta property="og:title" content="一文烤布蕾">
+<meta property="og:title" content="一文前端大小事">
 <meta property="og:url" content="https://happy9990929.github.io/page/3/index.html">
-<meta property="og:site_name" content="一文烤布蕾">
-<meta property="og:description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+<meta property="og:site_name" content="一文前端大小事">
+<meta property="og:description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="Vue.js, Javascript, JS, Vue3">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>一文烤布蕾</title>
+  <title>一文前端大小事</title>
   
 
 
@@ -96,7 +96,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">一文烤布蕾</h1>
+      <h1 class="site-title">一文前端大小事</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">FRONT END IS NEVER END</p>
@@ -188,16 +188,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/08/vue-cli/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端大小事">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/08/vue-cli/" class="post-title-link" itemprop="url">環境建置 & Vue-cli專案</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-03-08 22:59:21" itemprop="dateCreated datePublished" datetime="2021-03-08T22:59:21+08:00">2021-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-03-14 21:13:27" itemprop="dateModified" datetime="2021-03-14T21:13:27+08:00">2021-03-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/03/08/vue-cli/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/08/vue-cli/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Node-js-環境建置"><a href="#Node-js-環境建置" class="headerlink" title="Node.js 環境建置"></a>Node.js 環境建置</h1><h2 id="下載-NVM"><a href="#下載-NVM" class="headerlink" title="下載 NVM"></a>下載 NVM</h2><p>nvm 是 Node.js 的版本管理器 (version manager)，可在同一台主機上安裝多個版本的 Node.js 環境，因為不同專案可能會使用不同的 Node.js 版本，那就需要透過一個版本管理器來切換不同的 Node.js 版本。<br><br>NVM install - 點選右邊的 releases<br><a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/08/vue-cli/" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/05/axios-api/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -288,11 +383,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -383,11 +478,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -479,11 +574,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -575,11 +670,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
+      <meta itemprop="description" content="記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文烤布蕾">
+      <meta itemprop="name" content="一文前端大小事">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -723,14 +818,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Yi Wen Wang</p>
-  <div class="site-description" itemprop="description">這裡記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^</div>
+  <div class="site-description" itemprop="description">記錄關於前端的大小事，歡迎大家一起鑽研前端技術^^</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -743,7 +838,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
