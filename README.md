@@ -1,5 +1,5 @@
-# README
+# 一文前端大小事
 
-![Wen's github stats](https://github-readme-stats.vercel.app/api?username=happy9990929&theme=vue-dark)
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=happy9990929&layout=compact&theme=vue-dark)
+每月不定期更新部落格，記錄平常學習前端的筆記分享。
 
+[一文前端大小事](https://happy9990929.github.io/)
