@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://happy9990929.github.io/2021/07/31/js-call-apply-bind/</loc>
+    
+    <lastmod>2021-07-31</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/2021/07/29/js-promise/</loc>
     
     <lastmod>2021-07-31</lastmod>
@@ -256,7 +263,28 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/hoisting/</loc>
+    <loc>https://happy9990929.github.io/tags/props/</loc>
+    <lastmod>2021-07-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/call/</loc>
+    <lastmod>2021-07-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/apply/</loc>
+    <lastmod>2021-07-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/bind/</loc>
     <lastmod>2021-07-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -264,13 +292,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/closure/</loc>
-    <lastmod>2021-07-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/props/</loc>
     <lastmod>2021-07-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -298,6 +319,13 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/hoisting/</loc>
+    <lastmod>2021-07-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/promise/</loc>
     <lastmod>2021-07-31</lastmod>
     <changefreq>daily</changefreq>
@@ -306,6 +334,13 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/Javascript/</loc>
+    <lastmod>2021-07-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/</loc>
     <lastmod>2021-07-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -333,7 +368,7 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/</loc>
+    <loc>https://happy9990929.github.io/tags/transition/</loc>
     <lastmod>2021-07-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -354,21 +389,7 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/transition/</loc>
-    <lastmod>2021-07-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/Composition-API/</loc>
-    <lastmod>2021-07-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/router/</loc>
     <lastmod>2021-07-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -389,7 +410,7 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/ref/</loc>
+    <loc>https://happy9990929.github.io/tags/router/</loc>
     <lastmod>2021-07-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -397,6 +418,13 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/Slot/</loc>
+    <lastmod>2021-07-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/ref/</loc>
     <lastmod>2021-07-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
