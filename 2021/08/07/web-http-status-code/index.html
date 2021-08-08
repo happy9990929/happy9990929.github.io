@@ -21,19 +21,21 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="什麼是 HTTP 狀態碼(HTTP Status Codes)?HTTP 狀態碼是伺服器對瀏覽器請求回應(HTTP Response)的狀態，由 RFC 2616 規範定義的，並得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 與 RFC 4918 等規範擴充。伺服器用一個三位數的代碼來回應瀏覽器的請求，狀態的分類可區分三個層級，第一個數字為大類、第二個數字為中類、第三">
+  <meta name="description" content="什麼是 HTTP 狀態碼(HTTP Status Codes)?HTTP 狀態碼是伺服器對瀏覽器請求回應(HTTP Response)的狀態，由 RFC 2616 規範定義的，並得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 與 RFC 4918 等規範擴充。伺服器用一個三位數的代碼來回應瀏覽器的請求，狀態的分類可區分三個層級，第一個數字為大類、第二個數字為中類、第">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP 狀態碼">
 <meta property="og:url" content="https://happy9990929.github.io/2021/08/07/web-http-status-code/index.html">
 <meta property="og:site_name" content="一文前端大小事">
-<meta property="og:description" content="什麼是 HTTP 狀態碼(HTTP Status Codes)?HTTP 狀態碼是伺服器對瀏覽器請求回應(HTTP Response)的狀態，由 RFC 2616 規範定義的，並得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 與 RFC 4918 等規範擴充。伺服器用一個三位數的代碼來回應瀏覽器的請求，狀態的分類可區分三個層級，第一個數字為大類、第二個數字為中類、第三">
+<meta property="og:description" content="什麼是 HTTP 狀態碼(HTTP Status Codes)?HTTP 狀態碼是伺服器對瀏覽器請求回應(HTTP Response)的狀態，由 RFC 2616 規範定義的，並得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 與 RFC 4918 等規範擴充。伺服器用一個三位數的代碼來回應瀏覽器的請求，狀態的分類可區分三個層級，第一個數字為大類、第二個數字為中類、第">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/8GHhzql.jpg">
 <meta property="article:published_time" content="2021-08-07T15:07:24.000Z">
-<meta property="article:modified_time" content="2021-08-08T06:10:24.818Z">
+<meta property="article:modified_time" content="2021-08-08T06:16:38.725Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="HTTP 狀態碼">
 <meta property="article:tag" content="HTTP Status Codes">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/8GHhzql.jpg">
 
 <link rel="canonical" href="https://happy9990929.github.io/2021/08/07/web-http-status-code/">
 
@@ -222,7 +224,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-08-08 14:10:24" itemprop="dateModified" datetime="2021-08-08T14:10:24+08:00">2021-08-08</time>
+                <time title="修改時間：2021-08-08 14:16:38" itemprop="dateModified" datetime="2021-08-08T14:16:38+08:00">2021-08-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,7 +268,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="什麼是-HTTP-狀態碼-HTTP-Status-Codes"><a href="#什麼是-HTTP-狀態碼-HTTP-Status-Codes" class="headerlink" title="什麼是 HTTP 狀態碼(HTTP Status Codes)?"></a>什麼是 HTTP 狀態碼(HTTP Status Codes)?</h1><p>HTTP 狀態碼是伺服器對瀏覽器請求回應(HTTP Response)的狀態，由 RFC 2616 規範定義的，並得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 與 RFC 4918 等規範擴充。伺服器用一個三位數的代碼來回應瀏覽器的請求，狀態的分類可區分三個層級，第一個數字為大類、第二個數字為中類、第三個數字為小類。</p>
+        <p><img src="https://imgur.com/8GHhzql.jpg" alt="Imgur"></p>
+<h1 id="什麼是-HTTP-狀態碼-HTTP-Status-Codes"><a href="#什麼是-HTTP-狀態碼-HTTP-Status-Codes" class="headerlink" title="什麼是 HTTP 狀態碼(HTTP Status Codes)?"></a>什麼是 HTTP 狀態碼(HTTP Status Codes)?</h1><p>HTTP 狀態碼是伺服器對瀏覽器請求回應(HTTP Response)的狀態，由 RFC 2616 規範定義的，並得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 與 RFC 4918 等規範擴充。伺服器用一個三位數的代碼來回應瀏覽器的請求，狀態的分類可區分三個層級，第一個數字為大類、第二個數字為中類、第三個數字為小類。</p>
 <a id="more"></a>
 
 <p>了解狀態代碼以及如何使用它們將有助於快速診斷網站錯誤</p>
