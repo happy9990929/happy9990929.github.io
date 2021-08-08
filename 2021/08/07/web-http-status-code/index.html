@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="什麼是 HTTP 狀態碼(HTTP Status Codes)?HTTP 狀態碼是伺服器對瀏覽器請求回應(HTTP Response)的狀態，由 RFC 2616 規範定義的，並得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 與 RFC 4918 等規範擴充。伺服器用一個三位數的代碼來回應瀏覽器的請求，狀態的分類可區分三個層級，第一個數字為大類、第二個數字為中類、第三">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 狀態碼">
+<meta property="og:url" content="https://happy9990929.github.io/2021/08/07/web-http-status-code/index.html">
+<meta property="og:site_name" content="一文前端大小事">
+<meta property="og:description" content="什麼是 HTTP 狀態碼(HTTP Status Codes)?HTTP 狀態碼是伺服器對瀏覽器請求回應(HTTP Response)的狀態，由 RFC 2616 規範定義的，並得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 與 RFC 4918 等規範擴充。伺服器用一個三位數的代碼來回應瀏覽器的請求，狀態的分類可區分三個層級，第一個數字為大類、第二個數字為中類、第三">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-08-07T15:07:24.000Z">
+<meta property="article:modified_time" content="2021-08-08T06:10:24.818Z">
+<meta property="article:author" content="Yi Wen Wang">
+<meta property="article:tag" content="HTTP 狀態碼">
+<meta property="article:tag" content="HTTP Status Codes">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://happy9990929.github.io/2021/08/07/web-http-status-code/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>HTTP 狀態碼 | 一文前端大小事</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">一文前端大小事</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一起鑽研前端技術吧^^</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/08/07/web-http-status-code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端大小事">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP 狀態碼
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-08-07 23:07:24" itemprop="dateCreated datePublished" datetime="2021-08-07T23:07:24+08:00">2021-08-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-08-08 14:10:24" itemprop="dateModified" datetime="2021-08-08T14:10:24+08:00">2021-08-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B6%B2%E9%A0%81%E7%A8%8B%E5%BC%8F%E6%8A%80%E8%A1%93%E6%8E%A2%E8%A8%8E/" itemprop="url" rel="index"><span itemprop="name">網頁程式技術探討</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/08/07/web-http-status-code/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/08/07/web-http-status-code/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="什麼是-HTTP-狀態碼-HTTP-Status-Codes"><a href="#什麼是-HTTP-狀態碼-HTTP-Status-Codes" class="headerlink" title="什麼是 HTTP 狀態碼(HTTP Status Codes)?"></a>什麼是 HTTP 狀態碼(HTTP Status Codes)?</h1><p>HTTP 狀態碼是伺服器對瀏覽器請求回應(HTTP Response)的狀態，由 RFC 2616 規範定義的，並得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 與 RFC 4918 等規範擴充。伺服器用一個三位數的代碼來回應瀏覽器的請求，狀態的分類可區分三個層級，第一個數字為大類、第二個數字為中類、第三個數字為小類。</p>
+<a id="more"></a>
+
+<p>了解狀態代碼以及如何使用它們將有助於快速診斷網站錯誤</p>
+<h2 id="HTTP-狀態碼大致分成-5-類"><a href="#HTTP-狀態碼大致分成-5-類" class="headerlink" title="HTTP 狀態碼大致分成 5 類"></a>HTTP 狀態碼大致分成 5 類</h2><p>1xx Informationa - 參考資訊<br>2xx Successful - 成功<br>3xx Redirection - 重新導向<br>4xx Client Error - 用戶端錯誤<br>5xx Server Error - 伺服器錯誤</p>
+<h3 id="1xx-Informational-參考資訊"><a href="#1xx-Informational-參考資訊" class="headerlink" title="1xx Informational 參考資訊"></a>1xx Informational 參考資訊</h3><p>這些狀態碼代表請求已被接受，需要繼續處理，這類回應是臨時回應，所以在接收一般的回應之前，用戶端應準備接收一個或多個 1xx 的回應，等待伺服器採取進一步行動。</p>
+<p>100 Continue - 繼續執行所發出的請求<br>101 Switching Protocols - 切換通訊協定</p>
+<h3 id="2xx-Successful-成功"><a href="#2xx-Successful-成功" class="headerlink" title="2xx Successful 成功"></a>2xx Successful 成功</h3><p>這類的狀態碼表示伺服器成功接收到用戶端的要求、理解並接受。</p>
+<p>200 OK - 確定。用戶端要求成功<br>201 Created - 請求已經被實現<br>202 Accepted - 伺服器已接受請求，但尚未處理<br>203 Non-Authoritative Information - 非授權資訊<br>204 No Content - 無內容，伺服器成功處理了請求，沒有返回任何內容<br>205 Reset Content - 重設內容，伺服器成功處理了請求，但沒有返回任何內容。與 204 回應不同，此回應要求請求者重設文件視圖<br>206 Partial Content - 伺服器已經成功處理了部分 GET 請求<br>207 Multi-Status - 代表之後的訊息體將是一個 XML 訊息，並且可能依照之前子請求數量的不同，包含一系列獨立的回應代碼<br>208 Already Reported - DAV 繫結的成員已經在（多狀態）回應之前的部分被列舉，且未被再次包含<br>226 IM Used - 伺服器已經滿足了對資源的請求，對實體請求的一個或多個實體操作的結果表示</p>
+<h3 id="3xx-Redirection-重新導向"><a href="#3xx-Redirection-重新導向" class="headerlink" title="3xx Redirection 重新導向"></a>3xx Redirection 重新導向</h3><p>用戶端瀏覽器必須採取進一步的操作才能完成要求。這些狀態碼用來重新導向，例如瀏覽器可能必須重新發出 HTTP Request 要求伺服器上的不同頁面。客戶端應當自動監測無限迴圈重新導向（例如：A→B→C→……→A 或 A→A），因為這會導致伺服器和客戶端大量不必要的資源消耗。按照 HTTP/1.0 版規範的建議，瀏覽器不應自動存取超過 5 次的重新導向。</p>
+<p>300 Multiple Choices - 被請求的資源有一系列可供選擇的回饋資訊，每個都有自己特定的位址和瀏覽器驅動的商議資訊。使用者或瀏覽器能夠自行選擇一個首選的位址進行重新導向<br>301 Moved Permanently - 要求的網頁已經永久改變網址。此狀態要求用戶端未來在連結此網址時應該導向至指定的 URI<br>302 Found - 要求客戶端執行臨時重新導向<br>303 See Other - 通知用戶端使用 GET 連到另一個 URI 去查看<br>304 Not Modified - 未修改。用戶端要求該網頁時，其內容並沒有變更<br>305 Use Proxy - 要求的網頁必須透過 Server 指定的 proxy 才能查看(需透過 Location 標頭)<br>306 Switch Proxy - 在最新版的規範中，306 狀態碼已經不再被使用。最初是指「後續請求應使用指定的代理」<br>307 Temporary Redirect - 在這種情況下，請求應該與另一個 URI 重複，但後續的請求應仍使用原始的 URI。 與 302 相反，當重新發出原始請求時，不允許更改請求方法。 例如，應該使用另一個 POST 請求來重複 POST 請求</p>
+<h3 id="4xx-Client-Error-用戶端錯誤"><a href="#4xx-Client-Error-用戶端錯誤" class="headerlink" title="4xx Client Error 用戶端錯誤"></a>4xx Client Error 用戶端錯誤</h3><p>這代表錯誤發生，且這錯誤的發生的原因跟「用戶端」有關，妨礙了伺服器的處理。例如：用戶端可能連結到不存在的頁面、用戶端的權限不足、或可能未提供有效的驗證資訊(輸入的帳號、密碼錯誤)。</p>
+<p>400 Bad Request - 錯誤的要求<br>401 Unauthorized - 拒絕存取<br>402 Payment Required - 該狀態碼是為了將來可能的需求而預留的。該狀態碼最初的意圖可能被用作某種形式的數字現金或線上支付方案的一部分，但幾乎沒有哪家服務商使用，而且這個狀態碼通常不被使用<br>403 Forbidden - 伺服器已經理解請求，但是拒絕執行它<br>404 Not Found - 找不到，請求失敗，請求所希望得到的資源未被在伺服器上發現，但允許使用者的後續請求<br>405 Method Not Allowed - 用來存取這個頁面的 HTTP 動詞不受允許 (方法不受允許)<br>406 Not Acceptable - 用戶端瀏覽器不接受要求頁面的 MIME 類型<br>407 Proxy Authentication Required - 需要 Proxy 驗證<br>408 Request Timeout - 請求逾時<br>409 Conflict - 資源狀態衝突<br>410 Gone - 資源已不存在且無轉址資訊<br>411 Length Required - 要求的 Content-Length 沒有定義<br>412 Precondition Failed - 指定條件失敗<br>413 Request Entity Too Large - 要求的實體太大<br>414 Request-URI Too Long - 要求 URI 太長。會因伺服器或瀏覽器而異，建議 2048 字元以下比較保險<br>415 Unsupported Media Type - 不支援的媒體類型<br>416 Requested Range Not Satisfiable - 無法滿足要求的範圍<br>417 Expectation Failed - 執行失敗</p>
+<h3 id="5xx-Server-Error-伺服器錯誤"><a href="#5xx-Server-Error-伺服器錯誤" class="headerlink" title="5xx Server Error 伺服器錯誤"></a>5xx Server Error 伺服器錯誤</h3><p>這代表錯誤發生，且這錯誤發生的原因跟「伺服器」有關。伺服器因為發生錯誤或例外狀況(Exception)而無法完成要求(Request)時，就會回應 5xx 的錯誤，且這肯定跟伺服器有關。</p>
+<p>500 Internal Server Error - 內部伺服器錯誤。<br>501 Not Implemented – 標頭值指定未實作的設定。<br>502 Bad Gateway - Web 伺服器在作為閘道或 Proxy 時收到無效的回應。<br>503 Service Unavailable - 服務無法使用。 這是 IIS 6.0 專用的錯誤碼。<br>504 Gateway Timeout - 閘道逾時。<br>505 HTTP Version Not Supported - 不支援的 HTTP 版本。</p>
+<hr>
+<h3 id="參考文獻"><a href="#參考文獻" class="headerlink" title="參考文獻:"></a>參考文獻:</h3><p><a target="_blank" rel="noopener" href="https://blog.poychang.net/http-status-code/">HTTP 狀態碼一覽表</a><br><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81">HTTP 狀態碼</a></p>
+<hr>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HTTP-%E7%8B%80%E6%85%8B%E7%A2%BC/" rel="tag"># HTTP 狀態碼</a>
+              <a href="/tags/HTTP-Status-Codes/" rel="tag"># HTTP Status Codes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/07/web-https/" rel="prev" title="HTTPS 和 HTTP 的差別？">
+      <i class="fa fa-chevron-left"></i> HTTPS 和 HTTP 的差別？
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-HTTP-%E7%8B%80%E6%85%8B%E7%A2%BC-HTTP-Status-Codes"><span class="nav-number">1.</span> <span class="nav-text">什麼是 HTTP 狀態碼(HTTP Status Codes)?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-%E7%8B%80%E6%85%8B%E7%A2%BC%E5%A4%A7%E8%87%B4%E5%88%86%E6%88%90-5-%E9%A1%9E"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP 狀態碼大致分成 5 類</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1xx-Informational-%E5%8F%83%E8%80%83%E8%B3%87%E8%A8%8A"><span class="nav-number">1.1.1.</span> <span class="nav-text">1xx Informational 參考資訊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2xx-Successful-%E6%88%90%E5%8A%9F"><span class="nav-number">1.1.2.</span> <span class="nav-text">2xx Successful 成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3xx-Redirection-%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91"><span class="nav-number">1.1.3.</span> <span class="nav-text">3xx Redirection 重新導向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4xx-Client-Error-%E7%94%A8%E6%88%B6%E7%AB%AF%E9%8C%AF%E8%AA%A4"><span class="nav-number">1.1.4.</span> <span class="nav-text">4xx Client Error 用戶端錯誤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5xx-Server-Error-%E4%BC%BA%E6%9C%8D%E5%99%A8%E9%8C%AF%E8%AA%A4"><span class="nav-number">1.1.5.</span> <span class="nav-text">5xx Server Error 伺服器錯誤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%8D%BB"><span class="nav-number">1.1.6.</span> <span class="nav-text">參考文獻:</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yi Wen Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Yi Wen Wang</p>
+  <div class="site-description" itemprop="description">如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yi Wen Wang</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2021/08/07/web-http-status-code/";
+    this.page.identifier = "2021/08/07/web-http-status-code/";
+    this.page.title = "HTTP 狀態碼";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
