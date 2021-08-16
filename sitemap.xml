@@ -319,27 +319,6 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/import/</loc>
-    <lastmod>2021-08-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/export/</loc>
-    <lastmod>2021-08-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/ES6/</loc>
-    <lastmod>2021-08-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/Cookie/</loc>
     <lastmod>2021-08-16</lastmod>
     <changefreq>daily</changefreq>
@@ -362,6 +341,27 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/hoisting/</loc>
+    <lastmod>2021-08-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/import/</loc>
+    <lastmod>2021-08-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/export/</loc>
+    <lastmod>2021-08-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/ES6/</loc>
     <lastmod>2021-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -459,14 +459,14 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/Slot/</loc>
+    <loc>https://happy9990929.github.io/tags/ref/</loc>
     <lastmod>2021-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/ref/</loc>
+    <loc>https://happy9990929.github.io/tags/Slot/</loc>
     <lastmod>2021-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
