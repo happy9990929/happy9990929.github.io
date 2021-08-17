@@ -132,11 +132,11 @@
       
         <tags>
             
-            <tag> ES6 </tag>
-            
             <tag> promise </tag>
             
             <tag> Javascript </tag>
+            
+            <tag> ES6 </tag>
             
         </tags>
       
@@ -186,11 +186,11 @@
       
         <tags>
             
+            <tag> ES6 </tag>
+            
             <tag> import </tag>
             
             <tag> export </tag>
-            
-            <tag> ES6 </tag>
             
         </tags>
       
