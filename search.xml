@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>VUE 的 SSR 原理</title>
+      <link href="2021/08/29/vue-SSR/"/>
+      <url>2021/08/29/vue-SSR/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://imgur.com/mRrJH3R.jpg" alt="Imgur"><br>SPA 跟 SSR 各有好壞，因應專案需求來決定我們需要的是 SPA 還是 SSR 的網站</p><a id="more"></a><h1 id="什麼是-CSR"><a href="#什麼是-CSR" class="headerlink" title="什麼是 CSR?"></a>什麼是 CSR?</h1><p>CSR (Client-Side Rendering) 客戶端渲染，通常是講 SPA (Single Page Application)居多，SPA 指的是單頁式應用，內容交由 client 的瀏覽器去處理，HTML 透過 JavaScript 渲染上去。</p><p>優點: 減少 server 端的壓力、頁面切換速度快<br>缺點: 首屏顯示慢、SEO 較差<br>適合用在較不需 SEO 或需高頻操作的網站，如: 後台系統、活動頁面等</p><h1 id="什麼是-SSR"><a href="#什麼是-SSR" class="headerlink" title="什麼是 SSR?"></a>什麼是 SSR?</h1><p>SSR (Sever-Side Rendering) 伺服器端渲染，由 Server 端的 CPU 收到請求後，解析完整的 HTML 返回到使用者接收端，然後呈現網頁。</p><p>優點: 首屏顯示快，不用下載大量的 javascript、SEO 效果好<br>缺點: server 端承受比較大的壓力、點擊別頁時，整個畫面需重新繪製，如網路不好，使用者體驗會較差<br>適合用在很需要 SEO 的網站，如: 平台網站、新聞媒體網站</p><h1 id="什麼是-NUXT"><a href="#什麼是-NUXT" class="headerlink" title="什麼是 NUXT"></a>什麼是 NUXT</h1><p>提供 SSR 的功能、更方便去做 Vue.js 的開發的 framework</p><h1 id="Nuxt-SSR-原理解析"><a href="#Nuxt-SSR-原理解析" class="headerlink" title="Nuxt SSR 原理解析"></a>Nuxt SSR 原理解析</h1><p>Nuxt.js 是建構在 Node.js 的環境之上，要 run Nuxt 時，需要起一個 Node.js 的 server<br>Nuxt 在 bundle 時，會 bundle 兩份檔案:</p><ol><li>Server 端的檔案 =&gt; 給搜尋引擎爬蟲，提高 SEO</li><li>Client 端的檔案 =&gt; 給 User 看的檔案內容</li></ol><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Vue-Nuxt </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SSR </tag>
+            
+            <tag> SPA </tag>
+            
+            <tag> Nuxt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>瀏覽器資料儲存-Cookie、LocalStorage、SessionStorage</title>
       <link href="2021/08/16/js-cookie/"/>
       <url>2021/08/16/js-cookie/</url>
@@ -132,11 +161,11 @@
       
         <tags>
             
-            <tag> ES6 </tag>
-            
             <tag> promise </tag>
             
             <tag> Javascript </tag>
+            
+            <tag> ES6 </tag>
             
         </tags>
       
@@ -186,11 +215,11 @@
       
         <tags>
             
+            <tag> ES6 </tag>
+            
             <tag> import </tag>
             
             <tag> export </tag>
-            
-            <tag> ES6 </tag>
             
         </tags>
       
