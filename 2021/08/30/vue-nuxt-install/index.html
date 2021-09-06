@@ -21,22 +21,23 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="VUE 的生命週期(Lifecycle Hooks)setup &#x3D;&gt; vue 掛載到 app 上面後執行onBeforeMount &#x3D;&gt; DOM 渲染前執行onMounted &#x3D;&gt; DOM 渲染完成後執行onBeforeUpdate &#x3D;&gt; 資料更新 DOM 更改前執行onUpdated &#x3D;&gt; 資料更新 DOM 更改後執行">
+  <meta name="description" content="安裝 Nuxt安裝 Nuxt 前，先檢查 Nodejs 最少需要 v10.13 的版本，如小於此版本，請升級 Nodejs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VUE的生命週期">
-<meta property="og:url" content="https://happy9990929.github.io/2021/03/05/lifecycle-hooks/index.html">
+<meta property="og:title" content="vue-nuxt-install">
+<meta property="og:url" content="https://happy9990929.github.io/2021/08/30/vue-nuxt-install/index.html">
 <meta property="og:site_name" content="一文前端大小事">
-<meta property="og:description" content="VUE 的生命週期(Lifecycle Hooks)setup &#x3D;&gt; vue 掛載到 app 上面後執行onBeforeMount &#x3D;&gt; DOM 渲染前執行onMounted &#x3D;&gt; DOM 渲染完成後執行onBeforeUpdate &#x3D;&gt; 資料更新 DOM 更改前執行onUpdated &#x3D;&gt; 資料更新 DOM 更改後執行">
+<meta property="og:description" content="安裝 Nuxt安裝 Nuxt 前，先檢查 Nodejs 最少需要 v10.13 的版本，如小於此版本，請升級 Nodejs">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2021-03-05T13:14:22.000Z">
-<meta property="article:modified_time" content="2021-03-14T13:13:39.069Z">
+<meta property="og:image" content="https://imgur.com/mRrJH3R.jpg">
+<meta property="og:image" content="https://imgur.com/aJWOh3A.jpg">
+<meta property="article:published_time" content="2021-08-30T15:29:59.000Z">
+<meta property="article:modified_time" content="2021-09-06T15:21:50.567Z">
 <meta property="article:author" content="Yi Wen Wang">
-<meta property="article:tag" content="Vue.js">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="生命週期">
+<meta property="article:tag" content="Nuxt">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/mRrJH3R.jpg">
 
-<link rel="canonical" href="https://happy9990929.github.io/2021/03/05/lifecycle-hooks/">
+<link rel="canonical" href="https://happy9990929.github.io/2021/08/30/vue-nuxt-install/">
 
 
 <script id="page-configurations">
@@ -49,7 +50,7 @@
   };
 </script>
 
-  <title>VUE的生命週期 | 一文前端大小事</title>
+  <title>vue-nuxt-install | 一文前端大小事</title>
   
 
 
@@ -193,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/05/lifecycle-hooks/">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/08/30/vue-nuxt-install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
@@ -206,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          VUE的生命週期
+          vue-nuxt-install
         </h1>
 
         <div class="post-meta">
@@ -216,14 +217,14 @@
               </span>
               <span class="post-meta-item-text">發表於</span>
 
-              <time title="創建時間：2021-03-05 21:14:22" itemprop="dateCreated datePublished" datetime="2021-03-05T21:14:22+08:00">2021-03-05</time>
+              <time title="創建時間：2021-08-30 23:29:59" itemprop="dateCreated datePublished" datetime="2021-08-30T23:29:59+08:00">2021-08-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-03-14 21:13:39" itemprop="dateModified" datetime="2021-03-14T21:13:39+08:00">2021-03-14</time>
+                <time title="修改時間：2021-09-06 23:21:50" itemprop="dateModified" datetime="2021-09-06T23:21:50+08:00">2021-09-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -231,7 +232,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
+                  <a href="/categories/Vue-Nuxt/" itemprop="url" rel="index"><span itemprop="name">Vue-Nuxt</span></a>
                 </span>
             </span>
 
@@ -251,8 +252,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2021/03/05/lifecycle-hooks/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/05/lifecycle-hooks/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/08/30/vue-nuxt-install/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/08/30/vue-nuxt-install/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -267,13 +268,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="VUE-的生命週期-Lifecycle-Hooks"><a href="#VUE-的生命週期-Lifecycle-Hooks" class="headerlink" title="VUE 的生命週期(Lifecycle Hooks)"></a>VUE 的生命週期(Lifecycle Hooks)</h1><p><strong>setup</strong> =&gt; vue 掛載到 app 上面後執行<br><strong>onBeforeMount</strong> =&gt; DOM 渲染前執行<br><strong>onMounted</strong> =&gt; DOM 渲染完成後執行<br><strong>onBeforeUpdate</strong> =&gt; 資料更新 DOM 更改前執行<br><strong>onUpdated</strong> =&gt; 資料更新 DOM 更改後執行</p>
+        <p><img src="https://imgur.com/mRrJH3R.jpg" alt="Imgur"></p>
+<h1 id="安裝-Nuxt"><a href="#安裝-Nuxt" class="headerlink" title="安裝 Nuxt"></a>安裝 Nuxt</h1><p>安裝 Nuxt 前，先檢查 Nodejs 最少需要 v10.13 的版本，如小於此版本，請升級 Nodejs</p>
 <a id="more"></a>
 
-<p><strong>onBeforeUnmount</strong> =&gt; 組件銷毀前執行<br><strong>onUnmounted</strong> =&gt; 組件銷毀後執行<br><strong>onErrorCaptured</strong> =&gt; 當組件發出錯誤時後調用<br><strong>onRenderTracked</strong> =&gt; 監控 virtual DOM 重新選染時調用 ( 此事件告訴你操作什麼監聽了組件以及該操作的物件)<br><strong>onRenderTriggered</strong> =&gt; 監控 virtual DOM 重新選染時調用 ( 此事件告訴你操作什麼觸發了重新渲染，以及該操作的物件)</p>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+<p>以下步驟請依專案而定</p>
+<p>安裝 nuxt</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-nuxt-app &lt;project-name&gt;</span><br></pre></td></tr></table></figure>
+<p>Project name: 直接 Enter</p>
+<p>Programming language:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaScript</span><br></pre></td></tr></table></figure>
+<p>Package manager:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm</span><br></pre></td></tr></table></figure>
+<p>UI framework:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">None</span><br></pre></td></tr></table></figure>
+<p>Nuxt.js modules: (可先安裝的功能)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Axios - Promise based HTTP client</span><br></pre></td></tr></table></figure>
+<p>Linting tools: 直接 Enter</p>
+<p>Testing framework: 直接 Enter</p>
+<p>Rendering mode:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Universal (SSR / SSG)</span><br></pre></td></tr></table></figure>
+<p>Deployment target:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server (Node.js hosting)</span><br></pre></td></tr></table></figure>
+<p>Development tools:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jsconfig.json (Recommended <span class="keyword">for</span> VS Code <span class="keyword">if</span> you<span class="string">&#x27;re not using typescript)</span></span><br></pre></td></tr></table></figure>
+<p>What is your GitHub username?</p>
+<p>Version control system:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">None</span><br></pre></td></tr></table></figure>
+<br>
 
+<h2 id="Nuxt-2-14-6-安裝出現錯誤"><a href="#Nuxt-2-14-6-安裝出現錯誤" class="headerlink" title="Nuxt 2.14.6 安裝出現錯誤"></a>Nuxt 2.14.6 安裝出現錯誤</h2><p><img src="https://imgur.com/aJWOh3A.jpg" alt="Imgur"><br>這是目前只有在 Nuxt 2.14.6 會出現錯誤，可以在 nuxt.config.js 裡面的 build 新增以下設定解決這個錯誤</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">build: &#123;</span><br><span class="line">  babel: &#123;</span><br><span class="line">    plugins: [[<span class="string">&#x27;@babel/plugin-proposal-private-methods&#x27;</span>, &#123; <span class="attr">loose</span>: <span class="literal">true</span> &#125;]];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         <div>
   <script type="text/javascript">
     document.write(
@@ -289,9 +314,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Vue-js/" rel="tag"># Vue.js</a>
-              <a href="/tags/javascript/" rel="tag"># javascript</a>
-              <a href="/tags/%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/" rel="tag"># 生命週期</a>
+              <a href="/tags/Nuxt/" rel="tag"># Nuxt</a>
           </div>
 
         
@@ -300,13 +323,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/04/vue3-base2/" rel="prev" title="Vue3基本操作-2">
-      <i class="fa fa-chevron-left"></i> Vue3基本操作-2
+    <a href="/2021/08/29/vue-SSR/" rel="prev" title="VUE 的 SSR 原理">
+      <i class="fa fa-chevron-left"></i> VUE 的 SSR 原理
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/03/05/axios-api/" rel="next" title="非同步處理 Axios">
-      非同步處理 Axios <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -372,7 +392,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VUE-%E7%9A%84%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F-Lifecycle-Hooks"><span class="nav-number">1.</span> <span class="nav-text">VUE 的生命週期(Lifecycle Hooks)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-Nuxt"><span class="nav-number">1.</span> <span class="nav-text">安裝 Nuxt</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nuxt-2-14-6-%E5%AE%89%E8%A3%9D%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4"><span class="nav-number">1.1.</span> <span class="nav-text">Nuxt 2.14.6 安裝出現錯誤</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -522,9 +542,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "https://happy9990929.github.io/2021/03/05/lifecycle-hooks/";
-    this.page.identifier = "2021/03/05/lifecycle-hooks/";
-    this.page.title = "VUE的生命週期";
+    this.page.url = "https://happy9990929.github.io/2021/08/30/vue-nuxt-install/";
+    this.page.identifier = "2021/08/30/vue-nuxt-install/";
+    this.page.title = "vue-nuxt-install";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
