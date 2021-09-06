@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>vue-nuxt-install</title>
+      <title>Nuxt 安裝及設定</title>
       <link href="2021/08/30/vue-nuxt-install/"/>
       <url>2021/08/30/vue-nuxt-install/</url>
       
@@ -186,11 +186,11 @@
       
         <tags>
             
-            <tag> ES6 </tag>
-            
             <tag> promise </tag>
             
             <tag> Javascript </tag>
+            
+            <tag> ES6 </tag>
             
         </tags>
       
@@ -240,11 +240,11 @@
       
         <tags>
             
+            <tag> ES6 </tag>
+            
             <tag> import </tag>
             
             <tag> export </tag>
-            
-            <tag> ES6 </tag>
             
         </tags>
       
