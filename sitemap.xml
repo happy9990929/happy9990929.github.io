@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://happy9990929.github.io/2021/09/09/vue-nuxt-layout/</loc>
+    
+    <lastmod>2021-09-10</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/2021/08/30/vue-nuxt-install/</loc>
     
     <lastmod>2021-09-06</lastmod>
@@ -256,7 +263,7 @@
 
   <url>
     <loc>https://happy9990929.github.io/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -264,364 +271,364 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/axios/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/Vue-js/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/javascript/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/Vue-cli/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/props/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/call/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/apply/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/bind/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/emit/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/Vue-cli/</loc>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/props/</loc>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/call/</loc>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/apply/</loc>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/bind/</loc>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/closure/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/Cookie/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/LocalStorage/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/SessionStorage/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/hoisting/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/promise/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/Javascript/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/ES6/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/import/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/export/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/transition/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <loc>https://happy9990929.github.io/tags/ES6/</loc>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/nodeJs/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <loc>https://happy9990929.github.io/tags/promise/</loc>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/npm/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <loc>https://happy9990929.github.io/tags/Javascript/</loc>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/var/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/let/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/const/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/</loc>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/nodeJs/</loc>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/npm/</loc>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/transition/</loc>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/SSR/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/SPA/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/Nuxt/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/Composition-API/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/directive/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/router/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/event/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/Slot/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/ref/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/Slot/</loc>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/vuex/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/reactive/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/v-model/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/v-on/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/readonly/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/v-for/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/v-show/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/v-if/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/v-bind/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/VueJs/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/computed/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/watch/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/watchEffect/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/HTTPS/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/HTTP/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/HTTP-%E7%8B%80%E6%85%8B%E7%A2%BC/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/tags/HTTP-Status-Codes/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/HTTPS/</loc>
+    <lastmod>2021-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/HTTP/</loc>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -630,35 +637,35 @@
   
   <url>
     <loc>https://happy9990929.github.io/categories/Vue3/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/categories/Javascript/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/categories/nodeJs/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/categories/Vue-Nuxt/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://happy9990929.github.io/categories/%E7%B6%B2%E9%A0%81%E7%A8%8B%E5%BC%8F%E6%8A%80%E8%A1%93%E6%8E%A2%E8%A8%8E/</loc>
-    <lastmod>2021-09-06</lastmod>
+    <lastmod>2021-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>Nuxt 架構解析</title>
+      <link href="2021/09/09/vue-nuxt-layout/"/>
+      <url>2021/09/09/vue-nuxt-layout/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://imgur.com/wcFw6fe.jpg" alt="Imgur"></p><h1 id="nuxt-指令"><a href="#nuxt-指令" class="headerlink" title="nuxt 指令"></a>nuxt 指令</h1><p>在 package.json 有一些指令可以操作 nuxt</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;dev&quot;: &quot;nuxt&quot;,</span><br><span class="line">  &quot;build&quot;: &quot;nuxt build&quot;,</span><br><span class="line">  &quot;start&quot;: &quot;nuxt start&quot;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure><a id="more"></a><p><code>npm run dev</code> 開發環境時使用<br><code>npm run build</code> 打包專案，分別有 Client 端與 Server 端<br><code>npm run start</code> 用 Node.js 起一個 Server</p><h1 id="資料夾功能"><a href="#資料夾功能" class="headerlink" title="資料夾功能"></a>資料夾功能</h1><p>pages - 放頁面的地方，新增頁面後，會自動產生新頁面名稱的 router<br>layouts - 頁面共用的版型，像 header、footer 會重複的部分，可以寫在 default.vue，供每頁共用</p><p>layouts/default.vue</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">header</span>&gt;</span>header<span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Nuxt</span> /&gt;</span>  // Nuxt 為 pages 裡面的頁面，像是 Vue Cli 的 router-view</span><br><span class="line">    <span class="tag">&lt;<span class="name">footer</span>&gt;</span>footer<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure><p>components - 頁面的最小單位組件<br>assets - 需要經過 Nuxt 編譯打包、壓縮的檔案，如 CSS、圖片等<br>static - 不需經過 Nuxt 編譯的檔案，如 favicon、音樂、Zip、自己寫的 json 等<br>store - 操作 Vuex 的地方<br>middleware - 進入頁面前需要做的中間層，如驗證檢查等<br>plugins - 自定義的 Global nuxt 套件，會從 nuxt.config.js 自動注入</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Nuxt 安裝及設定</title>
       <link href="2021/08/30/vue-nuxt-install/"/>
       <url>2021/08/30/vue-nuxt-install/</url>
@@ -186,11 +199,11 @@
       
         <tags>
             
+            <tag> ES6 </tag>
+            
             <tag> promise </tag>
             
             <tag> Javascript </tag>
-            
-            <tag> ES6 </tag>
             
         </tags>
       
@@ -240,11 +253,11 @@
       
         <tags>
             
-            <tag> ES6 </tag>
-            
             <tag> import </tag>
             
             <tag> export </tag>
+            
+            <tag> ES6 </tag>
             
         </tags>
       
