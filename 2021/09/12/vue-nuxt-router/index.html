@@ -21,22 +21,25 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="嵌套路由(Nested Routes)父層有 router-view 可以切換，內層也有自己的 router-view 可以切換">
+  <meta name="description" content="Nuxt 設置路由非常方便，只要新增好 component 就會自動設定好頁面 Router 更換頁面的進入點在 layouts 可以放進每頁共用的部分，與一個隨著 pages 變化內容的進入點，相當於在 Vue Cli 的 ，在 Nuxt 的進入點用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue 嵌套路由">
-<meta property="og:url" content="https://happy9990929.github.io/2021/03/16/vue-nested-routes/index.html">
+<meta property="og:title" content="Nuxt 自動化 Router 配置">
+<meta property="og:url" content="https://happy9990929.github.io/2021/09/12/vue-nuxt-router/index.html">
 <meta property="og:site_name" content="一文前端大小事">
-<meta property="og:description" content="嵌套路由(Nested Routes)父層有 router-view 可以切換，內層也有自己的 router-view 可以切換">
+<meta property="og:description" content="Nuxt 設置路由非常方便，只要新增好 component 就會自動設定好頁面 Router 更換頁面的進入點在 layouts 可以放進每頁共用的部分，與一個隨著 pages 變化內容的進入點，相當於在 Vue Cli 的 ，在 Nuxt 的進入點用">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2021-03-16T08:20:53.000Z">
-<meta property="article:modified_time" content="2021-03-16T08:29:54.715Z">
+<meta property="og:image" content="https://imgur.com/kyou2GQ.jpg">
+<meta property="og:image" content="https://imgur.com/w5m1vIX.jpg">
+<meta property="og:image" content="https://imgur.com/HItJoSV.jpg">
+<meta property="article:published_time" content="2021-09-12T08:50:44.000Z">
+<meta property="article:modified_time" content="2021-09-12T11:57:05.987Z">
 <meta property="article:author" content="Yi Wen Wang">
-<meta property="article:tag" content="Vue.js">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="router">
+<meta property="article:tag" content="Nuxt">
+<meta property="article:tag" content="Router">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/kyou2GQ.jpg">
 
-<link rel="canonical" href="https://happy9990929.github.io/2021/03/16/vue-nested-routes/">
+<link rel="canonical" href="https://happy9990929.github.io/2021/09/12/vue-nuxt-router/">
 
 
 <script id="page-configurations">
@@ -49,7 +52,7 @@
   };
 </script>
 
-  <title>Vue 嵌套路由 | 一文前端大小事</title>
+  <title>Nuxt 自動化 Router 配置 | 一文前端大小事</title>
   
 
 
@@ -193,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/16/vue-nested-routes/">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/09/12/vue-nuxt-router/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
@@ -206,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Vue 嵌套路由
+          Nuxt 自動化 Router 配置
         </h1>
 
         <div class="post-meta">
@@ -217,7 +220,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-03-16 16:20:53 / 修改時間：16:29:54" itemprop="dateCreated datePublished" datetime="2021-03-16T16:20:53+08:00">2021-03-16</time>
+              <time title="創建時間：2021-09-12 16:50:44 / 修改時間：19:57:05" itemprop="dateCreated datePublished" datetime="2021-09-12T16:50:44+08:00">2021-09-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -225,7 +228,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
+                  <a href="/categories/Vue-Nuxt/" itemprop="url" rel="index"><span itemprop="name">Vue-Nuxt</span></a>
                 </span>
             </span>
 
@@ -245,8 +248,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2021/03/16/vue-nested-routes/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/16/vue-nested-routes/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/09/12/vue-nuxt-router/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/09/12/vue-nuxt-router/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -261,20 +264,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="嵌套路由-Nested-Routes"><a href="#嵌套路由-Nested-Routes" class="headerlink" title="嵌套路由(Nested Routes)"></a>嵌套路由(Nested Routes)</h1><p>父層有 router-view 可以切換，內層也有自己的 router-view 可以切換</p>
+        <p><img src="https://imgur.com/kyou2GQ.jpg" alt="Imgur"></p>
+<p>Nuxt 設置路由非常方便，只要新增好 component 就會自動設定好頁面</p>
+<h1 id="Router-更換頁面的進入點"><a href="#Router-更換頁面的進入點" class="headerlink" title="Router 更換頁面的進入點"></a>Router 更換頁面的進入點</h1><p>在 layouts 可以放進每頁共用的部分，與一個隨著 pages 變化內容的進入點，相當於在 Vue Cli 的 <router-view />，在 Nuxt 的進入點用 <Nuxt/></p>
 <a id="more"></a>
 
-<p>main.js</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">&quot;../views/Home.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> About <span class="keyword">from</span> <span class="string">&quot;../views/About.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Changelog <span class="keyword">from</span> <span class="string">&quot;../views/About/Changelog.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> GitHub <span class="keyword">from</span> <span class="string">&quot;../views/About/GitHub.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Guide <span class="keyword">from</span> <span class="string">&quot;../views/About/Guide.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> aboutIndex <span class="keyword">from</span> <span class="string">&quot;../views/About/index.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Reference <span class="keyword">from</span> <span class="string">&quot;../views/About/Reference.vue&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;Home&quot;</span>,</span><br><span class="line">    component: Home,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&quot;/about&quot;</span>,</span><br><span class="line">    name: <span class="string">&quot;About&quot;</span>,</span><br><span class="line">    component: About,</span><br><span class="line">    children: [</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">&quot;&quot;</span>, <span class="comment">// children裡的路徑不需要斜線/</span></span><br><span class="line">        component: aboutIndex</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">&quot;changelog&quot;</span>,</span><br><span class="line">        component: Changelog</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">&quot;gitHub&quot;</span>,</span><br><span class="line">        component: GitHub</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">&quot;guide&quot;</span>,</span><br><span class="line">        component: Guide</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">&quot;reference&quot;</span>,</span><br><span class="line">        component: Reference</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span><br><span class="line">  history: createWebHistory(process.env.BASE_URL),</span><br><span class="line">  routes,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>layouts/default.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Nuxt</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 <br>
 
-<h2 id="內層加上-router-view"><a href="#內層加上-router-view" class="headerlink" title="內層加上 router-view"></a>內層加上 router-view</h2><p>about.vue</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;about&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/about/changelog&quot;</span>&gt;</span>changelog<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/about/gitHub&quot;</span>&gt;</span>gitHub<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/about/guide&quot;</span>&gt;</span>guide<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/about/reference&quot;</span>&gt;</span>reference<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.about</span> &#123;</span><br><span class="line">  &gt; nav &#123;</span><br><span class="line">    &gt; <span class="selector-tag">a</span> &#123;</span><br><span class="line">      <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#2c3e50</span>;</span><br><span class="line">      <span class="attribute">font-weight</span>: bold;</span><br><span class="line">      &amp;.router-link-exact-active &#123;</span><br><span class="line">        <span class="selector-tag">color</span>: <span class="selector-tag">rebeccapurple</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>需注意的是，嵌套路由的router-link，class會自動產生router-link-active，router-link-active的下一層也會產生router-link-exact-active，可以利用此類別來設定active</p>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+<h1 id="嵌套-router-所更換頁面的進入點"><a href="#嵌套-router-所更換頁面的進入點" class="headerlink" title="嵌套 router 所更換頁面的進入點"></a>嵌套 router 所更換頁面的進入點</h1><p>About 下面還有子路由，只要在 pages 新增 About 資料夾，再放進 component，就會自動生成底下的路由啦！</p>
+<p><img src="https://imgur.com/w5m1vIX.jpg" alt="Imgur"></p>
+<p>嵌套路由的進入點為 <NuxtChild>，而不是用原本的 <router-view />，這樣在識別的時候也會比較好識別這個組件是不是用嵌套網址<br>pages/About.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;about&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">NuxtLink</span> <span class="attr">to</span>=<span class="string">&quot;/about/guide&quot;</span>&gt;</span>Guide<span class="tag">&lt;/<span class="name">NuxtLink</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">NuxtLink</span> <span class="attr">to</span>=<span class="string">&quot;/about/reference&quot;</span>&gt;</span>API Reference<span class="tag">&lt;/<span class="name">NuxtLink</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">NuxtLink</span> <span class="attr">to</span>=<span class="string">&quot;/about/changelog&quot;</span>&gt;</span>Changelog <span class="tag">&lt;/<span class="name">NuxtLink</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">NuxtLink</span> <span class="attr">to</span>=<span class="string">&quot;/about/gitHub&quot;</span>&gt;</span>GitHub<span class="tag">&lt;/<span class="name">NuxtLink</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">NuxtChild</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br>
 
+<h1 id="Nuxt-切換頁面的超連結元件"><a href="#Nuxt-切換頁面的超連結元件" class="headerlink" title="Nuxt 切換頁面的超連結元件"></a>Nuxt 切換頁面的超連結元件</h1><p>在 Vue Cli 為 <router-link>，在 Nuxt 要寫 <NuxtLink>，用法跟 router-link 一模一樣，雖然在 Nuxt 裡 router-link 也可以執行，但以防萬一非預期的錯誤，在 Nuxt 還是用 NuxtLink 吧！</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">NuxtLink</span> <span class="attr">to</span>=<span class="string">&quot;/about&quot;</span>&gt;</span>about page<span class="tag">&lt;/<span class="name">NuxtLink</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="動態-Router-配置"><a href="#動態-Router-配置" class="headerlink" title="動態 Router 配置"></a>動態 Router 配置</h1><p>在要設置動態路由的資料夾，新增一個名為<code>_id.vue</code> 的 component，id 為自定義的名字，主要前面要加底線</p>
+<p><img src="https://imgur.com/HItJoSV.jpg" alt="Imgur"></p>
+<p>asyncData 會回傳一個 context 物件，context.params.id 可取得動態路由</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">asyncData</span>(<span class="params">context</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(context.params.id);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      id: context.params.id,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
         <div>
   <script type="text/javascript">
     document.write(
@@ -290,9 +302,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Vue-js/" rel="tag"># Vue.js</a>
-              <a href="/tags/javascript/" rel="tag"># javascript</a>
-              <a href="/tags/router/" rel="tag"># router</a>
+              <a href="/tags/Nuxt/" rel="tag"># Nuxt</a>
+              <a href="/tags/Router/" rel="tag"># Router</a>
           </div>
 
         
@@ -301,13 +312,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/16/vue-dynamic-router/" rel="prev" title="Vue 動態路由">
-      <i class="fa fa-chevron-left"></i> Vue 動態路由
+    <a href="/2021/09/12/vue-nuxt-seo/" rel="prev" title="Nuxt 的 SEO 設定">
+      <i class="fa fa-chevron-left"></i> Nuxt 的 SEO 設定
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/03/16/vue-vuex/" rel="next" title="Vuex 資料流">
-      Vuex 資料流 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -373,7 +381,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1-Nested-Routes"><span class="nav-number">1.</span> <span class="nav-text">嵌套路由(Nested Routes)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A7%E5%B1%A4%E5%8A%A0%E4%B8%8A-router-view"><span class="nav-number">1.1.</span> <span class="nav-text">內層加上 router-view</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Router-%E6%9B%B4%E6%8F%9B%E9%A0%81%E9%9D%A2%E7%9A%84%E9%80%B2%E5%85%A5%E9%BB%9E"><span class="nav-number">1.</span> <span class="nav-text">Router 更換頁面的進入點</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97-router-%E6%89%80%E6%9B%B4%E6%8F%9B%E9%A0%81%E9%9D%A2%E7%9A%84%E9%80%B2%E5%85%A5%E9%BB%9E"><span class="nav-number">2.</span> <span class="nav-text">嵌套 router 所更換頁面的進入點</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nuxt-%E5%88%87%E6%8F%9B%E9%A0%81%E9%9D%A2%E7%9A%84%E8%B6%85%E9%80%A3%E7%B5%90%E5%85%83%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">Nuxt 切換頁面的超連結元件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8B%95%E6%85%8B-Router-%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">動態 Router 配置</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -523,9 +531,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "https://happy9990929.github.io/2021/03/16/vue-nested-routes/";
-    this.page.identifier = "2021/03/16/vue-nested-routes/";
-    this.page.title = "Vue 嵌套路由";
+    this.page.url = "https://happy9990929.github.io/2021/09/12/vue-nuxt-router/";
+    this.page.identifier = "2021/09/12/vue-nuxt-router/";
+    this.page.title = "Nuxt 自動化 Router 配置";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
