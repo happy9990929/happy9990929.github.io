@@ -21,16 +21,16 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="做好 SEO，可以增強網站的自然搜尋排名，不同的頁面通常會有不同的 title、關鍵字，Nuxt 可以幫我們做到這件事。 Global Settings設定整個網站的 SEO，在這裡你可以定義所有的">
+  <meta name="description" content="做好 SEO，可以增強網站的自然搜尋排名，不同的頁面通常會有不同的 title、關鍵字，Nuxt 可以幫我們做到這件事。 Global Settings設定整個網站的 SEO，在這裡你可以定義所有的 meta">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nuxt 的 SEO 設定">
 <meta property="og:url" content="https://happy9990929.github.io/2021/09/12/vue-nuxt-seo/index.html">
 <meta property="og:site_name" content="一文前端大小事">
-<meta property="og:description" content="做好 SEO，可以增強網站的自然搜尋排名，不同的頁面通常會有不同的 title、關鍵字，Nuxt 可以幫我們做到這件事。 Global Settings設定整個網站的 SEO，在這裡你可以定義所有的">
+<meta property="og:description" content="做好 SEO，可以增強網站的自然搜尋排名，不同的頁面通常會有不同的 title、關鍵字，Nuxt 可以幫我們做到這件事。 Global Settings設定整個網站的 SEO，在這裡你可以定義所有的 meta">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://imgur.com/s07cfNA.jpg">
 <meta property="article:published_time" content="2021-09-12T07:01:47.000Z">
-<meta property="article:modified_time" content="2021-09-12T07:34:44.407Z">
+<meta property="article:modified_time" content="2021-09-13T12:37:19.809Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="Nuxt">
 <meta property="article:tag" content="SEO">
@@ -216,10 +216,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-09-12 15:01:47 / 修改時間：15:34:44" itemprop="dateCreated datePublished" datetime="2021-09-12T15:01:47+08:00">2021-09-12</time>
+              <time title="創建時間：2021-09-12 15:01:47" itemprop="dateCreated datePublished" datetime="2021-09-12T15:01:47+08:00">2021-09-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-09-13 20:37:19" itemprop="dateModified" datetime="2021-09-13T20:37:19+08:00">2021-09-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -264,7 +270,7 @@
       
         <p><img src="https://imgur.com/s07cfNA.jpg" alt="Imgur"></p>
 <p>做好 SEO，可以增強網站的自然搜尋排名，不同的頁面通常會有不同的 title、關鍵字，Nuxt 可以幫我們做到這件事。</p>
-<h1 id="Global-Settings"><a href="#Global-Settings" class="headerlink" title="Global Settings"></a>Global Settings</h1><p>設定整個網站的 SEO，在這裡你可以定義所有的<meta></p>
+<h1 id="Global-Settings"><a href="#Global-Settings" class="headerlink" title="Global Settings"></a>Global Settings</h1><p>設定整個網站的 SEO，在這裡你可以定義所有的 meta</p>
 <a id="more"></a>
 
 <p>nuxt.config.js</p>
@@ -391,7 +397,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -404,7 +410,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
