@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Nuxt 錯誤頁面處理</title>
+      <link href="2021/09/13/vue-nuxt-error/"/>
+      <url>2021/09/13/vue-nuxt-error/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://imgur.com/dq0PWCR.jpg" alt="Imgur"></p><p>使用者網址輸入錯誤，或頁面發生錯誤的時候，會在畫面上給一個 404 的頁面，在 Nuxt 我們也需要設置 404 的頁面</p><a id="more"></a><p>在 layouts 新增一個 error.vue</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">&quot;error.statusCode === 404&quot;</span>&gt;</span>Page not found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span>&gt;</span>An error occurred<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">NuxtLink</span> <span class="attr">to</span>=<span class="string">&quot;/&quot;</span>&gt;</span>Home page<span class="tag">&lt;/<span class="name">NuxtLink</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: [<span class="string">&#x27;error&#x27;</span>], <span class="comment">// 如頁面發生錯誤，會傳遞叫 error 的 props</span></span><br><span class="line">  layout: <span class="string">&#x27;blog&#x27;</span>, <span class="comment">// you can set a custom layout for the error page</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Vue-Nuxt </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Nuxt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Nuxt loading 設定</title>
       <link href="2021/09/13/vue-nuxt-loading/"/>
       <url>2021/09/13/vue-nuxt-loading/</url>
