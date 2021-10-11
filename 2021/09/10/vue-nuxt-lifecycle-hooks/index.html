@@ -29,9 +29,9 @@
 <meta property="og:description" content="因為 Nuxt 又有牽扯到 Server 的部分，所以 Nuxt 的生命週期會跟 Vue 的 Nuxt 有一點不太一樣">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://imgur.com/btmMqMY.jpg">
-<meta property="og:image" content="https://nuxtjs.org/docs/2.x/nuxt-lifecycle.svg">
+<meta property="og:image" content="https://imgur.com/Myy3gry.jpg">
 <meta property="article:published_time" content="2021-09-10T15:33:01.000Z">
-<meta property="article:modified_time" content="2021-09-12T07:29:36.339Z">
+<meta property="article:modified_time" content="2021-10-06T13:07:23.504Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="Nuxt">
 <meta property="article:tag" content="asyncData">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-09-12 15:29:36" itemprop="dateModified" datetime="2021-09-12T15:29:36+08:00">2021-09-12</time>
+                <time title="修改時間：2021-10-06 21:07:23" itemprop="dateModified" datetime="2021-10-06T21:07:23+08:00">2021-10-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,7 +275,7 @@
 <p>因為 Nuxt 又有牽扯到 Server 的部分，所以 Nuxt 的生命週期會跟 Vue 的 Nuxt 有一點不太一樣</p>
 <a id="more"></a>
 
-<p><img src="https://nuxtjs.org/docs/2.x/nuxt-lifecycle.svg" alt="nuxt"></p>
+<p><img src="https://imgur.com/Myy3gry.jpg" alt="nuxt"></p>
 <h1 id="asyncData"><a href="#asyncData" class="headerlink" title="asyncData"></a>asyncData</h1><p>在 Server 執行階段，瀏覽器渲染之前的生命週期，Server 端處理非同步時，如 API 需要做到 SEO，需在 asyncData 處理，asyncData 只會執行一次。<br>🔸 asyncData 只有在頁面選染前才會執行，所以只有在 <code>pages</code> 裡的 component 才能使用 asyncData，如其他資料夾的 component 也需要 SEO，需把資料往下傳遞或是存進 Vuex 渲染<br>🔸 不能使用 this，在 Server 階段執行還沒產生 Vue 實體<br>🔸 不能使用瀏覽器有關的 API，如 windiw.alert、document 等，因在 Server 階段執行還沒建構出網站內容</p>
 <p>asyncData 的內容如跟 data 同名 ，asyncData 會覆蓋掉 data</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  &#123;&#123;name&#125;&#125;  // Bobee</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -427,7 +427,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -440,7 +440,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

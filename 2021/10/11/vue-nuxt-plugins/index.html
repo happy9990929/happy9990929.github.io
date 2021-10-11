@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="我們常常會使用到套件，幫助網站快速達到想要的效果，在 NUXT 要怎麼自行撰寫套件、如何整合現有的套件、或是整合第三方套件呢?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nuxt 使用 Plugins">
+<meta property="og:url" content="https://happy9990929.github.io/2021/10/11/vue-nuxt-plugins/index.html">
+<meta property="og:site_name" content="一文前端大小事">
+<meta property="og:description" content="我們常常會使用到套件，幫助網站快速達到想要的效果，在 NUXT 要怎麼自行撰寫套件、如何整合現有的套件、或是整合第三方套件呢?">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/ig2CVFl.jpg">
+<meta property="article:published_time" content="2021-10-11T15:21:21.000Z">
+<meta property="article:modified_time" content="2021-10-11T16:11:29.078Z">
+<meta property="article:author" content="Yi Wen Wang">
+<meta property="article:tag" content="plugins">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/ig2CVFl.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2021/10/11/vue-nuxt-plugins/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>nuxt 使用 Plugins | 一文前端大小事</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">一文前端大小事</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一起鑽研前端技術吧^^</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/10/11/vue-nuxt-plugins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端大小事">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          nuxt 使用 Plugins
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-10-11 23:21:21" itemprop="dateCreated datePublished" datetime="2021-10-11T23:21:21+08:00">2021-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-10-12 00:11:29" itemprop="dateModified" datetime="2021-10-12T00:11:29+08:00">2021-10-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue-Nuxt/" itemprop="url" rel="index"><span itemprop="name">Vue-Nuxt</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/10/11/vue-nuxt-plugins/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/10/11/vue-nuxt-plugins/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/ig2CVFl.jpg" alt="Plugins"><br>我們常常會使用到套件，幫助網站快速達到想要的效果，在 NUXT 要怎麼自行撰寫套件、如何整合現有的套件、或是整合第三方套件呢?</p>
+<a id="more"></a>
+
+<h1 id="自己撰寫的-Plugins"><a href="#自己撰寫的-Plugins" class="headerlink" title="自己撰寫的 Plugins"></a>自己撰寫的 Plugins</h1><p>自己撰寫 Plugins 起手式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (&#123; app &#125;, inject) =&gt; &#123;</span><br><span class="line">  inject(<span class="string">&#x27;EventName&#x27;</span>, &#123;</span><br><span class="line">    <span class="comment">// 想做的事情</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>inject 會把你所寫的東西，注入到整個環境，<br>EventName 是自定義的方法名稱，可以在頁面呼叫<code>this.$EventName</code>使用。</p>
+<h2 id="1-在-plugins-資料夾新增自定義的-js"><a href="#1-在-plugins-資料夾新增自定義的-js" class="headerlink" title="1.在 plugins 資料夾新增自定義的 js"></a>1.在 plugins 資料夾新增自定義的 js</h2><p>/plugins/demo.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (&#123; app &#125;, inject) =&gt; &#123;</span><br><span class="line">  inject(<span class="string">&#x27;EventName&#x27;</span>, &#123;</span><br><span class="line">    <span class="function"><span class="title">log</span>(<span class="params">val</span>)</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;EventName=&gt;&#x27;</span>, val);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="2-載入-demo-js"><a href="#2-載入-demo-js" class="headerlink" title="2.載入 demo.js"></a>2.載入 demo.js</h2><p>nuxt.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins: [<span class="string">&#x27;~/plugins/demo.js&#x27;</span>];</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="3-調用自定義的方法"><a href="#3-調用自定義的方法" class="headerlink" title="3.調用自定義的方法"></a>3.調用自定義的方法</h2><p>index.vue</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SSR 沒有 this，直接調用 $EventName</span></span><br><span class="line"><span class="function"><span class="title">asyncData</span>(<span class="params">context</span>)</span> &#123;</span><br><span class="line">  context.$EventName.log(<span class="string">&quot;asyncData&quot;</span>);</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">// CSR 沒有 this，直接調用 $EventName</span></span><br><span class="line"><span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.$EventName.log(<span class="string">&quot;mounted&quot;</span>));</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="整合現有的-Nuxt-Plugins"><a href="#整合現有的-Nuxt-Plugins" class="headerlink" title="整合現有的 Nuxt Plugins"></a>整合現有的 Nuxt Plugins</h1><p>以 <a target="_blank" rel="noopener" href="https://axios.nuxtjs.org/">axios</a> 做為範例</p>
+<h2 id="1-安裝-nuxt-axios"><a href="#1-安裝-nuxt-axios" class="headerlink" title="1.安裝 nuxt axios"></a>1.安裝 nuxt axios</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @nuxtjs/axios</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="2-設定-modules"><a href="#2-設定-modules" class="headerlink" title="2.設定 modules"></a>2.設定 modules</h2><p>nuxt.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modules: [<span class="string">&quot;@nuxtjs/axios&quot;</span>],</span><br></pre></td></tr></table></figure>
+<p>設定 modules 後，就可以用 context.$axios 去做操作了，<br>也可使用解構的方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="title">asyncData</span>(<span class="params">&#123; $axios &#125;</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> $axios.get(</span><br><span class="line">    <span class="string">&quot;https://vue-lessons-api.herokuapp.com/photo/list&quot;</span></span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">console</span>.log(res.data);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="3-封裝-axios-的錯誤處理"><a href="#3-封裝-axios-的錯誤處理" class="headerlink" title="3.封裝 axios 的錯誤處理"></a>3.封裝 axios 的錯誤處理</h2><p>在 plugins 新增 axios.js，用來處理 onError</p>
+<p>plugins/axios.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">&#123; $axios, redirect &#125;</span>) </span>&#123;</span><br><span class="line">  $axios.onError(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//axios 如發生錯誤，onError 可依內容去做後續處理</span></span><br><span class="line">    <span class="keyword">if</span> (error.response.status === <span class="number">500</span>) &#123;</span><br><span class="line">      redirect(<span class="string">&#x27;/sorry&#x27;</span>); <span class="comment">// 跳轉頁面</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (error.response.status === <span class="number">404</span>) &#123;</span><br><span class="line">      redirect(<span class="string">&#x27;/404&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>並在 nuxt.config.js 新增 plugins</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins: [<span class="string">&quot;~/plugins/axios.js&quot;</span>],</span><br></pre></td></tr></table></figure>
+<p>這麼一來整個 global 都可以使用到這個 axios 的錯誤處理</p>
+<br>
+
+<h1 id="第三方套件整合-Nuxt"><a href="#第三方套件整合-Nuxt" class="headerlink" title="第三方套件整合 Nuxt"></a>第三方套件整合 Nuxt</h1><p>通常使用 Nuxt 製作時，會找可以直接在 Nuxt 使用的套件，如果想使用的套件不是 Nuxt 專用，我們需要將一般的 VUE 套件，包裝成 NUXT 再做使用，需注意套件有沒有支援 SSR</p>
+<p>以 Vue.js <a target="_blank" rel="noopener" href="https://github.com/euvl/vue-notification#readme">notifications</a> 套件做為範例，是一個彈出通知訊息的套件</p>
+<h2 id="1-安裝-notifications"><a href="#1-安裝-notifications" class="headerlink" title="1.安裝 notifications"></a>1.安裝 notifications</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save vue-notification</span><br></pre></td></tr></table></figure>
+<p>先將 notifications 安裝起來</p>
+<br>
+
+<h2 id="2-新增-notifications-js-並引用"><a href="#2-新增-notifications-js-並引用" class="headerlink" title="2.新增 notifications.js 並引用"></a>2.新增 notifications.js 並引用</h2><p>在 plugins 新增 notification.js<br>notification.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="comment">// import Notifications from &#x27;vue-notification&#x27; 此為 CSR 使用</span></span><br><span class="line"><span class="keyword">import</span> Notifications <span class="keyword">from</span> <span class="string">&#x27;vue-notification/dist/ssr.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(Notifications);</span><br></pre></td></tr></table></figure>
+<p>本來在 CSR 時是放在 main.js 的引入，NUXT 是放在 notification.js，使用 SSR 的方式引入</p>
+<p>在 nuxt.config.js 新增 plugins</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  <span class="string">&quot;~/plugins/notification.js&quot;</span></span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="3-使用套件方法"><a href="#3-使用套件方法" class="headerlink" title="3.使用套件方法"></a>3.使用套件方法</h2><p>由於此套件屬於全站皆可使用的，所以放在 layouts，訊息 position 可以依需求調整</p>
+<p>layouts/default.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">notifications</span> <span class="attr">position</span>=<span class="string">&quot;bottom right&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>pages/index.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;showNotice&quot;</span>&gt;</span>CLICK<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  <span class="function"><span class="title">showNotice</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// using options</span></span><br><span class="line">    <span class="built_in">this</span>.$notify(&#123;</span><br><span class="line">      title: <span class="string">&quot;Important message&quot;</span>,</span><br><span class="line">      text: <span class="string">&quot;Hello user!&quot;</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="4-匯入-CSS"><a href="#4-匯入-CSS" class="headerlink" title="4.匯入 CSS"></a>4.匯入 CSS</h2><p>NUXT 套件整合，可能會遇到吃不到 CSS 的情況，需自行匯入 CSS<br>在 assets 新增 notifications.css，並全域匯入</p>
+<p>nuxt.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">css: [<span class="string">&#x27;~/assets/notifications.css&#x27;</span>];</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="筆記來源-2021-Vue3-專業職人-進階篇"><a href="#筆記來源-2021-Vue3-專業職人-進階篇" class="headerlink" title="筆記來源: 2021 Vue3 專業職人 | 進階篇"></a>筆記來源: 2021 Vue3 專業職人 | 進階篇</h3>
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/plugins/" rel="tag"># plugins</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/13/vue-nuxt-error/" rel="prev" title="Nuxt 錯誤頁面處理">
+      <i class="fa fa-chevron-left"></i> Nuxt 錯誤頁面處理
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E6%92%B0%E5%AF%AB%E7%9A%84-Plugins"><span class="nav-number">1.</span> <span class="nav-text">自己撰寫的 Plugins</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9C%A8-plugins-%E8%B3%87%E6%96%99%E5%A4%BE%E6%96%B0%E5%A2%9E%E8%87%AA%E5%AE%9A%E7%BE%A9%E7%9A%84-js"><span class="nav-number">1.1.</span> <span class="nav-text">1.在 plugins 資料夾新增自定義的 js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%BC%89%E5%85%A5-demo-js"><span class="nav-number">1.2.</span> <span class="nav-text">2.載入 demo.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%AA%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E7%BE%A9%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">3.調用自定義的方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B4%E5%90%88%E7%8F%BE%E6%9C%89%E7%9A%84-Nuxt-Plugins"><span class="nav-number">2.</span> <span class="nav-text">整合現有的 Nuxt Plugins</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%9D-nuxt-axios"><span class="nav-number">2.1.</span> <span class="nav-text">1.安裝 nuxt axios</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%A8%AD%E5%AE%9A-modules"><span class="nav-number">2.2.</span> <span class="nav-text">2.設定 modules</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%B0%81%E8%A3%9D-axios-%E7%9A%84%E9%8C%AF%E8%AA%A4%E8%99%95%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">3.封裝 axios 的錯誤處理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%A5%97%E4%BB%B6%E6%95%B4%E5%90%88-Nuxt"><span class="nav-number">3.</span> <span class="nav-text">第三方套件整合 Nuxt</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%9D-notifications"><span class="nav-number">3.1.</span> <span class="nav-text">1.安裝 notifications</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%96%B0%E5%A2%9E-notifications-js-%E4%B8%A6%E5%BC%95%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">2.新增 notifications.js 並引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BD%BF%E7%94%A8%E5%A5%97%E4%BB%B6%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">3.使用套件方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%8C%AF%E5%85%A5-CSS"><span class="nav-number">3.4.</span> <span class="nav-text">4.匯入 CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%86%E8%A8%98%E4%BE%86%E6%BA%90-2021-Vue3-%E5%B0%88%E6%A5%AD%E8%81%B7%E4%BA%BA-%E9%80%B2%E9%9A%8E%E7%AF%87"><span class="nav-number">3.4.1.</span> <span class="nav-text">筆記來源: 2021 Vue3 專業職人 | 進階篇</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yi Wen Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Yi Wen Wang</p>
+  <div class="site-description" itemprop="description">如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yi Wen Wang</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2021/10/11/vue-nuxt-plugins/";
+    this.page.identifier = "2021/10/11/vue-nuxt-plugins/";
+    this.page.title = "nuxt 使用 Plugins";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
