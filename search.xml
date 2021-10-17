@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Git 常用指令</title>
+      <link href="2021/10/17/git-cmdline/"/>
+      <url>2021/10/17/git-cmdline/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git-常用指令"><a href="#Git-常用指令" class="headerlink" title="Git 常用指令"></a>Git 常用指令</h1><p><strong>Git 是否有安裝成功：</strong><code>git --version</code></p><p><strong>設定/修改個人資料</strong></p><ul><li>輸入姓名：<code>git config --global user.name &quot;gon&quot;</code></li><li>輸入個人的 email：<code>git config --global user.email &quot;gonsakon@gmail.com&quot;</code></li><li>查詢 git 設定內容：<code>git config --list</code></li><li>查看用户名：<code>git config user.name</code></li><li>查看用户邮箱：<code>git config user.email</code></li></ul><p><strong>Git 常用指令</strong></p><ul><li>初始化數據庫：<code>git init</code></li><li>查詢當前狀態：<code>git status</code></li><li>將檔案加入到索引：<code>git add .</code></li><li>將索引檔案變成一個更新(commit)：<code>git commit -m &quot;修改內容&quot;</code></li><li>觀察 commit 歷史紀錄： <code>git log</code></li><li>下載遠端數據庫：<code>git clone 數據庫網址</code></li><li>更新遠端數據庫：<code>git push origin master</code></li><li>下載同步更新：<code>git pull</code></li></ul><p><strong>分支 (branch)</strong></p><ul><li>新增分支：<code>git branch 分支名稱</code></li><li>查看分支：<code>git branch</code></li><li>切換分支：<code>git checkout 分支名稱</code></li><li>建立並切換分支：<code>git checkout -b 分支名稱</code></li><li>刪除分支：<code>git branch -d 分支名稱</code> (-D 是強制刪除)</li><li>還原上個版本：<code>git reset HEAD^</code> (^為要回去哪一個版本，^^兩個就是回到前兩個版本)</li><li>合併分支：<code>git merge 分支名稱</code></li><li>取消快轉：<code>git merge 分支名稱 --no-ff</code></li><li>觀看線圖：<code>git log —oneline -graph</code></li><li>還原合併前狀態：<code>git reset —hard ORIG_HEAD</code></li></ul><p><strong>還原技巧</strong></p><ul><li>回頭觀看版本內容：<code>git checkout 編號</code></li><li>返回最新的版本：<code>git checkout master(分支名稱)</code></li><li>索引檔案&gt;還原到工作目錄：<code>git reset HEAD</code></li><li>還原前兩個版本：<code>git reset HEAD^^</code></li><li>還原前兩個版本，所有更新檔案都<strong>放棄</strong>：<code>git reset HEAD^^ --hard</code></li><li>觀看詳細所有歷史紀錄：<code>git reflog</code></li><li>新增檔案時，檔案還沒加追蹤時，清空工作目錄<br>顯示此次清除的檔案：<code>git clean -n</code><br>強制清除檔案：<code>git clean -f</code></li><li>檔案已加入追蹤，還原工作目錄上已更改的檔案 ：<code>git checkout -- &lt;file&gt;</code></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Git </tag>
+            
+            <tag> Git指令 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>在 Nuxt 使用 vuex</title>
       <link href="2021/10/16/vue-nuxt-vuex/"/>
       <url>2021/10/16/vue-nuxt-vuex/</url>
@@ -566,9 +593,9 @@
       
         <tags>
             
-            <tag> axios </tag>
-            
             <tag> Vue.js </tag>
+            
+            <tag> axios </tag>
             
         </tags>
       
@@ -593,9 +620,9 @@
       
         <tags>
             
-            <tag> axios </tag>
-            
             <tag> Vue.js </tag>
+            
+            <tag> axios </tag>
             
         </tags>
       
@@ -1084,11 +1111,11 @@
       
         <tags>
             
-            <tag> axios </tag>
-            
             <tag> Vue.js </tag>
             
             <tag> javascript </tag>
+            
+            <tag> axios </tag>
             
         </tags>
       
