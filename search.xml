@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Vue 的環境變量</title>
+      <link href="2022/01/01/vue-env/"/>
+      <url>2022/01/01/vue-env/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://imgur.com/lY6VKQe.png" alt="Vue"></p><p>有時候我們在開發專案時，會遇到開發環境跟正式環境資料不一樣的狀況，比較常見的就是域名不同，<br>最近我遇到的需求是，上正式站時，某個連結網址要換成正式站網址，但開發環境要用測試連結，那我們可以怎麼做呢?<br>像這種時候，可以使用環境變量，簡單解決各個環境的問題。</p><a id="more"></a><h1 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h1><p>在開發的過程中，通常會有三種階段: 開發環境、測試環境、生產環境(正式環境)。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">development  <span class="comment">// 模式用于 vue-cli-service serve</span></span><br><span class="line">production   <span class="comment">// 模式用于 vue-cli-service build 和 vue-cli-service test:e2e</span></span><br><span class="line">test         <span class="comment">// 模式用于 vue-cli-service test:unit</span></span><br></pre></td></tr></table></figure><br/>設定每個環境下的模式，serve、build 本身就有預設值，如沒要特別改，可省略--mode，你也可以自己定義模式環境，比如新建一個叫的staging模式，是用於構建生產環境的，但一些變量不同<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;serve&quot;</span>: <span class="string">&quot;vue-cli-service serve&quot;</span>, <span class="comment">// 等同vue-cli-service serve --mode development</span></span><br><span class="line">  <span class="string">&quot;build&quot;</span>: <span class="string">&quot;vue-cli-service build&quot;</span>, <span class="comment">// 等同vue-cli-service build --mode production</span></span><br><span class="line">  <span class="string">&quot;lint&quot;</span>: <span class="string">&quot;vue-cli-service lint&quot;</span>,</span><br><span class="line">  <span class="string">&quot;staging&quot;</span> :<span class="string">&quot;vue-cli-service build --mode staging&quot;</span> <span class="comment">// 自訂 staging 模式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br/><h1 id="環境變量"><a href="#環境變量" class="headerlink" title="環境變量"></a>環境變量</h1><p>Cli-3.0總共提供了四種方式來制定環境變量</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.env                <span class="comment">// 在所有的環境中被載入</span></span><br><span class="line">.env.local          <span class="comment">// 在所有的環境中被載入，只會在本地，會被 git 忽略</span></span><br><span class="line">.env.[mode]         <span class="comment">// 只在指定的模式中被載入</span></span><br><span class="line">.env.[mode].local   <span class="comment">// 只在指定的模式中被載入，只會在本地，會被 git 忽略</span></span><br></pre></td></tr></table></figure><p>不同的文件會在不同環境中被載入</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.env                      <span class="comment">// 會在所有的環境中被載入</span></span><br><span class="line">.env.local                <span class="comment">// 會在所有環境中載入，但只限於本地</span></span><br><span class="line">.env.development          <span class="comment">// 只在開發環境中被載入</span></span><br><span class="line">.env.production           <span class="comment">// 只在生產環境中被載入</span></span><br><span class="line">.env.development.local    <span class="comment">// 會在本地開發環境中載入</span></span><br></pre></td></tr></table></figure><br/><p>運行相關命令的時候，會根據不同環境載入不同的文件，以至於能正確讀到文件裡的變量。載入的優先級別是：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.env.[ mode ].local &gt; .env.[ mode ] &gt; .env</span><br></pre></td></tr></table></figure><br/><p>在文件中，我們只需要以key=value的方式就可以設置變量了</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FOO=bar</span><br><span class="line">VUE_APP_SECRET=secret</span><br></pre></td></tr></table></figure><p>設置完環境變量之後就可以在我們的項目中使用這兩個變量了。<br/><br>請注意，只有NODE_ENV，BASE_URL和以 VUE_APP_ 開頭的變量將通過 webpack.DefinePlugin 靜態地嵌入到客戶端側的代碼中。這是為了避免意外公開機器上可能具有相同名稱的私鑰。<br>在webpack配置中使用，沒什麽限制，可以直接通過process.env.XXX來使用<br><br/></p><h1 id="示例：建立-Staging-模式"><a href="#示例：建立-Staging-模式" class="headerlink" title="示例：建立 Staging 模式"></a>示例：建立 Staging 模式</h1><p>首先在項目根目錄下新建.env.staging文件</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NODE_ENV=production</span><br><span class="line">VUE_APP_TITLE=My App (staging)</span><br></pre></td></tr></table></figure><br/>package.json 設定 --mode staging<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;serve&quot;</span>: <span class="string">&quot;vue-cli-service serve&quot;</span>,</span><br><span class="line">  <span class="string">&quot;build&quot;</span>: <span class="string">&quot;vue-cli-service build&quot;</span>,</span><br><span class="line">  <span class="string">&quot;lint&quot;</span>: <span class="string">&quot;vue-cli-service lint&quot;</span>,</span><br><span class="line">  <span class="string">&quot;staging&quot;</span> :<span class="string">&quot;vue-cli-service build --mode staging&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br/><p>下指令<br><code>npm run staging</code><br>會在staging 模式下加載可能存在的.env、.env.staging和 .env.staging.local 文件然後構建出生產環境應用</p><hr><p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p><h3 id="參考文獻"><a href="#參考文獻" class="headerlink" title="參考文獻:"></a>參考文獻:</h3><p><a href="https://cli.vuejs.org/zh/guide/mode-and-env.html">官方-模式和環境變量</a><br><a href="http://www.qianduan8.com/1704.html">vue-cli3.0入门-环境变量和模式配置</a></p><h3 id="nuxt-js-配置參考"><a href="#nuxt-js-配置參考" class="headerlink" title="nuxt.js 配置參考"></a>nuxt.js 配置參考</h3><p><a href="https://www.itread01.com/content/1547462292.html">nuxt.js配置基本域名和NODE_ENV環境變數</a></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Vue3 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> env </tag>
+            
+            <tag> env環境變量 </tag>
+            
+            <tag> 環境變數 </tag>
+            
+            <tag> 環境變量 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>使用 npm ci 不更新 package-lock.json</title>
       <link href="2022/01/01/npm-ci/"/>
       <url>2022/01/01/npm-ci/</url>
@@ -622,9 +653,9 @@
       
         <tags>
             
-            <tag> axios </tag>
-            
             <tag> Vue.js </tag>
+            
+            <tag> axios </tag>
             
         </tags>
       
@@ -649,9 +680,9 @@
       
         <tags>
             
-            <tag> axios </tag>
-            
             <tag> Vue.js </tag>
+            
+            <tag> axios </tag>
             
         </tags>
       
@@ -1140,11 +1171,11 @@
       
         <tags>
             
-            <tag> axios </tag>
-            
             <tag> Vue.js </tag>
             
             <tag> javascript </tag>
+            
+            <tag> axios </tag>
             
         </tags>
       
