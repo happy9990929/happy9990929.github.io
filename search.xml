@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>使用 npm ci 不更新 package-lock.json</title>
+      <link href="2022/01/01/npm-ci/"/>
+      <url>2022/01/01/npm-ci/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://imgur.com/95xxPeT.png" alt="npm"></p><p>最近在 clone 新專案時，下了 npm install，發現 package-lock.json 裡的套件版本被更新了，但又怕推上去會有版本上的問題😓<br>爬了一下文才知道，原來 npm install 會自動幫你更新套件😨 可是瑞凡~~~我沒有要更新啊!!<br>不過意外也發現了另一個好東西<code>npm ci</code>，可以解決這個問題。</p><a id="more"></a><h1 id="什麼是-npm-ci"><a href="#什麼是-npm-ci" class="headerlink" title="什麼是 npm ci ?"></a>什麼是 npm ci ?</h1><p>npm ci 跟 npm i 一樣，都可以安裝依賴，npm ci 的 ci 是「Continuous Integration」，中文是持續集成的意思，這個指令在 npm 5.7.1 的版本才能使用。</p><h1 id="npm-install-與-npm-ci-有什麼差別"><a href="#npm-install-與-npm-ci-有什麼差別" class="headerlink" title="npm install 與 npm ci 有什麼差別?"></a>npm install 與 npm ci 有什麼差別?</h1><p>npm install 針對 package.json 的版本來安裝套件，執行後會出現 node_modules、package-lock.json，會自動還原專案並更新套件</p><p>npm ci 針對 package-lock.json 的版本來安裝套件，專案需有 package-lock.json 或 npm-shrinkwrap.json 文件存在，因為是參照package-lock.json 的版本，所以不會有版本自動更新的問題<br>另外還有一些 npm ci 需注意的地方<br>🔸 當 package-lock.json 中的依賴於 package.json 不一致時，npm ci 退出但不會修改 package-lock.json<br>🔸 npm ci 只可以一次性的安裝整個專案依賴，但無法新增單個依賴項<br>🔸 如果 node_modules 已經存在，它會先刪除 node_modules 之後再安裝，以確保乾淨的狀態</p><hr><p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p><h3 id="參考文獻"><a href="#參考文獻" class="headerlink" title="參考文獻:"></a>參考文獻:</h3><p><a href="https://hsiangfeng.github.io/nodejs/20211027/1827968017/">npm ci 與 npm install 差異</a></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> npm </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> npm ci </tag>
+            
+            <tag> npm install </tag>
+            
+            <tag> package-lock被更新 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Git 常用指令</title>
       <link href="2021/10/17/git-cmdline/"/>
       <url>2021/10/17/git-cmdline/</url>
@@ -456,11 +485,11 @@
       
         <tags>
             
+            <tag> ES6 </tag>
+            
             <tag> promise </tag>
             
             <tag> Javascript </tag>
-            
-            <tag> ES6 </tag>
             
         </tags>
       
@@ -510,11 +539,11 @@
       
         <tags>
             
-            <tag> ES6 </tag>
-            
             <tag> import </tag>
             
             <tag> export </tag>
+            
+            <tag> ES6 </tag>
             
         </tags>
       
