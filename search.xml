@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>認識 HTTP Header</title>
+      <link href="2022/01/02/web-http-header/"/>
+      <url>2022/01/02/web-http-header/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://imgur.com/w3Kil1b.png" alt="HTTP HEADER"></p><p>上次被後端問了關於 Header 的問題，發現我對這 HTTP 的知識薄弱，實在慚愧🥺，馬上上網科普一下，<br>好在找到了<a href="https://www.youtube.com/watch?v=qTpw9EKEeqk">偷米騎巴哥</a>大大分享的直播影片，以下是從影片內容裡整理的資料，筆記記錄一下</p><a id="more"></a><p>HTTP 是通訊協定，電腦與電腦溝通的語言</p><h1 id="前端為何要了解-HTTP"><a href="#前端為何要了解-HTTP" class="headerlink" title="前端為何要了解 HTTP"></a>前端為何要了解 HTTP</h1><p>🔸 前端經常需要與後端合作<br>🔸 釐清責任歸屬<br>🔸 了解瀏覽器運作原理</p><br /><h1 id="什麼是-HTTP-Header"><a href="#什麼是-HTTP-Header" class="headerlink" title="什麼是 HTTP Header"></a>什麼是 HTTP Header</h1><p>🔸 傳送內容以外的資訊<br>內容是什麼格式? 內容有多大? 內容多久後過期?…等等<br>內容為 HTML、圖片、字型、CSS、JavaScript、JSON…等等</p><p>🔸 Header 一定在內容前面</p><p>🔸 細分 Genaral Header、Request/Response Header、Entity Header</p><br /><h1 id="如何將資料傳送到對方電腦"><a href="#如何將資料傳送到對方電腦" class="headerlink" title="如何將資料傳送到對方電腦"></a>如何將資料傳送到對方電腦</h1><p>TCP/IP 協定(Transmission Control Protocol / Internet Protocol)<br>網際網路協議套組，是一個網路通訊模型，以及一整個網路傳輸協定家族，為網際網路的基礎通訊架構。</p><p>TCP/IP 包含了四種表現層，常被視為是簡化的七層OSI模型</p><p><img src="https://media.slid.es/uploads/275963/images/4907985/osi_tcpip.jpg" alt="TCP/IP"></p><br />資料傳遞的過程中，每一層都會有一個 header，傳送後，會再一層一層慢慢拆解 header<br /><br /><p><img src="https://media.slid.es/uploads/275963/images/4907983/0913wtdosipromo.gif" alt="傳遞資料"></p><p>TCP：會切割封包，接收時確認是不是資料都有收到<br>IP：確認資料封包要送去哪個 IP 位址，電腦和網路設備不認得網址只認得 IP<br>DNS Server：把網址轉換成 IP 位址</p><p>瀏覽器會傳網址給 DNS 伺服器，透過 DNS 轉成 IP 回來，再用 TCP/IP 傳送 IP，找到伺服器，再傳遞 Response 回來<br><img src="https://imgur.com/OAteH8R.png" alt="傳遞資料"></p><br /><h1 id="HTTP-Header-種類"><a href="#HTTP-Header-種類" class="headerlink" title="HTTP Header 種類"></a>HTTP Header 種類</h1><p>🔸 Request Header 客戶端要求伺服器時傳送<br>🔸 Response Header 伺服器回應客戶端時傳送<br>有發送請求，就必會有回應 (只要伺服器正常運作)</p><br /><h1 id="常見的-Request-Header"><a href="#常見的-Request-Header" class="headerlink" title="常見的 Request Header"></a>常見的 Request Header</h1><p>🔸 Host<br>瀏覽器存取的Host名稱，因為一個IP可以綁訂多個不同Domain，此時就需要Host知道要對應到哪個伺服器</p><p>🔸 User-Agent<br>瀏覽器名稱和版本&amp;作業系統名稱和版本</p><p>🔸 Accept<br>瀏覽器接受的類型，ex: text/plain、text/html</p><p>🔸 Accept-Language<br>瀏覽器接受的語言，q值表示語言優先的權重</p><p>🔸 Accept-Encoding<br>瀏覽器支援的壓縮格式，大部分流覽器都支援gzip壓縮，伺服器則會壓縮內容後傳給瀏覽器，節省下載時間和頻寬</p><p>🔸 Date<br>傳送瀏覽器時間給伺服器，讓伺服器知道瀏覽器目前的時間</p><p>🔸 Expect<br>要求伺服器回應特定結果，期望可以給想要的結果，但最終還是由伺服器決定，ex: 100-continue</p><p>🔸 If-Modified-Since<br>瀏覽器cache檔案，下一次request則會發送此header，伺服器使用這個時間來判斷是否修改過檔案，沒有則會回傳304<br>If-Modified-Since (時間)<br>If-None-Match (Hash Code)</p><p>🔸 Cookie<br>把瀏覽器的cookie傳給伺服器，每一個request都會包含cookie</p><p>🔸 Referer<br>瀏覽器前一個瀏覽頁面的網址，可用此header判斷request的來源，但是不可靠，因為可能被遭到串改<br>(原應為referrer因為拼錯了只好將錯就錯)</p><p>🔸 Connection<br>可以設定Keep-Alive保持連線時間，減少重新連接TCP連線次數，提高傳輸效率</p><p>🔸 Content-Type<br>指傳送內容的格式，常見格式為：<br>表單: application/x-www-form-urlencoded<br>檔案上傳: multipart/form-data; boundary=–xxx<br>純文字內容: text/plain</p><p>🔸 Authorization<br>HTTP 連線的身分驗證(帳號、密碼)</p><p>🔸 Upgrade<br>升級到另外一個協定，ex: websocket</p><br /><h1 id="常見的-Response-Header"><a href="#常見的-Response-Header" class="headerlink" title="常見的 Response Header"></a>常見的 Response Header</h1><p>🔸 Etag<br>產生檔案的Hash Code給瀏覽器，下一次瀏覽器可以傳送If-None-Match給伺服器判斷是否有修改過檔案，沒有則回傳304並且不會包含content</p><p>🔸 Last-Modified<br>回傳檔案最後修改的時間，下一次瀏覽器可以傳送If-Modified-Since給伺服器判斷是否有修改過檔案，沒有則回傳304並且不會包含content</p><p>🔸 Catch-Control<br>快取檔案的策略，max-age 則表示該檔案有效的cache秒數，no-cache 則表示不使用快取</p><p>🔸 Content-Type<br>回傳content的mime類型，當content-type設為text/html和text/plain可同時設定charset文字編碼格式，若無content-type瀏覽器自動判斷</p><p>🔸 Content-Disposition<br>讓瀏覽器可以打開下載視窗並且指定檔案名稱，例如：Content-Disposition: attachment; filename=”download.zip”</p><p>🔸 Content-length<br>取得下載傳送內容的大小，讓瀏覽器可以判斷下載的進度</p><p>🔸 Date<br>傳送伺服器時間給瀏覽器，讓瀏覽器知道伺服器目前的時間</p><p>🔸 Location<br>當狀態碼為301或302時，瀏覽器則會重新導向到Location這個位置</p><p>🔸 Set-Cookie<br>設定瀏覽器的cookie，當瀏覽器收到此header則會建立cookie在瀏覽器中</p><p>🔸 Content-Encoding<br>回傳內容的壓縮格式，讓瀏覽器知道該如何解壓縮內容</p><p>🔸 Access-Control-Allow-Origin<br>准許跨網域存取的Domain，全部網域使用*字號表示<br>script和link標籤不再此限</p><p>🔸 X-Frame-Options<br>否能夠在 frame、iframe 以及 object 載入，網站可以利用 X-Frame-Options 來確保本身內容不會遭惡意嵌入道其他網站、避免 clickjacking 攻擊<br>SAMEORIGIN 只限相同域名，跨域無法載入</p><p>🔸 Upgrade<br>確認升級到新的協定，此時connection也會同時回應Upgrade<br>ex: Connection: Upgrade<br>Upgrade: websocket</p><br /><h1 id="WebSocket-雙向溝通"><a href="#WebSocket-雙向溝通" class="headerlink" title="WebSocket (雙向溝通)"></a>WebSocket (雙向溝通)</h1><p>🔸 Header 傳送 Upgrade: websocket<br>🔸 伺服器回應 101 切換協定<br>🔸 建立一個保持連線的狀態，連線會更即時、更快速<br>🔸 建立雙向的通道，可任意的作資料傳遞<br>🔸 即不需要送一個 request 即回一個 response，可一直丟<br>🔸 伺服器能承受的連線數量要很高，通常會作 load balance</p><hr><h3 id="參考文獻"><a href="#參考文獻" class="headerlink" title="參考文獻:"></a>參考文獻:</h3><p><a href="https://www.youtube.com/watch?v=qTpw9EKEeqk">偷米騎巴哥HTTP header &amp; Status code</a><br><a href="https://ithelp.ithome.com.tw/articles/10212102">HTTP Header &amp; Status Code 心得</a></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> 網頁程式技術探討 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTTP Header </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Vue 的環境變量</title>
       <link href="2022/01/01/vue-env/"/>
       <url>2022/01/01/vue-env/</url>
@@ -653,9 +678,9 @@
       
         <tags>
             
-            <tag> Vue.js </tag>
-            
             <tag> axios </tag>
+            
+            <tag> Vue.js </tag>
             
         </tags>
       
@@ -680,9 +705,9 @@
       
         <tags>
             
-            <tag> Vue.js </tag>
-            
             <tag> axios </tag>
+            
+            <tag> Vue.js </tag>
             
         </tags>
       
@@ -1171,11 +1196,11 @@
       
         <tags>
             
+            <tag> axios </tag>
+            
             <tag> Vue.js </tag>
             
             <tag> javascript </tag>
-            
-            <tag> axios </tag>
             
         </tags>
       
