@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>icoMoon 教學-將 icon 生成圖標字體</title>
+      <link href="2022/03/12/icomoon/"/>
+      <url>2022/03/12/icomoon/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://imgur.com/STTYcIy.jpg" alt="icoMoon"><br>在網站上常常會使用到 icon 圖示做為點綴，而現今行動版普及化，響應式網站大多使用縮放都不會失真的 svg 向量圖檔，來獲得最佳的視覺體驗。網路有很多的插件內建 svg 圖示可以做為字型使用，例如 <a href="https://fontawesome.com/icons">fontawesome</a> 使用上就很方便快速，不過有時候想要自行定義圖示，或是只有用到少數的 icon，不想載入太大包檔案，這次要介紹的就是可以自行客製 icon 的 <a href="https://icomoon.io/">icoMoon</a></p><a id="more"></a><h1 id="IcoMoon-App-概述"><a href="#IcoMoon-App-概述" class="headerlink" title="IcoMoon App 概述"></a>IcoMoon App 概述</h1><ul><li>5500 多個免費圖標</li><li>可以導出 SVG、PNG 等格式的圖標，IcoMoon 生成可與 use 標籤一起使用的內聯 SVG</li><li>導入客製的向量圖，生成圖標字體</li><li>IcoMoon 生成的代碼文件（HTML、CSS、JS）是 MIT 許可的，可免費使用</li><li>IcoMoon 應用程序中所做的幾乎所有事情都發生在本地。例如，當導入 SVG 圖像/字體或生成字體時，一切都發生在自己的瀏覽器中，不會上傳到 IcoMoon 的服務器</li></ul><h1 id="IcoMoon-教學"><a href="#IcoMoon-教學" class="headerlink" title="IcoMoon 教學"></a>IcoMoon 教學</h1><p>先進入 <a href="https://icomoon.io/app/">IcoMoon App</a></p><br/><h2 id="STEP-1-加入-icon"><a href="#STEP-1-加入-icon" class="headerlink" title="STEP 1.加入 icon"></a>STEP 1.加入 icon</h2><p>🔸 加入 IcoMoon 所提供的 icon<br>從 <a href="https://icomoon.io/app/#/select/library">Icon Library</a> 圖示庫可以加入你想要的圖示，Add 為免費直接加入，Purchase、Go Premium 需要升級購買<br><img src="https://i.imgur.com/jd8pOqJ.jpg" alt="IcoMoon"></p><p>🔸 客製 icon<br>左上點擊 Import Icons，將 svg 圖檔匯入，如圖<br><img src="https://i.imgur.com/wIiyeSu.png" alt="Import Icons"></p><br/><h2 id="STEP-2-選取要使用的-icon"><a href="#STEP-2-選取要使用的-icon" class="headerlink" title="STEP 2.選取要使用的 icon"></a>STEP 2.選取要使用的 icon</h2><p>將要使用的 icon 點選起來，選起來的圖示會自動變成一個 Selection<br><img src="https://i.imgur.com/p9kqsqE.jpg" alt="icoMoon-select"></p><br/><h2 id="STEP-3-生成圖標字體或圖示，Download"><a href="#STEP-3-生成圖標字體或圖示，Download" class="headerlink" title="STEP 3.生成圖標字體或圖示，Download"></a>STEP 3.生成圖標字體或圖示，Download</h2><p>你可以選擇使用 Generate Font 或 Generate SVG &amp; More 其中一種</p><p>🔸 選取 Generate Font<br>產生圖標字體，Download 檔案後引入到自己的專案，即可使用裡面的 class，並用 font-size 就可以調整大小</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;icon-smile&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure><p>點選圖示的 Get code，即可查看語法<br><img src="https://imgur.com/87LT8Zr.jpg" alt="icoMoon-Font"></p><br/><p>🔸 選取 Generate SVG &amp; More<br>也可以生成 svg 圖示，Download 檔案後引入到自己的專案，用繪製 svg 的方式顯示 icon</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">class</span>=<span class="string">&quot;icon icon-smile&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">&quot;#icon-smile&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">use</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">symbol</span> <span class="attr">id</span>=<span class="string">&quot;icon-smile&quot;</span> <span class="attr">viewBox</span>=<span class="string">&quot;0 0 32 32&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">&quot;M25.632 10.65c0 1.432-1.16 2.592-2.592 2.592s-2.592-1.16-2.592-2.592c0-1.432 1.16-2.592 2.592-2.592s2.592 1.16 2.592 2.592z&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">&quot;M11.955 10.65c0 1.432-1.16 2.592-2.592 2.592s-2.592-1.16-2.592-2.592c0-1.432 1.16-2.592 2.592-2.592s2.592 1.16 2.592 2.592z&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">&quot;M16.774 24.877c-8.429 0-15.008-6.022-15.11-6.112l1.312-1.402c0.55 0.512 13.619 12.416 26.022 0.026l1.357 1.357c-4.602 4.595-9.325 6.131-13.581 6.131z&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">symbol</span>&gt;</span></span><br></pre></td></tr></table></figure><p>點選圖示的 Get code，即可查看語法<br><img src="https://imgur.com/JBAMcSe.jpg" alt="icoMoon-Svg"></p><hr><p>icoMoon 真的是簡單又好用，尤其是可以自訂圖示的部分更是加分，大家也可以使用看看哦😊</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Plugins </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> icoMoon教學 </tag>
+            
+            <tag> icoMoon </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>認識 HTTP Header</title>
       <link href="2022/01/02/web-http-header/"/>
       <url>2022/01/02/web-http-header/</url>
@@ -678,9 +705,9 @@
       
         <tags>
             
-            <tag> Vue.js </tag>
-            
             <tag> axios </tag>
+            
+            <tag> Vue.js </tag>
             
         </tags>
       
@@ -705,9 +732,9 @@
       
         <tags>
             
-            <tag> Vue.js </tag>
-            
             <tag> axios </tag>
+            
+            <tag> Vue.js </tag>
             
         </tags>
       
@@ -1196,11 +1223,11 @@
       
         <tags>
             
+            <tag> axios </tag>
+            
             <tag> Vue.js </tag>
             
             <tag> javascript </tag>
-            
-            <tag> axios </tag>
             
         </tags>
       
