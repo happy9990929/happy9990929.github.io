@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>設定 OG 分享網址連結，讓你的網站更吸引人</title>
+      <link href="2022/03/21/seo-og-image/"/>
+      <url>2022/03/21/seo-og-image/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://imgur.com/SlR0x2P.jpg" alt="og"></p><p>你有沒有遇過，當你分享網站連結到 Facebook 時，出現了詭異的縮圖，甚至連縮圖、介紹都沒有，不寫個訊息的話，完全不會讓人想點進去，有人可能還會以為你被盜了😅</p><a id="more"></a><p><img src="https://imgur.com/bBfZShO.png" alt="無設定og"></p><p>這不是被盜！是你應該設定 OG，給用戶理解和信任的網站體驗。</p><br/><h1 id="OG-是什麼"><a href="#OG-是什麼" class="headerlink" title="OG 是什麼"></a>OG 是什麼</h1><p>OG 是由 Facebook 提出的設定，全名為 Open Graph Protocol，官方中文翻譯為「<a href="https://developers.facebook.com/docs/sharing/webmasters?locale=zh_TW">開放社交關係圖</a>」。<br>OG 可以輕鬆的標記網頁的結構化訊息、包含標題、描述、圖片等，以呈現顯示分享連結的預覽內容，現在主流的社群網站平台都支援 OG，例如：Facebook、Line、Twitter 等。<br>OG 可以呈現網站明確的模樣，增加用戶的信任與好的網站體驗，相對的也會有比較好的點閱率。</p><br/><h1 id="設定-OG"><a href="#設定-OG" class="headerlink" title="設定 OG"></a>設定 OG</h1><p>要設定 OG 其實很簡單，首先了解每個 og 屬性的意義</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:url&quot;</span> <span class="attr">content</span>=<span class="string">&quot;你的網址&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:locale&quot;</span> <span class="attr">content</span>=<span class="string">&quot;網站語系，ex:zh_TW，預設為 en_US&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;類型，ex：website&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:title&quot;</span> <span class="attr">content</span>=<span class="string">&quot;網站的標題&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:description&quot;</span> <span class="attr">content</span>=<span class="string">&quot;網站內容描述&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:image&quot;</span> <span class="attr">content</span>=<span class="string">&quot;縮圖圖片連結&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:image:type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;圖像的 MIME 類型，可為 image/jpeg、image/gif 或 image/png&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:image:width&quot;</span> <span class="attr">content</span>=<span class="string">&quot;縮圖寬度&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:image:height&quot;</span> <span class="attr">content</span>=<span class="string">&quot;縮圖高度&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure><p>其中縮圖的寬、高度依<a href="https://developers.facebook.com/docs/games/services/sharing">官方</a>建議的比例，對高解析度裝置使用至少 1080 像素的寬度以獲得最佳顯示，至少使用寬度為 600 像素的圖像以顯示圖像連結廣告。<br>🔸 正方形：比例 1:1，如 600 x 600 像素<br>🔸 長方形：比例 1.91:1，如 600 x 314 像素</p><br/><p>接著設定到自己的網站</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:url&quot;</span> <span class="attr">content</span>=<span class="string">&quot;https://happy9990929.github.io/gtplay&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:locale&quot;</span> <span class="attr">content</span>=<span class="string">&quot;zh_TW&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;website&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:title&quot;</span> <span class="attr">content</span>=<span class="string">&quot;GTPLAY吉他館&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:description&quot;</span> <span class="attr">content</span>=<span class="string">&quot;販賣各式弦樂器，吉他、電吉他、烏克莉莉等，歡迎洽詢!&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:image&quot;</span> <span class="attr">content</span>=<span class="string">&quot;https://happy9990929.github.io/gtplay/logo.png&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:image:type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;image/png&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:image:width&quot;</span> <span class="attr">content</span>=<span class="string">&quot;1080&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">&quot;og:image:height&quot;</span> <span class="attr">content</span>=<span class="string">&quot;565&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure><br/><h1 id="檢查-OG"><a href="#檢查-OG" class="headerlink" title="檢查 OG"></a>檢查 OG</h1><p>可以透過 <a href="https://developers.facebook.com/tools/debug/">Facebook分享偵錯工具</a> 來檢查你的 OG，輸入網址，就可以預覽你的成果囉！</p><br/>設定完 og 後，到 Facebook 建立貼文，就可以看到清楚的網站資訊啦！<br/>是不是看起來漂亮多了呢🤩快把你的網站也設定一下吧！<br/><br/><p><img src="https://imgur.com/L4oYvxB.jpg" alt="OG完成"></p><hr><h3 id="Facebook-官方文件"><a href="#Facebook-官方文件" class="headerlink" title="Facebook 官方文件:"></a>Facebook 官方文件:</h3><p><a href="https://developers.facebook.com/docs/sharing/webmasters?locale=zh_TW">Facebook 開放社交關係圖</a><br><a href="https://developers.facebook.com/docs/sharing/best-practices#images">Facebook 分享最佳作法</a></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> SEO </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> og image </tag>
+            
+            <tag> 分享連結圖片 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>使用 dart-sass 取代 node-sass</title>
       <link href="2022/03/18/sass-dart-sass/"/>
       <url>2022/03/18/sass-dart-sass/</url>
@@ -599,11 +626,11 @@
       
         <tags>
             
+            <tag> ES6 </tag>
+            
             <tag> promise </tag>
             
             <tag> Javascript </tag>
-            
-            <tag> ES6 </tag>
             
         </tags>
       
@@ -653,11 +680,11 @@
       
         <tags>
             
-            <tag> ES6 </tag>
-            
             <tag> import </tag>
             
             <tag> export </tag>
+            
+            <tag> ES6 </tag>
             
         </tags>
       
