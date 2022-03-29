@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="填寫表單時，需要驗證是否必填(require)、或是格式是否正確，自己手刻很複雜，可能也會不夠全面，用套件來做驗證是最省事又快速的。在 Vue2 框架時，我偏好使用 vee-validate 來做驗證，因為它簡單又好用，但到了 Vue3，veeValidate4 怎麼好像是另一個世界惹😱，vee-validate4 該怎麼使用呢">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vee-validate 4.0 教學，表單驗證套件應用">
+<meta property="og:url" content="https://happy9990929.github.io/2022/03/29/vue-vee-validate/index.html">
+<meta property="og:site_name" content="一文前端大小事">
+<meta property="og:description" content="填寫表單時，需要驗證是否必填(require)、或是格式是否正確，自己手刻很複雜，可能也會不夠全面，用套件來做驗證是最省事又快速的。在 Vue2 框架時，我偏好使用 vee-validate 來做驗證，因為它簡單又好用，但到了 Vue3，veeValidate4 怎麼好像是另一個世界惹😱，vee-validate4 該怎麼使用呢">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/0WQXAft.png">
+<meta property="og:image" content="https://imgur.com/wXW0AKf.jpg">
+<meta property="article:published_time" content="2022-03-29T04:08:14.000Z">
+<meta property="article:modified_time" content="2022-03-29T04:15:46.526Z">
+<meta property="article:author" content="Yi Wen Wang">
+<meta property="article:tag" content="vee-validate4">
+<meta property="article:tag" content="veeValidate4 教學">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/0WQXAft.png">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/03/29/vue-vee-validate/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>vee-validate 4.0 教學，表單驗證套件應用 | 一文前端大小事</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">一文前端大小事</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一起鑽研前端技術吧:)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/03/29/vue-vee-validate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端大小事">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vee-validate 4.0 教學，表單驗證套件應用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-03-29 12:08:14 / 修改時間：12:15:46" itemprop="dateCreated datePublished" datetime="2022-03-29T12:08:14+08:00">2022-03-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/03/29/vue-vee-validate/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/03/29/vue-vee-validate/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/0WQXAft.png" alt="vee-validate"></p>
+<p>填寫表單時，需要驗證是否必填(require)、或是格式是否正確，自己手刻很複雜，可能也會不夠全面，用套件來做驗證是最省事又快速的。在 Vue2 框架時，我偏好使用 vee-validate 來做驗證，因為它簡單又好用，但到了 Vue3，veeValidate4 怎麼好像是另一個世界惹😱，vee-validate4 該怎麼使用呢</p>
+<a id="more"></a>
+
+<h1 id="安裝-vee-validate"><a href="#安裝-vee-validate" class="headerlink" title="安裝 vee-validate"></a>安裝 vee-validate</h1><p>首先先安裝 vee-validate</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn add vee-validate</span><br><span class="line"># or</span><br><span class="line">npm i vee-validate --save</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>另外 yup 也是個簡單卻強大的驗證 library，vee-validate 可以結合 yup 一起使用</p>
+<p>安裝 yup</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn add yup</span><br><span class="line"># or</span><br><span class="line">npm i yup --save</span><br></pre></td></tr></table></figure>
+<br/>
+
+<h1 id="使用-vee-validate"><a href="#使用-vee-validate" class="headerlink" title="使用 vee-validate"></a>使用 vee-validate</h1><p>vee-validate 提供了兩種方法，可以使用 components 或是 composition API<br>components: 適合簡單的 UI 組件和具有自定義樣式的原生 HTML 元素，使用 Field、Form 和 ErrorMessage<br>composition API: 適合構建複雜的 UI 表單組件和通用數據驗證，使用 useField、useForm<br>這兩種方式都可以混合使用</p>
+<p>我這邊使用的是 composition API + yup 來做驗證</p>
+<br/>
+
+<hr>
+<p>製作需求:<br>1.取得 API 資料後，會自動把資料帶入到表單<br>2.表單驗證<br>3.取得表單值</p>
+<hr>
+<h2 id="引入驗證-js、input-元件"><a href="#引入驗證-js、input-元件" class="headerlink" title="引入驗證 js、input 元件"></a>引入驗證 js、input 元件</h2><p>在 main.js 引入全局 (global) 驗證、表單 component input，如果表單只有一頁，可以直接引用在表單頁面<br>main.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = createApp(App);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入全局驗證、表單 component input</span></span><br><span class="line"><span class="keyword">import</span> &#123; schema &#125; <span class="keyword">from</span> <span class="string">&#x27;@/utils/validate.js&#x27;</span>;</span><br><span class="line">app.provide(<span class="string">&#x27;schema&#x27;</span>, schema);</span><br><span class="line"><span class="keyword">import</span> FormInput <span class="keyword">from</span> <span class="string">&#x27;@/components/FormInput.vue&#x27;</span>;</span><br><span class="line">app.component(<span class="string">&#x27;FormInput&#x27;</span>, FormInput);</span><br><span class="line"></span><br><span class="line">app.use(router).mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<br />
+
+<h2 id="用-yup-處理驗證格式的-js"><a href="#用-yup-處理驗證格式的-js" class="headerlink" title="用 yup 處理驗證格式的 js"></a>用 yup 處理驗證格式的 js</h2><p>.required 必填<br>.matches 客製驗證格式<br>.oneOf 確認 key 是否相同<br>.min 最少幾位數<br>.max 最多幾位數<br>.nullable 接受 key 為 null</p>
+<p>utils/validate.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; object, string, ref, array &#125; <span class="keyword">from</span> <span class="string">&#x27;yup&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> required = <span class="string">&#x27;必填&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> phoneRegExp = <span class="regexp">/^((\\+[1-9]&#123;1,4&#125;[ \\-]*)|(\\([0-9]&#123;2,3&#125;\\)[ \\-]*)|([0-9]&#123;2,4&#125;)[ \\-]*)*?[0-9]&#123;3,4&#125;?[ \\-]*[0-9]&#123;3,4&#125;?$/</span>;</span><br><span class="line"><span class="keyword">const</span> passwordRegExp = <span class="regexp">/[a-zA-Z0-9]/</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> schema = object().shape(&#123;</span><br><span class="line">  email: string().required(required).email(<span class="string">&#x27;E-mail輸入錯誤&#x27;</span>),</span><br><span class="line"></span><br><span class="line">  password: string()</span><br><span class="line">    .required(required)</span><br><span class="line">    .min(<span class="number">8</span>, <span class="string">&#x27;密碼最少8位&#x27;</span>)</span><br><span class="line">    .max(<span class="number">20</span>, <span class="string">&#x27;密碼最多20位&#x27;</span>)</span><br><span class="line">    .matches(passwordRegExp, <span class="string">&#x27;請輸入不含符號的半形英文、數字&#x27;</span>),</span><br><span class="line"></span><br><span class="line">  confirmPassword: string()</span><br><span class="line">    .oneOf([ref(<span class="string">&#x27;password&#x27;</span>)], <span class="string">&#x27;輸入密碼不相同&#x27;</span>)</span><br><span class="line">    .required(required),</span><br><span class="line"></span><br><span class="line">  phone: string().matches(phoneRegExp, <span class="string">&#x27;手機輸入錯誤&#x27;</span>),</span><br><span class="line"></span><br><span class="line">  userName: string().nullable().required(required),</span><br><span class="line"></span><br><span class="line">  link: array().of(string().required(<span class="string">&#x27;請輸入標題&#x27;</span>)),</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br/>
+
+<h2 id="建立-input-元件"><a href="#建立-input-元件" class="headerlink" title="建立 input 元件"></a>建立 input 元件</h2><p>設定從父層來的 props</p>
+<p>components/FormInput.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  &lt;input</span><br><span class="line">    :id=&quot;id&quot;</span><br><span class="line">    v-model=&quot;inputValue&quot;</span><br><span class="line">    :name=&quot;name&quot;</span><br><span class="line">    :type=&quot;type&quot;</span><br><span class="line">    :placeholder=&quot;placeholder&quot;</span><br><span class="line">    :maxlength=&quot;maxlength&quot;</span><br><span class="line">    class=&quot;form-control&quot;</span><br><span class="line">    :class=&quot;&#123; &#x27;is-invalid&#x27;: errorMessage &#125;&quot;</span><br><span class="line">  /&gt;</span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;invalid-feedback&quot;</span>&gt;</span>&#123;&#123; errorMessage &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>並設定 useField 的值 (value) 跟錯誤訊息 (errorMessage)，會由 name 來判定驗證格式是否正確，watch 是為了取得 API 資料後，會自動把資料帶入到表單，如沒有這個需求可以拿掉</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useField &#125; <span class="keyword">from</span> <span class="string">&#x27;vee-validate&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; watch &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    name: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      required: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    id: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    type: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    modelValue: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    placeholder: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    maxlength: &#123;</span><br><span class="line">      type: <span class="built_in">Number</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="literal">Infinity</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; <span class="attr">value</span>: inputValue, errorMessage &#125; = useField(</span><br><span class="line">      props.name,</span><br><span class="line">      <span class="literal">undefined</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// 設定預設值，如未設定值為 undefined</span></span><br><span class="line">        initialValue: props.modelValue,</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取得 API 資料後，會自動把資料帶入到表單</span></span><br><span class="line">    watch(</span><br><span class="line">      () =&gt; props.modelValue,</span><br><span class="line">      val =&gt; &#123;</span><br><span class="line">        inputValue.value = val;</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      inputValue,</span><br><span class="line">      errorMessage,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<h2 id="表單頁面"><a href="#表單頁面" class="headerlink" title="表單頁面"></a>表單頁面</h2><p>插入 input component，設定好要傳入的 props</p>
+<p>Form.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-box&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;userName&quot;</span>&gt;</span>姓名：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        &lt;FormInput</span><br><span class="line">        :id=&quot;&#x27;userName&#x27;&quot;</span><br><span class="line">        v-model=&quot;memberInfo.data.name&quot;</span><br><span class="line">        :name=&quot;&#x27;userName&#x27;&quot;</span><br><span class="line">        :type=&quot;&#x27;text&#x27;&quot;</span><br><span class="line">        :placeholder=&quot;&#x27;輸入&#x27;&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;password&quot;</span>&gt;</span>密碼：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        &lt;FormInput</span><br><span class="line">        :id=&quot;&#x27;password&#x27;&quot;</span><br><span class="line">        v-model=&quot;password.password&quot;</span><br><span class="line">        :name=&quot;&#x27;password&#x27;&quot;</span><br><span class="line">        :type=&quot;&#x27;password&#x27;&quot;</span><br><span class="line">        :placeholder=&quot;&#x27;輸入&#x27;&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;confirmPassword&quot;</span>&gt;</span>確認密碼：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        &lt;FormInput</span><br><span class="line">        :id=&quot;&#x27;confirmPassword&#x27;&quot;</span><br><span class="line">        v-model=&quot;password.confirmPassword&quot;</span><br><span class="line">        :name=&quot;&#x27;confirmPassword&#x27;&quot;</span><br><span class="line">        :type=&quot;&#x27;password&#x27;&quot;</span><br><span class="line">        :placeholder=&quot;&#x27;輸入&#x27;&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;email&quot;</span>&gt;</span>e-mail：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        &lt;FormInput</span><br><span class="line">        :id=&quot;&#x27;email&#x27;&quot;</span><br><span class="line">        v-model=&quot;memberInfo.data.email&quot;</span><br><span class="line">        :name=&quot;&#x27;email&#x27;&quot;</span><br><span class="line">        :type=&quot;&#x27;text&#x27;&quot;</span><br><span class="line">        :placeholder=&quot;&#x27;輸入&#x27;&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;(item, idx) in fields&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;item.url&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">label</span> <span class="attr">:for</span>=<span class="string">&quot;`link$&#123;idx&#125;`&quot;</span>&gt;</span>link&#123;&#123;idx+1&#125;&#125;：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">          &lt;FormInput</span><br><span class="line">          :id=&quot;`link[$&#123;idx&#125;]`&quot;</span><br><span class="line">          :name=&quot;`link[$&#123;idx&#125;].url`&quot;</span><br><span class="line">          :type=&quot;&#x27;text&#x27;&quot;</span><br><span class="line">          :placeholder=&quot;&#x27;輸入&#x27;&quot;</span><br><span class="line">          /&gt;</span><br><span class="line">          <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;remove(idx)&quot;</span>&gt;</span>remove<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;push(&#123;url: &#x27;&#x27;&#125;)&quot;</span>&gt;</span>add<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    Form 表單取值：</span><br><span class="line">    &#123;&#123; values &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>設定 useForm、useFieldArray<br>useForm 是整個 Form 表單，設定驗證並取值，取到的值 submit 到後端，就資料完成送出啦！<br>useFieldArray 用來設定陣列的 input，可使用內建方法：移除 (remove)、取代 (replace)、新增資料 (push)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; reactive, inject &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useForm, useFieldArray &#125; <span class="keyword">from</span> <span class="string">&#x27;vee-validate&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> schema = inject(<span class="string">&#x27;schema&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 整個 Form 表單</span></span><br><span class="line">    <span class="keyword">const</span> &#123; values &#125; = useForm(&#123;</span><br><span class="line">      validationSchema: schema,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 設定多筆資料的陣列、陣列方法</span></span><br><span class="line">    <span class="keyword">const</span> &#123; replace, remove, push, fields &#125; = useFieldArray(<span class="string">&#x27;link&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> password = reactive(&#123;</span><br><span class="line">      password: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      confirmPassword: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取得 API 的資料</span></span><br><span class="line">    <span class="keyword">const</span> publicPath = process.env.BASE_URL;</span><br><span class="line">    <span class="keyword">const</span> getMemberInfo = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> axios.get(<span class="string">`<span class="subst">$&#123;publicPath&#125;</span>data/info.json`</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> memberInfo = reactive(&#123;</span><br><span class="line">      data: &#123;&#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    getMemberInfo().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      memberInfo.data = res.data;</span><br><span class="line">      <span class="comment">// 取得資料後，將空陣列資料取代為取得後的資料</span></span><br><span class="line">      replace(memberInfo.data.link);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      password,</span><br><span class="line">      memberInfo,</span><br><span class="line">      values,</span><br><span class="line">      remove, push, fields</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.form-box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.form-group</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">20px</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>資料格式<br>data/info.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;email&quot;</span>: <span class="string">&quot;lala9990929@gmail.com&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;link&quot;</span>: [</span><br><span class="line">    &#123; <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;https://happy9990929.github.io&quot;</span>&#125;,</span><br><span class="line">    &#123; <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;https://happy9990929.github.io/gtplay&quot;</span>&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<!-- 文章內廣告 -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+crossorigin="anonymous"></script>
+<p><ins class="adsbygoogle"
+    style="display:block; text-align:center; margin-bottom: 150px;"
+    data-ad-layout="in-article"
+    data-ad-format="fluid"
+    data-ad-client="ca-pub-3584202217117217"
+    data-ad-slot="6664330716"></ins></p>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>vee-validate4.0 跟之前的版本差異真的很大，我也是研究了一陣子，如果有哪邊有問題或是有更好的寫法，歡迎路過的大大指正噢🧐<br>👉 附上我的 <a target="_blank" rel="noopener" href="https://github.com/happy9990929/vee-validate4">vee-validate4 範例</a><br>最後用可愛的 bobee 做結尾吧！<br><br/><br><img src="https://imgur.com/wXW0AKf.jpg" alt="bobee"></p>
+<hr>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vee-validate4/" rel="tag"># vee-validate4</a>
+              <a href="/tags/veeValidate4-%E6%95%99%E5%AD%B8/" rel="tag"># veeValidate4 教學</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/21/seo-og-image/" rel="prev" title="設定 OG 分享網址連結，讓你的網站更吸引人">
+      <i class="fa fa-chevron-left"></i> 設定 OG 分享網址連結，讓你的網站更吸引人
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin-bottom: 150px;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-vee-validate"><span class="nav-number">1.</span> <span class="nav-text">安裝 vee-validate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-vee-validate"><span class="nav-number">2.</span> <span class="nav-text">使用 vee-validate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E9%A9%97%E8%AD%89-js%E3%80%81input-%E5%85%83%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">引入驗證 js、input 元件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8-yup-%E8%99%95%E7%90%86%E9%A9%97%E8%AD%89%E6%A0%BC%E5%BC%8F%E7%9A%84-js"><span class="nav-number">2.2.</span> <span class="nav-text">用 yup 處理驗證格式的 js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-input-%E5%85%83%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">建立 input 元件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%96%AE%E9%A0%81%E9%9D%A2"><span class="nav-number">2.4.</span> <span class="nav-text">表單頁面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">3.</span> <span class="nav-text">結語</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yi Wen Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Yi Wen Wang</p>
+  <div class="site-description" itemprop="description">前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yi Wen Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/03/29/vue-vee-validate/";
+    this.page.identifier = "2022/03/29/vue-vee-validate/";
+    this.page.title = "vee-validate 4.0 教學，表單驗證套件應用";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
