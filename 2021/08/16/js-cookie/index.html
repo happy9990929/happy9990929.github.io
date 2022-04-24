@@ -47,7 +47,7 @@
 <meta property="og:description" content="Cookie LocalStorage SessionStorage    資料大小 ≤4KB ≥5MB ≥5MB   生命週期 預設資料失效是關閉瀏覽器，也可以設定失效時間 不會過期，除非手動清除 每次分頁或瀏覽器關掉後就會清除   與 Server 溝通 每次都會攜帶在 HTTP 中，保存過多數據會帶來效能問題 僅在瀏覽器保存，不參與 Server 溝通 僅在瀏覽器保存，不參與 Ser">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-08-16T12:47:34.000Z">
-<meta property="article:modified_time" content="2021-08-16T15:39:47.816Z">
+<meta property="article:modified_time" content="2022-04-21T03:37:03.217Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="Cookie">
 <meta property="article:tag" content="LocalStorage">
@@ -232,10 +232,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-08-16 20:47:34 / 修改時間：23:39:47" itemprop="dateCreated datePublished" datetime="2021-08-16T20:47:34+08:00">2021-08-16</time>
+              <time title="創建時間：2021-08-16 20:47:34" itemprop="dateCreated datePublished" datetime="2021-08-16T20:47:34+08:00">2021-08-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-04-21 11:37:03" itemprop="dateModified" datetime="2022-04-21T11:37:03+08:00">2022-04-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -346,11 +352,11 @@
 <br>
 
 <h2 id="localStorage-1"><a href="#localStorage-1" class="headerlink" title="localStorage"></a>localStorage</h2><p>H5 對於 web storage 的支援很友好，使用方法很簡單</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 獲取指定 key 的本地儲存的值</span></span><br><span class="line"><span class="built_in">localStorage</span>.getItem(keyName);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 將 value 儲存到 key 欄位中</span></span><br><span class="line"><span class="keyword">var</span> keyName = sessionStorage.key;</span><br><span class="line"><span class="built_in">localStorage</span>.setItem(keyName, value);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 刪除指定 key 的本地儲存的值</span></span><br><span class="line"><span class="built_in">localStorage</span>.keyName = <span class="string">&#x27;value&#x27;</span>;</span><br><span class="line"><span class="built_in">localStorage</span>.removeItem(keyName);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 清除所有的key ,value,慎用，慎用，慎用，會清除所有，會把別的網頁的儲存也刪除</span></span><br><span class="line"><span class="built_in">localStorage</span>.clear();</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 獲取指定 key 的本地儲存的值</span></span><br><span class="line"><span class="built_in">localStorage</span>.getItem(<span class="string">&#x27;keyName&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 將 value 儲存到 key 欄位中</span></span><br><span class="line"><span class="built_in">localStorage</span>.setItem(<span class="string">&#x27;keyName&#x27;</span>, value);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 刪除指定 key 的本地儲存的值</span></span><br><span class="line"><span class="built_in">localStorage</span>.removeItem(<span class="string">&#x27;keyName&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 清除所有的key ,value,慎用，慎用，慎用，會清除所有，會把別的網頁的儲存也刪除</span></span><br><span class="line"><span class="built_in">localStorage</span>.clear();</span><br></pre></td></tr></table></figure>
 <br>
 
 <h2 id="sessionStorage-1"><a href="#sessionStorage-1" class="headerlink" title="sessionStorage"></a>sessionStorage</h2><p>基本和 localStorage 一樣</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//獲取指定 key 的本地儲存的值</span></span><br><span class="line">sessionStorage.getItem(keyName);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 將 value 儲存到 key 欄位中</span></span><br><span class="line"><span class="keyword">var</span> keyName = sessionStorage.key;</span><br><span class="line">sessionStorage.setItem(keyName, value);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 刪除指定 key 的本地儲存的值</span></span><br><span class="line">sessionStorage.keyName = <span class="string">&#x27;value&#x27;</span>;</span><br><span class="line">sessionStorage.removeItem(keyName);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 清除所有的 key, value,慎用，慎用，慎用，會清除所有，會把別的網頁的儲存也刪除</span></span><br><span class="line">sessionStorage.clear();</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//獲取指定 key 的本地儲存的值</span></span><br><span class="line">sessionStorage.getItem(<span class="string">&#x27;keyName&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 將 value 儲存到 key 欄位中</span></span><br><span class="line">sessionStorage.setItem(<span class="string">&#x27;keyName&#x27;</span>, value);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 刪除指定 key 的本地儲存的值</span></span><br><span class="line">sessionStorage.removeItem(<span class="string">&#x27;keyName&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 清除所有的 key, value,慎用，慎用，慎用，會清除所有，會把別的網頁的儲存也刪除</span></span><br><span class="line">sessionStorage.clear();</span><br></pre></td></tr></table></figure>
 <br>
 
 <h1 id="Storage-取物件"><a href="#Storage-取物件" class="headerlink" title="Storage 取物件"></a>Storage 取物件</h1><p>雖然我們可以透過 Storage 方法，輕鬆的將資料儲存在本地端，但是實際應用之後，我們會發現我們要儲存的資料 value，全部被轉成字串格式，因此當我們要儲存的資料為一個物件的時候就會產生一個嚴重的問題：</p>
@@ -493,20 +499,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
