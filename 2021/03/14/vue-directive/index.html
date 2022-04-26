@@ -41,13 +41,13 @@
 
   <meta name="description" content="全局 directive透過 directive 可以讓每頁都使用共用語法，在 main.js 中添加全局 directivedirective mounted 生命週期等同於 onMounted, 但這裡為純 js 並非 vue 的週期裡，所以這樣使用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自定義模板 directive">
+<meta property="og:title" content="Vue3 自定義模板 directive">
 <meta property="og:url" content="https://happy9990929.github.io/2021/03/14/vue-directive/index.html">
 <meta property="og:site_name" content="一文前端大小事">
 <meta property="og:description" content="全局 directive透過 directive 可以讓每頁都使用共用語法，在 main.js 中添加全局 directivedirective mounted 生命週期等同於 onMounted, 但這裡為純 js 並非 vue 的週期裡，所以這樣使用">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-03-14T09:41:51.000Z">
-<meta property="article:modified_time" content="2021-03-14T13:13:23.594Z">
+<meta property="article:modified_time" content="2022-04-26T12:35:14.857Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="Vue.js">
 <meta property="article:tag" content="javascript">
@@ -67,7 +67,7 @@
   };
 </script>
 
-  <title>自定義模板 directive | 一文前端大小事</title>
+  <title>Vue3 自定義模板 directive | 一文前端大小事</title>
   
 
 
@@ -223,7 +223,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          自定義模板 directive
+          Vue3 自定義模板 directive
         </h1>
 
         <div class="post-meta">
@@ -232,10 +232,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-03-14 17:41:51 / 修改時間：21:13:23" itemprop="dateCreated datePublished" datetime="2021-03-14T17:41:51+08:00">2021-03-14</time>
+              <time title="創建時間：2021-03-14 17:41:51" itemprop="dateCreated datePublished" datetime="2021-03-14T17:41:51+08:00">2021-03-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-04-26 20:35:14" itemprop="dateModified" datetime="2022-04-26T20:35:14+08:00">2022-04-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -330,8 +336,8 @@
       <i class="fa fa-chevron-left"></i> 透過ref綁定，取得DOM元素
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/03/14/vue-slot/" rel="next" title="Slot 插槽">
-      Slot 插槽 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/03/14/vue-slot/" rel="next" title="Vue 的 Slot 插槽">
+      Vue 的 Slot 插槽 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -441,7 +447,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -599,7 +605,7 @@
   var disqus_config = function() {
     this.page.url = "https://happy9990929.github.io/2021/03/14/vue-directive/";
     this.page.identifier = "2021/03/14/vue-directive/";
-    this.page.title = "自定義模板 directive";
+    this.page.title = "Vue3 自定義模板 directive";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {

@@ -41,7 +41,7 @@
 
   <meta name="description" content="Vite 是由 Vue 之父 尤雨溪開發的新打包工具，可以說是 Vue Cli 的升級版，Cli 因為有依賴 webpack 解決了很多打包上複雜的問題，然而，當專案越來越大，打包時間隨著專案變大包跑得越久，大大降低了開發者的開發效率和幸福感。 vite 解決了開發速度上的痛點，秒啟動根本驚為天人⚡️⚡️⚡️！打包速度極快，不用像 vue-cli 要進行編譯後啟動，省了很多開發上的時間。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vite 快速上手教學">
+<meta property="og:title" content="Vite 教學快速上手，秒安裝秒啟動">
 <meta property="og:url" content="https://happy9990929.github.io/2022/04/24/frontend-vite/index.html">
 <meta property="og:site_name" content="一文前端大小事">
 <meta property="og:description" content="Vite 是由 Vue 之父 尤雨溪開發的新打包工具，可以說是 Vue Cli 的升級版，Cli 因為有依賴 webpack 解決了很多打包上複雜的問題，然而，當專案越來越大，打包時間隨著專案變大包跑得越久，大大降低了開發者的開發效率和幸福感。 vite 解決了開發速度上的痛點，秒啟動根本驚為天人⚡️⚡️⚡️！打包速度極快，不用像 vue-cli 要進行編譯後啟動，省了很多開發上的時間。">
@@ -51,9 +51,11 @@
 <meta property="og:image" content="https://imgur.com/GuYJb6p.jpg">
 <meta property="og:image" content="https://imgur.com/35PNPXZ.jpg">
 <meta property="article:published_time" content="2022-04-24T03:25:48.000Z">
-<meta property="article:modified_time" content="2022-04-24T15:28:43.856Z">
+<meta property="article:modified_time" content="2022-04-26T12:30:46.942Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="vite">
+<meta property="article:tag" content="vite 教學">
+<meta property="article:tag" content="vite scss共用變數">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://imgur.com/iogr3On.jpg">
 
@@ -70,7 +72,7 @@
   };
 </script>
 
-  <title>Vite 快速上手教學 | 一文前端大小事</title>
+  <title>Vite 教學快速上手，秒安裝秒啟動 | 一文前端大小事</title>
   
 
 
@@ -226,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Vite 快速上手教學
+          Vite 教學快速上手，秒安裝秒啟動
         </h1>
 
         <div class="post-meta">
@@ -235,10 +237,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2022-04-24 11:25:48 / 修改時間：23:28:43" itemprop="dateCreated datePublished" datetime="2022-04-24T11:25:48+08:00">2022-04-24</time>
+              <time title="創建時間：2022-04-24 11:25:48" itemprop="dateCreated datePublished" datetime="2022-04-24T11:25:48+08:00">2022-04-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-04-26 20:30:46" itemprop="dateModified" datetime="2022-04-26T20:30:46+08:00">2022-04-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -294,8 +302,6 @@
 <br />
 
 <p>🔸 生產環境：使用 Rollup 打包代碼，透過較快的時間來將檔案打包成更小容量。</p>
-<br />
-
 <!-- 文章內廣告 -->
 <p><ins class="adsbygoogle"
      style="display:block; text-align:center; margin: 100px auto"
@@ -303,8 +309,6 @@
      data-ad-format="fluid"
      data-ad-client="ca-pub-3584202217117217"
      data-ad-slot="5051618728"></ins></p>
-<br />
-
 <h1 id="Vite-安裝"><a href="#Vite-安裝" class="headerlink" title="Vite 安裝"></a>Vite 安裝</h1><p>使用 NPM</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm create vite@latest</span><br></pre></td></tr></table></figure>
 <p>使用 yarn</p>
@@ -379,6 +383,12 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
 <br />
 <br />
 
+<h1 id="共用-SCSS-變數"><a href="#共用-SCSS-變數" class="headerlink" title="共用 SCSS 變數"></a>共用 SCSS 變數</h1><p>vite 共用 SCSS 變數需在 <code>vite.config</code> 設定，<br>由於 vite 沒有內建 @ 的語法糖，如要使用需設定 alias，更多設定請參考<a target="_blank" rel="noopener" href="https://vitejs.dev/config/">官方文件</a></p>
+<p>vite.config</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">&#x27;vite&#x27;</span></span><br><span class="line"><span class="keyword">import</span> vue <span class="keyword">from</span> <span class="string">&#x27;@vitejs/plugin-vue&#x27;</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineConfig(&#123;</span><br><span class="line">  plugins: [vue()],</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    alias: &#123;</span><br><span class="line">      <span class="string">&#x27;@&#x27;</span>: path.resolve(__dirname, <span class="string">&#x27;src&#x27;</span>),</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  css:&#123;</span><br><span class="line">    preprocessorOptions: &#123;</span><br><span class="line">       scss: &#123;</span><br><span class="line">         additionalData: <span class="string">`@import &quot;@/assets/scss/variable.scss&quot;;`</span>,</span><br><span class="line">         charset: <span class="literal">false</span>,</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<br />
+<br />
+
 <h1 id="Vite-跟-Cli-對比"><a href="#Vite-跟-Cli-對比" class="headerlink" title="Vite 跟 Cli 對比"></a>Vite 跟 Cli 對比</h1><table>
 <thead>
 <tr>
@@ -413,9 +423,12 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
 <td>因有 babel 可兼容多種瀏覽器</td>
 </tr>
 </tbody></table>
-<br />
-<br />
-
+<p><ins class="adsbygoogle"
+     style="display:block; text-align:center; margin: 100px auto"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3584202217117217"
+     data-ad-slot="8536485431"></ins></p>
 <h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>Vite 的快速省了很多開發時間，是開發者的福音，尤雨溪在 twitter 也發表了，<br><strong>Vite 會取代 Vue CLI 嗎？</strong><br><br /></p>
 <p><img src="https://imgur.com/35PNPXZ.jpg" alt="尤雨溪twitter"></p>
 <br />
@@ -441,6 +454,8 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/vite/" rel="tag"># vite</a>
+              <a href="/tags/vite-%E6%95%99%E5%AD%B8/" rel="tag"># vite 教學</a>
+              <a href="/tags/vite-scss%E5%85%B1%E7%94%A8%E8%AE%8A%E6%95%B8/" rel="tag"># vite scss共用變數</a>
           </div>
 
         
@@ -532,7 +547,7 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vite-%E6%98%AF%E4%BB%80%E9%BA%BC"><span class="nav-number">1.</span> <span class="nav-text">Vite 是什麼?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vite-%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">Vite 安裝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vite-%E5%B0%88%E6%A1%88%E7%9B%AE%E9%8C%84%E7%B5%90%E6%A7%8B"><span class="nav-number">3.</span> <span class="nav-text">Vite 專案目錄結構</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vite-%E8%B7%9F-Cli-%E5%B0%8D%E6%AF%94"><span class="nav-number">4.</span> <span class="nav-text">Vite 跟 Cli 對比</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">5.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%8D%BB"><span class="nav-number">6.</span> <span class="nav-text">參考文獻</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vite-%E6%98%AF%E4%BB%80%E9%BA%BC"><span class="nav-number">1.</span> <span class="nav-text">Vite 是什麼?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vite-%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">Vite 安裝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vite-%E5%B0%88%E6%A1%88%E7%9B%AE%E9%8C%84%E7%B5%90%E6%A7%8B"><span class="nav-number">3.</span> <span class="nav-text">Vite 專案目錄結構</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B1%E7%94%A8-SCSS-%E8%AE%8A%E6%95%B8"><span class="nav-number">4.</span> <span class="nav-text">共用 SCSS 變數</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vite-%E8%B7%9F-Cli-%E5%B0%8D%E6%AF%94"><span class="nav-number">5.</span> <span class="nav-text">Vite 跟 Cli 對比</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">6.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%8D%BB"><span class="nav-number">7.</span> <span class="nav-text">參考文獻</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -561,7 +576,7 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -719,7 +734,7 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
   var disqus_config = function() {
     this.page.url = "https://happy9990929.github.io/2022/04/24/frontend-vite/";
     this.page.identifier = "2022/04/24/frontend-vite/";
-    this.page.title = "Vite 快速上手教學";
+    this.page.title = "Vite 教學快速上手，秒安裝秒啟動";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
