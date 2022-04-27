@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="12345678&lt;script setup&gt;import &amp;#123; defineProps, defineEmits &amp;#125; from &amp;#x27;vue&amp;#x27;;const props &#x3D; defineProps(&amp;#123;  foo: String&amp;#125;)const emit &#x3D; defineEmits([&amp;#x27;change&amp;#x27;, &amp;#x27;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解Bug-defineProps is a compiler macro and no longer needs to be imported.">
+<meta property="og:url" content="https://happy9990929.github.io/2022/04/27/bug-defineProps/index.html">
+<meta property="og:site_name" content="一文前端大小事">
+<meta property="og:description" content="12345678&lt;script setup&gt;import &amp;#123; defineProps, defineEmits &amp;#125; from &amp;#x27;vue&amp;#x27;;const props &#x3D; defineProps(&amp;#123;  foo: String&amp;#125;)const emit &#x3D; defineEmits([&amp;#x27;change&amp;#x27;, &amp;#x27;">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/u3IhKJS.jpg">
+<meta property="article:published_time" content="2022-04-27T05:41:35.000Z">
+<meta property="article:modified_time" content="2022-04-27T07:33:49.629Z">
+<meta property="article:author" content="Yi Wen Wang">
+<meta property="article:tag" content="defineProps">
+<meta property="article:tag" content="defineEmits">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/u3IhKJS.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/04/27/bug-defineProps/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>解Bug-defineProps is a compiler macro and no longer needs to be imported. | 一文前端大小事</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">一文前端大小事</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一起鑽研前端技術吧:)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/04/27/bug-defineProps/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端大小事">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          解Bug-defineProps is a compiler macro and no longer needs to be imported.
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-04-27 13:41:35 / 修改時間：15:33:49" itemprop="dateCreated datePublished" datetime="2022-04-27T13:41:35+08:00">2022-04-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%A3Bug/" itemprop="url" rel="index"><span itemprop="name">解Bug</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/04/27/bug-defineProps/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/04/27/bug-defineProps/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/u3IhKJS.jpg" alt="defineProps error"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; defineProps, defineEmits &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> props = defineProps(&#123;</span><br><span class="line">  foo: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emit = defineEmits([<span class="string">&#x27;change&#x27;</span>, <span class="string">&#x27;delete&#x27;</span>])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>在 Vue3 編譯時出現這個警告<br>[@vue/compiler-sfc] defineProps is a compiler macro and no longer needs to be imported.<br>[@vue/compiler-sfc] defineEmits is a compiler macro and no longer needs to be imported.</p>
+<a id="more"></a>
+<br/>
+<br/>
+
+<h1 id="解譯bug"><a href="#解譯bug" class="headerlink" title="解譯bug"></a>解譯bug</h1><p>⚠️ <strong>@vue/compiler-sfc</strong><br>Vue 單文件組件(SFC) 編譯警告</p>
+<p>⚠️<strong>defineProps is a compiler macro and no longer needs to be imported.</strong><br>defineProps 是一個編譯器巨集，不再需要導入。</p>
+<p>⚠️<strong>defineEmits is a compiler macro and no longer needs to be imported.</strong><br>defineEmits 是一個編譯器巨集，不再需要導入。<br><br/><br><br/></p>
+<h1 id="錯誤原因"><a href="#錯誤原因" class="headerlink" title="錯誤原因"></a>錯誤原因</h1><p>defineProps和 defineEmits 都是只在 <code>&lt;script setup&gt;</code> 中才能使用的編譯器巨集。<br>他們不需要導入且會隨著 <code>&lt;script setup&gt;</code> 處理過程一同被編譯掉<br><br/><br><br/></p>
+<h1 id="如何解決"><a href="#如何解決" class="headerlink" title="如何解決"></a>如何解決</h1><p>將 import 的 <code>defineProps</code>、<code>defineEmits</code> 移除即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line"><span class="comment">// import &#123; defineProps, defineEmits &#125; from &#x27;vue&#x27;; // 刪除這行</span></span><br><span class="line"><span class="keyword">const</span> props = defineProps(&#123;</span><br><span class="line">  foo: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emit = defineEmits([<span class="string">&#x27;change&#x27;</span>, <span class="string">&#x27;delete&#x27;</span>])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/api/sfc-script-setup.html">官方文件</a></p>
+<hr>
+<p>如果這篇文章對你有幫助，請幫小編按個讚👍～你的鼓勵是我分享的動力😊</p>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/defineProps/" rel="tag"># defineProps</a>
+              <a href="/tags/defineEmits/" rel="tag"># defineEmits</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/24/frontend-vite/" rel="prev" title="Vite 教學快速上手，秒安裝秒啟動">
+      <i class="fa fa-chevron-left"></i> Vite 教學快速上手，秒安裝秒啟動
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E8%AD%AFbug"><span class="nav-number">1.</span> <span class="nav-text">解譯bug</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%8C%AF%E8%AA%A4%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.</span> <span class="nav-text">錯誤原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E6%B1%BA"><span class="nav-number">3.</span> <span class="nav-text">如何解決</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yi Wen Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Yi Wen Wang</p>
+  <div class="site-description" itemprop="description">前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yi Wen Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/04/27/bug-defineProps/";
+    this.page.identifier = "2022/04/27/bug-defineProps/";
+    this.page.title = "解Bug-defineProps is a compiler macro and no longer needs to be imported.";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
