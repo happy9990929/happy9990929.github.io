@@ -23,35 +23,6 @@
       </tags>
   </entry>
   <entry>
-    <title>解Bug-defineProps is a compiler macro and no longer needs to be imported.</title>
-    <url>/2022/04/27/bug-defineProps/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/u3IhKJS.jpg" alt="defineProps error"></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; defineProps, defineEmits &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> props = defineProps(&#123;</span><br><span class="line">  foo: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emit = defineEmits([<span class="string">&#x27;change&#x27;</span>, <span class="string">&#x27;delete&#x27;</span>])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>在 Vue3 編譯時出現這個警告<br>[@vue/compiler-sfc] defineProps is a compiler macro and no longer needs to be imported.<br>[@vue/compiler-sfc] defineEmits is a compiler macro and no longer needs to be imported.</p>
-<a id="more"></a>
-<br/>
-<br/>
-
-<h1 id="解譯bug"><a href="#解譯bug" class="headerlink" title="解譯bug"></a>解譯bug</h1><p>⚠️ <strong>@vue/compiler-sfc</strong><br>Vue 單文件組件(SFC) 編譯警告</p>
-<p>⚠️<strong>defineProps is a compiler macro and no longer needs to be imported.</strong><br>defineProps 是一個編譯器巨集，不再需要導入。</p>
-<p>⚠️<strong>defineEmits is a compiler macro and no longer needs to be imported.</strong><br>defineEmits 是一個編譯器巨集，不再需要導入。<br><br/><br><br/></p>
-<h1 id="錯誤原因"><a href="#錯誤原因" class="headerlink" title="錯誤原因"></a>錯誤原因</h1><p>defineProps和 defineEmits 都是只在 <code>&lt;script setup&gt;</code> 中才能使用的編譯器巨集。<br>他們不需要導入且會隨著 <code>&lt;script setup&gt;</code> 處理過程一同被編譯掉<br><br/><br><br/></p>
-<h1 id="如何解決"><a href="#如何解決" class="headerlink" title="如何解決"></a>如何解決</h1><p>將 import 的 <code>defineProps</code>、<code>defineEmits</code> 移除即可</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line"><span class="comment">// import &#123; defineProps, defineEmits &#125; from &#x27;vue&#x27;; // 刪除這行</span></span><br><span class="line"><span class="keyword">const</span> props = defineProps(&#123;</span><br><span class="line">  foo: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emit = defineEmits([<span class="string">&#x27;change&#x27;</span>, <span class="string">&#x27;delete&#x27;</span>])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<hr>
-<p><a href="https://v3.cn.vuejs.org/api/sfc-script-setup.html">官方文件</a></p>
-<hr>
-<p>如果這篇文章對你有幫助，請幫小編按個讚👍～你的鼓勵是我分享的動力😊</p>
-]]></content>
-      <categories>
-        <category>Bug記錄</category>
-      </categories>
-      <tags>
-        <tag>defineProps</tag>
-        <tag>defineEmits</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue Component 組件基本介紹</title>
     <url>/2021/03/10/components-base/</url>
     <content><![CDATA[<h1 id="組件基本介紹"><a href="#組件基本介紹" class="headerlink" title="組件基本介紹"></a>組件基本介紹</h1><p>main.js</p>
@@ -84,39 +55,32 @@
       </tags>
   </entry>
   <entry>
-    <title>組件資料傳遞 emit-子層傳參數到父層</title>
-    <url>/2021/03/14/components-emit/</url>
-    <content><![CDATA[<h1 id="組件資料傳遞-emit-子傳父"><a href="#組件資料傳遞-emit-子傳父" class="headerlink" title="組件資料傳遞 emit (子傳父)"></a>組件資料傳遞 emit (子傳父)</h1><p>使用 emit 往上傳遞資料</p>
+    <title>解Bug-defineProps is a compiler macro and no longer needs to be imported.</title>
+    <url>/2022/04/27/bug-defineProps/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/u3IhKJS.jpg" alt="defineProps error"></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; defineProps, defineEmits &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> props = defineProps(&#123;</span><br><span class="line">  foo: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emit = defineEmits([<span class="string">&#x27;change&#x27;</span>, <span class="string">&#x27;delete&#x27;</span>])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>在 Vue3 編譯時出現這個警告<br>[@vue/compiler-sfc] defineProps is a compiler macro and no longer needs to be imported.<br>[@vue/compiler-sfc] defineEmits is a compiler macro and no longer needs to be imported.</p>
 <a id="more"></a>
+<br/>
+<br/>
 
-<p>App.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> EmitTest <span class="keyword">from</span> <span class="string">&quot;@/components/EmitTest.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    EmitTest,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> clickFn = <span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(num);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      clickFn,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">EmitTest</span> @<span class="attr">callBack</span>=<span class="string">&quot;clickFn&quot;</span> /&gt;</span> // @在emit定義的變數=&quot;父層Fn&quot;</span><br></pre></td></tr></table></figure>
-<p>EmitTest.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted, ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props, context</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> num = ref(<span class="number">0</span>);</span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      context.emit(<span class="string">&quot;callBack&quot;</span>, num); <span class="comment">// emit(自定義變數, 要使用的參數)</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      num,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;num&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>setup 接收兩個參數，前面為 props，第二個 context<br>使用 emit 也可以直接解構出來</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">setup</span>(<span class="params">props, &#123;emit&#125;</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> num = ref(<span class="number">0</span>);</span><br><span class="line">    onMounted(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      emit(<span class="string">&quot;callBack&quot;</span>, num);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      num</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="解譯bug"><a href="#解譯bug" class="headerlink" title="解譯bug"></a>解譯bug</h1><p>⚠️ <strong>@vue/compiler-sfc</strong><br>Vue 單文件組件(SFC) 編譯警告</p>
+<p>⚠️<strong>defineProps is a compiler macro and no longer needs to be imported.</strong><br>defineProps 是一個編譯器巨集，不再需要導入。</p>
+<p>⚠️<strong>defineEmits is a compiler macro and no longer needs to be imported.</strong><br>defineEmits 是一個編譯器巨集，不再需要導入。<br><br/><br><br/></p>
+<h1 id="錯誤原因"><a href="#錯誤原因" class="headerlink" title="錯誤原因"></a>錯誤原因</h1><p>defineProps和 defineEmits 都是只在 <code>&lt;script setup&gt;</code> 中才能使用的編譯器巨集。<br>他們不需要導入且會隨著 <code>&lt;script setup&gt;</code> 處理過程一同被編譯掉<br><br/><br><br/></p>
+<h1 id="如何解決"><a href="#如何解決" class="headerlink" title="如何解決"></a>如何解決</h1><p>將 import 的 <code>defineProps</code>、<code>defineEmits</code> 移除即可</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line"><span class="comment">// import &#123; defineProps, defineEmits &#125; from &#x27;vue&#x27;; // 刪除這行</span></span><br><span class="line"><span class="keyword">const</span> props = defineProps(&#123;</span><br><span class="line">  foo: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emit = defineEmits([<span class="string">&#x27;change&#x27;</span>, <span class="string">&#x27;delete&#x27;</span>])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <hr>
-<h1 id="emits-的使用"><a href="#emits-的使用" class="headerlink" title="emits 的使用"></a>emits 的使用</h1><p>聲明有使用到的 emit，可以寫成 Array<br>emit 也可以寫成 object 來做驗證的動作<br>如驗證未通過，console 會跳出 warning 的提示來告訴開發者</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  emits: &#123;</span><br><span class="line">    callBack: <span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> num.value === <span class="number">0</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props, &#123; emit &#125;</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> num = ref(<span class="number">1</span>);</span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      emit(<span class="string">&quot;callBack&quot;</span>, num);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      num,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><a href="https://v3.cn.vuejs.org/api/sfc-script-setup.html">官方文件</a></p>
 <hr>
-<h1 id="計數器範例"><a href="#計數器範例" class="headerlink" title="計數器範例"></a>計數器範例</h1><p>App.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> EmitTest <span class="keyword">from</span> <span class="string">&quot;@/components/EmitTest.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    EmitTest,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> handTimeOut = <span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;time is over&quot;</span>, num.value);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      handTimeOut,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">EmitTest</span> @<span class="attr">TimeOut</span>=<span class="string">&quot;handTimeOut&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>EmitTest.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted, ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  emits: &#123;</span><br><span class="line">    TimeOut: <span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (num.value === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props, &#123; emit &#125;</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> num = ref(<span class="number">5</span>);</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      timer = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        num.value--;</span><br><span class="line">        <span class="keyword">if</span> (num.value === <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">          emit(<span class="string">&quot;TimeOut&quot;</span>, num);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      num,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;num&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+<p>如果這篇文章對你有幫助，請幫小編按個讚👍～你的鼓勵是我分享的動力😊</p>
 ]]></content>
       <categories>
-        <category>Vue3</category>
+        <category>Bug記錄</category>
       </categories>
       <tags>
-        <tag>Vue.js</tag>
-        <tag>javascript</tag>
-        <tag>emit</tag>
+        <tag>defineProps</tag>
+        <tag>defineEmits</tag>
       </tags>
   </entry>
   <entry>
@@ -154,6 +118,42 @@
         <tag>Vue.js</tag>
         <tag>javascript</tag>
         <tag>props</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>組件資料傳遞 emit-子層傳參數到父層</title>
+    <url>/2021/03/14/components-emit/</url>
+    <content><![CDATA[<h1 id="組件資料傳遞-emit-子傳父"><a href="#組件資料傳遞-emit-子傳父" class="headerlink" title="組件資料傳遞 emit (子傳父)"></a>組件資料傳遞 emit (子傳父)</h1><p>使用 emit 往上傳遞資料</p>
+<a id="more"></a>
+
+<p>App.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> EmitTest <span class="keyword">from</span> <span class="string">&quot;@/components/EmitTest.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    EmitTest,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> clickFn = <span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(num);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      clickFn,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">EmitTest</span> @<span class="attr">callBack</span>=<span class="string">&quot;clickFn&quot;</span> /&gt;</span> // @在emit定義的變數=&quot;父層Fn&quot;</span><br></pre></td></tr></table></figure>
+<p>EmitTest.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted, ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props, context</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> num = ref(<span class="number">0</span>);</span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      context.emit(<span class="string">&quot;callBack&quot;</span>, num); <span class="comment">// emit(自定義變數, 要使用的參數)</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      num,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;num&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>setup 接收兩個參數，前面為 props，第二個 context<br>使用 emit 也可以直接解構出來</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">setup</span>(<span class="params">props, &#123;emit&#125;</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> num = ref(<span class="number">0</span>);</span><br><span class="line">    onMounted(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      emit(<span class="string">&quot;callBack&quot;</span>, num);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      num</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="emits-的使用"><a href="#emits-的使用" class="headerlink" title="emits 的使用"></a>emits 的使用</h1><p>聲明有使用到的 emit，可以寫成 Array<br>emit 也可以寫成 object 來做驗證的動作<br>如驗證未通過，console 會跳出 warning 的提示來告訴開發者</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  emits: &#123;</span><br><span class="line">    callBack: <span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> num.value === <span class="number">0</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props, &#123; emit &#125;</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> num = ref(<span class="number">1</span>);</span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      emit(<span class="string">&quot;callBack&quot;</span>, num);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      num,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="計數器範例"><a href="#計數器範例" class="headerlink" title="計數器範例"></a>計數器範例</h1><p>App.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> EmitTest <span class="keyword">from</span> <span class="string">&quot;@/components/EmitTest.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    EmitTest,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> handTimeOut = <span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;time is over&quot;</span>, num.value);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      handTimeOut,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">EmitTest</span> @<span class="attr">TimeOut</span>=<span class="string">&quot;handTimeOut&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>EmitTest.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted, ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  emits: &#123;</span><br><span class="line">    TimeOut: <span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (num.value === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props, &#123; emit &#125;</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> num = ref(<span class="number">5</span>);</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      timer = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        num.value--;</span><br><span class="line">        <span class="keyword">if</span> (num.value === <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">          emit(<span class="string">&quot;TimeOut&quot;</span>, num);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      num,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;num&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+]]></content>
+      <categories>
+        <category>Vue3</category>
+      </categories>
+      <tags>
+        <tag>Vue.js</tag>
+        <tag>javascript</tag>
+        <tag>emit</tag>
       </tags>
   </entry>
   <entry>
@@ -508,63 +508,6 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </tags>
   </entry>
   <entry>
-    <title>搞懂JS-什麼是hoisting?</title>
-    <url>/2021/06/14/js-hoisting/</url>
-    <content><![CDATA[<p><img src="https://i.imgur.com/n7k7xaM.jpg" alt="Imgur"></p>
-<p>JS 在編譯時，會將宣告的變數、函式都先存放到一個記憶體空間，很像是被提升到最前面，賦值不會跟著被提升，實際運行時，再把值塞進剛剛存放的記憶體空間裡。</p>
-<a id="more"></a>
-
-<h1 id="變數提升-Variable-hoisting"><a href="#變數提升-Variable-hoisting" class="headerlink" title="變數提升(Variable hoisting)"></a>變數提升(Variable hoisting)</h1><p>先來看個範例:<br>我 log 了一個從未宣告的變數 dog</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(dog);</span><br></pre></td></tr></table></figure>
-<p>會出現 Uncaught ReferenceError: dog is not defined 的錯誤，這非常合理！<br><br><br>那如果先 log 出下面的變數會發生什麼事?</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(dog);</span><br><span class="line"><span class="keyword">var</span> dog = <span class="string">&quot;bobee&quot;</span>;</span><br></pre></td></tr></table></figure>
-<br>
-出現了 undefined！！為什麼不是 ReferenceError: dog is not defined 呢?
-<br>
-<br>
-這是因為宣告的變數先被存放到記憶體空間了，而賦值不會被提升，你可以想成這樣
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> dog;</span><br><span class="line"><span class="built_in">console</span>.log(dog);</span><br><span class="line">dog = <span class="string">&quot;bobee&quot;</span>;</span><br></pre></td></tr></table></figure>
-<p>注意！var dog 並不是真的被放到最前面，而是<code>記憶體空間</code>先存放了 dog，才會繼續依照執行順序運行程式碼，因此 log 會是 undefined，在執行程式碼之前，記憶體空間會是這樣</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">globle scope: &#123;</span><br><span class="line">  dog: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br>
-在函式裡宣告的變數也會被放到 function scope 的記憶體空間
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">  <span class="keyword">var</span> bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>執行起來時會像是這樣:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bark;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">  bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br>
-
-<h1 id="函式提升-Function-hoisting"><a href="#函式提升-Function-hoisting" class="headerlink" title="函式提升(Function hoisting)"></a>函式提升(Function hoisting)</h1><p>函式有分為函式陳述式(具名函式)、函式表達式(匿名函式)兩種，其中函式陳述式會被提升，函式表達式不會被提升，我們來看看範例。</p>
-<h2 id="函式陳述式"><a href="#函式陳述式" class="headerlink" title="函式陳述式"></a>函式陳述式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">dog();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>結果會是 woof<br>dog()放在函式之前，卻可以 log 出我們要的結果，這是 hoisting 的關係，可以想成這樣</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">&#125;</span><br><span class="line">dog();</span><br></pre></td></tr></table></figure>
-<br>
-
-<h2 id="函式表達式"><a href="#函式表達式" class="headerlink" title="函式表達式"></a>函式表達式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">dog();</span><br><span class="line"><span class="keyword">var</span> dog = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>結果變成 Uncaught TypeError: dog is not a function</p>
-<p>這是因為宣告的變數先被提升了，會變成這個樣子</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> dog;</span><br><span class="line">dog();</span><br><span class="line">dog = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>我們在呼叫 dog 時還不是個 function，因此會噴出 TypeError 的錯誤<br><br></p>
-<h2 id="函式的-hoisting-可以輕易達成遞迴函式"><a href="#函式的-hoisting-可以輕易達成遞迴函式" class="headerlink" title="函式的 hoisting 可以輕易達成遞迴函式"></a>函式的 hoisting 可以輕易達成遞迴函式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">even</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> odd(n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">odd</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">return</span> even(n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">even(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
-<p>我們在 even 裡面呼叫 odd，在 odd 裡面也呼叫 even，這種遞迴狀況如果沒有 hoisting 是沒辦法解決的。<br><br></p>
-<h1 id="函式與變數同名，函式優先"><a href="#函式與變數同名，函式優先" class="headerlink" title="函式與變數同名，函式優先"></a>函式與變數同名，函式優先</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(dog); <span class="comment">// fn dog()&#123;&#125;</span></span><br><span class="line"><span class="keyword">var</span> dog;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dog</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>函式的優先權比變數高，如有多個函式，將會覆蓋前面的</p>
-<br>
-
-<h1 id="let-與-const-也有-hoisting"><a href="#let-與-const-也有-hoisting" class="headerlink" title="let 與 const 也有 hoisting"></a>let 與 const 也有 hoisting</h1><p>在上一篇<a href="https://happy9990929.github.io/2021/06/13/js-variable/">var, let, const 概念</a>就有講到， let、const 也是會有 hoisting 的，差別在於提升之後，var 宣告的變數會被初始化為 undefined，而 let 與 const 的宣告不會被初始化為 undefined，而且如果你在「賦值之前」就存取它，就會拋出錯誤。</p>
-<p>在「提升之後」以及「賦值之前」這段期間被稱為「暫時死區」（Temporal Dead Zone，TDZ），可以幫助我們養成在變數還沒宣告之前，不要使用他的好習慣，讓程式碼可讀性提高。<br><br><br><br><br>hoisting 的筆記就告一段落，了解正確觀念真的很重要，歡迎路過多多指教，一起學習程式吧 😀<br></p>
-<hr>
-<h3 id="推薦閱讀：-我知道你懂-hoisting，可是你了解到多深？"><a href="#推薦閱讀：-我知道你懂-hoisting，可是你了解到多深？" class="headerlink" title="推薦閱讀： 我知道你懂 hoisting，可是你了解到多深？"></a>推薦閱讀： <a href="https://blog.techbridge.cc/2018/11/10/javascript-hoisting">我知道你懂 hoisting，可是你了解到多深？</a></h3><hr>
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>hoisting</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>瀏覽器資料儲存-Cookie、LocalStorage、SessionStorage</title>
     <url>/2021/08/16/js-cookie/</url>
     <content><![CDATA[<table>
@@ -664,6 +607,63 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </tags>
   </entry>
   <entry>
+    <title>搞懂JS-什麼是hoisting?</title>
+    <url>/2021/06/14/js-hoisting/</url>
+    <content><![CDATA[<p><img src="https://i.imgur.com/n7k7xaM.jpg" alt="Imgur"></p>
+<p>JS 在編譯時，會將宣告的變數、函式都先存放到一個記憶體空間，很像是被提升到最前面，賦值不會跟著被提升，實際運行時，再把值塞進剛剛存放的記憶體空間裡。</p>
+<a id="more"></a>
+
+<h1 id="變數提升-Variable-hoisting"><a href="#變數提升-Variable-hoisting" class="headerlink" title="變數提升(Variable hoisting)"></a>變數提升(Variable hoisting)</h1><p>先來看個範例:<br>我 log 了一個從未宣告的變數 dog</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(dog);</span><br></pre></td></tr></table></figure>
+<p>會出現 Uncaught ReferenceError: dog is not defined 的錯誤，這非常合理！<br><br><br>那如果先 log 出下面的變數會發生什麼事?</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(dog);</span><br><span class="line"><span class="keyword">var</span> dog = <span class="string">&quot;bobee&quot;</span>;</span><br></pre></td></tr></table></figure>
+<br>
+出現了 undefined！！為什麼不是 ReferenceError: dog is not defined 呢?
+<br>
+<br>
+這是因為宣告的變數先被存放到記憶體空間了，而賦值不會被提升，你可以想成這樣
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> dog;</span><br><span class="line"><span class="built_in">console</span>.log(dog);</span><br><span class="line">dog = <span class="string">&quot;bobee&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>注意！var dog 並不是真的被放到最前面，而是<code>記憶體空間</code>先存放了 dog，才會繼續依照執行順序運行程式碼，因此 log 會是 undefined，在執行程式碼之前，記憶體空間會是這樣</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">globle scope: &#123;</span><br><span class="line">  dog: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+在函式裡宣告的變數也會被放到 function scope 的記憶體空間
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">  <span class="keyword">var</span> bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>執行起來時會像是這樣:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bark;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">  bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="函式提升-Function-hoisting"><a href="#函式提升-Function-hoisting" class="headerlink" title="函式提升(Function hoisting)"></a>函式提升(Function hoisting)</h1><p>函式有分為函式陳述式(具名函式)、函式表達式(匿名函式)兩種，其中函式陳述式會被提升，函式表達式不會被提升，我們來看看範例。</p>
+<h2 id="函式陳述式"><a href="#函式陳述式" class="headerlink" title="函式陳述式"></a>函式陳述式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">dog();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>結果會是 woof<br>dog()放在函式之前，卻可以 log 出我們要的結果，這是 hoisting 的關係，可以想成這樣</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">&#125;</span><br><span class="line">dog();</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="函式表達式"><a href="#函式表達式" class="headerlink" title="函式表達式"></a>函式表達式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">dog();</span><br><span class="line"><span class="keyword">var</span> dog = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>結果變成 Uncaught TypeError: dog is not a function</p>
+<p>這是因為宣告的變數先被提升了，會變成這個樣子</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> dog;</span><br><span class="line">dog();</span><br><span class="line">dog = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bark = <span class="string">&quot;woof&quot;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(bark);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>我們在呼叫 dog 時還不是個 function，因此會噴出 TypeError 的錯誤<br><br></p>
+<h2 id="函式的-hoisting-可以輕易達成遞迴函式"><a href="#函式的-hoisting-可以輕易達成遞迴函式" class="headerlink" title="函式的 hoisting 可以輕易達成遞迴函式"></a>函式的 hoisting 可以輕易達成遞迴函式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">even</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> odd(n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">odd</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">return</span> even(n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">even(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>我們在 even 裡面呼叫 odd，在 odd 裡面也呼叫 even，這種遞迴狀況如果沒有 hoisting 是沒辦法解決的。<br><br></p>
+<h1 id="函式與變數同名，函式優先"><a href="#函式與變數同名，函式優先" class="headerlink" title="函式與變數同名，函式優先"></a>函式與變數同名，函式優先</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(dog); <span class="comment">// fn dog()&#123;&#125;</span></span><br><span class="line"><span class="keyword">var</span> dog;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dog</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>函式的優先權比變數高，如有多個函式，將會覆蓋前面的</p>
+<br>
+
+<h1 id="let-與-const-也有-hoisting"><a href="#let-與-const-也有-hoisting" class="headerlink" title="let 與 const 也有 hoisting"></a>let 與 const 也有 hoisting</h1><p>在上一篇<a href="https://happy9990929.github.io/2021/06/13/js-variable/">var, let, const 概念</a>就有講到， let、const 也是會有 hoisting 的，差別在於提升之後，var 宣告的變數會被初始化為 undefined，而 let 與 const 的宣告不會被初始化為 undefined，而且如果你在「賦值之前」就存取它，就會拋出錯誤。</p>
+<p>在「提升之後」以及「賦值之前」這段期間被稱為「暫時死區」（Temporal Dead Zone，TDZ），可以幫助我們養成在變數還沒宣告之前，不要使用他的好習慣，讓程式碼可讀性提高。<br><br><br><br><br>hoisting 的筆記就告一段落，了解正確觀念真的很重要，歡迎路過多多指教，一起學習程式吧 😀<br></p>
+<hr>
+<h3 id="推薦閱讀：-我知道你懂-hoisting，可是你了解到多深？"><a href="#推薦閱讀：-我知道你懂-hoisting，可是你了解到多深？" class="headerlink" title="推薦閱讀： 我知道你懂 hoisting，可是你了解到多深？"></a>推薦閱讀： <a href="https://blog.techbridge.cc/2018/11/10/javascript-hoisting">我知道你懂 hoisting，可是你了解到多深？</a></h3><hr>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>hoisting</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ES6-import &amp; export 怎麼用</title>
     <url>/2021/06/15/js-import-export/</url>
     <content><![CDATA[<p><img src="https://imgur.com/2Auy2fY.jpg" alt="Imgur"></p>
@@ -712,6 +712,81 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
         <tag>import</tag>
         <tag>export</tag>
         <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ES6-Promise 非同步的解決方案</title>
+    <url>/2021/07/29/js-promise/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/RuN7HR6.png" alt="Imgur"></p>
+<p>由於非同步的程式沒辦法照順序執行，像是 AJAX、setTimeout 都是典型的非同步，ES6 提出了 Promise 的新物件，可以確保非同步處理完畢後，再進行下一步的動作，Promise 就是來解決非同步的程式碼。</p>
+<a id="more"></a>
+
+<h1 id="Promise-物件的三種狀態"><a href="#Promise-物件的三種狀態" class="headerlink" title="Promise 物件的三種狀態"></a>Promise 物件的三種狀態</h1><p>在建立 Promise 之前，先來了解 Promise 只會出現以下三種狀態</p>
+<ol>
+<li>pending 初始狀態 (進行中)</li>
+<li>fulfilled 事件已完成，回傳 resolve 的結果</li>
+<li>rejected 事件已失敗，回傳 rejected 的結果</li>
+</ol>
+<p>Promise 狀態的改變只有兩種可能<br>從 pending 變成 fulfilled<br>從 pending 變成 rejected<br>而一但狀態改變就會固定，永遠不會再改變狀態了。</p>
+<br>
+
+<h1 id="建立一個-Promise-物件"><a href="#建立一個-Promise-物件" class="headerlink" title="建立一個 Promise 物件"></a>建立一個 Promise 物件</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    resolve(<span class="string">&#x27;成功&#x27;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(<span class="string">&#x27;失敗&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>創建一個新 Promise 構造函數，並代入一個 function</li>
+<li>function 代入兩個參數，這兩個參數也是函式，分別為 resolve (執行成功)、reject (執行失敗)</li>
+<li>設定 resolve / reject 回傳方法<br>resolve() 執行成功的函式<br>reject() 執行失敗的函式</li>
+</ol>
+<br>
+
+<h1 id="取得-Promise-結果"><a href="#取得-Promise-結果" class="headerlink" title="取得 Promise 結果"></a>取得 Promise 結果</h1><p>Promise 物件生成後，可以用 Promise 的原型方法來執行取得的結果</p>
+<h2 id="then"><a href="#then" class="headerlink" title=".then()"></a>.then()</h2><p>綁定當 fulfilled 或 rejected 狀態時，分別要執行的函數，.then 可傳入兩個參數</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise.then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 當狀態是 fulfilled (成功) 時，執行這個函數</span></span><br><span class="line">    <span class="comment">// value 是透過 resolve() 傳進來的參數</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 當狀態是 rejected (失敗) 時，執行這個函數</span></span><br><span class="line">    <span class="comment">// error 是透過 reject() 傳進來的參數</span></span><br><span class="line">    <span class="comment">// 此參數選擇性的，不一定需要</span></span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="catch"><a href="#catch" class="headerlink" title=".catch()"></a>.catch()</h2><p>綁定當 rejected 狀態時，要執行的函數</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise.catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="finally"><a href="#finally" class="headerlink" title=".finally()"></a>.finally()</h2><p>不帶有任何參數，表示非同步執行完畢，無論是否正確完成，要執行的函數</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise</span><br><span class="line">  .then(<span class="function">(<span class="params">success</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(success);</span><br><span class="line">  &#125;)</span><br><span class="line">  .finally(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;done&#x27;</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="Chaining-串接"><a href="#Chaining-串接" class="headerlink" title="Chaining 串接"></a>Chaining 串接</h1><p>then、catch 執行後都會返回一個新的 Promise 物件，可以使用鏈接的方式不斷的進行<br>後面的 then 會接收前一個 then 的 return value 當作參數</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  resolve(<span class="string">&#x27;123&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str + <span class="string">&#x27; 456&#x27;</span>;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(str); <span class="comment">// 123456</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="Promise-方法介紹"><a href="#Promise-方法介紹" class="headerlink" title="Promise 方法介紹"></a>Promise 方法介紹</h1><h2 id="Promise-all-iterable"><a href="#Promise-all-iterable" class="headerlink" title="Promise.all(iterable)"></a>Promise.all(iterable)</h2><p>透過陣列的形式傳入多個 promise 函式，Promise.all 會回傳一個陣列，分別有三種情況</p>
+<ol>
+<li>當引數 iterable 中所有的 promises 都被實現（resolved）</li>
+<li>引數 iterable 不含任何 promise 時，被實現</li>
+<li>得到一個 rejected 時，第一個被 reject 的值會被傳進回 all Promise 物件的 callback</li>
+</ol>
+<p>當全部執行完成後回傳陣列結果，陣列的結果順序與傳入的順序一致，適合用在多支 API 要一起執行，並確保全部完成後才進行其他工作時</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = <span class="built_in">Promise</span>.resolve(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p2 = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p3 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">100</span>, <span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all([p1, p2, p3]).then(<span class="function"><span class="keyword">function</span> (<span class="params">values</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(values); <span class="comment">// [3, 123, &quot;foo&quot;]</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="Promise-race-iterable"><a href="#Promise-race-iterable" class="headerlink" title="Promise.race(iterable)"></a>Promise.race(iterable)</h2><p>透過陣列的形式傳入多個 promise 函式，Promise.race 的結果為第一個最先改變狀態的 Promise 物件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">500</span>, <span class="string">&#x27;one&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> p2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">100</span>, <span class="string">&#x27;two&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.race([p1, p2]).then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value); <span class="comment">// 會顯示 &quot;two&quot;，因為 p2 比較快被 resolve</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="Promise-resolve-value"><a href="#Promise-resolve-value" class="headerlink" title="Promise.resolve(value)"></a>Promise.resolve(value)</h2><p>直接定義 Promise 物件 resolve 的狀態，回傳一個 Promise 物件，value 有三種可能</p>
+<ol>
+<li>value 為具有”then”方法的 Promise，回傳的 promise 將依其結果採取其最終狀態</li>
+<li>value 為 promise，呼叫 Promise.resolve 之結果</li>
+<li>其他情形都將回傳以 value 實現的 promise</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.resolve(<span class="string">&#x27;Success&#x27;</span>).then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Fail&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 輸出 &quot;Success&quot;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="Promise-reject-reason"><a href="#Promise-reject-reason" class="headerlink" title="Promise.reject(reason)"></a>Promise.reject(reason)</h2><p>回傳一個以 reason 拒絕的 Promise 物件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;Fail&#x27;</span>)).then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Success&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Fail&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 輸出 &quot;Fail&quot;</span></span><br></pre></td></tr></table></figure>
+<p><br><br><br>有了 Promise 非同步語法，就可以捨棄古早時期使用的 callback hell，變得更清楚直觀，程式碼可讀性更高了 👍</p>
+<hr>
+<h3 id="參考文獻：-Fooish-程式技術、MDN、卡斯柏’s-blog"><a href="#參考文獻：-Fooish-程式技術、MDN、卡斯柏’s-blog" class="headerlink" title="參考文獻： Fooish 程式技術、MDN、卡斯柏’s blog"></a>參考文獻： <a href="https://www.fooish.com/javascript/ES6/Promise.html">Fooish 程式技術</a>、<a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">MDN</a>、<a href="https://wcc723.github.io/development/2020/02/16/all-new-promise/">卡斯柏’s blog</a></h3><hr>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>ES6</tag>
+        <tag>promise</tag>
+        <tag>Javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -794,81 +869,6 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
         <tag>var</tag>
         <tag>let</tag>
         <tag>const</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ES6-Promise 非同步的解決方案</title>
-    <url>/2021/07/29/js-promise/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/RuN7HR6.png" alt="Imgur"></p>
-<p>由於非同步的程式沒辦法照順序執行，像是 AJAX、setTimeout 都是典型的非同步，ES6 提出了 Promise 的新物件，可以確保非同步處理完畢後，再進行下一步的動作，Promise 就是來解決非同步的程式碼。</p>
-<a id="more"></a>
-
-<h1 id="Promise-物件的三種狀態"><a href="#Promise-物件的三種狀態" class="headerlink" title="Promise 物件的三種狀態"></a>Promise 物件的三種狀態</h1><p>在建立 Promise 之前，先來了解 Promise 只會出現以下三種狀態</p>
-<ol>
-<li>pending 初始狀態 (進行中)</li>
-<li>fulfilled 事件已完成，回傳 resolve 的結果</li>
-<li>rejected 事件已失敗，回傳 rejected 的結果</li>
-</ol>
-<p>Promise 狀態的改變只有兩種可能<br>從 pending 變成 fulfilled<br>從 pending 變成 rejected<br>而一但狀態改變就會固定，永遠不會再改變狀態了。</p>
-<br>
-
-<h1 id="建立一個-Promise-物件"><a href="#建立一個-Promise-物件" class="headerlink" title="建立一個 Promise 物件"></a>建立一個 Promise 物件</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    resolve(<span class="string">&#x27;成功&#x27;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(<span class="string">&#x27;失敗&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<ol>
-<li>創建一個新 Promise 構造函數，並代入一個 function</li>
-<li>function 代入兩個參數，這兩個參數也是函式，分別為 resolve (執行成功)、reject (執行失敗)</li>
-<li>設定 resolve / reject 回傳方法<br>resolve() 執行成功的函式<br>reject() 執行失敗的函式</li>
-</ol>
-<br>
-
-<h1 id="取得-Promise-結果"><a href="#取得-Promise-結果" class="headerlink" title="取得 Promise 結果"></a>取得 Promise 結果</h1><p>Promise 物件生成後，可以用 Promise 的原型方法來執行取得的結果</p>
-<h2 id="then"><a href="#then" class="headerlink" title=".then()"></a>.then()</h2><p>綁定當 fulfilled 或 rejected 狀態時，分別要執行的函數，.then 可傳入兩個參數</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise.then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 當狀態是 fulfilled (成功) 時，執行這個函數</span></span><br><span class="line">    <span class="comment">// value 是透過 resolve() 傳進來的參數</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 當狀態是 rejected (失敗) 時，執行這個函數</span></span><br><span class="line">    <span class="comment">// error 是透過 reject() 傳進來的參數</span></span><br><span class="line">    <span class="comment">// 此參數選擇性的，不一定需要</span></span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h2 id="catch"><a href="#catch" class="headerlink" title=".catch()"></a>.catch()</h2><p>綁定當 rejected 狀態時，要執行的函數</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise.catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="finally"><a href="#finally" class="headerlink" title=".finally()"></a>.finally()</h2><p>不帶有任何參數，表示非同步執行完畢，無論是否正確完成，要執行的函數</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise</span><br><span class="line">  .then(<span class="function">(<span class="params">success</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(success);</span><br><span class="line">  &#125;)</span><br><span class="line">  .finally(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;done&#x27;</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-<br>
-
-<h1 id="Chaining-串接"><a href="#Chaining-串接" class="headerlink" title="Chaining 串接"></a>Chaining 串接</h1><p>then、catch 執行後都會返回一個新的 Promise 物件，可以使用鏈接的方式不斷的進行<br>後面的 then 會接收前一個 then 的 return value 當作參數</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  resolve(<span class="string">&#x27;123&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str + <span class="string">&#x27; 456&#x27;</span>;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(str); <span class="comment">// 123456</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-<br>
-
-<h1 id="Promise-方法介紹"><a href="#Promise-方法介紹" class="headerlink" title="Promise 方法介紹"></a>Promise 方法介紹</h1><h2 id="Promise-all-iterable"><a href="#Promise-all-iterable" class="headerlink" title="Promise.all(iterable)"></a>Promise.all(iterable)</h2><p>透過陣列的形式傳入多個 promise 函式，Promise.all 會回傳一個陣列，分別有三種情況</p>
-<ol>
-<li>當引數 iterable 中所有的 promises 都被實現（resolved）</li>
-<li>引數 iterable 不含任何 promise 時，被實現</li>
-<li>得到一個 rejected 時，第一個被 reject 的值會被傳進回 all Promise 物件的 callback</li>
-</ol>
-<p>當全部執行完成後回傳陣列結果，陣列的結果順序與傳入的順序一致，適合用在多支 API 要一起執行，並確保全部完成後才進行其他工作時</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = <span class="built_in">Promise</span>.resolve(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p2 = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p3 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">100</span>, <span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all([p1, p2, p3]).then(<span class="function"><span class="keyword">function</span> (<span class="params">values</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(values); <span class="comment">// [3, 123, &quot;foo&quot;]</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<br>
-
-<h2 id="Promise-race-iterable"><a href="#Promise-race-iterable" class="headerlink" title="Promise.race(iterable)"></a>Promise.race(iterable)</h2><p>透過陣列的形式傳入多個 promise 函式，Promise.race 的結果為第一個最先改變狀態的 Promise 物件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">500</span>, <span class="string">&#x27;one&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> p2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">100</span>, <span class="string">&#x27;two&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.race([p1, p2]).then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value); <span class="comment">// 會顯示 &quot;two&quot;，因為 p2 比較快被 resolve</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<br>
-
-<h2 id="Promise-resolve-value"><a href="#Promise-resolve-value" class="headerlink" title="Promise.resolve(value)"></a>Promise.resolve(value)</h2><p>直接定義 Promise 物件 resolve 的狀態，回傳一個 Promise 物件，value 有三種可能</p>
-<ol>
-<li>value 為具有”then”方法的 Promise，回傳的 promise 將依其結果採取其最終狀態</li>
-<li>value 為 promise，呼叫 Promise.resolve 之結果</li>
-<li>其他情形都將回傳以 value 實現的 promise</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.resolve(<span class="string">&#x27;Success&#x27;</span>).then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Fail&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 輸出 &quot;Success&quot;</span></span><br></pre></td></tr></table></figure>
-<br>
-
-<h2 id="Promise-reject-reason"><a href="#Promise-reject-reason" class="headerlink" title="Promise.reject(reason)"></a>Promise.reject(reason)</h2><p>回傳一個以 reason 拒絕的 Promise 物件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;Fail&#x27;</span>)).then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Success&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Fail&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 輸出 &quot;Fail&quot;</span></span><br></pre></td></tr></table></figure>
-<p><br><br><br>有了 Promise 非同步語法，就可以捨棄古早時期使用的 callback hell，變得更清楚直觀，程式碼可讀性更高了 👍</p>
-<hr>
-<h3 id="參考文獻：-Fooish-程式技術、MDN、卡斯柏’s-blog"><a href="#參考文獻：-Fooish-程式技術、MDN、卡斯柏’s-blog" class="headerlink" title="參考文獻： Fooish 程式技術、MDN、卡斯柏’s blog"></a>參考文獻： <a href="https://www.fooish.com/javascript/ES6/Promise.html">Fooish 程式技術</a>、<a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">MDN</a>、<a href="https://wcc723.github.io/development/2020/02/16/all-new-promise/">卡斯柏’s blog</a></h3><hr>
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>ES6</tag>
-        <tag>promise</tag>
-        <tag>Javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -990,12 +990,6 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
 <p>recaptcha-v3.vue</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;row g-3&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-4 position-relative&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;form-label&quot;</span>&gt;</span>帳號<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span> <span class="attr">required</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-4 position-relative&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;form-label&quot;</span>&gt;</span>密碼<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span> <span class="attr">required</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-12&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-warning&quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;recaptcha&quot;</span>&gt;</span>Submit form<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useReCaptcha &#125; <span class="keyword">from</span> <span class="string">&#x27;vue-recaptcha-v3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; executeRecaptcha, recaptchaLoaded &#125; = useReCaptcha()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// submit 回傳一組 token，並把 token 傳給後端驗證</span></span><br><span class="line">    <span class="keyword">const</span> recaptcha = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">      <span class="keyword">await</span> recaptchaLoaded()</span><br><span class="line">      <span class="keyword">const</span> token = <span class="keyword">await</span> executeRecaptcha(<span class="string">&#x27;login&#x27;</span>)</span><br><span class="line">      <span class="built_in">console</span>.log(token)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      recaptcha</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><ins class="adsbygoogle"
-     style="display:block; text-align:center; margin: 100px auto"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-3584202217117217"
-     data-ad-slot="8536485431"></ins></p>
 <h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>不管使用 recaptcha v2 或 recaptcha v3，都是多了一層保護機制，設定上也不困難，一起讓網站更安全吧👊🏽👊🏽👊🏽</p>
 ]]></content>
       <categories>
@@ -1006,6 +1000,40 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
         <tag>recaptcha v3</tag>
         <tag>recaptcha驗證</tag>
         <tag>我不是機器人 驗證</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 dart-sass 取代 node-sass</title>
+    <url>/2022/03/18/sass-dart-sass/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/Gh27Ew9.jpg" alt="sass"></p>
+<p>今天在更新網站時，github actions 在 npm install 時發生了錯誤</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm ERR! code 1</span><br><span class="line">npm ERR! path &#x2F;home&#x2F;runner&#x2F;work&#x2F;portfolio&#x2F;portfolio&#x2F;node_modules&#x2F;node-sass</span><br><span class="line">&#x2F;&#x2F; ...中間太多省略</span><br><span class="line">Error: Process completed with exit code 1.</span><br></pre></td></tr></table></figure>
+<p>根據資訊推測是 node-sass 的問題，爬了一下文發現，</p>
+<a id="more"></a>
+<p><a href="https://sass-lang.com/blog/libsass-is-deprecated">Sass 官方已在 2020-10-26 正式宣布棄用 LibSass，並推薦使用 Dart Sass</a></p>
+<p>LibSass 顯然沒有足夠的工程帶寬來跟上 Sass 語言的最新發展，且 node-sass 底層依賴 LibSass，常常導致很多使用者安裝的特別的困難，sass 官方已經將 dart-sass 作為未來主要的的開發方向，效能更好。</p>
+<p>如果你是 Node Sass 的用戶，遷移到 Dart Sass 很簡單：只需在你的 package.json 文件中將 node-sass 替換為 sass. 這兩個包都公開了相同的 JavaScript API。</p>
+<br>
+
+<h1 id="安裝-Dart-Sass-步驟"><a href="#安裝-Dart-Sass-步驟" class="headerlink" title="安裝 Dart Sass 步驟"></a>安裝 Dart Sass 步驟</h1><p>1.如果安裝了 node-sass 首先需要解除安裝</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm remove node-sass</span><br></pre></td></tr></table></figure>
+<p>2.安装 dart-sass</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install sass sass-loader -D</span><br></pre></td></tr></table></figure>
+<p>3、如果專案之前用到/deep/需要替換為<code>::v-deep</code>，否則會報錯</p>
+<h1 id="安裝錯誤"><a href="#安裝錯誤" class="headerlink" title="安裝錯誤"></a>安裝錯誤</h1><p>在安裝的過程中，如果遇到下面錯誤😨</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm ERR! code EBADPLATFORM</span><br><span class="line">npm ERR! notsup Unsupported platform for fsevents@2.1.3: wanted &#123;&quot;os&quot;:&quot;darwin&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line">npm ERR! notsup Valid OS:    darwin</span><br><span class="line">npm ERR! notsup Valid Arch:  undefined</span><br><span class="line">npm ERR! notsup Actual OS:   win32</span><br><span class="line">npm ERR! notsup Actual Arch: x64</span><br></pre></td></tr></table></figure>
+<p>不要緊張! 把 <code>package-lock.json</code> 移除掉，再 npm install 重新生成，<br>再安裝一次 dart-sass 就成功啦!!</p>
+<hr>
+<p>重新裝了 dart-sass 後，github actions 就跑成功啦！真是可喜可賀😀🌟🌟🌟</p>
+]]></content>
+      <categories>
+        <category>sass</category>
+      </categories>
+      <tags>
+        <tag>sass</tag>
+        <tag>node-sass</tag>
+        <tag>dart-sass</tag>
+        <tag>Process completed with exit code 1</tag>
       </tags>
   </entry>
   <entry>
@@ -1049,40 +1077,6 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       <tags>
         <tag>og image</tag>
         <tag>分享連結圖片</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 dart-sass 取代 node-sass</title>
-    <url>/2022/03/18/sass-dart-sass/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/Gh27Ew9.jpg" alt="sass"></p>
-<p>今天在更新網站時，github actions 在 npm install 時發生了錯誤</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm ERR! code 1</span><br><span class="line">npm ERR! path &#x2F;home&#x2F;runner&#x2F;work&#x2F;portfolio&#x2F;portfolio&#x2F;node_modules&#x2F;node-sass</span><br><span class="line">&#x2F;&#x2F; ...中間太多省略</span><br><span class="line">Error: Process completed with exit code 1.</span><br></pre></td></tr></table></figure>
-<p>根據資訊推測是 node-sass 的問題，爬了一下文發現，</p>
-<a id="more"></a>
-<p><a href="https://sass-lang.com/blog/libsass-is-deprecated">Sass 官方已在 2020-10-26 正式宣布棄用 LibSass，並推薦使用 Dart Sass</a></p>
-<p>LibSass 顯然沒有足夠的工程帶寬來跟上 Sass 語言的最新發展，且 node-sass 底層依賴 LibSass，常常導致很多使用者安裝的特別的困難，sass 官方已經將 dart-sass 作為未來主要的的開發方向，效能更好。</p>
-<p>如果你是 Node Sass 的用戶，遷移到 Dart Sass 很簡單：只需在你的 package.json 文件中將 node-sass 替換為 sass. 這兩個包都公開了相同的 JavaScript API。</p>
-<br>
-
-<h1 id="安裝-Dart-Sass-步驟"><a href="#安裝-Dart-Sass-步驟" class="headerlink" title="安裝 Dart Sass 步驟"></a>安裝 Dart Sass 步驟</h1><p>1.如果安裝了 node-sass 首先需要解除安裝</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm remove node-sass</span><br></pre></td></tr></table></figure>
-<p>2.安装 dart-sass</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install sass sass-loader -D</span><br></pre></td></tr></table></figure>
-<p>3、如果專案之前用到/deep/需要替換為<code>::v-deep</code>，否則會報錯</p>
-<h1 id="安裝錯誤"><a href="#安裝錯誤" class="headerlink" title="安裝錯誤"></a>安裝錯誤</h1><p>在安裝的過程中，如果遇到下面錯誤😨</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm ERR! code EBADPLATFORM</span><br><span class="line">npm ERR! notsup Unsupported platform for fsevents@2.1.3: wanted &#123;&quot;os&quot;:&quot;darwin&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line">npm ERR! notsup Valid OS:    darwin</span><br><span class="line">npm ERR! notsup Valid Arch:  undefined</span><br><span class="line">npm ERR! notsup Actual OS:   win32</span><br><span class="line">npm ERR! notsup Actual Arch: x64</span><br></pre></td></tr></table></figure>
-<p>不要緊張! 把 <code>package-lock.json</code> 移除掉，再 npm install 重新生成，<br>再安裝一次 dart-sass 就成功啦!!</p>
-<hr>
-<p>重新裝了 dart-sass 後，github actions 就跑成功啦！真是可喜可賀😀🌟🌟🌟</p>
-]]></content>
-      <categories>
-        <category>sass</category>
-      </categories>
-      <tags>
-        <tag>sass</tag>
-        <tag>node-sass</tag>
-        <tag>dart-sass</tag>
-        <tag>Process completed with exit code 1</tag>
       </tags>
   </entry>
   <entry>
@@ -1622,6 +1616,33 @@ package.json 設定 --mode staging
       </tags>
   </entry>
   <entry>
+    <title>用 Nuxt 設定 loading 效果</title>
+    <url>/2021/09/13/vue-nuxt-loading/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/MUS8ao2.jpg" alt="Imgur"></p>
+<h1 id="loading-開關"><a href="#loading-開關" class="headerlink" title="loading 開關"></a>loading 開關</h1><p>預設 loading 開關為 true，如想關閉 loading 可在 nuxt.config.js 設定</p>
+<a id="more"></a>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  loading: <span class="literal">false</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="修改-loading-樣式"><a href="#修改-loading-樣式" class="headerlink" title="修改 loading 樣式"></a>修改 loading 樣式</h1><p>nuxt.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  loading: &#123;</span><br><span class="line">    color: <span class="string">&#x27;blue&#x27;</span>,</span><br><span class="line">    height: <span class="string">&#x27;5px&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="客製-loading"><a href="#客製-loading" class="headerlink" title="客製 loading"></a>客製 loading</h1><p>在 components 目錄新增一個 loading.vue</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">lang</span>=<span class="string">&quot;html&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;loading-page&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;loading&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    loading: <span class="literal">false</span>,</span><br><span class="line">  &#125;),</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="function"><span class="title">start</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.loading = <span class="literal">true</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">finish</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.loading = <span class="literal">false</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.loading-page</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: fixed;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.8</span>);</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">padding-top</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">font-family</span>: sans-serif;</span><br><span class="line">  <span class="attribute">z-index</span>: <span class="number">999</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 nuxt.config.js 設定 loading 的組件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  loading: <span class="string">&#x27;~/components/loading.vue&#x27;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="點擊開關-loading"><a href="#點擊開關-loading" class="headerlink" title="點擊開關 loading"></a>點擊開關 loading</h1><p>可以從 this.$nuxt 的物件，去抓 $loading，$loading 就是 components/loading.vue 的組件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;openLoading&quot;</span>&gt;</span>loading<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  <span class="function"><span class="title">openLoading</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.$nuxt.$loading.start(); <span class="comment">// 啟動 loading</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.$nuxt.$loading.finish(); <span class="comment">// 關閉 loading</span></span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Vue-Nuxt</category>
+      </categories>
+      <tags>
+        <tag>Nuxt</tag>
+        <tag>loading</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Nuxt 生命週期及執行順序</title>
     <url>/2021/09/10/vue-nuxt-lifecycle-hooks/</url>
     <content><![CDATA[<p><img src="https://imgur.com/btmMqMY.jpg" alt="Imgur"></p>
@@ -1673,33 +1694,6 @@ package.json 設定 --mode staging
         <tag>asyncData</tag>
         <tag>fetch</tag>
         <tag>keep-alive</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>用 Nuxt 設定 loading 效果</title>
-    <url>/2021/09/13/vue-nuxt-loading/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/MUS8ao2.jpg" alt="Imgur"></p>
-<h1 id="loading-開關"><a href="#loading-開關" class="headerlink" title="loading 開關"></a>loading 開關</h1><p>預設 loading 開關為 true，如想關閉 loading 可在 nuxt.config.js 設定</p>
-<a id="more"></a>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  loading: <span class="literal">false</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="修改-loading-樣式"><a href="#修改-loading-樣式" class="headerlink" title="修改 loading 樣式"></a>修改 loading 樣式</h1><p>nuxt.config.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  loading: &#123;</span><br><span class="line">    color: <span class="string">&#x27;blue&#x27;</span>,</span><br><span class="line">    height: <span class="string">&#x27;5px&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="客製-loading"><a href="#客製-loading" class="headerlink" title="客製 loading"></a>客製 loading</h1><p>在 components 目錄新增一個 loading.vue</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">lang</span>=<span class="string">&quot;html&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;loading-page&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;loading&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    loading: <span class="literal">false</span>,</span><br><span class="line">  &#125;),</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="function"><span class="title">start</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.loading = <span class="literal">true</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">finish</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.loading = <span class="literal">false</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.loading-page</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: fixed;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.8</span>);</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">padding-top</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">font-family</span>: sans-serif;</span><br><span class="line">  <span class="attribute">z-index</span>: <span class="number">999</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在 nuxt.config.js 設定 loading 的組件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  loading: <span class="string">&#x27;~/components/loading.vue&#x27;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="點擊開關-loading"><a href="#點擊開關-loading" class="headerlink" title="點擊開關 loading"></a>點擊開關 loading</h1><p>可以從 this.$nuxt 的物件，去抓 $loading，$loading 就是 components/loading.vue 的組件</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;openLoading&quot;</span>&gt;</span>loading<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  <span class="function"><span class="title">openLoading</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.$nuxt.$loading.start(); <span class="comment">// 啟動 loading</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.$nuxt.$loading.finish(); <span class="comment">// 關閉 loading</span></span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Vue-Nuxt</category>
-      </categories>
-      <tags>
-        <tag>Nuxt</tag>
-        <tag>loading</tag>
       </tags>
   </entry>
   <entry>
@@ -1850,33 +1844,6 @@ package.json 設定 --mode staging
       </tags>
   </entry>
   <entry>
-    <title>Nuxt 的 SEO 設定</title>
-    <url>/2021/09/12/vue-nuxt-seo/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/s07cfNA.jpg" alt="Imgur"></p>
-<p>做好 SEO，可以增強網站的自然搜尋排名，不同的頁面通常會有不同的 title、關鍵字，Nuxt 可以幫我們做到這件事。</p>
-<h1 id="Global-Settings"><a href="#Global-Settings" class="headerlink" title="Global Settings"></a>Global Settings</h1><p>設定整個網站的 SEO，在這裡你可以定義所有的 meta</p>
-<a id="more"></a>
-
-<p>nuxt.config.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">head: &#123;</span><br><span class="line">  title: <span class="string">&quot;一文前端大小事&quot;</span>,</span><br><span class="line">  htmlAttrs: &#123;</span><br><span class="line">    lang: <span class="string">&quot;en&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  meta: [</span><br><span class="line">    &#123; <span class="attr">charset</span>: <span class="string">&quot;utf-8&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;viewport&quot;</span>, <span class="attr">content</span>: <span class="string">&quot;width=device-width, initial-scale=1&quot;</span> &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      hid: <span class="string">&quot;description&quot;</span>,</span><br><span class="line">      name: <span class="string">&quot;description&quot;</span>,</span><br><span class="line">      content: <span class="string">&quot;一起鑽研前端技術吧^^&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;format-detection&quot;</span>, <span class="attr">content</span>: <span class="string">&quot;telephone=no&quot;</span> &#125;</span><br><span class="line">  ],</span><br><span class="line">  link: [&#123; <span class="attr">rel</span>: <span class="string">&quot;icon&quot;</span>, <span class="attr">type</span>: <span class="string">&quot;image/x-icon&quot;</span>, <span class="attr">href</span>: <span class="string">&quot;/favicon.ico&quot;</span> &#125;]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<h1 id="Local-Settings"><a href="#Local-Settings" class="headerlink" title="Local Settings"></a>Local Settings</h1><p>要設定每頁的 SEO 也很簡單，只要把 head 搬去要設定的頁面就可以了<br>pages/about.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  head: &#123;</span><br><span class="line">    title: <span class="string">&#x27;關於我們&#x27;</span>,</span><br><span class="line">    htmlAttrs: &#123;</span><br><span class="line">      lang: <span class="string">&#x27;en&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    meta: [</span><br><span class="line">      &#123; <span class="attr">charset</span>: <span class="string">&#x27;utf-8&#x27;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&#x27;viewport&#x27;</span>, <span class="attr">content</span>: <span class="string">&#x27;width=device-width, initial-scale=1&#x27;</span> &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        hid: <span class="string">&#x27;description&#x27;</span>,</span><br><span class="line">        name: <span class="string">&#x27;description&#x27;</span>,</span><br><span class="line">        content: <span class="string">&#x27;關於我們的頁面&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&#x27;format-detection&#x27;</span>, <span class="attr">content</span>: <span class="string">&#x27;telephone=no&#x27;</span> &#125;,</span><br><span class="line">    ],</span><br><span class="line">    link: [&#123; <span class="attr">rel</span>: <span class="string">&#x27;icon&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;image/x-icon&#x27;</span>, <span class="attr">href</span>: <span class="string">&#x27;/favicon.ico&#x27;</span> &#125;],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<br>
-如果要利用 data 的資料，改變 head 的內容，可以把 head 變成函式的方式 return
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    title: <span class="string">&quot;data的關於我們&quot;</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="function"><span class="title">head</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    title: <span class="built_in">this</span>.title,</span><br><span class="line">    htmlAttrs: &#123;</span><br><span class="line">      lang: <span class="string">&quot;en&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    meta: [</span><br><span class="line">      &#123; <span class="attr">charset</span>: <span class="string">&quot;utf-8&quot;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&quot;viewport&quot;</span>, <span class="attr">content</span>: <span class="string">&quot;width=device-width, initial-scale=1&quot;</span> &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        hid: <span class="string">&quot;description&quot;</span>,</span><br><span class="line">        name: <span class="string">&quot;description&quot;</span>,</span><br><span class="line">        content: <span class="string">&quot;關於我們的頁面&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&quot;format-detection&quot;</span>, <span class="attr">content</span>: <span class="string">&quot;telephone=no&quot;</span> &#125;,</span><br><span class="line">    ],</span><br><span class="line">    link: [&#123; <span class="attr">rel</span>: <span class="string">&quot;icon&quot;</span>, <span class="attr">type</span>: <span class="string">&quot;image/x-icon&quot;</span>, <span class="attr">href</span>: <span class="string">&quot;/favicon.ico&quot;</span> &#125;],</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<h1 id="SSR-設定"><a href="#SSR-設定" class="headerlink" title="SSR 設定"></a>SSR 設定</h1><p>Nuxt 的 SSR 預設是開啟，實際上 Nuxt 也可以開發 SPA 模式，打包時就只會輸出 Client 端的部分</p>
-<p>nuxt.config.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  ssr: <span class="literal">false</span>, <span class="comment">// 關閉 SSR，使用 SPA 開發模式</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Vue-Nuxt</category>
-      </categories>
-      <tags>
-        <tag>Nuxt</tag>
-        <tag>SEO</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在 Nuxt 管理 vuex 狀態</title>
     <url>/2021/10/16/vue-nuxt-vuex/</url>
     <content><![CDATA[<p><img src="https://imgur.com/mRrJH3R.jpg" alt="Imgur"></p>
@@ -1932,35 +1899,30 @@ package.json 設定 --mode staging
       </tags>
   </entry>
   <entry>
-    <title>Vue3 setup、CSS新寫法</title>
-    <url>/2021/03/21/vue-other-issues/</url>
-    <content><![CDATA[<p>Vue3 還有很多新功能官方正在進行中，目前有幾個差不多定案的新功能</p>
+    <title>Nuxt 的 SEO 設定</title>
+    <url>/2021/09/12/vue-nuxt-seo/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/s07cfNA.jpg" alt="Imgur"></p>
+<p>做好 SEO，可以增強網站的自然搜尋排名，不同的頁面通常會有不同的 title、關鍵字，Nuxt 可以幫我們做到這件事。</p>
+<h1 id="Global-Settings"><a href="#Global-Settings" class="headerlink" title="Global Settings"></a>Global Settings</h1><p>設定整個網站的 SEO，在這裡你可以定義所有的 meta</p>
 <a id="more"></a>
 
-<h1 id="Script-Setup"><a href="#Script-Setup" class="headerlink" title="Script Setup"></a>Script Setup</h1><p><b>原本寫法</b></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      name,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>nuxt.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">head: &#123;</span><br><span class="line">  title: <span class="string">&quot;一文前端大小事&quot;</span>,</span><br><span class="line">  htmlAttrs: &#123;</span><br><span class="line">    lang: <span class="string">&quot;en&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  meta: [</span><br><span class="line">    &#123; <span class="attr">charset</span>: <span class="string">&quot;utf-8&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;viewport&quot;</span>, <span class="attr">content</span>: <span class="string">&quot;width=device-width, initial-scale=1&quot;</span> &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      hid: <span class="string">&quot;description&quot;</span>,</span><br><span class="line">      name: <span class="string">&quot;description&quot;</span>,</span><br><span class="line">      content: <span class="string">&quot;一起鑽研前端技術吧^^&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;format-detection&quot;</span>, <span class="attr">content</span>: <span class="string">&quot;telephone=no&quot;</span> &#125;</span><br><span class="line">  ],</span><br><span class="line">  link: [&#123; <span class="attr">rel</span>: <span class="string">&quot;icon&quot;</span>, <span class="attr">type</span>: <span class="string">&quot;image/x-icon&quot;</span>, <span class="attr">href</span>: <span class="string">&quot;/favicon.ico&quot;</span> &#125;]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h1 id="Local-Settings"><a href="#Local-Settings" class="headerlink" title="Local Settings"></a>Local Settings</h1><p>要設定每頁的 SEO 也很簡單，只要把 head 搬去要設定的頁面就可以了<br>pages/about.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  head: &#123;</span><br><span class="line">    title: <span class="string">&#x27;關於我們&#x27;</span>,</span><br><span class="line">    htmlAttrs: &#123;</span><br><span class="line">      lang: <span class="string">&#x27;en&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    meta: [</span><br><span class="line">      &#123; <span class="attr">charset</span>: <span class="string">&#x27;utf-8&#x27;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&#x27;viewport&#x27;</span>, <span class="attr">content</span>: <span class="string">&#x27;width=device-width, initial-scale=1&#x27;</span> &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        hid: <span class="string">&#x27;description&#x27;</span>,</span><br><span class="line">        name: <span class="string">&#x27;description&#x27;</span>,</span><br><span class="line">        content: <span class="string">&#x27;關於我們的頁面&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&#x27;format-detection&#x27;</span>, <span class="attr">content</span>: <span class="string">&#x27;telephone=no&#x27;</span> &#125;,</span><br><span class="line">    ],</span><br><span class="line">    link: [&#123; <span class="attr">rel</span>: <span class="string">&#x27;icon&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;image/x-icon&#x27;</span>, <span class="attr">href</span>: <span class="string">&#x27;/favicon.ico&#x27;</span> &#125;],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <br>
+如果要利用 data 的資料，改變 head 的內容，可以把 head 變成函式的方式 return
 
-<p><b>新寫法</b><br>直接將 Setup 寫在 script 上，不用 export、return<br>如果沒有在 template 寫變數，就自動不會 return 出來</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123;ref&#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<br>
-
-<h1 id="變數綁定-CSS"><a href="#變數綁定-CSS" class="headerlink" title="變數綁定 CSS"></a>變數綁定 CSS</h1><p>用 v-bind 綁定 JS 變數，可以直接變換屬性的值</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; ref &#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">const colorBlue = ref(<span class="string">&quot;#000FFF&quot;</span>);</span><br><span class="line">const changeColor = () =&gt; &#123;</span><br><span class="line">  colorBlue.value = <span class="string">&quot;#FF0000&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;changeColor&quot;</span>&gt;</span>changeColor<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">v-bind</span>(colorBlue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
-]]></content>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    title: <span class="string">&quot;data的關於我們&quot;</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="function"><span class="title">head</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    title: <span class="built_in">this</span>.title,</span><br><span class="line">    htmlAttrs: &#123;</span><br><span class="line">      lang: <span class="string">&quot;en&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    meta: [</span><br><span class="line">      &#123; <span class="attr">charset</span>: <span class="string">&quot;utf-8&quot;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&quot;viewport&quot;</span>, <span class="attr">content</span>: <span class="string">&quot;width=device-width, initial-scale=1&quot;</span> &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        hid: <span class="string">&quot;description&quot;</span>,</span><br><span class="line">        name: <span class="string">&quot;description&quot;</span>,</span><br><span class="line">        content: <span class="string">&quot;關於我們的頁面&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&quot;format-detection&quot;</span>, <span class="attr">content</span>: <span class="string">&quot;telephone=no&quot;</span> &#125;,</span><br><span class="line">    ],</span><br><span class="line">    link: [&#123; <span class="attr">rel</span>: <span class="string">&quot;icon&quot;</span>, <span class="attr">type</span>: <span class="string">&quot;image/x-icon&quot;</span>, <span class="attr">href</span>: <span class="string">&quot;/favicon.ico&quot;</span> &#125;],</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h1 id="SSR-設定"><a href="#SSR-設定" class="headerlink" title="SSR 設定"></a>SSR 設定</h1><p>Nuxt 的 SSR 預設是開啟，實際上 Nuxt 也可以開發 SPA 模式，打包時就只會輸出 Client 端的部分</p>
+<p>nuxt.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  ssr: <span class="literal">false</span>, <span class="comment">// 關閉 SSR，使用 SPA 開發模式</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>Vue3</category>
+        <category>Vue-Nuxt</category>
       </categories>
       <tags>
-        <tag>Vue.js</tag>
-        <tag>javascript</tag>
-        <tag>Composition API</tag>
+        <tag>Nuxt</tag>
+        <tag>SEO</tag>
       </tags>
   </entry>
   <entry>
@@ -2463,6 +2425,38 @@ MenuBtn.vue
       <tags>
         <tag>HTTPS</tag>
         <tag>HTTP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue3 setup、CSS新寫法</title>
+    <url>/2021/03/21/vue-other-issues/</url>
+    <content><![CDATA[<p>Vue3 還有很多新功能官方正在進行中，目前有幾個差不多定案的新功能</p>
+<a id="more"></a>
+
+<h1 id="Script-Setup"><a href="#Script-Setup" class="headerlink" title="Script Setup"></a>Script Setup</h1><p><b>原本寫法</b></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      name,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<p><b>新寫法</b><br>直接將 Setup 寫在 script 上，不用 export、return<br>如果沒有在 template 寫變數，就自動不會 return 出來</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123;ref&#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="變數綁定-CSS"><a href="#變數綁定-CSS" class="headerlink" title="變數綁定 CSS"></a>變數綁定 CSS</h1><p>用 v-bind 綁定 JS 變數，可以直接變換屬性的值</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; ref &#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">const colorBlue = ref(<span class="string">&quot;#000FFF&quot;</span>);</span><br><span class="line">const changeColor = () =&gt; &#123;</span><br><span class="line">  colorBlue.value = <span class="string">&quot;#FF0000&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;changeColor&quot;</span>&gt;</span>changeColor<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">v-bind</span>(colorBlue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+]]></content>
+      <categories>
+        <category>Vue3</category>
+      </categories>
+      <tags>
+        <tag>Vue.js</tag>
+        <tag>javascript</tag>
+        <tag>Composition API</tag>
       </tags>
   </entry>
 </search>
