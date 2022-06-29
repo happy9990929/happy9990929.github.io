@@ -48,7 +48,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://imgur.com/PWYji3a.jpg">
 <meta property="article:published_time" content="2022-06-28T02:28:54.000Z">
-<meta property="article:modified_time" content="2022-06-28T03:29:31.266Z">
+<meta property="article:modified_time" content="2022-06-29T12:57:08.495Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="React">
 <meta property="article:tag" content="JSX">
@@ -235,10 +235,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2022-06-28 10:28:54 / 修改時間：11:29:31" itemprop="dateCreated datePublished" datetime="2022-06-28T10:28:54+08:00">2022-06-28</time>
+              <time title="創建時間：2022-06-28 10:28:54" itemprop="dateCreated datePublished" datetime="2022-06-28T10:28:54+08:00">2022-06-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-06-29 20:57:08" itemprop="dateModified" datetime="2022-06-29T20:57:08+08:00">2022-06-29</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -289,7 +295,7 @@
 <p>啟動</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run start</span><br></pre></td></tr></table></figure>
 <p><br/><br/></p>
-<h1 id="JSX語法-用-JS-寫-HTML-語法"><a href="#JSX語法-用-JS-寫-HTML-語法" class="headerlink" title="JSX語法: 用 JS 寫 HTML 語法"></a>JSX語法: 用 JS 寫 HTML 語法</h1><p>React定義的HTML模板，跟HTML幾乎相同，只有幾個點不太一樣</p>
+<h1 id="JSX語法-用-JS-寫-HTML-語法"><a href="#JSX語法-用-JS-寫-HTML-語法" class="headerlink" title="JSX語法: 用 JS 寫 HTML 語法"></a>JSX語法: 用 JS 寫 HTML 語法</h1><p>React 定義的 HTML 模板，跟 HTML 幾乎相同，只有幾個點不太一樣</p>
 <p><strong>must close 每個標籤需close</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&lt;/p&gt;</span><br><span class="line">&lt;img src=<span class="string">&quot;&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
 <br/>
@@ -298,7 +304,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className /&gt;</span><br></pre></td></tr></table></figure>
 <br/>
 
-<p><strong>className/htmlFor</strong><br>class、for因與JS語法撞名<br>css的class需叫className<br>html的for需叫htmlFor</p>
+<p><strong>className / htmlFor</strong><br>class、for 因與 JS 語法撞名<br>css 的 class 需叫 className<br>html 的 for 需叫 htmlFor</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className=<span class="string">&#x27;red&#x27;</span> /&gt;</span><br><span class="line">&lt;label htmlFor=<span class="string">&#x27;check&#x27;</span>&gt;</span><br><span class="line">&lt;input type=<span class="string">&#x27;checkbox&#x27;</span> id=<span class="string">&#x27;check&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
 <br/>
 
@@ -309,12 +315,12 @@
 <p><strong>可以用 { } 括號塞值或表達式</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div onClick=&#123; <span class="built_in">this</span>.onClick &#125;&gt;</span><br></pre></td></tr></table></figure>
 <p><br/><br/></p>
-<h1 id="建立組件"><a href="#建立組件" class="headerlink" title="建立組件"></a>建立組件</h1><p>Item.js</p>
+<h1 id="建立組件"><a href="#建立組件" class="headerlink" title="建立組件"></a>建立組件</h1><p>src/Item.js</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Item</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;li&gt;<span class="number">123</span>&lt;/li&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Item;</span><br></pre></td></tr></table></figure>
-<p>List.js</p>
+<p>src/List.js</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">&quot;./Item&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">List</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span>(</span><br><span class="line">    &lt;ol&gt;</span><br><span class="line">      &lt;Item/&gt;</span><br><span class="line">    &lt;/ol&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> List;</span><br></pre></td></tr></table></figure>
 <p><br/><br/></p>
-<h1 id="渲染組件到畫面"><a href="#渲染組件到畫面" class="headerlink" title="渲染組件到畫面"></a>渲染組件到畫面</h1><p>React18 使用 createRoot</p>
+<h1 id="渲染組件到畫面"><a href="#渲染組件到畫面" class="headerlink" title="渲染組件到畫面"></a>渲染組件到畫面</h1><p>React18 使用 createRoot<br>src/index.js</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createRoot &#125; <span class="keyword">from</span> <span class="string">&#x27;react-dom/client&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> List <span class="keyword">from</span> <span class="string">&quot;./List&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> container = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> root = createRoot(container);</span><br><span class="line">root.render(<span class="xml"><span class="tag">&lt;<span class="name">List</span> /&gt;</span></span>);</span><br></pre></td></tr></table></figure>
 <br/>
 
@@ -353,7 +359,10 @@
     <a href="/2022/06/27/js-math/" rel="prev" title="Javascript-Math運算">
       <i class="fa fa-chevron-left"></i> Javascript-Math運算
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/06/29/react-basic-component/" rel="next" title="React基本組件介紹">
+      React基本組件介紹 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -449,7 +458,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -462,7 +471,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">133</span>
+        <span class="site-state-item-count">134</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
