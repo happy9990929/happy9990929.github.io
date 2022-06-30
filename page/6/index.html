@@ -39,15 +39,15 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前端工程師的生活 vue &#x2F; vuex &#x2F; nuxt &#x2F; javascript &#x2F; CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+  <meta name="description" content="前端工程師的生活 Vue &#x2F; Nuxt &#x2F; Javascript &#x2F; React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
 <meta property="og:type" content="website">
 <meta property="og:title" content="一文前端大小事">
 <meta property="og:url" content="https://happy9990929.github.io/page/6/index.html">
 <meta property="og:site_name" content="一文前端大小事">
-<meta property="og:description" content="前端工程師的生活 vue &#x2F; vuex &#x2F; nuxt &#x2F; javascript &#x2F; CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+<meta property="og:description" content="前端工程師的生活 Vue &#x2F; Nuxt &#x2F; Javascript &#x2F; React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:author" content="Yi Wen Wang">
-<meta property="article:tag" content="Vue.js, Javascript, JS, Vue3, Nuxt">
+<meta property="article:tag" content="Vue, Javascript, JS, Vue3, Nuxt, React">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://happy9990929.github.io/page/6/">
@@ -205,12 +205,121 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/14/transitions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端大小事">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/14/transitions/" class="post-title-link" itemprop="url">使用 Vue transition 製作動畫過渡組件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-03-14 16:12:22" itemprop="dateCreated datePublished" datetime="2021-03-14T16:12:22+08:00">2021-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-04-26 20:34:55" itemprop="dateModified" datetime="2022-04-26T20:34:55+08:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/03/14/transitions/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/14/transitions/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Enter-amp-Leave-Transitions"><a href="#Enter-amp-Leave-Transitions" class="headerlink" title="Enter &amp; Leave Transitions"></a>Enter &amp; Leave Transitions</h1><p>Vue.js 將過場漸變的效果包裝成一個獨立的 transition 元件， 再由開發者自行定義元素的進場 (Enter) 、退場 (Leave) 以及動畫過程漸變 (Transitions) 的樣式。動畫執行完後才會把 DOM 元素拔掉</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/14/transitions/" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/14/components-emit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -319,7 +428,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -431,7 +540,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -541,7 +650,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -650,7 +759,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -759,7 +868,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -868,7 +977,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -978,7 +1087,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1088,7 +1197,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
       <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1252,14 +1361,14 @@
     <img class="site-author-image" itemprop="image" alt="Yi Wen Wang"
       src="https://i.imgur.com/pvToiN1.jpg">
   <p class="site-author-name" itemprop="name">Yi Wen Wang</p>
-  <div class="site-description" itemprop="description">前端工程師的生活 vue / vuex / nuxt / javascript / CSS，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+  <div class="site-description" itemprop="description">前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -1272,7 +1381,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">134</span>
+        <span class="site-state-item-count">146</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
