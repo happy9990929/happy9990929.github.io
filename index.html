@@ -205,6 +205,120 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/07/01/react-render-list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端大小事">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/01/react-render-list/" class="post-title-link" itemprop="url">React列表渲染-將陣列、物件渲染成元素</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-07-01 13:35:44 / 修改時間：13:48:32" itemprop="dateCreated datePublished" datetime="2022-07-01T13:35:44+08:00">2022-07-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/07/01/react-render-list/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/07/01/react-render-list/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://imgur.com/PWYji3a.jpg" alt="React"><br>在 Vue 框架渲染列表時會有自己的語法 v-for，不過 React 沒有自定義的語法，而是直接使用 JS 的語法</p>
+<h1 id="陣列渲染成元素"><a href="#陣列渲染成元素" class="headerlink" title="陣列渲染成元素"></a>陣列渲染成元素</h1><p>使用 JS 的 map 把每個 item 渲染出來，組件 Item 需要被代入 key 屬性，</p>
+<p><strong>key 必須是唯一值</strong>，如陣列改變，才不會再被重新渲染，影響效能</p>
+<p>key 如果為 index 也會被重新渲染，只是不會跳出警告，除非沒有唯一值才用 index，或是請後端加上唯一值</p>
+<p>List.js</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">&quot;./Item&quot;</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> steps = [</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&#x27;hello&#x27;</span>&#125;,</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&#x27;world&#x27;</span>&#125;,</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&#x27;hello world&#x27;</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &#123;steps.map(<span class="function">(<span class="params">item, idx</span>) =&gt;</span></span><br><span class="line">          (<span class="xml"><span class="tag">&lt;<span class="name">Item</span> <span class="attr">key</span>=<span class="string">&#123;item.text&#125;</span>&gt;</span>&#123; item.text &#125;(&#123; idx &#125;)<span class="tag">&lt;/<span class="name">Item</span>&gt;</span></span>)</span><br><span class="line">        )&#125;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> List;</span><br></pre></td></tr></table></figure>
+<p>Item.js</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Item</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;li&gt;&#123;<span class="built_in">this</span>.props.children&#125;&lt;/li&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Item;</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<h1 id="物件渲染成元素"><a href="#物件渲染成元素" class="headerlink" title="物件渲染成元素"></a>物件渲染成元素</h1><p>物件使用 <code>Object.keys</code> 先把物件屬性變成陣列，再使用 map 渲染</p>
+<p><strong>物件渲染出來的結果順序不一定相同，如果要照資料排序須將資料改為陣列</strong></p>
+<p>List.js</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">&quot;./Item&quot;</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> dog = &#123;</span><br><span class="line">      name: <span class="string">&#x27;bobee&#x27;</span>,</span><br><span class="line">      age: <span class="number">12</span>,</span><br><span class="line">      height: <span class="number">64</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &#123; <span class="built_in">Object</span>.keys(dog).map(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> value = dog[key];</span><br><span class="line">            <span class="keyword">return</span> (</span><br><span class="line">              &lt;Item key=&#123;value&#125;&gt;&#123;key&#125;: &#123;value&#125;&lt;/Item&gt;</span><br><span class="line">            )</span><br><span class="line">        &#125;) &#125;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> List;</span><br></pre></td></tr></table></figure>
+          <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/06/30/react-component/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1165,120 +1279,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/03/29/vue-vee-validate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
-      <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文前端大小事">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/29/vue-vee-validate/" class="post-title-link" itemprop="url">vee-validate 4.0 教學，表單驗證套件應用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2022-03-29 12:08:14" itemprop="dateCreated datePublished" datetime="2022-03-29T12:08:14+08:00">2022-03-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2022-04-24 22:54:55" itemprop="dateModified" datetime="2022-04-24T22:54:55+08:00">2022-04-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2022/03/29/vue-vee-validate/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/03/29/vue-vee-validate/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://imgur.com/0WQXAft.png" alt="vee-validate"></p>
-<p>填寫表單時，需要驗證是否必填(require)、或是格式是否正確，自己手刻很複雜，可能也會不夠全面，用套件來做驗證是最省事又快速的。在 Vue2 框架時，我偏好使用 vee-validate 來做驗證，因為它簡單又好用，但到了 Vue3，veeValidate4 怎麼好像是另一個世界惹😱，vee-validate4 該怎麼使用呢</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/03/29/vue-vee-validate/" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-  <!-- 文章內廣告 -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
-  crossorigin="anonymous"></script>
-  <ins class="adsbygoogle"
-      style="display:block; text-align:center; margin: 100px auto;"
-      data-ad-layout="in-article"
-      data-ad-format="fluid"
-      data-ad-client="ca-pub-3584202217117217"
-      data-ad-slot="6664330716"></ins>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
   </nav>
 
 
@@ -1346,7 +1350,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
