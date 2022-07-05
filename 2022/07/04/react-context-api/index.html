@@ -49,7 +49,7 @@
 <meta property="og:image" content="https://imgur.com/PWYji3a.jpg">
 <meta property="og:image" content="https://imgur.com/nvRnhNa.jpg">
 <meta property="article:published_time" content="2022-07-04T09:55:38.000Z">
-<meta property="article:modified_time" content="2022-07-04T10:04:23.637Z">
+<meta property="article:modified_time" content="2022-07-05T07:01:27.982Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="React Context">
 <meta property="article:tag" content="Context API">
@@ -236,10 +236,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2022-07-04 17:55:38 / 修改時間：18:04:23" itemprop="dateCreated datePublished" datetime="2022-07-04T17:55:38+08:00">2022-07-04</time>
+              <time title="創建時間：2022-07-04 17:55:38" itemprop="dateCreated datePublished" datetime="2022-07-04T17:55:38+08:00">2022-07-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-07-05 15:01:27" itemprop="dateModified" datetime="2022-07-05T15:01:27+08:00">2022-07-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -296,7 +302,7 @@
 <p>/src/context/order.js</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createContext &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> &#123; Provider, Consumer &#125; = createContext(&#123;</span><br><span class="line">  orders: [],</span><br><span class="line">  addOrder: <span class="function">() =&gt;</span> &#123;&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p><br/><br/></p>
-<h1 id="Provider-傳入-context"><a href="#Provider-傳入-context" class="headerlink" title="Provider 傳入 context"></a>Provider 傳入 context</h1><p>在外層設定值與函式，傳入 context</p>
+<h1 id="設定-Provider，contextValue-傳入-context"><a href="#設定-Provider，contextValue-傳入-context" class="headerlink" title="設定 Provider，contextValue 傳入 context"></a>設定 Provider，contextValue 傳入 context</h1><p>在外層設定值與函式，傳入 context</p>
 <p>在需使用到的組件外，包一層 Provider，傳入需要的 value，使底下的組件都可以使用 value 裡的值</p>
 <p>App.js</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">&quot;./Header&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ProductList <span class="keyword">from</span> <span class="string">&quot;./ProductList&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">&quot;./context/order.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    orders: []</span><br><span class="line">  &#125;</span><br><span class="line">  addOrder = <span class="function"><span class="params">order</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      orders: [...this.state.orders, order]</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; orders &#125; = <span class="built_in">this</span>.state;</span><br><span class="line">    <span class="keyword">const</span> contextValue = &#123;</span><br><span class="line">      orders,</span><br><span class="line">      addOrder: <span class="built_in">this</span>.addOrder</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;Provider value=&#123;contextValue&#125;&gt;</span><br><span class="line">          &lt;Header /&gt;</span><br><span class="line">          &lt;ProductList /&gt;</span><br><span class="line">        &lt;/Provider&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
@@ -313,6 +319,8 @@
 
 <p>Product.js</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Consumer &#125; <span class="keyword">from</span> <span class="string">&quot;./context/order.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Product = <span class="function">(<span class="params">&#123; id, name &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;li&gt;</span><br><span class="line">      &lt;label&gt;&#123;name&#125;&lt;/label&gt;</span><br><span class="line">      &lt;Consumer&gt;</span><br><span class="line">        &#123;</span><br><span class="line">          value =&gt; (</span><br><span class="line">            &lt;button onClick=&#123;<span class="function">() =&gt;</span> &#123;value.addOrder(id)&#125;&#125;&gt;+&lt;/button&gt;</span><br><span class="line">          )</span><br><span class="line">        &#125;</span><br><span class="line">      &lt;/Consumer&gt;</span><br><span class="line">    &lt;/li&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Product;</span><br></pre></td></tr></table></figure>
+<p><br/><br/><br>React Hooks 的 useContext 可以不使用 Consumer，可參考 <a href="https://happy9990929.github.io/2022/07/05/react-hooks">React 常用 Hooks</a></p>
+
         <div>
   <script type="text/javascript">
     document.write(
@@ -343,7 +351,10 @@
     <a href="/2022/07/04/react-portal/" rel="prev" title="React Portal 傳送組件到指定元素">
       <i class="fa fa-chevron-left"></i> React Portal 傳送組件到指定元素
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/07/05/react-hooks/" rel="next" title="React常用Hooks">
+      React常用Hooks <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -423,7 +434,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-Context"><span class="nav-number">1.</span> <span class="nav-text">設定 Context</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Provider-%E5%82%B3%E5%85%A5-context"><span class="nav-number">2.</span> <span class="nav-text">Provider 傳入 context</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Consumer-%E4%BD%BF%E7%94%A8-context"><span class="nav-number">3.</span> <span class="nav-text">Consumer 使用 context</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-Context"><span class="nav-number">1.</span> <span class="nav-text">設定 Context</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-Provider%EF%BC%8CcontextValue-%E5%82%B3%E5%85%A5-context"><span class="nav-number">2.</span> <span class="nav-text">設定 Provider，contextValue 傳入 context</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Consumer-%E4%BD%BF%E7%94%A8-context"><span class="nav-number">3.</span> <span class="nav-text">Consumer 使用 context</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -439,7 +450,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
