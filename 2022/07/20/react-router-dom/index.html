@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="此篇版本為 react-router-dom 6.3.0react-router-dom 可以設定 react 的網站路由，是以 react-router 為基底，所以新增後會自動引入 react-router">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React-router-dom 教學">
+<meta property="og:url" content="https://happy9990929.github.io/2022/07/20/react-router-dom/index.html">
+<meta property="og:site_name" content="一文前端大小事">
+<meta property="og:description" content="此篇版本為 react-router-dom 6.3.0react-router-dom 可以設定 react 的網站路由，是以 react-router 為基底，所以新增後會自動引入 react-router">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/PWYji3a.jpg">
+<meta property="article:published_time" content="2022-07-20T06:03:13.000Z">
+<meta property="article:modified_time" content="2022-07-20T06:25:14.498Z">
+<meta property="article:author" content="Yi Wen Wang">
+<meta property="article:tag" content="react-router-dom">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/PWYji3a.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/07/20/react-router-dom/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>React-router-dom 教學 | 一文前端大小事</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">一文前端大小事</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一起鑽研前端技術吧:)</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/07/20/react-router-dom/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Yi Wen Wang">
+      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一文前端大小事">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          React-router-dom 教學
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-07-20 14:03:13 / 修改時間：14:25:14" itemprop="dateCreated datePublished" datetime="2022-07-20T14:03:13+08:00">2022-07-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/07/20/react-router-dom/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/07/20/react-router-dom/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/PWYji3a.jpg" alt="React"></p>
+<p>此篇版本為 react-router-dom 6.3.0<br>react-router-dom 可以設定 react 的網站路由，是以 react-router 為基底，所以新增後會自動引入 react-router</p>
+<a id="more"></a>
+
+<h1 id="安裝-react-router-dom"><a href="#安裝-react-router-dom" class="headerlink" title="安裝 react-router-dom"></a>安裝 react-router-dom</h1><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i react-router-dom</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<h1 id="路由設定"><a href="#路由設定" class="headerlink" title="路由設定"></a>路由設定</h1><p>在 index.js 設定整個網站的路由</p>
+<h2 id="BrowserRouter"><a href="#BrowserRouter" class="headerlink" title="BrowserRouter"></a>BrowserRouter</h2><p>BrowserRouter 包在所有組件外層，確保整個網站可以使用 router</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">&quot;react-dom/client&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserRouter &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&quot;./App&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> root = ReactDOM.createRoot(</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&quot;root&quot;</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">root.render(</span><br><span class="line">  &lt;BrowserRouter&gt;</span><br><span class="line">    &lt;App /&gt;</span><br><span class="line">  &lt;/BrowserRouter&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>BrowserRouter 跟 HashRouter 的差別<br>HashRouter：網址會帶 <code>#</code> 字號，純前端使用，換 url 時不會發送request<br>BrowserRouter： 網址沒有 <code>#</code> 字號較美觀，需有後端設定，換 url 時會發送request<br><br/></p>
+<h2 id="Routers、Router-組件"><a href="#Routers、Router-組件" class="headerlink" title="Routers、Router 組件"></a>Routers、Router 組件</h2><p>在不同的 url 渲染不同的組件</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">&quot;react-dom/client&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  BrowserRouter,</span><br><span class="line">  Routes,</span><br><span class="line">  Route,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&quot;./App&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Page1 <span class="keyword">from</span> <span class="string">&quot;./routes/Page1&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Page2 <span class="keyword">from</span> <span class="string">&quot;./routes/Page2&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> root = ReactDOM.createRoot(</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&quot;root&quot;</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">root.render(</span><br><span class="line">  &lt;BrowserRouter&gt;</span><br><span class="line">    &lt;Routes&gt;</span><br><span class="line">      &lt;Route path=<span class="string">&quot;/&quot;</span> element=&#123;<span class="xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span>&#125; /&gt;</span><br><span class="line">      &lt;Route path=<span class="string">&quot;page1&quot;</span> element=&#123;<span class="xml"><span class="tag">&lt;<span class="name">Page1</span> /&gt;</span></span>&#125; /&gt;</span><br><span class="line">      &lt;Route path=<span class="string">&quot;page2&quot;</span> element=&#123;<span class="xml"><span class="tag">&lt;<span class="name">Page2</span> /&gt;</span></span>&#125; /&gt;</span><br><span class="line">    &lt;/Routes&gt;</span><br><span class="line">  &lt;/BrowserRouter&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><code>path</code>：路徑<br><code>element</code>：要渲染的组件<br><br/></p>
+<h2 id="全匹配路由"><a href="#全匹配路由" class="headerlink" title="全匹配路由"></a><strong><strong>全匹配路由</strong></strong></h2><p>設定 Route <code>path=&quot;*&quot;</code> 在所有路由的最下方，當上面的路徑都沒有匹配到時，就會顯示此組件，可用於 404 找不到頁面</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;Routes&gt;</span><br><span class="line">  &lt;Route path=<span class="string">&quot;/foo&quot;</span> element=&#123;Foo&#125;&gt;</span><br><span class="line">    &lt;Route path=<span class="string">&quot;bar&quot;</span> element=&#123;Bar&#125;&gt;&lt;/Route&gt;</span><br><span class="line">    &lt;Route path=<span class="string">&quot;*&quot;</span> element=&#123;NotFound&#125;&gt;&lt;/Route&gt;</span><br><span class="line">  &lt;/Route&gt;</span><br><span class="line">&lt;/Routes&gt;</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<h1 id="路由跳轉"><a href="#路由跳轉" class="headerlink" title="路由跳轉"></a>路由跳轉</h1><h2 id="Link-組件"><a href="#Link-組件" class="headerlink" title="Link 組件"></a>Link 組件</h2><p>指定連結路徑，跳轉頁面 url</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Link &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br><span class="line"></span><br><span class="line">&lt;Link to=<span class="string">&quot;index&quot;</span>&gt;index&lt;/Link&gt;;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<h2 id="NavLink-組件"><a href="#NavLink-組件" class="headerlink" title="NavLink 組件"></a>NavLink 組件</h2><p>NavLink 跟 Link 用法相同，差別只在於 NavLink 可以判斷 to 的 url 是否為當前路徑，可用於設定 active 的樣式</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; NavLink &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">   &lt;NavLink style=&#123;<span class="function">(<span class="params">&#123; isActive &#125;</span>) =&gt;</span> (&#123; <span class="attr">color</span>: isActive? <span class="string">&quot;red&quot;</span>: <span class="string">&quot;&quot;</span> &#125;)&#125;&gt;style&lt;/NavLink&gt;</span><br><span class="line">   &lt;NavLink className=&#123;<span class="function">(<span class="params">&#123; isActive &#125;</span>) =&gt;</span> isActive ? <span class="string">&quot;red&quot;</span> : <span class="string">&quot;blue&quot;</span>&#125;&gt;className&lt;/NavLink&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<h2 id="useNavigate"><a href="#useNavigate" class="headerlink" title="useNavigate"></a>useNavigate</h2><p>可直接傳入要跳轉的 url，可傳入相對路徑，-1 為回上一層</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useNavigate &#125; <span class="keyword">from</span> <span class="string">&#x27;react-router-dom&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> navigate= useNavigate();</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="comment">// 前路徑 /a；    當前路徑 /a/a1</span></span><br><span class="line">    &lt;div onClick=&#123;<span class="function">() =&gt;</span> navigate(<span class="string">&#x27;/b&#x27;</span>)&#125;&gt;跳轉到/b&lt;/div&gt;</span><br><span class="line">    &lt;div onClick=&#123;<span class="function">() =&gt;</span> navigate(<span class="string">&#x27;a11&#x27;</span>)&#125;&gt;跳轉到/a/a1/a11&lt;/div&gt;</span><br><span class="line">    &lt;div onClick=&#123;<span class="function">() =&gt;</span> navigate(<span class="string">&#x27;../a2&#x27;</span>)&#125;&gt;跳轉到/a/a2&lt;/div&gt;</span><br><span class="line">    &lt;div onClick=&#123;<span class="function">() =&gt;</span> navigate(-<span class="number">1</span>)&#125;&gt;跳轉到/a&lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<h1 id="嵌套路由-Nested-Routes"><a href="#嵌套路由-Nested-Routes" class="headerlink" title="嵌套路由 Nested Routes"></a>嵌套路由 <strong><strong>Nested Routes</strong></strong></h1><p>如要用 App 當作基底的 layout 有兩個步驟</p>
+<ol>
+<li><p>設定路由在 App 的 Router 底下</p>
+</li>
+<li><p>加入 Outlay，Outlay 會顯示需變更切換的組件</p>
+<br/>
+
+</li>
+</ol>
+<p><strong>設定路由</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;BrowserRouter&gt;</span><br><span class="line">  &lt;Routes&gt;</span><br><span class="line">    &lt;Route path=<span class="string">&quot;/&quot;</span> element=&#123;<span class="xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span>&#125;&gt;</span><br><span class="line">      &lt;Route path=<span class="string">&quot;page1&quot;</span> element=&#123;<span class="xml"><span class="tag">&lt;<span class="name">Page1</span> /&gt;</span></span>&#125; /&gt;</span><br><span class="line">      &lt;Route path=<span class="string">&quot;page2&quot;</span> element=&#123;<span class="xml"><span class="tag">&lt;<span class="name">Page2</span> /&gt;</span></span>&#125; /&gt;</span><br><span class="line">    &lt;/Route&gt;</span><br><span class="line">  &lt;/Routes&gt;</span><br><span class="line">&lt;/BrowserRouter&gt;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p><strong>並在 App.js ( layout 組件) 的地方加入 Outlay</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Outlet, Link &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;nav&gt;</span><br><span class="line">        &lt;Link to=<span class="string">&quot;/page1&quot;</span>&gt;Page1&lt;/Link&gt; |&#123;<span class="string">&quot; &quot;</span>&#125;</span><br><span class="line">        &lt;Link to=<span class="string">&quot;/page2&quot;</span>&gt;Page2&lt;/Link&gt;</span><br><span class="line">      &lt;/nav&gt;</span><br><span class="line">      &lt;Outlet/&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<h2 id="默認路由-index-Routes"><a href="#默認路由-index-Routes" class="headerlink" title="默認路由 index Routes"></a>默認路由 index Routes</h2><p>如為嵌套路由時，可設定預設要顯示的組件，當 url 為 ‘/about’ 時，Outlet 會顯示 Default 組件</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;Routes&gt;</span><br><span class="line">  &lt;Route path=<span class="string">&quot;/about&quot;</span> element=&#123;About&#125;&gt;</span><br><span class="line">    &lt;Route index element=&#123;Default&#125;&gt;&lt;/Route&gt;</span><br><span class="line">    &lt;Route path=<span class="string">&quot;contact&quot;</span> element=&#123;Contact&#125;&gt;&lt;/Route&gt;</span><br><span class="line">  &lt;/Route&gt;</span><br><span class="line">&lt;/Routes&gt;</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<h1 id="Params參數"><a href="#Params參數" class="headerlink" title="Params參數"></a>Params參數</h1><h2 id="useParams"><a href="#useParams" class="headerlink" title="useParams()"></a>useParams()</h2><p>當 router 是動態路由時，useParams 可以取得 url 的 params</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;BrowserRouter&gt;</span><br><span class="line">  &lt;Routes&gt;</span><br><span class="line">    &lt;Route path=<span class="string">&quot;/product/:id&quot;</span> element=&#123;<span class="xml"><span class="tag">&lt;<span class="name">Product</span>/&gt;</span></span>&#125; /&gt;</span><br><span class="line">  &lt;/Routes&gt;</span><br><span class="line">&lt;/BrowserRouter&gt;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useParams &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> params= useParams();</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;&#123;params.id&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<h2 id="useSearchParams"><a href="#useSearchParams" class="headerlink" title="useSearchParams()"></a>useSearchParams()</h2><p>可查找或設定 Query String 問號後面的 params，用法跟 <code>useState()</code> 一樣</p>
+<p>如當前路徑為 /product?id=12</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useSearchParams &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Product</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [searchParams, setSearchParams] = useSearchParams();</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(searchParams.get(<span class="string">&quot;id&quot;</span>)); <span class="comment">// 12</span></span><br><span class="line">  <span class="built_in">console</span>.log(searchParams.getAll(<span class="string">&quot;id&quot;</span>)); <span class="comment">// [12]</span></span><br><span class="line"></span><br><span class="line">  setSearchParams(&#123;</span><br><span class="line">    name: <span class="string">&quot;foo&quot;</span>,</span><br><span class="line">  &#125;); <span class="comment">// /product?name=foo</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>foo<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<h1 id="當前路由資訊"><a href="#當前路由資訊" class="headerlink" title="當前路由資訊"></a>當前路由資訊</h1><h2 id="useLocation"><a href="#useLocation" class="headerlink" title="useLocation"></a>useLocation</h2><p>獲取當前 url 的各種屬性，</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useLocation &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> location = useLocation();</span><br><span class="line"><span class="built_in">console</span>.log(location);</span><br></pre></td></tr></table></figure>
+<p>你可以得到以下資訊</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  pathname: <span class="string">&quot;/hello/world&quot;</span>,</span><br><span class="line">  search: <span class="string">&quot;?filter=123&quot;</span>,</span><br><span class="line">  hash: <span class="string">&quot;#menu&quot;</span>,</span><br><span class="line">  state: <span class="literal">null</span>,</span><br><span class="line">  key: <span class="string">&quot;12345&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>pathname：URL 路徑</p>
+<p>search：Query String Params</p>
+<p>hash：用於確定頁面滾動的具體位置</p>
+<p>state：對於 window.history.state 的包裝</p>
+<p>key：每個 Location 對象擁有一個唯一的 key，可以實現數據緩存</p>
+<p><ins class="adsbygoogle"
+     style="display:block; text-align:center; margin: 100px auto"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3584202217117217"
+     data-ad-slot="8536485431"></ins></p>
+<hr>
+<h3 id="參考文獻：react-router-dom使用指南（最新V6-0-1）、router-tutorial"><a href="#參考文獻：react-router-dom使用指南（最新V6-0-1）、router-tutorial" class="headerlink" title="參考文獻：react-router-dom使用指南（最新V6.0.1）、router-tutorial"></a>參考文獻：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/431389907">react-router-dom使用指南（最新V6.0.1）</a>、<a target="_blank" rel="noopener" href="https://github.com/remix-run/react-router/blob/main/docs/getting-started/tutorial.md">router-tutorial</a></h3>
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/react-router-dom/" rel="tag"># react-router-dom</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/19/computer-space-full/" rel="prev" title="C槽空間不足，容量爆滿，清理windows更新造成的多餘檔案">
+      <i class="fa fa-chevron-left"></i> C槽空間不足，容量爆滿，清理windows更新造成的多餘檔案
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-react-router-dom"><span class="nav-number">1.</span> <span class="nav-text">安裝 react-router-dom</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">路由設定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BrowserRouter"><span class="nav-number">2.1.</span> <span class="nav-text">BrowserRouter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Routers%E3%80%81Router-%E7%B5%84%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">Routers、Router 組件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%8C%B9%E9%85%8D%E8%B7%AF%E7%94%B1"><span class="nav-number">2.3.</span> <span class="nav-text">全匹配路由</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%89"><span class="nav-number">3.</span> <span class="nav-text">路由跳轉</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Link-%E7%B5%84%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">Link 組件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NavLink-%E7%B5%84%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">NavLink 組件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useNavigate"><span class="nav-number">3.3.</span> <span class="nav-text">useNavigate</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1-Nested-Routes"><span class="nav-number">4.</span> <span class="nav-text">嵌套路由 Nested Routes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AA%8D%E8%B7%AF%E7%94%B1-index-Routes"><span class="nav-number">4.1.</span> <span class="nav-text">默認路由 index Routes</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Params%E5%8F%83%E6%95%B8"><span class="nav-number">5.</span> <span class="nav-text">Params參數</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#useParams"><span class="nav-number">5.1.</span> <span class="nav-text">useParams()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useSearchParams"><span class="nav-number">5.2.</span> <span class="nav-text">useSearchParams()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%95%B6%E5%89%8D%E8%B7%AF%E7%94%B1%E8%B3%87%E8%A8%8A"><span class="nav-number">6.</span> <span class="nav-text">當前路由資訊</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#useLocation"><span class="nav-number">6.1.</span> <span class="nav-text">useLocation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%8D%BB%EF%BC%9Areact-router-dom%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97%EF%BC%88%E6%9C%80%E6%96%B0V6-0-1%EF%BC%89%E3%80%81router-tutorial"><span class="nav-number">6.1.1.</span> <span class="nav-text">參考文獻：react-router-dom使用指南（最新V6.0.1）、router-tutorial</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yi Wen Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Yi Wen Wang</p>
+  <div class="site-description" itemprop="description">前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">181</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yi Wen Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/07/20/react-router-dom/";
+    this.page.identifier = "2022/07/20/react-router-dom/";
+    this.page.title = "React-router-dom 教學";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
