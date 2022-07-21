@@ -52,11 +52,13 @@
 <meta property="og:image" content="https://imgur.com/9KrXRa9.jpg">
 <meta property="og:image" content="https://imgur.com/fErKOQK.jpg">
 <meta property="article:published_time" content="2022-06-13T07:29:40.000Z">
-<meta property="article:modified_time" content="2022-06-13T08:33:25.934Z">
+<meta property="article:modified_time" content="2022-07-21T05:52:29.592Z">
 <meta property="article:author" content="Yi Wen Wang">
 <meta property="article:tag" content="ngrok">
 <meta property="article:tag" content="ngrok 教學">
 <meta property="article:tag" content="ngrok token">
+<meta property="article:tag" content="invalid host header">
+<meta property="article:tag" content="Your account is limited to 1 simultaneous ngrok agent session.">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://imgur.com/L7Qvsfy.jpg">
 
@@ -238,10 +240,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2022-06-13 15:29:40 / 修改時間：16:33:25" itemprop="dateCreated datePublished" datetime="2022-06-13T15:29:40+08:00">2022-06-13</time>
+              <time title="創建時間：2022-06-13 15:29:40" itemprop="dateCreated datePublished" datetime="2022-06-13T15:29:40+08:00">2022-06-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-07-21 13:52:29" itemprop="dateModified" datetime="2022-07-21T13:52:29+08:00">2022-07-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -304,6 +312,18 @@
 <p>之後就會出現以下畫面<br><br/></p>
 <p><img src="https://imgur.com/9KrXRa9.jpg" alt="ngrok http"><br>把網址貼到瀏覽器上執行，就會出現你本地端的網站啦～</p>
 <p><img src="https://imgur.com/fErKOQK.jpg" alt="ngrok http"><br><br/><br/></p>
+<hr>
+<h1 id="使用框架時遇到-invalid-host-header"><a href="#使用框架時遇到-invalid-host-header" class="headerlink" title="使用框架時遇到 invalid host header"></a>使用框架時遇到 invalid host header</h1><p>vue 的解決方式是直接在 vue.config.js 的地方設定 <code>disableHostCheck: true</code>，就可以開啟囉！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">     disableHostCheck: <span class="literal">true</span>,</span><br><span class="line">   &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>使用 React 時，網友也提供了解法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ngrok http <span class="number">8080</span> -host-header=<span class="string">&quot;localhost:8080&quot;</span></span><br><span class="line">ngrok http --host-header=rewrite <span class="number">8080</span></span><br></pre></td></tr></table></figure>
+<p>記得將 8080 改成自己的 port 號哦！</p>
+<br/>
+
+<h1 id="錯誤-Your-account-is-limited-to-1-simultaneous-ngrok-agent-session"><a href="#錯誤-Your-account-is-limited-to-1-simultaneous-ngrok-agent-session" class="headerlink" title="錯誤: Your account is limited to 1 simultaneous ngrok agent session."></a>錯誤: Your account is limited to 1 simultaneous ngrok agent session.</h1><p>如果出現此錯誤: 他的意思是你使用了一個以上的代理，<br>當下找不到斷開的方式，最萬能的解法是 <strong>重開機</strong> 就會好囉😂</p>
+<hr>
 <h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>有時在檢查網站裝置畫面功能，可能會跟在行動裝置上有不同狀況發生，ngrok 就很適合拿來測試行動裝置上的問題，也不需要一直重複部署，真的很方便呢！如果我的文章有幫助到你，歡迎給我一點鼓勵哦👏👏👏</p>
 
         <div>
@@ -324,6 +344,8 @@
               <a href="/tags/ngrok/" rel="tag"># ngrok</a>
               <a href="/tags/ngrok-%E6%95%99%E5%AD%B8/" rel="tag"># ngrok 教學</a>
               <a href="/tags/ngrok-token/" rel="tag"># ngrok token</a>
+              <a href="/tags/invalid-host-header/" rel="tag"># invalid host header</a>
+              <a href="/tags/Your-account-is-limited-to-1-simultaneous-ngrok-agent-session/" rel="tag"># Your account is limited to 1 simultaneous ngrok agent session.</a>
           </div>
 
         
@@ -418,7 +440,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89-ngrok"><span class="nav-number">1.</span> <span class="nav-text">下載 ngrok</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%BB%E5%86%8A-ngrok-%E5%B8%B3%E8%99%9F"><span class="nav-number">2.</span> <span class="nav-text">註冊 ngrok 帳號</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BB%E5%85%A5-ngrok-%E5%8F%96%E5%BE%97-token"><span class="nav-number">3.</span> <span class="nav-text">登入 ngrok 取得 token</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5-token"><span class="nav-number">4.</span> <span class="nav-text">加入 token</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%95%9F%E7%94%A8%E9%80%A3%E5%88%B0-local-%E7%9A%84-web-%E6%9C%8D%E5%8B%99"><span class="nav-number">5.</span> <span class="nav-text">啟用連到 local 的 web 服務</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">6.</span> <span class="nav-text">結語</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89-ngrok"><span class="nav-number">1.</span> <span class="nav-text">下載 ngrok</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%BB%E5%86%8A-ngrok-%E5%B8%B3%E8%99%9F"><span class="nav-number">2.</span> <span class="nav-text">註冊 ngrok 帳號</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BB%E5%85%A5-ngrok-%E5%8F%96%E5%BE%97-token"><span class="nav-number">3.</span> <span class="nav-text">登入 ngrok 取得 token</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5-token"><span class="nav-number">4.</span> <span class="nav-text">加入 token</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%95%9F%E7%94%A8%E9%80%A3%E5%88%B0-local-%E7%9A%84-web-%E6%9C%8D%E5%8B%99"><span class="nav-number">5.</span> <span class="nav-text">啟用連到 local 的 web 服務</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A1%86%E6%9E%B6%E6%99%82%E9%81%87%E5%88%B0-invalid-host-header"><span class="nav-number">6.</span> <span class="nav-text">使用框架時遇到 invalid host header</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%8C%AF%E8%AA%A4-Your-account-is-limited-to-1-simultaneous-ngrok-agent-session"><span class="nav-number">7.</span> <span class="nav-text">錯誤: Your account is limited to 1 simultaneous ngrok agent session.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">8.</span> <span class="nav-text">結語</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -447,7 +469,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">192</span>
+        <span class="site-state-item-count">194</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
