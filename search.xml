@@ -52,6 +52,43 @@
       </tags>
   </entry>
   <entry>
+    <title>組件資料傳遞 Props-父層傳參數到子層</title>
+    <url>/2021/03/11/components-props/</url>
+    <content><![CDATA[<h1 id="組件資料傳遞-Props-父傳子"><a href="#組件資料傳遞-Props-父傳子" class="headerlink" title="組件資料傳遞 Props (父傳子)"></a>組件資料傳遞 Props (父傳子)</h1><p>上層的 data 透過 props 往下傳，不會往上傳回 data，所以下層的資料改變不會影響到上層(data)</p>
+<p>App.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> PropsTest <span class="keyword">from</span> <span class="string">&quot;@/components/PropsTest.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    PropsTest,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> data = ref(<span class="string">&quot;hello Vue!&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123; data &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">PropsTest</span> <span class="attr">:msg</span>=<span class="string">&quot;data&quot;</span> /&gt;</span> // :子層屬性=&quot;父層 data&quot;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<p>PropsTest.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: [<span class="string">&quot;msg&quot;</span>],</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; props &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;props.msg&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Props-型態"><a href="#Props-型態" class="headerlink" title="Props 型態"></a>Props 型態</h1><p>props 雖可以為陣列，但建議使用<code>物件</code>表示，物件可以定義型別，還能設定<code>預設值</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">  msg: <span class="built_in">String</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Or</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">  msg: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">&#x27;HI&#x27;</span> <span class="comment">// 如上層未設定msg值，會顯示HI</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Props-定義各個型別的預設值"><a href="#Props-定義各個型別的預設值" class="headerlink" title="Props 定義各個型別的預設值"></a>Props 定義各個型別的預設值</h1><p>父層</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> PropsTest <span class="keyword">from</span> <span class="string">&quot;@/components/PropsTest.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ref, reactive &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    PropsTest,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> string = ref(<span class="string">&quot;string&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> boolean = ref(<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">const</span> num = ref(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">const</span> array = reactive([]);</span><br><span class="line">    <span class="keyword">const</span> obj = reactive(&#123;&#125;);</span><br><span class="line">    <span class="keyword">const</span> clickFn = <span class="function">() =&gt;</span> &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> &#123; string, boolean, num, array, obj, clickFn &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;PropsTest</span><br><span class="line">  :string=&quot;string&quot;</span><br><span class="line">  :boolean=&quot;boolean&quot;</span><br><span class="line">  :num=&quot;num&quot;</span><br><span class="line">  :array=&quot;array&quot;</span><br><span class="line">  :obj=&quot;obj&quot;</span><br><span class="line">  :clickFn=&quot;clickFn&quot;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+<br>
+子層
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    string: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">&quot;string&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    boolean: &#123;</span><br><span class="line">      type: <span class="built_in">Boolean</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    num: &#123;</span><br><span class="line">      type: <span class="built_in">Number</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="number">0</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    array: &#123;</span><br><span class="line">      type: <span class="built_in">Array</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        [];</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    obj: &#123;</span><br><span class="line">      type: <span class="built_in">Object</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="function">() =&gt;</span> (&#123;&#125;),</span><br><span class="line">      <span class="comment">// 等於</span></span><br><span class="line">      <span class="comment">// default: ()=&gt;&#123;</span></span><br><span class="line">      <span class="comment">//   return &#123;&#125;</span></span><br><span class="line">      <span class="comment">// &#125;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    clickFn: &#123;</span><br><span class="line">      type: <span class="built_in">Function</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="function">() =&gt;</span> &#123;&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; props &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+]]></content>
+      <categories>
+        <category>Vue3</category>
+      </categories>
+      <tags>
+        <tag>Vue.js</tag>
+        <tag>javascript</tag>
+        <tag>props</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>組件資料傳遞 emit-子層傳參數到父層</title>
     <url>/2021/03/14/components-emit/</url>
     <content><![CDATA[<h1 id="組件資料傳遞-emit-子傳父"><a href="#組件資料傳遞-emit-子傳父" class="headerlink" title="組件資料傳遞 emit (子傳父)"></a>組件資料傳遞 emit (子傳父)</h1><p>使用 emit 往上傳遞資料</p>
@@ -120,40 +157,51 @@
       </tags>
   </entry>
   <entry>
-    <title>組件資料傳遞 Props-父層傳參數到子層</title>
-    <url>/2021/03/11/components-props/</url>
-    <content><![CDATA[<h1 id="組件資料傳遞-Props-父傳子"><a href="#組件資料傳遞-Props-父傳子" class="headerlink" title="組件資料傳遞 Props (父傳子)"></a>組件資料傳遞 Props (父傳子)</h1><p>上層的 data 透過 props 往下傳，不會往上傳回 data，所以下層的資料改變不會影響到上層(data)</p>
-<p>App.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> PropsTest <span class="keyword">from</span> <span class="string">&quot;@/components/PropsTest.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    PropsTest,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> data = ref(<span class="string">&quot;hello Vue!&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123; data &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">PropsTest</span> <span class="attr">:msg</span>=<span class="string">&quot;data&quot;</span> /&gt;</span> // :子層屬性=&quot;父層 data&quot;</span><br></pre></td></tr></table></figure>
+    <title>ngrok教學-從外部連到localhost執行你的網站</title>
+    <url>/2022/06/13/frontend-ngrok/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/L7Qvsfy.jpg" alt="ngrok"></p>
+<p>你是否有遇過，想測試一個功能，或是想在不同裝置上測試，卻又要大費周章部署到測試機，你其實可以不用這麼麻煩！<br>ngrok 可以在本地 localhost 的環境下直接進行測試，重點是 <strong>免費版</strong> 就夠給我們一般使用<br><br/><br/></p>
 <a id="more"></a>
 
-<p>PropsTest.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: [<span class="string">&quot;msg&quot;</span>],</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; props &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;props.msg&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><ins class="adsbygoogle"
+     style="display:block; text-align:center; margin: 100px auto"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3584202217117217"
+     data-ad-slot="8536485431"></ins></p>
+<h1 id="下載-ngrok"><a href="#下載-ngrok" class="headerlink" title="下載 ngrok"></a>下載 ngrok</h1><p>首先<a href="https://ngrok.com/download">Install ngrok</a>，依自己的 OS 作業系統選擇檔案<br><br/><br/></p>
+<h1 id="註冊-ngrok-帳號"><a href="#註冊-ngrok-帳號" class="headerlink" title="註冊 ngrok 帳號"></a>註冊 ngrok 帳號</h1><p>進入 <a href="https://ngrok.com/">ngrok 官網</a>，可以用 github 或 google 帳號建立，或是自行建立一個帳號<br><br/><br/></p>
+<h1 id="登入-ngrok-取得-token"><a href="#登入-ngrok-取得-token" class="headerlink" title="登入 ngrok 取得 token"></a>登入 ngrok 取得 token</h1><p>直接把 Command Line 複製下來<br><img src="https://imgur.com/TIW1WYt.jpg" alt="ngrok token"><br><br/><br/></p>
+<h1 id="加入-token"><a href="#加入-token" class="headerlink" title="加入 token"></a>加入 token</h1><p>將 Command Line 貼到剛下載的 ngrok.exe<br>設定完之後會看到自動建立了 ngrok.yml<br><br/></p>
+<p><img src="https://imgur.com/PIH8hgB.jpg" alt="ngrok token"><br><br/><br/></p>
+<h1 id="啟用連到-local-的-web-服務"><a href="#啟用連到-local-的-web-服務" class="headerlink" title="啟用連到 local 的 web 服務"></a>啟用連到 local 的 web 服務</h1><p>依本地端的埠號去下指令，如果我的本地是 localhost:4000 那就會是</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ngrok http 4000</span><br></pre></td></tr></table></figure>
+<p>之後就會出現以下畫面<br><br/></p>
+<p><img src="https://imgur.com/9KrXRa9.jpg" alt="ngrok http"><br>把網址貼到瀏覽器上執行，就會出現你本地端的網站啦～</p>
+<p><img src="https://imgur.com/fErKOQK.jpg" alt="ngrok http"><br><br/><br/></p>
 <hr>
-<h1 id="Props-型態"><a href="#Props-型態" class="headerlink" title="Props 型態"></a>Props 型態</h1><p>props 雖可以為陣列，但建議使用<code>物件</code>表示，物件可以定義型別，還能設定<code>預設值</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">  msg: <span class="built_in">String</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Or</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">  msg: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">&#x27;HI&#x27;</span> <span class="comment">// 如上層未設定msg值，會顯示HI</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="Props-定義各個型別的預設值"><a href="#Props-定義各個型別的預設值" class="headerlink" title="Props 定義各個型別的預設值"></a>Props 定義各個型別的預設值</h1><p>父層</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> PropsTest <span class="keyword">from</span> <span class="string">&quot;@/components/PropsTest.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ref, reactive &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    PropsTest,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> string = ref(<span class="string">&quot;string&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> boolean = ref(<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">const</span> num = ref(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">const</span> array = reactive([]);</span><br><span class="line">    <span class="keyword">const</span> obj = reactive(&#123;&#125;);</span><br><span class="line">    <span class="keyword">const</span> clickFn = <span class="function">() =&gt;</span> &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> &#123; string, boolean, num, array, obj, clickFn &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;PropsTest</span><br><span class="line">  :string=&quot;string&quot;</span><br><span class="line">  :boolean=&quot;boolean&quot;</span><br><span class="line">  :num=&quot;num&quot;</span><br><span class="line">  :array=&quot;array&quot;</span><br><span class="line">  :obj=&quot;obj&quot;</span><br><span class="line">  :clickFn=&quot;clickFn&quot;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
-<br>
-子層
+<h1 id="使用框架時遇到-invalid-host-header"><a href="#使用框架時遇到-invalid-host-header" class="headerlink" title="使用框架時遇到 invalid host header"></a>使用框架時遇到 invalid host header</h1><p>vue 的解決方式是直接在 vue.config.js 的地方設定 <code>disableHostCheck: true</code>，就可以開啟囉！</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">     disableHostCheck: <span class="literal">true</span>,</span><br><span class="line">   &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<br/>
 
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    string: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">&quot;string&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    boolean: &#123;</span><br><span class="line">      type: <span class="built_in">Boolean</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    num: &#123;</span><br><span class="line">      type: <span class="built_in">Number</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="number">0</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    array: &#123;</span><br><span class="line">      type: <span class="built_in">Array</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        [];</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    obj: &#123;</span><br><span class="line">      type: <span class="built_in">Object</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="function">() =&gt;</span> (&#123;&#125;),</span><br><span class="line">      <span class="comment">// 等於</span></span><br><span class="line">      <span class="comment">// default: ()=&gt;&#123;</span></span><br><span class="line">      <span class="comment">//   return &#123;&#125;</span></span><br><span class="line">      <span class="comment">// &#125;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    clickFn: &#123;</span><br><span class="line">      type: <span class="built_in">Function</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="function">() =&gt;</span> &#123;&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; props &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用 React 時，網友也提供了解法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ngrok http <span class="number">8080</span> -host-header=<span class="string">&quot;localhost:8080&quot;</span></span><br><span class="line">ngrok http --host-header=rewrite <span class="number">8080</span></span><br></pre></td></tr></table></figure>
+<p>記得將 8080 改成自己的 port 號哦！</p>
+<br/>
+
+<h1 id="錯誤-Your-account-is-limited-to-1-simultaneous-ngrok-agent-session"><a href="#錯誤-Your-account-is-limited-to-1-simultaneous-ngrok-agent-session" class="headerlink" title="錯誤: Your account is limited to 1 simultaneous ngrok agent session."></a>錯誤: Your account is limited to 1 simultaneous ngrok agent session.</h1><p>如果出現此錯誤: 他的意思是你使用了一個以上的代理，<br>當下找不到斷開的方式，最萬能的解法是 <strong>重開機</strong> 就會好囉😂</p>
 <hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>有時在檢查網站裝置畫面功能，可能會跟在行動裝置上有不同狀況發生，ngrok 就很適合拿來測試行動裝置上的問題，也不需要一直重複部署，真的很方便呢！如果我的文章有幫助到你，歡迎給我一點鼓勵哦👏👏👏</p>
 ]]></content>
       <categories>
-        <category>Vue3</category>
+        <category>前端工具</category>
       </categories>
       <tags>
-        <tag>Vue.js</tag>
-        <tag>javascript</tag>
-        <tag>props</tag>
+        <tag>ngrok</tag>
+        <tag>ngrok 教學</tag>
+        <tag>ngrok token</tag>
+        <tag>invalid host header</tag>
+        <tag>Your account is limited to 1 simultaneous ngrok agent session.</tag>
       </tags>
   </entry>
   <entry>
@@ -191,6 +239,65 @@
         <tag>C槽清理</tag>
         <tag>C槽容量不足</tag>
         <tag>c槽突然爆滿</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git 常用指令</title>
+    <url>/2021/10/17/git-cmdline/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/6mK0zWq.jpg" alt="Git"></p>
+<h1 id="Git-常用指令"><a href="#Git-常用指令" class="headerlink" title="Git 常用指令"></a>Git 常用指令</h1><p><strong>Git 是否有安裝成功：</strong><code>git --version</code></p>
+<a id="more"></a>
+
+<p><strong>設定/修改個人資料</strong></p>
+<ul>
+<li>輸入姓名：<code>git config --global user.name &quot;gon&quot;</code></li>
+<li>輸入個人的 email：<code>git config --global user.email &quot;gonsakon@gmail.com&quot;</code></li>
+<li>查詢 git 設定內容：<code>git config --list</code></li>
+<li>查看用户名：<code>git config user.name</code></li>
+<li>查看用户邮箱：<code>git config user.email</code></li>
+</ul>
+<p><strong>Git 常用指令</strong></p>
+<ul>
+<li>初始化數據庫：<code>git init</code></li>
+<li>查詢當前狀態：<code>git status</code></li>
+<li>將檔案加入到索引：<code>git add .</code></li>
+<li>將索引檔案變成一個更新(commit)：<code>git commit -m &quot;修改內容&quot;</code></li>
+<li>觀察 commit 歷史紀錄： <code>git log</code></li>
+<li>下載遠端數據庫：<code>git clone 數據庫網址</code></li>
+<li>更新遠端數據庫：<code>git push origin master</code></li>
+<li>下載同步更新：<code>git pull</code></li>
+</ul>
+<p><strong>分支 (branch)</strong></p>
+<ul>
+<li>新增分支：<code>git branch 分支名稱</code></li>
+<li>查看分支：<code>git branch</code></li>
+<li>切換分支：<code>git checkout 分支名稱</code></li>
+<li>建立並切換分支：<code>git checkout -b 分支名稱</code></li>
+<li>刪除分支：<code>git branch -d 分支名稱</code> (-D 是強制刪除)</li>
+<li>還原上個版本：<code>git reset HEAD^</code> (^為要回去哪一個版本，^^兩個就是回到前兩個版本)</li>
+<li>合併分支：<code>git merge 分支名稱</code></li>
+<li>取消快轉：<code>git merge 分支名稱 --no-ff</code></li>
+<li>觀看線圖：<code>git log —oneline -graph</code></li>
+<li>還原合併前狀態：<code>git reset —hard ORIG_HEAD</code></li>
+</ul>
+<p><strong>還原技巧</strong></p>
+<ul>
+<li>回頭觀看版本內容：<code>git checkout 編號</code></li>
+<li>返回最新的版本：<code>git checkout master(分支名稱)</code></li>
+<li>索引檔案&gt;還原到工作目錄：<code>git reset HEAD</code></li>
+<li>還原前兩個版本：<code>git reset HEAD^^</code></li>
+<li>還原前兩個版本，所有更新檔案都<strong>放棄</strong>：<code>git reset HEAD^^ --hard</code></li>
+<li>觀看詳細所有歷史紀錄：<code>git reflog</code></li>
+<li>新增檔案時，檔案還沒加追蹤時，清空工作目錄<br>顯示此次清除的檔案：<code>git clean -n</code><br>強制清除檔案：<code>git clean -f</code></li>
+<li>檔案已加入追蹤，還原工作目錄上已更改的檔案 ：<code>git checkout -- &lt;file&gt;</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>Git指令</tag>
       </tags>
   </entry>
   <entry>
@@ -352,113 +459,6 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
         <tag>vite</tag>
         <tag>vite 教學</tag>
         <tag>vite scss共用變數</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git 常用指令</title>
-    <url>/2021/10/17/git-cmdline/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/6mK0zWq.jpg" alt="Git"></p>
-<h1 id="Git-常用指令"><a href="#Git-常用指令" class="headerlink" title="Git 常用指令"></a>Git 常用指令</h1><p><strong>Git 是否有安裝成功：</strong><code>git --version</code></p>
-<a id="more"></a>
-
-<p><strong>設定/修改個人資料</strong></p>
-<ul>
-<li>輸入姓名：<code>git config --global user.name &quot;gon&quot;</code></li>
-<li>輸入個人的 email：<code>git config --global user.email &quot;gonsakon@gmail.com&quot;</code></li>
-<li>查詢 git 設定內容：<code>git config --list</code></li>
-<li>查看用户名：<code>git config user.name</code></li>
-<li>查看用户邮箱：<code>git config user.email</code></li>
-</ul>
-<p><strong>Git 常用指令</strong></p>
-<ul>
-<li>初始化數據庫：<code>git init</code></li>
-<li>查詢當前狀態：<code>git status</code></li>
-<li>將檔案加入到索引：<code>git add .</code></li>
-<li>將索引檔案變成一個更新(commit)：<code>git commit -m &quot;修改內容&quot;</code></li>
-<li>觀察 commit 歷史紀錄： <code>git log</code></li>
-<li>下載遠端數據庫：<code>git clone 數據庫網址</code></li>
-<li>更新遠端數據庫：<code>git push origin master</code></li>
-<li>下載同步更新：<code>git pull</code></li>
-</ul>
-<p><strong>分支 (branch)</strong></p>
-<ul>
-<li>新增分支：<code>git branch 分支名稱</code></li>
-<li>查看分支：<code>git branch</code></li>
-<li>切換分支：<code>git checkout 分支名稱</code></li>
-<li>建立並切換分支：<code>git checkout -b 分支名稱</code></li>
-<li>刪除分支：<code>git branch -d 分支名稱</code> (-D 是強制刪除)</li>
-<li>還原上個版本：<code>git reset HEAD^</code> (^為要回去哪一個版本，^^兩個就是回到前兩個版本)</li>
-<li>合併分支：<code>git merge 分支名稱</code></li>
-<li>取消快轉：<code>git merge 分支名稱 --no-ff</code></li>
-<li>觀看線圖：<code>git log —oneline -graph</code></li>
-<li>還原合併前狀態：<code>git reset —hard ORIG_HEAD</code></li>
-</ul>
-<p><strong>還原技巧</strong></p>
-<ul>
-<li>回頭觀看版本內容：<code>git checkout 編號</code></li>
-<li>返回最新的版本：<code>git checkout master(分支名稱)</code></li>
-<li>索引檔案&gt;還原到工作目錄：<code>git reset HEAD</code></li>
-<li>還原前兩個版本：<code>git reset HEAD^^</code></li>
-<li>還原前兩個版本，所有更新檔案都<strong>放棄</strong>：<code>git reset HEAD^^ --hard</code></li>
-<li>觀看詳細所有歷史紀錄：<code>git reflog</code></li>
-<li>新增檔案時，檔案還沒加追蹤時，清空工作目錄<br>顯示此次清除的檔案：<code>git clean -n</code><br>強制清除檔案：<code>git clean -f</code></li>
-<li>檔案已加入追蹤，還原工作目錄上已更改的檔案 ：<code>git checkout -- &lt;file&gt;</code></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>Git指令</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ngrok教學-從外部連到localhost執行你的網站</title>
-    <url>/2022/06/13/frontend-ngrok/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/L7Qvsfy.jpg" alt="ngrok"></p>
-<p>你是否有遇過，想測試一個功能，或是想在不同裝置上測試，卻又要大費周章部署到測試機，你其實可以不用這麼麻煩！<br>ngrok 可以在本地 localhost 的環境下直接進行測試，重點是 <strong>免費版</strong> 就夠給我們一般使用<br><br/><br/></p>
-<a id="more"></a>
-
-<p><ins class="adsbygoogle"
-     style="display:block; text-align:center; margin: 100px auto"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-3584202217117217"
-     data-ad-slot="8536485431"></ins></p>
-<h1 id="下載-ngrok"><a href="#下載-ngrok" class="headerlink" title="下載 ngrok"></a>下載 ngrok</h1><p>首先<a href="https://ngrok.com/download">Install ngrok</a>，依自己的 OS 作業系統選擇檔案<br><br/><br/></p>
-<h1 id="註冊-ngrok-帳號"><a href="#註冊-ngrok-帳號" class="headerlink" title="註冊 ngrok 帳號"></a>註冊 ngrok 帳號</h1><p>進入 <a href="https://ngrok.com/">ngrok 官網</a>，可以用 github 或 google 帳號建立，或是自行建立一個帳號<br><br/><br/></p>
-<h1 id="登入-ngrok-取得-token"><a href="#登入-ngrok-取得-token" class="headerlink" title="登入 ngrok 取得 token"></a>登入 ngrok 取得 token</h1><p>直接把 Command Line 複製下來<br><img src="https://imgur.com/TIW1WYt.jpg" alt="ngrok token"><br><br/><br/></p>
-<h1 id="加入-token"><a href="#加入-token" class="headerlink" title="加入 token"></a>加入 token</h1><p>將 Command Line 貼到剛下載的 ngrok.exe<br>設定完之後會看到自動建立了 ngrok.yml<br><br/></p>
-<p><img src="https://imgur.com/PIH8hgB.jpg" alt="ngrok token"><br><br/><br/></p>
-<h1 id="啟用連到-local-的-web-服務"><a href="#啟用連到-local-的-web-服務" class="headerlink" title="啟用連到 local 的 web 服務"></a>啟用連到 local 的 web 服務</h1><p>依本地端的埠號去下指令，如果我的本地是 localhost:4000 那就會是</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ngrok http 4000</span><br></pre></td></tr></table></figure>
-<p>之後就會出現以下畫面<br><br/></p>
-<p><img src="https://imgur.com/9KrXRa9.jpg" alt="ngrok http"><br>把網址貼到瀏覽器上執行，就會出現你本地端的網站啦～</p>
-<p><img src="https://imgur.com/fErKOQK.jpg" alt="ngrok http"><br><br/><br/></p>
-<hr>
-<h1 id="使用框架時遇到-invalid-host-header"><a href="#使用框架時遇到-invalid-host-header" class="headerlink" title="使用框架時遇到 invalid host header"></a>使用框架時遇到 invalid host header</h1><p>vue 的解決方式是直接在 vue.config.js 的地方設定 <code>disableHostCheck: true</code>，就可以開啟囉！</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">     disableHostCheck: <span class="literal">true</span>,</span><br><span class="line">   &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<br/>
-
-<p>使用 React 時，網友也提供了解法</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ngrok http <span class="number">8080</span> -host-header=<span class="string">&quot;localhost:8080&quot;</span></span><br><span class="line">ngrok http --host-header=rewrite <span class="number">8080</span></span><br></pre></td></tr></table></figure>
-<p>記得將 8080 改成自己的 port 號哦！</p>
-<br/>
-
-<h1 id="錯誤-Your-account-is-limited-to-1-simultaneous-ngrok-agent-session"><a href="#錯誤-Your-account-is-limited-to-1-simultaneous-ngrok-agent-session" class="headerlink" title="錯誤: Your account is limited to 1 simultaneous ngrok agent session."></a>錯誤: Your account is limited to 1 simultaneous ngrok agent session.</h1><p>如果出現此錯誤: 他的意思是你使用了一個以上的代理，<br>當下找不到斷開的方式，最萬能的解法是 <strong>重開機</strong> 就會好囉😂</p>
-<hr>
-<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>有時在檢查網站裝置畫面功能，可能會跟在行動裝置上有不同狀況發生，ngrok 就很適合拿來測試行動裝置上的問題，也不需要一直重複部署，真的很方便呢！如果我的文章有幫助到你，歡迎給我一點鼓勵哦👏👏👏</p>
-]]></content>
-      <categories>
-        <category>前端工具</category>
-      </categories>
-      <tags>
-        <tag>ngrok</tag>
-        <tag>ngrok 教學</tag>
-        <tag>ngrok token</tag>
-        <tag>invalid host header</tag>
-        <tag>Your account is limited to 1 simultaneous ngrok agent session.</tag>
       </tags>
   </entry>
   <entry>
@@ -851,6 +851,57 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </tags>
   </entry>
   <entry>
+    <title>ES6-import &amp; export 怎麼用</title>
+    <url>/2021/06/15/js-import-export/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/2Auy2fY.jpg" alt="Imgur"></p>
+<p>ES6 推出了管理 javascript 模組的語法，透過 import、export 可以將每個檔案視為獨立模組，讓檔案不會過於龐大，且可讀性也比較高，每個系統都有相對的模組，在程式碼的管理與組織方便了許多。</p>
+<a id="more"></a>
+
+<p>要在瀏覽器中運行，我們需先在 HTML 加上模組類型</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// import要匯入的檔案</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>這樣一來，就可以開始做模組管理了！</p>
+<h1 id="import-amp-export"><a href="#import-amp-export" class="headerlink" title="import &amp; export"></a>import &amp; export</h1><p>export 可以輸出任何類型的資料，如物件、函式與純值等，輸出又分為 default export、named export 兩種<br>import 是將 export 的檔案匯入，default export、named export 的輸入方式也稍微不太一樣，輸入的數量是沒有限制的</p>
+<br>
+
+<h2 id="default-export-預設匯出"><a href="#default-export-預設匯出" class="headerlink" title="default export(預設匯出)"></a>default export(預設匯出)</h2><p>單一輸出名稱，預設使用 export default，每一個檔案只能有一個 export default</p>
+<h3 id="1-可以不指定變數名稱"><a href="#1-可以不指定變數名稱" class="headerlink" title="1.可以不指定變數名稱"></a>1.可以不指定變數名稱</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> dog <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(dog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-也可以指定變數名稱，-import-裡的名稱可以使用不同的名稱呼叫"><a href="#2-也可以指定變數名稱，-import-裡的名稱可以使用不同的名稱呼叫" class="headerlink" title="2.也可以指定變數名稱， import 裡的名稱可以使用不同的名稱呼叫"></a>2.也可以指定變數名稱， import 裡的名稱<code>可以</code>使用不同的名稱呼叫</h3><p>🔸 預設單筆</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> dog;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> goodDog <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(goodDog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
+<p>🔸 預設多筆</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123; dog, add &#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> goodDog <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(goodDog.dog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="named-export-具名匯出"><a href="#named-export-具名匯出" class="headerlink" title="named export(具名匯出)"></a>named export(具名匯出)</h2><p>多個輸出名稱，需先宣告名稱，在 import 時必須使用一樣名稱才能匯出，即使只匯出一個名稱也需加上中括號{}</p>
+<h3 id="1-export-每個宣告"><a href="#1-export-每個宣告" class="headerlink" title="1.export 每個宣告"></a>1.export 每個宣告</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; dog &#125; <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>; <span class="comment">// 需加上中括號&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(dog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-在結尾時統一使用物件匯出"><a href="#2-在結尾時統一使用物件匯出" class="headerlink" title="2.在結尾時統一使用物件匯出"></a>2.在結尾時統一使用物件匯出</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> &#123; dog, add &#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; dog &#125; <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(dog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="import-export-全部資料-使用"><a href="#import-export-全部資料-使用" class="headerlink" title="import/export 全部資料 使用*"></a>import/export 全部資料 使用*</h1><p>*代表全部的意思，並賦予一個名稱，就可以呼叫你要的東西囉!</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> &#123; dog, add &#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> myModule <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(myModule.dog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="import-無需匯出的檔案"><a href="#import-無需匯出的檔案" class="headerlink" title="import 無需匯出的檔案"></a>import 無需匯出的檔案</h1><p>若想要單純執行某支檔案程式，則不用帶任何名稱引入即可</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;/export.js&quot;</span>;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>有了 export 跟 import，程式碼可以被模組化，讓系統更好維護提升管理效率，<br>歡迎路過多多指教，一起學習程式吧 😀<br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>import</tag>
+        <tag>export</tag>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搞懂JS-什麼是hoisting?</title>
     <url>/2021/06/14/js-hoisting/</url>
     <content><![CDATA[<p><img src="https://i.imgur.com/n7k7xaM.jpg" alt="Imgur"></p>
@@ -905,57 +956,6 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </categories>
       <tags>
         <tag>hoisting</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ES6-import &amp; export 怎麼用</title>
-    <url>/2021/06/15/js-import-export/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/2Auy2fY.jpg" alt="Imgur"></p>
-<p>ES6 推出了管理 javascript 模組的語法，透過 import、export 可以將每個檔案視為獨立模組，讓檔案不會過於龐大，且可讀性也比較高，每個系統都有相對的模組，在程式碼的管理與組織方便了許多。</p>
-<a id="more"></a>
-
-<p>要在瀏覽器中運行，我們需先在 HTML 加上模組類型</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// import要匯入的檔案</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>這樣一來，就可以開始做模組管理了！</p>
-<h1 id="import-amp-export"><a href="#import-amp-export" class="headerlink" title="import &amp; export"></a>import &amp; export</h1><p>export 可以輸出任何類型的資料，如物件、函式與純值等，輸出又分為 default export、named export 兩種<br>import 是將 export 的檔案匯入，default export、named export 的輸入方式也稍微不太一樣，輸入的數量是沒有限制的</p>
-<br>
-
-<h2 id="default-export-預設匯出"><a href="#default-export-預設匯出" class="headerlink" title="default export(預設匯出)"></a>default export(預設匯出)</h2><p>單一輸出名稱，預設使用 export default，每一個檔案只能有一個 export default</p>
-<h3 id="1-可以不指定變數名稱"><a href="#1-可以不指定變數名稱" class="headerlink" title="1.可以不指定變數名稱"></a>1.可以不指定變數名稱</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> dog <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(dog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-也可以指定變數名稱，-import-裡的名稱可以使用不同的名稱呼叫"><a href="#2-也可以指定變數名稱，-import-裡的名稱可以使用不同的名稱呼叫" class="headerlink" title="2.也可以指定變數名稱， import 裡的名稱可以使用不同的名稱呼叫"></a>2.也可以指定變數名稱， import 裡的名稱<code>可以</code>使用不同的名稱呼叫</h3><p>🔸 預設單筆</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> dog;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> goodDog <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(goodDog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
-<p>🔸 預設多筆</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123; dog, add &#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> goodDog <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(goodDog.dog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
-<br>
-
-<h2 id="named-export-具名匯出"><a href="#named-export-具名匯出" class="headerlink" title="named export(具名匯出)"></a>named export(具名匯出)</h2><p>多個輸出名稱，需先宣告名稱，在 import 時必須使用一樣名稱才能匯出，即使只匯出一個名稱也需加上中括號{}</p>
-<h3 id="1-export-每個宣告"><a href="#1-export-每個宣告" class="headerlink" title="1.export 每個宣告"></a>1.export 每個宣告</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; dog &#125; <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>; <span class="comment">// 需加上中括號&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(dog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-在結尾時統一使用物件匯出"><a href="#2-在結尾時統一使用物件匯出" class="headerlink" title="2.在結尾時統一使用物件匯出"></a>2.在結尾時統一使用物件匯出</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> &#123; dog, add &#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; dog &#125; <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(dog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
-<br>
-
-<h1 id="import-export-全部資料-使用"><a href="#import-export-全部資料-使用" class="headerlink" title="import/export 全部資料 使用*"></a>import/export 全部資料 使用*</h1><p>*代表全部的意思，並賦予一個名稱，就可以呼叫你要的東西囉!</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// export.js</span></span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&quot;bobee&quot;</span>,</span><br><span class="line">  age: <span class="number">11</span>,</span><br><span class="line">  bark: <span class="string">&quot;woof&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> &#123; dog, add &#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> myModule <span class="keyword">from</span> <span class="string">&quot;./export.js&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(myModule.dog.name); <span class="comment">// bobee</span></span><br></pre></td></tr></table></figure>
-<br>
-
-<h1 id="import-無需匯出的檔案"><a href="#import-無需匯出的檔案" class="headerlink" title="import 無需匯出的檔案"></a>import 無需匯出的檔案</h1><p>若想要單純執行某支檔案程式，則不用帶任何名稱引入即可</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;/export.js&quot;</span>;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>有了 export 跟 import，程式碼可以被模組化，讓系統更好維護提升管理效率，<br>歡迎路過多多指教，一起學習程式吧 😀<br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>import</tag>
-        <tag>export</tag>
-        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>
@@ -1850,7 +1850,7 @@ src/Product.js
       </tags>
   </entry>
   <entry>
-    <title>Redux Toolkit</title>
+    <title>【Redux Toolkit 教學】管理組件的共用資料</title>
     <url>/2022/07/25/react-redux/</url>
     <content><![CDATA[<p><img src="https://imgur.com/Cc0ifaw.jpg" alt="Redux Toolkit"></p>
 <p>Redux 是可以讓不同的組件，使用到共用的資料和方法，統一集中管理共用的狀態<br>Redux 不是 React 的 library，但很多 React 專案都會使用 Redux 來管理狀態，這也是學 React 比較複雜的地方<strong>🤪</strong><br>好在官方之後出了 Redux Toolkit，也推薦大家使用 Redux Toolkit 來撰寫 Redux，它是以 Redux 為核心，也比較容易上手！</p>
@@ -1922,10 +1922,24 @@ src/Product.js
 <p><br/><br/></p>
 <h1 id="⚠️eslint-出現警告"><a href="#⚠️eslint-出現警告" class="headerlink" title="⚠️eslint 出現警告"></a>⚠️eslint 出現警告</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">React Hook useEffect has a missing dependency: &#39;dispatch&#39;.</span><br><span class="line">Either include it or remove the dependency array</span><br></pre></td></tr></table></figure>
 <p>如果想除掉警告可以把 dispatch 放到第二個參數的陣列裡</p>
-]]></content>
+<hr>
+<h3 id="參考資料-React-React-Redux-Redux-Toolkit-新手教學、Using-Redux-Toolkit’s-createAsyncThunk"><a href="#參考資料-React-React-Redux-Redux-Toolkit-新手教學、Using-Redux-Toolkit’s-createAsyncThunk" class="headerlink" title="參考資料 React + React-Redux + Redux-Toolkit 新手教學、Using Redux Toolkit’s createAsyncThunk"></a>參考資料 <a href="https://penueling.com/%E7%B7%9A%E4%B8%8A%E5%AD%B8%E7%BF%92/react-react-redux-redix-toolkit-%E6%96%B0%E6%89%8B%E6%95%99%E5%AD%B8/">React + React-Redux + Redux-Toolkit 新手教學</a>、<a href="https://blog.logrocket.com/using-redux-toolkits-createasyncthunk/">Using Redux Toolkit’s createAsyncThunk</a></h3>]]></content>
       <categories>
         <category>React</category>
       </categories>
+      <tags>
+        <tag>Redux 教學</tag>
+        <tag>Redux Toolkit</tag>
+        <tag>Redux Toolkit 教學</tag>
+        <tag>configureStore</tag>
+        <tag>createSlice</tag>
+        <tag>useSelector</tag>
+        <tag>useDispatch</tag>
+        <tag>Redux Toolkit async</tag>
+        <tag>createAsyncThunk</tag>
+        <tag>extraReducers</tag>
+        <tag>react-redux</tag>
+      </tags>
   </entry>
   <entry>
     <title>React列表渲染-將陣列、物件渲染成元素</title>
@@ -2971,38 +2985,6 @@ package.json 設定 --mode staging
       </tags>
   </entry>
   <entry>
-    <title>Vue3 setup、CSS新寫法</title>
-    <url>/2021/03/21/vue-other-issues/</url>
-    <content><![CDATA[<p>Vue3 還有很多新功能官方正在進行中，目前有幾個差不多定案的新功能</p>
-<a id="more"></a>
-
-<h1 id="Script-Setup"><a href="#Script-Setup" class="headerlink" title="Script Setup"></a>Script Setup</h1><p><b>原本寫法</b></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      name,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<br>
-
-<p><b>新寫法</b><br>直接將 Setup 寫在 script 上，不用 export、return<br>如果沒有在 template 寫變數，就自動不會 return 出來</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123;ref&#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<br>
-
-<h1 id="變數綁定-CSS"><a href="#變數綁定-CSS" class="headerlink" title="變數綁定 CSS"></a>變數綁定 CSS</h1><p>用 v-bind 綁定 JS 變數，可以直接變換屬性的值</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; ref &#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">const colorBlue = ref(<span class="string">&quot;#000FFF&quot;</span>);</span><br><span class="line">const changeColor = () =&gt; &#123;</span><br><span class="line">  colorBlue.value = <span class="string">&quot;#FF0000&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;changeColor&quot;</span>&gt;</span>changeColor<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">v-bind</span>(colorBlue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
-]]></content>
-      <categories>
-        <category>Vue3</category>
-      </categories>
-      <tags>
-        <tag>Vue.js</tag>
-        <tag>javascript</tag>
-        <tag>Composition API</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue Router 網址路由設定、History modes</title>
     <url>/2021/03/14/vue-router/</url>
     <content><![CDATA[<h1 id="單頁式應用"><a href="#單頁式應用" class="headerlink" title="單頁式應用"></a>單頁式應用</h1><p>single-page application，縮寫 SPA<br>透過 JS 動態渲染當前頁面來與使用者互動，而非傳統的從伺服器重新載入整個新頁面。這種方法避免了頁面之間切換打斷用戶體驗，使應用程式更像一個桌面應用程式。</p>
@@ -3036,6 +3018,57 @@ package.json 設定 --mode staging
       </tags>
   </entry>
   <entry>
+    <title>Vue3 setup、CSS新寫法</title>
+    <url>/2021/03/21/vue-other-issues/</url>
+    <content><![CDATA[<p>Vue3 還有很多新功能官方正在進行中，目前有幾個差不多定案的新功能</p>
+<a id="more"></a>
+
+<h1 id="Script-Setup"><a href="#Script-Setup" class="headerlink" title="Script Setup"></a>Script Setup</h1><p><b>原本寫法</b></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      name,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<p><b>新寫法</b><br>直接將 Setup 寫在 script 上，不用 export、return<br>如果沒有在 template 寫變數，就自動不會 return 出來</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123;ref&#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="變數綁定-CSS"><a href="#變數綁定-CSS" class="headerlink" title="變數綁定 CSS"></a>變數綁定 CSS</h1><p>用 v-bind 綁定 JS 變數，可以直接變換屬性的值</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; ref &#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">const colorBlue = ref(<span class="string">&quot;#000FFF&quot;</span>);</span><br><span class="line">const changeColor = () =&gt; &#123;</span><br><span class="line">  colorBlue.value = <span class="string">&quot;#FF0000&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;changeColor&quot;</span>&gt;</span>changeColor<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">v-bind</span>(colorBlue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+]]></content>
+      <categories>
+        <category>Vue3</category>
+      </categories>
+      <tags>
+        <tag>Vue.js</tag>
+        <tag>javascript</tag>
+        <tag>Composition API</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>透過ref綁定，取得DOM元素</title>
+    <url>/2021/03/14/vue-template-refs/</url>
+    <content><![CDATA[<h1 id="透過-ref-綁定，取得-DOM-元素"><a href="#透過-ref-綁定，取得-DOM-元素" class="headerlink" title="透過 ref 綁定，取得 DOM 元素"></a>透過 ref 綁定，取得 DOM 元素</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted, ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> inputText = ref(<span class="literal">null</span>); <span class="comment">// 變數需跟綁定的ref一樣名稱</span></span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      inputText.value.focus(); <span class="comment">// 回傳後即可使用inputText</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      inputText, <span class="comment">// 回傳inputText</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">&quot;inputText&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> /&gt;</span> // 綁定ref</span><br></pre></td></tr></table></figure>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+]]></content>
+      <categories>
+        <category>Vue3</category>
+      </categories>
+      <tags>
+        <tag>Vue.js</tag>
+        <tag>javascript</tag>
+        <tag>ref</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue 的 Slot 插槽</title>
     <url>/2021/03/14/vue-slot/</url>
     <content><![CDATA[<h1 id="Slot-插槽"><a href="#Slot-插槽" class="headerlink" title="Slot 插槽"></a>Slot 插槽</h1><p>在子元件上面開個洞， 由外層元件將內容置放在至子層元件指定的位置中<br>可解決樣式一樣，但內容不一樣的組件</p>
@@ -3057,25 +3090,6 @@ package.json 設定 --mode staging
         <tag>Vue.js</tag>
         <tag>javascript</tag>
         <tag>Slot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>透過ref綁定，取得DOM元素</title>
-    <url>/2021/03/14/vue-template-refs/</url>
-    <content><![CDATA[<h1 id="透過-ref-綁定，取得-DOM-元素"><a href="#透過-ref-綁定，取得-DOM-元素" class="headerlink" title="透過 ref 綁定，取得 DOM 元素"></a>透過 ref 綁定，取得 DOM 元素</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted, ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> inputText = ref(<span class="literal">null</span>); <span class="comment">// 變數需跟綁定的ref一樣名稱</span></span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      inputText.value.focus(); <span class="comment">// 回傳後即可使用inputText</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      inputText, <span class="comment">// 回傳inputText</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">&quot;inputText&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> /&gt;</span> // 綁定ref</span><br></pre></td></tr></table></figure>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
-]]></content>
-      <categories>
-        <category>Vue3</category>
-      </categories>
-      <tags>
-        <tag>Vue.js</tag>
-        <tag>javascript</tag>
-        <tag>ref</tag>
       </tags>
   </entry>
   <entry>
@@ -3149,6 +3163,46 @@ package.json 設定 --mode staging
       </tags>
   </entry>
   <entry>
+    <title>Vuex &amp; API 資料流整合</title>
+    <url>/2021/03/21/vue-vuex-api-example/</url>
+    <content><![CDATA[<h1 id="圖片切換範例"><a href="#圖片切換範例" class="headerlink" title="圖片切換範例"></a>圖片切換範例</h1><h2 id="API-抽離管理，清楚管理資料"><a href="#API-抽離管理，清楚管理資料" class="headerlink" title="API 抽離管理，清楚管理資料"></a>API 抽離管理，清楚管理資料</h2><p>axios create 的物件會變成 axios 的實體<br>axios interceptors 攔截器，可以做驗證檢查</p>
+<a id="more"></a>
+
+<p>@/api/photoRequest.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// create的物件會變成axios的實體</span></span><br><span class="line"><span class="keyword">const</span> photoRequest = axios.create(&#123;</span><br><span class="line">  baseURL: <span class="string">&quot;https://vue-lessons-api.herokuapp.com/&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// axios 攔截器，可以做驗證檢查</span></span><br><span class="line"><span class="comment">// 發出 request以前執行</span></span><br><span class="line">photoRequest.interceptors.request.use(</span><br><span class="line">  (config) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">true</span>) <span class="keyword">throw</span> &#123; <span class="attr">response</span>: &#123; <span class="attr">data</span>: <span class="string">&quot;資料不得為空&quot;</span> &#125; &#125;;</span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;,</span><br><span class="line">  (error) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接到 response 之前執行</span></span><br><span class="line">photoRequest.interceptors.response.use(</span><br><span class="line">  (response) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(response);</span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;,</span><br><span class="line">  (error) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getPhotoRequest = <span class="function">() =&gt;</span> photoRequest.get(<span class="string">&quot;/photo/list&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="api-模組入口"><a href="#api-模組入口" class="headerlink" title="api 模組入口"></a>api 模組入口</h2><p>index.js 做各模組的分類，當成模組的入口，方便管理，components 只需引入 index.js</p>
+<p>@/api/index.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; getPhotoRequest &#125; <span class="keyword">from</span> <span class="string">&quot;./photoRequest.js&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> apiGetPhotoRequest = getPhotoRequest;</span><br></pre></td></tr></table></figure>
+<h2 id="資料管理"><a href="#資料管理" class="headerlink" title="資料管理"></a>資料管理</h2><p>store/index.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; apiGetPhotoRequest &#125; <span class="keyword">from</span> <span class="string">&quot;../api&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> createStore(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    photoArr: [],</span><br><span class="line">    idx: <span class="number">0</span>,</span><br><span class="line">    isLoad: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    <span class="comment">// 為確保API資料拿回再進行handImgLoad()，需回傳Promise，axios本身就是一個Promise的回傳</span></span><br><span class="line">    <span class="comment">// async / await 接近同步呼叫</span></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="title">handInit</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> res = <span class="keyword">await</span> apiGetPhotoRequest();</span><br><span class="line">        commit(<span class="string">&quot;init&quot;</span>, res.data);</span><br><span class="line">        <span class="keyword">return</span> res.data;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error.response.data);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 上面async等於</span></span><br><span class="line">    <span class="comment">// handInit(&#123; commit &#125;) &#123;</span></span><br><span class="line">    <span class="comment">//   const res = apiGetPhotoRequest();</span></span><br><span class="line">    <span class="comment">//   return res.then((response) =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     commit(&quot;init&quot;, response.data);</span></span><br><span class="line">    <span class="comment">//     return response.data;</span></span><br><span class="line">    <span class="comment">//   &#125;)</span></span><br><span class="line">    <span class="comment">// &#125;,</span></span><br><span class="line">    <span class="function"><span class="title">handLoadState</span>(<span class="params">&#123; commit &#125;, bool</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;loadState&quot;</span>, bool);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">handAdd</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;Add&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">handRemove</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;Remove&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    <span class="function"><span class="title">init</span>(<span class="params">state, payload</span>)</span> &#123;</span><br><span class="line">      state.photoArr = payload;</span><br><span class="line">      <span class="built_in">console</span>.log(state.photoArr);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">loadState</span>(<span class="params">state, bool</span>)</span> &#123;</span><br><span class="line">      state.isLoad = bool;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">Add</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      state.idx++;</span><br><span class="line">      <span class="keyword">if</span> (state.idx &gt; state.photoArr.length - <span class="number">1</span>) &#123;</span><br><span class="line">        state.idx = <span class="number">0</span>; <span class="comment">// 大於總數量時返回第一張</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">Remove</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      state.idx--;</span><br><span class="line">      <span class="keyword">if</span> (state.idx &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        state.idx = state.photoArr.length - <span class="number">1</span>; <span class="comment">//小於0時返回最後一張</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    <span class="function"><span class="title">isLoad</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.isLoad;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">photoArr</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.photoArr;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">idx</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.idx;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="組件"><a href="#組件" class="headerlink" title="組件"></a>組件</h2><p>App.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ImageBox <span class="keyword">from</span> <span class="string">&quot;./components/ImageBox/index.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> LoadingBar <span class="keyword">from</span> <span class="string">&quot;./components/LoadingBar.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    LoadingBar,</span><br><span class="line">    ImageBox,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> handImgLoad = <span class="function">(<span class="params">imgArr</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">      imgArr.forEach(<span class="function">(<span class="params">image</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newImage = <span class="keyword">new</span> Image();</span><br><span class="line">        newImage.src = image.url;</span><br><span class="line">        newImage.onload = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          i++;</span><br><span class="line">          store.dispatch(<span class="string">&quot;handLoadState&quot;</span>, i === imgArr.length);</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> init = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handInit&quot;</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        handImgLoad(res); <span class="comment">// res為handInit回傳的資料</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      init();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">LoadingBar</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ImageBox</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>loading 組件<br>components/LoadingBar.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> isLoad = computed(<span class="function">() =&gt;</span> store.getters.isLoad);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; isLoad &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">v-show</span>=<span class="string">&quot;!isLoad&quot;</span> <span class="attr">class</span>=<span class="string">&quot;load&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../assets/load.gif&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>圖片組件<br>components/ImageBox/index.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ImgShow <span class="keyword">from</span> <span class="string">&quot;./ImgShow.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ChangeBtn <span class="keyword">from</span> <span class="string">&quot;./ChangeBtn.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    ImgShow,</span><br><span class="line">    ChangeBtn,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> isLoad = computed(<span class="function">() =&gt;</span> store.getters.isLoad);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; isLoad &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span> <span class="attr">v-show</span>=<span class="string">&quot;isLoad&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ImgShow</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ChangeBtn</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>圖片切換按鈕<br>components/ImageBox/ChangeBtn.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> addImg = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handAdd&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> removeImg = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handRemove&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; addImg, removeImg &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;btnbox&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">&quot;removeImg&quot;</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span>&gt;</span>上一張<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">&quot;addImg&quot;</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span>&gt;</span>下一張<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>圖片顯示組件<br>components/ImageBox/ImgShow.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> photoArr = computed(<span class="function">() =&gt;</span> store.getters.photoArr);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> idx = computed(<span class="function">() =&gt;</span> store.getters.idx);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; photoArr, idx &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  &lt;img</span><br><span class="line">    class=&quot;img&quot;</span><br><span class="line">    v-for=&quot;(item, s) in photoArr&quot;</span><br><span class="line">    v-show=&quot;idx === s&quot;</span><br><span class="line">    :key=&quot;item.url&quot;</span><br><span class="line">    :src=&quot;item.url&quot;</span><br><span class="line">    alt=&quot;&quot;</span><br><span class="line">  /&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+]]></content>
+      <categories>
+        <category>Vue3</category>
+      </categories>
+      <tags>
+        <tag>Vue.js</tag>
+        <tag>javascript</tag>
+        <tag>vuex</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vuex 資料流，設定Vuex與modules管理</title>
     <url>/2021/03/16/vue-vuex/</url>
     <content><![CDATA[<h1 id="什麼是-Vuex"><a href="#什麼是-Vuex" class="headerlink" title="什麼是 Vuex?"></a>什麼是 Vuex?</h1><p>Vuex 是 Vue 應用程式的狀態管理，組件常會跨結構的傳遞狀態、需要全域狀態的管理，用 Vuex 可以更容易的控管你的資料流。</p>
@@ -3203,46 +3257,6 @@ MenuBtn.vue
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  namespaced: <span class="literal">true</span>,</span><br><span class="line">  state: &#123;</span><br><span class="line">    token: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    <span class="function"><span class="title">handSetToken</span>(<span class="params">context, token</span>)</span> &#123;</span><br><span class="line">      context.commit(<span class="string">&#x27;setToken&#x27;</span>, token);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    <span class="function"><span class="title">setToken</span>(<span class="params">state, token</span>)</span> &#123;</span><br><span class="line">      state.token = token;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    <span class="function"><span class="title">getToken</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.token;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>App.vue</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 因為設定namespaced，前面要加modules名稱Auth/</span></span><br><span class="line">      store.dispatch(<span class="string">&#x27;Auth/handSetToken&#x27;</span>, <span class="string">&#x27;aaa&#x27;</span>);</span><br><span class="line">      <span class="built_in">console</span>.log(store.getters[<span class="string">&#x27;Auth/getToken&#x27;</span>]);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
-]]></content>
-      <categories>
-        <category>Vue3</category>
-      </categories>
-      <tags>
-        <tag>Vue.js</tag>
-        <tag>javascript</tag>
-        <tag>vuex</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vuex &amp; API 資料流整合</title>
-    <url>/2021/03/21/vue-vuex-api-example/</url>
-    <content><![CDATA[<h1 id="圖片切換範例"><a href="#圖片切換範例" class="headerlink" title="圖片切換範例"></a>圖片切換範例</h1><h2 id="API-抽離管理，清楚管理資料"><a href="#API-抽離管理，清楚管理資料" class="headerlink" title="API 抽離管理，清楚管理資料"></a>API 抽離管理，清楚管理資料</h2><p>axios create 的物件會變成 axios 的實體<br>axios interceptors 攔截器，可以做驗證檢查</p>
-<a id="more"></a>
-
-<p>@/api/photoRequest.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// create的物件會變成axios的實體</span></span><br><span class="line"><span class="keyword">const</span> photoRequest = axios.create(&#123;</span><br><span class="line">  baseURL: <span class="string">&quot;https://vue-lessons-api.herokuapp.com/&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// axios 攔截器，可以做驗證檢查</span></span><br><span class="line"><span class="comment">// 發出 request以前執行</span></span><br><span class="line">photoRequest.interceptors.request.use(</span><br><span class="line">  (config) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">true</span>) <span class="keyword">throw</span> &#123; <span class="attr">response</span>: &#123; <span class="attr">data</span>: <span class="string">&quot;資料不得為空&quot;</span> &#125; &#125;;</span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;,</span><br><span class="line">  (error) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接到 response 之前執行</span></span><br><span class="line">photoRequest.interceptors.response.use(</span><br><span class="line">  (response) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(response);</span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;,</span><br><span class="line">  (error) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getPhotoRequest = <span class="function">() =&gt;</span> photoRequest.get(<span class="string">&quot;/photo/list&quot;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="api-模組入口"><a href="#api-模組入口" class="headerlink" title="api 模組入口"></a>api 模組入口</h2><p>index.js 做各模組的分類，當成模組的入口，方便管理，components 只需引入 index.js</p>
-<p>@/api/index.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; getPhotoRequest &#125; <span class="keyword">from</span> <span class="string">&quot;./photoRequest.js&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> apiGetPhotoRequest = getPhotoRequest;</span><br></pre></td></tr></table></figure>
-<h2 id="資料管理"><a href="#資料管理" class="headerlink" title="資料管理"></a>資料管理</h2><p>store/index.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; apiGetPhotoRequest &#125; <span class="keyword">from</span> <span class="string">&quot;../api&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> createStore(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    photoArr: [],</span><br><span class="line">    idx: <span class="number">0</span>,</span><br><span class="line">    isLoad: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    <span class="comment">// 為確保API資料拿回再進行handImgLoad()，需回傳Promise，axios本身就是一個Promise的回傳</span></span><br><span class="line">    <span class="comment">// async / await 接近同步呼叫</span></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="title">handInit</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> res = <span class="keyword">await</span> apiGetPhotoRequest();</span><br><span class="line">        commit(<span class="string">&quot;init&quot;</span>, res.data);</span><br><span class="line">        <span class="keyword">return</span> res.data;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error.response.data);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 上面async等於</span></span><br><span class="line">    <span class="comment">// handInit(&#123; commit &#125;) &#123;</span></span><br><span class="line">    <span class="comment">//   const res = apiGetPhotoRequest();</span></span><br><span class="line">    <span class="comment">//   return res.then((response) =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     commit(&quot;init&quot;, response.data);</span></span><br><span class="line">    <span class="comment">//     return response.data;</span></span><br><span class="line">    <span class="comment">//   &#125;)</span></span><br><span class="line">    <span class="comment">// &#125;,</span></span><br><span class="line">    <span class="function"><span class="title">handLoadState</span>(<span class="params">&#123; commit &#125;, bool</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;loadState&quot;</span>, bool);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">handAdd</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;Add&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">handRemove</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;Remove&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    <span class="function"><span class="title">init</span>(<span class="params">state, payload</span>)</span> &#123;</span><br><span class="line">      state.photoArr = payload;</span><br><span class="line">      <span class="built_in">console</span>.log(state.photoArr);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">loadState</span>(<span class="params">state, bool</span>)</span> &#123;</span><br><span class="line">      state.isLoad = bool;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">Add</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      state.idx++;</span><br><span class="line">      <span class="keyword">if</span> (state.idx &gt; state.photoArr.length - <span class="number">1</span>) &#123;</span><br><span class="line">        state.idx = <span class="number">0</span>; <span class="comment">// 大於總數量時返回第一張</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">Remove</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      state.idx--;</span><br><span class="line">      <span class="keyword">if</span> (state.idx &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        state.idx = state.photoArr.length - <span class="number">1</span>; <span class="comment">//小於0時返回最後一張</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    <span class="function"><span class="title">isLoad</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.isLoad;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">photoArr</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.photoArr;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">idx</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.idx;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="組件"><a href="#組件" class="headerlink" title="組件"></a>組件</h2><p>App.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ImageBox <span class="keyword">from</span> <span class="string">&quot;./components/ImageBox/index.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> LoadingBar <span class="keyword">from</span> <span class="string">&quot;./components/LoadingBar.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    LoadingBar,</span><br><span class="line">    ImageBox,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> handImgLoad = <span class="function">(<span class="params">imgArr</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">      imgArr.forEach(<span class="function">(<span class="params">image</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newImage = <span class="keyword">new</span> Image();</span><br><span class="line">        newImage.src = image.url;</span><br><span class="line">        newImage.onload = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          i++;</span><br><span class="line">          store.dispatch(<span class="string">&quot;handLoadState&quot;</span>, i === imgArr.length);</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> init = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handInit&quot;</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        handImgLoad(res); <span class="comment">// res為handInit回傳的資料</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      init();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">LoadingBar</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ImageBox</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>loading 組件<br>components/LoadingBar.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> isLoad = computed(<span class="function">() =&gt;</span> store.getters.isLoad);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; isLoad &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">v-show</span>=<span class="string">&quot;!isLoad&quot;</span> <span class="attr">class</span>=<span class="string">&quot;load&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../assets/load.gif&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>圖片組件<br>components/ImageBox/index.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ImgShow <span class="keyword">from</span> <span class="string">&quot;./ImgShow.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ChangeBtn <span class="keyword">from</span> <span class="string">&quot;./ChangeBtn.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    ImgShow,</span><br><span class="line">    ChangeBtn,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> isLoad = computed(<span class="function">() =&gt;</span> store.getters.isLoad);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; isLoad &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span> <span class="attr">v-show</span>=<span class="string">&quot;isLoad&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ImgShow</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ChangeBtn</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>圖片切換按鈕<br>components/ImageBox/ChangeBtn.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> addImg = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handAdd&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> removeImg = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handRemove&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; addImg, removeImg &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;btnbox&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">&quot;removeImg&quot;</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span>&gt;</span>上一張<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">&quot;addImg&quot;</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span>&gt;</span>下一張<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>圖片顯示組件<br>components/ImageBox/ImgShow.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> photoArr = computed(<span class="function">() =&gt;</span> store.getters.photoArr);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> idx = computed(<span class="function">() =&gt;</span> store.getters.idx);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; photoArr, idx &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  &lt;img</span><br><span class="line">    class=&quot;img&quot;</span><br><span class="line">    v-for=&quot;(item, s) in photoArr&quot;</span><br><span class="line">    v-show=&quot;idx === s&quot;</span><br><span class="line">    :key=&quot;item.url&quot;</span><br><span class="line">    :src=&quot;item.url&quot;</span><br><span class="line">    alt=&quot;&quot;</span><br><span class="line">  /&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <hr>
 <p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
 ]]></content>

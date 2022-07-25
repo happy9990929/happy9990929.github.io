@@ -41,16 +41,26 @@
 
   <meta name="description" content="Redux 是可以讓不同的組件，使用到共用的資料和方法，統一集中管理共用的狀態Redux 不是 React 的 library，但很多 React 專案都會使用 Redux 來管理狀態，這也是學 React 比較複雜的地方🤪好在官方之後出了 Redux Toolkit，也推薦大家使用 Redux Toolkit 來撰寫 Redux，它是以 Redux 為核心，也比較容易上手！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redux Toolkit">
+<meta property="og:title" content="【Redux Toolkit 教學】管理組件的共用資料">
 <meta property="og:url" content="https://happy9990929.github.io/2022/07/25/react-redux/index.html">
-<meta property="og:site_name" content="一文前端大小事">
+<meta property="og:site_name" content="Lala的前端大補帖">
 <meta property="og:description" content="Redux 是可以讓不同的組件，使用到共用的資料和方法，統一集中管理共用的狀態Redux 不是 React 的 library，但很多 React 專案都會使用 Redux 來管理狀態，這也是學 React 比較複雜的地方🤪好在官方之後出了 Redux Toolkit，也推薦大家使用 Redux Toolkit 來撰寫 Redux，它是以 Redux 為核心，也比較容易上手！">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://imgur.com/Cc0ifaw.jpg">
 <meta property="article:published_time" content="2022-07-25T04:06:17.000Z">
-<meta property="article:modified_time" content="2022-07-25T04:24:28.835Z">
-<meta property="article:author" content="Yi Wen Wang">
-<meta property="article:tag" content="Vue, Javascript, JS, Vue3, Nuxt, React">
+<meta property="article:modified_time" content="2022-07-25T05:52:42.019Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="Redux 教學">
+<meta property="article:tag" content="Redux Toolkit">
+<meta property="article:tag" content="Redux Toolkit 教學">
+<meta property="article:tag" content="configureStore">
+<meta property="article:tag" content="createSlice">
+<meta property="article:tag" content="useSelector">
+<meta property="article:tag" content="useDispatch">
+<meta property="article:tag" content="Redux Toolkit async">
+<meta property="article:tag" content="createAsyncThunk">
+<meta property="article:tag" content="extraReducers">
+<meta property="article:tag" content="react-redux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://imgur.com/Cc0ifaw.jpg">
 
@@ -67,7 +77,7 @@
   };
 </script>
 
-  <title>Redux Toolkit | 一文前端大小事</title>
+  <title>【Redux Toolkit 教學】管理組件的共用資料 | Lala的前端大補帖</title>
   
 
 
@@ -118,10 +128,10 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">一文前端大小事</h1>
+      <h1 class="site-title">Lala的前端大補帖</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">一起鑽研前端技術吧:)</p>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
   </div>
 
   <div class="site-nav-right">
@@ -214,16 +224,16 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
-      <meta itemprop="name" content="Yi Wen Wang">
-      <meta itemprop="description" content="前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一文前端大小事">
+      <meta itemprop="name" content="Lala的前端大補帖">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Redux Toolkit
+          【Redux Toolkit 教學】管理組件的共用資料
         </h1>
 
         <div class="post-meta">
@@ -234,7 +244,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2022-07-25 12:06:17 / 修改時間：12:24:28" itemprop="dateCreated datePublished" datetime="2022-07-25T12:06:17+08:00">2022-07-25</time>
+              <time title="創建時間：2022-07-25 12:06:17 / 修改時間：13:52:42" itemprop="dateCreated datePublished" datetime="2022-07-25T12:06:17+08:00">2022-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -348,7 +358,8 @@
 <p><br/><br/></p>
 <h1 id="⚠️eslint-出現警告"><a href="#⚠️eslint-出現警告" class="headerlink" title="⚠️eslint 出現警告"></a>⚠️eslint 出現警告</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">React Hook useEffect has a missing dependency: &#39;dispatch&#39;.</span><br><span class="line">Either include it or remove the dependency array</span><br></pre></td></tr></table></figure>
 <p>如果想除掉警告可以把 dispatch 放到第二個參數的陣列裡</p>
-
+<hr>
+<h3 id="參考資料-React-React-Redux-Redux-Toolkit-新手教學、Using-Redux-Toolkit’s-createAsyncThunk"><a href="#參考資料-React-React-Redux-Redux-Toolkit-新手教學、Using-Redux-Toolkit’s-createAsyncThunk" class="headerlink" title="參考資料 React + React-Redux + Redux-Toolkit 新手教學、Using Redux Toolkit’s createAsyncThunk"></a>參考資料 <a target="_blank" rel="noopener" href="https://penueling.com/%E7%B7%9A%E4%B8%8A%E5%AD%B8%E7%BF%92/react-react-redux-redix-toolkit-%E6%96%B0%E6%89%8B%E6%95%99%E5%AD%B8/">React + React-Redux + Redux-Toolkit 新手教學</a>、<a target="_blank" rel="noopener" href="https://blog.logrocket.com/using-redux-toolkits-createasyncthunk/">Using Redux Toolkit’s createAsyncThunk</a></h3>
         <div>
   <script type="text/javascript">
     document.write(
@@ -363,6 +374,19 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Redux-%E6%95%99%E5%AD%B8/" rel="tag"># Redux 教學</a>
+              <a href="/tags/Redux-Toolkit/" rel="tag"># Redux Toolkit</a>
+              <a href="/tags/Redux-Toolkit-%E6%95%99%E5%AD%B8/" rel="tag"># Redux Toolkit 教學</a>
+              <a href="/tags/configureStore/" rel="tag"># configureStore</a>
+              <a href="/tags/createSlice/" rel="tag"># createSlice</a>
+              <a href="/tags/useSelector/" rel="tag"># useSelector</a>
+              <a href="/tags/useDispatch/" rel="tag"># useDispatch</a>
+              <a href="/tags/Redux-Toolkit-async/" rel="tag"># Redux Toolkit async</a>
+              <a href="/tags/createAsyncThunk/" rel="tag"># createAsyncThunk</a>
+              <a href="/tags/extraReducers/" rel="tag"># extraReducers</a>
+              <a href="/tags/react-redux/" rel="tag"># react-redux</a>
+          </div>
 
         
 
@@ -453,16 +477,16 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E7%92%B0%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">安裝環境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AA%8D%E8%AD%98%E8%AE%8A%E6%95%B8"><span class="nav-number">2.</span> <span class="nav-text">認識變數</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux-%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">Redux 流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B%E6%83%85%E5%A2%83%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">範例情境：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%B5%E5%BB%BA-store"><span class="nav-number">5.</span> <span class="nav-text">創建 store</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%9C%80%E5%A4%96%E5%B1%A4%E5%8A%A0%E5%85%A5-Provider"><span class="nav-number">6.</span> <span class="nav-text">在最外層加入 Provider</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%B5%E5%BB%BA-Slice"><span class="nav-number">7.</span> <span class="nav-text">創建 Slice</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%95%AB%E9%9D%A2%E6%B8%B2%E6%9F%93"><span class="nav-number">8.</span> <span class="nav-text">畫面渲染</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%9E%E5%90%8C%E6%AD%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">9.</span> <span class="nav-text">非同步操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8Feslint-%E5%87%BA%E7%8F%BE%E8%AD%A6%E5%91%8A"><span class="nav-number">10.</span> <span class="nav-text">⚠️eslint 出現警告</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E7%92%B0%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">安裝環境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AA%8D%E8%AD%98%E8%AE%8A%E6%95%B8"><span class="nav-number">2.</span> <span class="nav-text">認識變數</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux-%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">Redux 流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B%E6%83%85%E5%A2%83%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">範例情境：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%B5%E5%BB%BA-store"><span class="nav-number">5.</span> <span class="nav-text">創建 store</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%9C%80%E5%A4%96%E5%B1%A4%E5%8A%A0%E5%85%A5-Provider"><span class="nav-number">6.</span> <span class="nav-text">在最外層加入 Provider</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%B5%E5%BB%BA-Slice"><span class="nav-number">7.</span> <span class="nav-text">創建 Slice</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%95%AB%E9%9D%A2%E6%B8%B2%E6%9F%93"><span class="nav-number">8.</span> <span class="nav-text">畫面渲染</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%9E%E5%90%8C%E6%AD%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">9.</span> <span class="nav-text">非同步操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8Feslint-%E5%87%BA%E7%8F%BE%E8%AD%A6%E5%91%8A"><span class="nav-number">10.</span> <span class="nav-text">⚠️eslint 出現警告</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99-React-React-Redux-Redux-Toolkit-%E6%96%B0%E6%89%8B%E6%95%99%E5%AD%B8%E3%80%81Using-Redux-Toolkit%E2%80%99s-createAsyncThunk"><span class="nav-number">10.0.1.</span> <span class="nav-text">參考資料 React + React-Redux + Redux-Toolkit 新手教學、Using Redux Toolkit’s createAsyncThunk</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Yi Wen Wang"
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
       src="https://i.imgur.com/pvToiN1.jpg">
-  <p class="site-author-name" itemprop="name">Yi Wen Wang</p>
-  <div class="site-description" itemprop="description">前端工程師的生活 Vue / Nuxt / Javascript / React，網頁問題歡迎技術交流~也可以找我合作唷😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -482,7 +506,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">194</span>
+        <span class="site-state-item-count">205</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -526,7 +550,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Yi Wen Wang</span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
 </div>
 
   <!--底部廣告-->
@@ -640,7 +664,7 @@
   var disqus_config = function() {
     this.page.url = "https://happy9990929.github.io/2022/07/25/react-redux/";
     this.page.identifier = "2022/07/25/react-redux/";
-    this.page.title = "Redux Toolkit";
+    this.page.title = "【Redux Toolkit 教學】管理組件的共用資料";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
