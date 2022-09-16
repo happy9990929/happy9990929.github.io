@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="第一次參加 IT 邦鐵人賽，接下來會發一系列鐵人賽的文章，希望可以堅持到最後，一起加油吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【DAY 1】 React 的歷史時間軸">
+<meta property="og:url" content="https://happy9990929.github.io/2022/09/16/react-history/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:description" content="第一次參加 IT 邦鐵人賽，接下來會發一系列鐵人賽的文章，希望可以堅持到最後，一起加油吧！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/uOjSy8y.jpg">
+<meta property="og:image" content="https://imgur.com/9xCoTS4.jpg">
+<meta property="og:image" content="https://imgur.com/sbU3CJn.jpg">
+<meta property="og:image" content="https://imgur.com/gtEzOHL.jpg">
+<meta property="og:image" content="https://imgur.com/54bi8yl.jpg">
+<meta property="og:image" content="https://imgur.com/OZPUwXa.jpg">
+<meta property="og:image" content="https://imgur.com/20YuapT.jpg">
+<meta property="article:published_time" content="2022-09-16T03:33:08.000Z">
+<meta property="article:modified_time" content="2022-09-16T03:52:31.129Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="React時間軸">
+<meta property="article:tag" content="React歷史">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/uOjSy8y.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/09/16/react-history/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>【DAY 1】 React 的歷史時間軸 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/09/16/react-history/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【DAY 1】 React 的歷史時間軸
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-09-16 11:33:08 / 修改時間：11:52:31" itemprop="dateCreated datePublished" datetime="2022-09-16T11:33:08+08:00">2022-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%90IT-%E9%90%B5%E4%BA%BA%E8%B3%BD%E3%80%91%E4%BD%A0React%E4%BA%86%E5%97%8E-30%E5%A4%A9%E8%A7%A3%E9%8E%96React%E6%8A%80%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">【IT 鐵人賽】你React了嗎? 30天解鎖React技能</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/09/16/react-history/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/09/16/react-history/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/uOjSy8y.jpg" alt="react-blue.jpg"></p>
+<p>第一次參加 IT 邦鐵人賽，接下來會發一系列鐵人賽的文章，希望可以堅持到最後，一起加油吧！</p>
+<a id="more"></a>
+
+<h3 id="前情提要"><a href="#前情提要" class="headerlink" title="[ 前情提要 ]"></a>[ 前情提要 ]</h3><p>要學習 React 就要有開一間餐廳的決心，你說這有什麼關係？<br>這過程其實大同小異，兩者都需要學習且消耗時間成本，才有機會成功！<br>現在「<strong>你</strong>」就是餐廳的老闆，即將營業一間「React 熱炒店」，<br>請了特級廚師 <strong>小當家</strong> 當御用主廚，而 <strong>解師傅</strong> 也是股東之一，我們抱著堅持下去的決心一起前進吧！</p>
+<p>解師傅：老闆～請多多指教囉！<br>小當家：我們一起把  React 熱炒店 做大吧~~~🤩<br><br/><br/></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>React 的出現，讓開發者享受到組件重用的便利，優化使用者介面</p>
+<p>早期都是用 Class Component，但在 React 16.8 之後出了 「Hook」，可以單純使用函式組件，讓你不需要用複雜的 class，就能使用更多 React 的功能，因此整篇，我們都會使用 Hook 的方式來開發</p>
+<p>不過 React 是誰發明的？又是怎麼出現的呢？在操作 React 之前，先來簡單了解一下 React 的背景吧！</p>
+<p><br/><br/></p>
+<h1 id="🕓-回顧-React-的時間軸"><a href="#🕓-回顧-React-的時間軸" class="headerlink" title="🕓 回顧 React 的時間軸"></a>🕓 回顧 React 的時間軸</h1><p><br/><br/></p>
+<p><img src="https://imgur.com/9xCoTS4.jpg" alt="fb.jpg"></p>
+<h3 id="💠-2010-年前後"><a href="#💠-2010-年前後" class="headerlink" title="💠 2010 年前後"></a>💠 <strong>2010 年前後</strong></h3><p>Facebook 快速成長，相信你我對 Facebook 一定都不陌生，隨著團隊的擴張讓代碼的維護變得越來越困難，FB 認為現行技術已無法滿足擴展需求，如果繼續用舊有的代碼維護頁面，系統的複雜就成級數的增長，使代碼變得脆弱且不可預測</p>
+<p><br/><br/><br/></p>
+<p><img src="https://imgur.com/sbU3CJn.jpg" alt="fax.jpg"></p>
+<h3 id="💠-2011-年"><a href="#💠-2011-年" class="headerlink" title="💠 2011 年"></a>💠 <strong>2011 年</strong></h3><p>為了解決這個問題，一位 Facebook 工程師 <strong>Jordan Walke</strong> ，便開發出 <a target="_blank" rel="noopener" href="https://github.com/jordwalke/FaxJs"><strong>FaxJs</strong></a>，也就是 React 的原型，於是 React 先被應用在 Facebook 的 News Feed (動態消息)</p>
+<p><br/><br/><br/></p>
+<p><img src="https://imgur.com/gtEzOHL.jpg" alt="ig.jpg"></p>
+<h3 id="💠-2012-年"><a href="#💠-2012-年" class="headerlink" title="💠 2012 年"></a>💠 <strong>2012 年</strong></h3><p>Facebook 將 React 分離出來，讓 React 可以在不同專案運行，Facebook 收購 Instagram，將 React 部署在 Instagram</p>
+<p>Facebook 的 CEO Mark Zuckerberg 表示：我們最大的錯誤就是壓太多寶在 HTML5 上了</p>
+<p><br/><br/><br/></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GW0rj4sNH2w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h3 id="💠-2013年"><a href="#💠-2013年" class="headerlink" title="💠 2013年"></a>💠 <strong>2013年</strong></h3><p>在 JSCONF US 峰會，Jordan Walke 發表 React 的 Open Source，起初的聽眾對 React 抱持懷疑的態度，多數人覺得 React 是一種退步，這讓 Facebook 團隊決定加強宣傳在勇於創新的族群上</p>
+<p><br/><br/><br/></p>
+<p><img src="https://imgur.com/54bi8yl.jpg" alt="netflix.jpg"></p>
+<h3 id="💠-2014年"><a href="#💠-2014年" class="headerlink" title="💠 2014年"></a>💠 2014年</h3><p>經過團隊的推廣，React 逐漸獲得聲譽，開始有大量公司將 React 用在專案上，包含了 Netflix</p>
+<p><br/><br/><br/></p>
+<p><img src="https://imgur.com/OZPUwXa.jpg" alt="redux.jpg"></p>
+<h3 id="💠-2015年"><a href="#💠-2015年" class="headerlink" title="💠 2015年"></a>💠 2015年</h3><p>React Native、Redux 問世</p>
+<p>React Native 讓網頁開發人員能用 React 的方式以 JavaScript 撰寫 App</p>
+<p>Redux 可以讓不同的組件，使用到共用的資料和方法，統一集中管理共用的狀態</p>
+<p><br/><br/><br/></p>
+<h3 id="💠-2016年"><a href="#💠-2016年" class="headerlink" title="💠 2016年"></a>💠 2016年</h3><p>React 成為主流框架之一，版本進入到正式版號 React 15 穩定版</p>
+<p><br/><br/><br/></p>
+<h3 id="💠-2017年"><a href="#💠-2017年" class="headerlink" title="💠 2017年"></a>💠 2017年</h3><p>React 16 發佈</p>
+<p><br/><br/><br/></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dpw9EHDh2bM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h3 id="💠-2018年"><a href="#💠-2018年" class="headerlink" title="💠 2018年"></a>💠 2018年</h3><p>在 React Conf 2018，Sophie Alpert 和 Dan Abramov 介紹了 Hook，接著 Ryan Florence 展示了如何用它們來重構應用程式</p>
+<p><br/><br/><br/></p>
+<p><img src="https://imgur.com/20YuapT.jpg" alt="hook.jpg"></p>
+<h3 id="💠-2019年"><a href="#💠-2019年" class="headerlink" title="💠 2019年"></a>💠 2019年</h3><p>React 16.8 公眾發布。React Hooks 可以在穩定版中使用，不必寫 class 就能使用 state，更好管理有狀態的邏輯，也降低了學習成本</p>
+<p><br/><br/><br/></p>
+<h3 id="💠-2020年"><a href="#💠-2020年" class="headerlink" title="💠 2020年"></a>💠 2020年</h3><p>React 17 引入漸進式升級</p>
+<p><br/><br/><br/></p>
+<h3 id="💠-2022年至今"><a href="#💠-2022年至今" class="headerlink" title="💠 2022年至今"></a>💠 2022年至今</h3><p>React18 正式版發布</p>
+<p><br/><br/><br/></p>
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>回溯的部分就差不多寫到這裡，雖然你完全可以不用知道這些過去，還是可以學好 React ，但回過頭來看了這些過去會發現，這其實是個很勵志的故事，也還滿有趣的！今天就到這裡囉～我們明天繼續吧！</p>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React%E6%99%82%E9%96%93%E8%BB%B8/" rel="tag"># React時間軸</a>
+              <a href="/tags/React%E6%AD%B7%E5%8F%B2/" rel="tag"># React歷史</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/25/react-redux/" rel="prev" title="【Redux Toolkit 教學】管理組件的共用資料">
+      <i class="fa fa-chevron-left"></i> 【Redux Toolkit 教學】管理組件的共用資料
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">[ 前情提要 ]</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number"></span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%F0%9F%95%93-%E5%9B%9E%E9%A1%A7-React-%E7%9A%84%E6%99%82%E9%96%93%E8%BB%B8"><span class="nav-number"></span> <span class="nav-text">🕓 回顧 React 的時間軸</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2010-%E5%B9%B4%E5%89%8D%E5%BE%8C"><span class="nav-number">1.</span> <span class="nav-text">💠 2010 年前後</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2011-%E5%B9%B4"><span class="nav-number">2.</span> <span class="nav-text">💠 2011 年</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2012-%E5%B9%B4"><span class="nav-number">3.</span> <span class="nav-text">💠 2012 年</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2013%E5%B9%B4"><span class="nav-number">4.</span> <span class="nav-text">💠 2013年</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2014%E5%B9%B4"><span class="nav-number">5.</span> <span class="nav-text">💠 2014年</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2015%E5%B9%B4"><span class="nav-number">6.</span> <span class="nav-text">💠 2015年</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2016%E5%B9%B4"><span class="nav-number">7.</span> <span class="nav-text">💠 2016年</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2017%E5%B9%B4"><span class="nav-number">8.</span> <span class="nav-text">💠 2017年</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2018%E5%B9%B4"><span class="nav-number">9.</span> <span class="nav-text">💠 2018年</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2019%E5%B9%B4"><span class="nav-number">10.</span> <span class="nav-text">💠 2019年</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2020%E5%B9%B4"><span class="nav-number">11.</span> <span class="nav-text">💠 2020年</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A0-2022%E5%B9%B4%E8%87%B3%E4%BB%8A"><span class="nav-number">12.</span> <span class="nav-text">💠 2022年至今</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number"></span> <span class="nav-text">結語</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">207</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/09/16/react-history/";
+    this.page.identifier = "2022/09/16/react-history/";
+    this.page.title = "【DAY 1】 React 的歷史時間軸";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
