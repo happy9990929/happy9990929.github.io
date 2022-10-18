@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="【DAY 3】React 環境安裝-完成前置作業">
+<meta property="og:url" content="https://happy9990929.github.io/2022/10/18/react-install/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/BhMRQL0.jpg">
+<meta property="og:image" content="https://imgur.com/c5Kj0ru.jpg">
+<meta property="og:image" content="https://imgur.com/elSlDav.jpg">
+<meta property="og:image" content="https://imgur.com/KMqwA2o.jpg">
+<meta property="og:image" content="https://imgur.com/WpfOXlM.jpg">
+<meta property="og:image" content="https://imgur.com/XCbyYyx.jpg">
+<meta property="article:published_time" content="2022-10-18T14:21:07.000Z">
+<meta property="article:modified_time" content="2022-10-18T14:32:16.798Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="Vue, Javascript, JS, Vue3, Nuxt, React">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/BhMRQL0.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/10/18/react-install/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>【DAY 3】React 環境安裝-完成前置作業 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/10/18/react-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【DAY 3】React 環境安裝-完成前置作業
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-10-18 22:21:07 / 修改時間：22:32:16" itemprop="dateCreated datePublished" datetime="2022-10-18T22:21:07+08:00">2022-10-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%90IT-%E9%90%B5%E4%BA%BA%E8%B3%BD%E3%80%91%E4%BD%A0React%E4%BA%86%E5%97%8E-30%E5%A4%A9%E8%A7%A3%E9%8E%96React%E6%8A%80%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">【IT 鐵人賽】你React了嗎? 30天解鎖React技能</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/10/18/react-install/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/10/18/react-install/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/BhMRQL0.jpg" alt="cover"></p>
+<a id="more"></a>
+
+<p><strong>［情境劇場］</strong></p>
+<p>解師傅：嘿！老闆！我找到了一間不錯的店面，CRA 師傅會幫我們完成它！</p>
+<p>要開一間 React 熱炒店，想當然要先有一間環境店面，即使小當家有再高的廚藝，沒有店面也是無用武之地，我們請 CRA 師傅幫我們建好環境，一起期待我們的新店面吧！!</p>
+<hr>
+<p>因為要建置一個 JavaScript 的開發環境，一般都會用 Node.js 來作為測試或開發用的本地端伺服器，所以在安裝 React 之前，要先確認：</p>
+<ul>
+<li>是否已安裝 Node</li>
+<li>Node 版本需 &gt;= 14.0.0</li>
+<li>npm 需 &gt;= 5.6</li>
+</ul>
+<p>安裝 Node 就等於已安裝了 npm 工具，所以只需要檢查 npm 版本即可<br><br/><br><br/><br><br/></p>
+<h1 id="安裝-Node-js"><a href="#安裝-Node-js" class="headerlink" title="安裝 Node.js"></a>安裝 Node.js</h1><p>先到 <a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node 官網</a>，會看到有兩個版本</p>
+<ul>
+<li>LTS 長期支援版本：官方長期維護，較為穩定，供一般開發專案使用</li>
+<li>Current 最新版本：具有現在最新功能，但可能會有變動，較不穩定，要對新功能做研究測試才會使用這個版本</li>
+</ul>
+<p>我們只是要執行專案，下載 LTS 長期支援版本<br/><br><br/><br><img src="https://imgur.com/c5Kj0ru.jpg" alt="nodejs"><br><br/><br><br/></p>
+<h2 id="確認版本"><a href="#確認版本" class="headerlink" title="確認版本"></a>確認版本</h2><p>檢查是否安裝成功，打開命令提示字元(在 windows 搜尋 <code>cmd</code> 或在鍵盤按 開始 + <code>R</code>)</p>
+<ul>
+<li><p>確認 Node 版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>確認 npm 版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<p><img src="https://imgur.com/elSlDav.jpg" alt="check node"><br>確認 Node 安裝完就可以來安裝 React 囉！<br/></p>
+<br/>
+<br/>
+<br/>
+
+</li>
+</ul>
+<h1 id="安裝-React"><a href="#安裝-React" class="headerlink" title="安裝 React"></a>安裝 React</h1><p><a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app">Create React App</a> 簡稱為 CRA，是一個適合學習 React 的環境，<br>也是使用 React 建立一個 <strong>全新的 single-page 應用程式</strong> 的最佳方法</p>
+<p>你可以在你要的資料夾下指令 <code>cmd</code> 開啟命令提示字元，<br>接著從下面選擇一種方式安裝 Create React App，官方使用 NPX</p>
+<p>my-app 為專案名稱，依專案自行命名<br/></p>
+<ul>
+<li>NPX<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app my-app</span><br></pre></td></tr></table></figure></li>
+<li>NPM<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init react-app my-app</span><br></pre></td></tr></table></figure></li>
+<li>Yarn<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn create react-app my-app</span><br></pre></td></tr></table></figure>
+<br/>
+<br/>
+
+</li>
+</ul>
+<blockquote>
+<p>⭕ npm 與 npx 的差異<br>npm 為永久安裝，npx 安裝後即移除<br>Create React App 只有最一開始建立專案會用到，之後就不會用了，就很適合用 npx 來安裝</p>
+</blockquote>
+<br/>
+<br/>
+
+<p>安裝成功後，會出現建議的指令</p>
+<p><img src="https://imgur.com/KMqwA2o.jpg" alt="CRA"></p>
+<br/>
+<br/>
+
+<p><code>cd my-app</code>  進入 my-app</p>
+<p><code>npm start</code>  開啟專案<br/><br><br/><br><br/><br><br/></p>
+<p>如果記不起來指令也沒關係，使用編輯器開啟專案(這邊使用的是 Visual Studio Code)</p>
+<p>點擊 package.json，<code>scripts</code> 的地方也會顯示指令</p>
+<p><img src="https://imgur.com/WpfOXlM.jpg" alt="script"></p>
+<p><code>npm start</code> 執行專案</p>
+<p><code>npm run build</code> 打包專案</p>
+<p><code>npm test</code> 執行測試</p>
+<p><code>npm run eject</code> 對 Create React App 配置進行高度修改<br/><br><br/><br><br/><br><br/></p>
+<p>安裝完就大功告成囉！!</p>
+<p><img src="https://imgur.com/XCbyYyx.jpg" alt="react"><br><br/><br><br/><br><br/></p>
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>我們今天用 Create React App 成功安裝好 React 了，接著可以進行專案上的開發，明天再來介紹專案內的檔案分別是做什麼功用，以及專案結構該怎麼分配吧！!</p>
+<hr>
+<p>本文為 IT 鐵人賽 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
+<hr>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/09/17/react-characteristic/" rel="prev" title="【DAY 2】 React 的特性與思維，我該先學哪個框架呢?">
+      <i class="fa fa-chevron-left"></i> 【DAY 2】 React 的特性與思維，我該先學哪個框架呢?
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-Node-js"><span class="nav-number">1.</span> <span class="nav-text">安裝 Node.js</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%BA%E8%AA%8D%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.</span> <span class="nav-text">確認版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-React"><span class="nav-number">2.</span> <span class="nav-text">安裝 React</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">3.</span> <span class="nav-text">結語</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">207</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/10/18/react-install/";
+    this.page.identifier = "2022/10/18/react-install/";
+    this.page.title = "【DAY 3】React 環境安裝-完成前置作業";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
