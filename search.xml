@@ -23,35 +23,6 @@
       </tags>
   </entry>
   <entry>
-    <title>解Bug-defineProps is a compiler macro and no longer needs to be imported.</title>
-    <url>/2022/04/27/bug-defineProps/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/u3IhKJS.jpg" alt="defineProps error"></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; defineProps, defineEmits &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> props = defineProps(&#123;</span><br><span class="line">  foo: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emit = defineEmits([<span class="string">&#x27;change&#x27;</span>, <span class="string">&#x27;delete&#x27;</span>])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>在 Vue3 編譯時出現這個警告<br>[@vue/compiler-sfc] defineProps is a compiler macro and no longer needs to be imported.<br>[@vue/compiler-sfc] defineEmits is a compiler macro and no longer needs to be imported.</p>
-<a id="more"></a>
-<br/>
-<br/>
-
-<h1 id="解譯bug"><a href="#解譯bug" class="headerlink" title="解譯bug"></a>解譯bug</h1><p>⚠️ <strong>@vue/compiler-sfc</strong><br>Vue 單文件組件(SFC) 編譯警告</p>
-<p>⚠️<strong>defineProps is a compiler macro and no longer needs to be imported.</strong><br>defineProps 是一個編譯器巨集，不再需要導入。</p>
-<p>⚠️<strong>defineEmits is a compiler macro and no longer needs to be imported.</strong><br>defineEmits 是一個編譯器巨集，不再需要導入。<br><br/><br><br/></p>
-<h1 id="錯誤原因"><a href="#錯誤原因" class="headerlink" title="錯誤原因"></a>錯誤原因</h1><p>defineProps和 defineEmits 都是只在 <code>&lt;script setup&gt;</code> 中才能使用的編譯器巨集。<br>他們不需要導入且會隨著 <code>&lt;script setup&gt;</code> 處理過程一同被編譯掉<br><br/><br><br/></p>
-<h1 id="如何解決"><a href="#如何解決" class="headerlink" title="如何解決"></a>如何解決</h1><p>將 import 的 <code>defineProps</code>、<code>defineEmits</code> 移除即可</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line"><span class="comment">// import &#123; defineProps, defineEmits &#125; from &#x27;vue&#x27;; // 刪除這行</span></span><br><span class="line"><span class="keyword">const</span> props = defineProps(&#123;</span><br><span class="line">  foo: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emit = defineEmits([<span class="string">&#x27;change&#x27;</span>, <span class="string">&#x27;delete&#x27;</span>])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<hr>
-<p><a href="https://v3.cn.vuejs.org/api/sfc-script-setup.html">官方文件</a></p>
-<hr>
-<p>如果這篇文章對你有幫助，請幫小編按個讚👍～你的鼓勵是我分享的動力😊</p>
-]]></content>
-      <categories>
-        <category>Bug記錄</category>
-      </categories>
-      <tags>
-        <tag>defineProps</tag>
-        <tag>defineEmits</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue Component 組件基本介紹</title>
     <url>/2021/03/10/components-base/</url>
     <content><![CDATA[<h1 id="組件基本介紹"><a href="#組件基本介紹" class="headerlink" title="組件基本介紹"></a>組件基本介紹</h1><p>main.js</p>
@@ -191,6 +162,142 @@
         <tag>C槽清理</tag>
         <tag>C槽容量不足</tag>
         <tag>c槽突然爆滿</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解Bug-defineProps is a compiler macro and no longer needs to be imported.</title>
+    <url>/2022/04/27/bug-defineProps/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/u3IhKJS.jpg" alt="defineProps error"></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; defineProps, defineEmits &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> props = defineProps(&#123;</span><br><span class="line">  foo: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emit = defineEmits([<span class="string">&#x27;change&#x27;</span>, <span class="string">&#x27;delete&#x27;</span>])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>在 Vue3 編譯時出現這個警告<br>[@vue/compiler-sfc] defineProps is a compiler macro and no longer needs to be imported.<br>[@vue/compiler-sfc] defineEmits is a compiler macro and no longer needs to be imported.</p>
+<a id="more"></a>
+<br/>
+<br/>
+
+<h1 id="解譯bug"><a href="#解譯bug" class="headerlink" title="解譯bug"></a>解譯bug</h1><p>⚠️ <strong>@vue/compiler-sfc</strong><br>Vue 單文件組件(SFC) 編譯警告</p>
+<p>⚠️<strong>defineProps is a compiler macro and no longer needs to be imported.</strong><br>defineProps 是一個編譯器巨集，不再需要導入。</p>
+<p>⚠️<strong>defineEmits is a compiler macro and no longer needs to be imported.</strong><br>defineEmits 是一個編譯器巨集，不再需要導入。<br><br/><br><br/></p>
+<h1 id="錯誤原因"><a href="#錯誤原因" class="headerlink" title="錯誤原因"></a>錯誤原因</h1><p>defineProps和 defineEmits 都是只在 <code>&lt;script setup&gt;</code> 中才能使用的編譯器巨集。<br>他們不需要導入且會隨著 <code>&lt;script setup&gt;</code> 處理過程一同被編譯掉<br><br/><br><br/></p>
+<h1 id="如何解決"><a href="#如何解決" class="headerlink" title="如何解決"></a>如何解決</h1><p>將 import 的 <code>defineProps</code>、<code>defineEmits</code> 移除即可</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line"><span class="comment">// import &#123; defineProps, defineEmits &#125; from &#x27;vue&#x27;; // 刪除這行</span></span><br><span class="line"><span class="keyword">const</span> props = defineProps(&#123;</span><br><span class="line">  foo: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emit = defineEmits([<span class="string">&#x27;change&#x27;</span>, <span class="string">&#x27;delete&#x27;</span>])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><a href="https://v3.cn.vuejs.org/api/sfc-script-setup.html">官方文件</a></p>
+<hr>
+<p>如果這篇文章對你有幫助，請幫小編按個讚👍～你的鼓勵是我分享的動力😊</p>
+]]></content>
+      <categories>
+        <category>Bug記錄</category>
+      </categories>
+      <tags>
+        <tag>defineProps</tag>
+        <tag>defineEmits</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ngrok教學-從外部連到localhost執行你的網站</title>
+    <url>/2022/06/13/frontend-ngrok/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/L7Qvsfy.jpg" alt="ngrok"></p>
+<p>你是否有遇過，想測試一個功能，或是想在不同裝置上測試，卻又要大費周章部署到測試機，你其實可以不用這麼麻煩！<br>ngrok 可以在本地 localhost 的環境下直接進行測試，重點是 <strong>免費版</strong> 就夠給我們一般使用<br><br/><br/></p>
+<a id="more"></a>
+
+<p><ins class="adsbygoogle"
+     style="display:block; text-align:center; margin: 100px auto"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3584202217117217"
+     data-ad-slot="8536485431"></ins></p>
+<h1 id="下載-ngrok"><a href="#下載-ngrok" class="headerlink" title="下載 ngrok"></a>下載 ngrok</h1><p>首先<a href="https://ngrok.com/download">Install ngrok</a>，依自己的 OS 作業系統選擇檔案<br><br/><br/></p>
+<h1 id="註冊-ngrok-帳號"><a href="#註冊-ngrok-帳號" class="headerlink" title="註冊 ngrok 帳號"></a>註冊 ngrok 帳號</h1><p>進入 <a href="https://ngrok.com/">ngrok 官網</a>，可以用 github 或 google 帳號建立，或是自行建立一個帳號<br><br/><br/></p>
+<h1 id="登入-ngrok-取得-token"><a href="#登入-ngrok-取得-token" class="headerlink" title="登入 ngrok 取得 token"></a>登入 ngrok 取得 token</h1><p>直接把 Command Line 複製下來<br><img src="https://imgur.com/TIW1WYt.jpg" alt="ngrok token"><br><br/><br/></p>
+<h1 id="加入-token"><a href="#加入-token" class="headerlink" title="加入 token"></a>加入 token</h1><p>將 Command Line 貼到剛下載的 ngrok.exe<br>設定完之後會看到自動建立了 ngrok.yml<br><br/></p>
+<p><img src="https://imgur.com/PIH8hgB.jpg" alt="ngrok token"><br><br/><br/></p>
+<h1 id="啟用連到-local-的-web-服務"><a href="#啟用連到-local-的-web-服務" class="headerlink" title="啟用連到 local 的 web 服務"></a>啟用連到 local 的 web 服務</h1><p>依本地端的埠號去下指令，如果我的本地是 localhost:4000 那就會是</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ngrok http 4000</span><br></pre></td></tr></table></figure>
+<p>之後就會出現以下畫面<br><br/></p>
+<p><img src="https://imgur.com/9KrXRa9.jpg" alt="ngrok http"><br>把網址貼到瀏覽器上執行，就會出現你本地端的網站啦～</p>
+<p><img src="https://imgur.com/fErKOQK.jpg" alt="ngrok http"><br><br/><br/></p>
+<hr>
+<h1 id="使用框架時遇到-invalid-host-header"><a href="#使用框架時遇到-invalid-host-header" class="headerlink" title="使用框架時遇到 invalid host header"></a>使用框架時遇到 invalid host header</h1><p>vue 的解決方式是直接在 vue.config.js 的地方設定 <code>disableHostCheck: true</code>，就可以開啟囉！</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">     disableHostCheck: <span class="literal">true</span>,</span><br><span class="line">   &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>使用 React 時，網友也提供了解法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ngrok http <span class="number">8080</span> -host-header=<span class="string">&quot;localhost:8080&quot;</span></span><br><span class="line">ngrok http --host-header=rewrite <span class="number">8080</span></span><br></pre></td></tr></table></figure>
+<p>記得將 8080 改成自己的 port 號哦！</p>
+<br/>
+
+<h1 id="錯誤-Your-account-is-limited-to-1-simultaneous-ngrok-agent-session"><a href="#錯誤-Your-account-is-limited-to-1-simultaneous-ngrok-agent-session" class="headerlink" title="錯誤: Your account is limited to 1 simultaneous ngrok agent session."></a>錯誤: Your account is limited to 1 simultaneous ngrok agent session.</h1><p>如果出現此錯誤: 他的意思是你使用了一個以上的代理，<br>當下找不到斷開的方式，最萬能的解法是 <strong>重開機</strong> 就會好囉😂</p>
+<hr>
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>有時在檢查網站裝置畫面功能，可能會跟在行動裝置上有不同狀況發生，ngrok 就很適合拿來測試行動裝置上的問題，也不需要一直重複部署，真的很方便呢！如果我的文章有幫助到你，歡迎給我一點鼓勵哦👏👏👏</p>
+]]></content>
+      <categories>
+        <category>前端工具</category>
+      </categories>
+      <tags>
+        <tag>ngrok</tag>
+        <tag>ngrok 教學</tag>
+        <tag>ngrok token</tag>
+        <tag>invalid host header</tag>
+        <tag>Your account is limited to 1 simultaneous ngrok agent session.</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git 常用指令</title>
+    <url>/2021/10/17/git-cmdline/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/6mK0zWq.jpg" alt="Git"></p>
+<h1 id="Git-常用指令"><a href="#Git-常用指令" class="headerlink" title="Git 常用指令"></a>Git 常用指令</h1><p><strong>Git 是否有安裝成功：</strong><code>git --version</code></p>
+<a id="more"></a>
+
+<p><strong>設定/修改個人資料</strong></p>
+<ul>
+<li>輸入姓名：<code>git config --global user.name &quot;gon&quot;</code></li>
+<li>輸入個人的 email：<code>git config --global user.email &quot;gonsakon@gmail.com&quot;</code></li>
+<li>查詢 git 設定內容：<code>git config --list</code></li>
+<li>查看用户名：<code>git config user.name</code></li>
+<li>查看用户邮箱：<code>git config user.email</code></li>
+</ul>
+<p><strong>Git 常用指令</strong></p>
+<ul>
+<li>初始化數據庫：<code>git init</code></li>
+<li>查詢當前狀態：<code>git status</code></li>
+<li>將檔案加入到索引：<code>git add .</code></li>
+<li>將索引檔案變成一個更新(commit)：<code>git commit -m &quot;修改內容&quot;</code></li>
+<li>觀察 commit 歷史紀錄： <code>git log</code></li>
+<li>下載遠端數據庫：<code>git clone 數據庫網址</code></li>
+<li>更新遠端數據庫：<code>git push origin master</code></li>
+<li>下載同步更新：<code>git pull</code></li>
+</ul>
+<p><strong>分支 (branch)</strong></p>
+<ul>
+<li>新增分支：<code>git branch 分支名稱</code></li>
+<li>查看分支：<code>git branch</code></li>
+<li>切換分支：<code>git checkout 分支名稱</code></li>
+<li>建立並切換分支：<code>git checkout -b 分支名稱</code></li>
+<li>刪除分支：<code>git branch -d 分支名稱</code> (-D 是強制刪除)</li>
+<li>還原上個版本：<code>git reset HEAD^</code> (^為要回去哪一個版本，^^兩個就是回到前兩個版本)</li>
+<li>合併分支：<code>git merge 分支名稱</code></li>
+<li>取消快轉：<code>git merge 分支名稱 --no-ff</code></li>
+<li>觀看線圖：<code>git log —oneline -graph</code></li>
+<li>還原合併前狀態：<code>git reset —hard ORIG_HEAD</code></li>
+</ul>
+<p><strong>還原技巧</strong></p>
+<ul>
+<li>回頭觀看版本內容：<code>git checkout 編號</code></li>
+<li>返回最新的版本：<code>git checkout master(分支名稱)</code></li>
+<li>索引檔案&gt;還原到工作目錄：<code>git reset HEAD</code></li>
+<li>還原前兩個版本：<code>git reset HEAD^^</code></li>
+<li>還原前兩個版本，所有更新檔案都<strong>放棄</strong>：<code>git reset HEAD^^ --hard</code></li>
+<li>觀看詳細所有歷史紀錄：<code>git reflog</code></li>
+<li>新增檔案時，檔案還沒加追蹤時，清空工作目錄<br>顯示此次清除的檔案：<code>git clean -n</code><br>強制清除檔案：<code>git clean -f</code></li>
+<li>檔案已加入追蹤，還原工作目錄上已更改的檔案 ：<code>git checkout -- &lt;file&gt;</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>Git指令</tag>
       </tags>
   </entry>
   <entry>
@@ -352,113 +459,6 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
         <tag>vite</tag>
         <tag>vite 教學</tag>
         <tag>vite scss共用變數</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ngrok教學-從外部連到localhost執行你的網站</title>
-    <url>/2022/06/13/frontend-ngrok/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/L7Qvsfy.jpg" alt="ngrok"></p>
-<p>你是否有遇過，想測試一個功能，或是想在不同裝置上測試，卻又要大費周章部署到測試機，你其實可以不用這麼麻煩！<br>ngrok 可以在本地 localhost 的環境下直接進行測試，重點是 <strong>免費版</strong> 就夠給我們一般使用<br><br/><br/></p>
-<a id="more"></a>
-
-<p><ins class="adsbygoogle"
-     style="display:block; text-align:center; margin: 100px auto"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-3584202217117217"
-     data-ad-slot="8536485431"></ins></p>
-<h1 id="下載-ngrok"><a href="#下載-ngrok" class="headerlink" title="下載 ngrok"></a>下載 ngrok</h1><p>首先<a href="https://ngrok.com/download">Install ngrok</a>，依自己的 OS 作業系統選擇檔案<br><br/><br/></p>
-<h1 id="註冊-ngrok-帳號"><a href="#註冊-ngrok-帳號" class="headerlink" title="註冊 ngrok 帳號"></a>註冊 ngrok 帳號</h1><p>進入 <a href="https://ngrok.com/">ngrok 官網</a>，可以用 github 或 google 帳號建立，或是自行建立一個帳號<br><br/><br/></p>
-<h1 id="登入-ngrok-取得-token"><a href="#登入-ngrok-取得-token" class="headerlink" title="登入 ngrok 取得 token"></a>登入 ngrok 取得 token</h1><p>直接把 Command Line 複製下來<br><img src="https://imgur.com/TIW1WYt.jpg" alt="ngrok token"><br><br/><br/></p>
-<h1 id="加入-token"><a href="#加入-token" class="headerlink" title="加入 token"></a>加入 token</h1><p>將 Command Line 貼到剛下載的 ngrok.exe<br>設定完之後會看到自動建立了 ngrok.yml<br><br/></p>
-<p><img src="https://imgur.com/PIH8hgB.jpg" alt="ngrok token"><br><br/><br/></p>
-<h1 id="啟用連到-local-的-web-服務"><a href="#啟用連到-local-的-web-服務" class="headerlink" title="啟用連到 local 的 web 服務"></a>啟用連到 local 的 web 服務</h1><p>依本地端的埠號去下指令，如果我的本地是 localhost:4000 那就會是</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ngrok http 4000</span><br></pre></td></tr></table></figure>
-<p>之後就會出現以下畫面<br><br/></p>
-<p><img src="https://imgur.com/9KrXRa9.jpg" alt="ngrok http"><br>把網址貼到瀏覽器上執行，就會出現你本地端的網站啦～</p>
-<p><img src="https://imgur.com/fErKOQK.jpg" alt="ngrok http"><br><br/><br/></p>
-<hr>
-<h1 id="使用框架時遇到-invalid-host-header"><a href="#使用框架時遇到-invalid-host-header" class="headerlink" title="使用框架時遇到 invalid host header"></a>使用框架時遇到 invalid host header</h1><p>vue 的解決方式是直接在 vue.config.js 的地方設定 <code>disableHostCheck: true</code>，就可以開啟囉！</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">     disableHostCheck: <span class="literal">true</span>,</span><br><span class="line">   &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<br/>
-
-<p>使用 React 時，網友也提供了解法</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ngrok http <span class="number">8080</span> -host-header=<span class="string">&quot;localhost:8080&quot;</span></span><br><span class="line">ngrok http --host-header=rewrite <span class="number">8080</span></span><br></pre></td></tr></table></figure>
-<p>記得將 8080 改成自己的 port 號哦！</p>
-<br/>
-
-<h1 id="錯誤-Your-account-is-limited-to-1-simultaneous-ngrok-agent-session"><a href="#錯誤-Your-account-is-limited-to-1-simultaneous-ngrok-agent-session" class="headerlink" title="錯誤: Your account is limited to 1 simultaneous ngrok agent session."></a>錯誤: Your account is limited to 1 simultaneous ngrok agent session.</h1><p>如果出現此錯誤: 他的意思是你使用了一個以上的代理，<br>當下找不到斷開的方式，最萬能的解法是 <strong>重開機</strong> 就會好囉😂</p>
-<hr>
-<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>有時在檢查網站裝置畫面功能，可能會跟在行動裝置上有不同狀況發生，ngrok 就很適合拿來測試行動裝置上的問題，也不需要一直重複部署，真的很方便呢！如果我的文章有幫助到你，歡迎給我一點鼓勵哦👏👏👏</p>
-]]></content>
-      <categories>
-        <category>前端工具</category>
-      </categories>
-      <tags>
-        <tag>ngrok</tag>
-        <tag>ngrok 教學</tag>
-        <tag>ngrok token</tag>
-        <tag>invalid host header</tag>
-        <tag>Your account is limited to 1 simultaneous ngrok agent session.</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git 常用指令</title>
-    <url>/2021/10/17/git-cmdline/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/6mK0zWq.jpg" alt="Git"></p>
-<h1 id="Git-常用指令"><a href="#Git-常用指令" class="headerlink" title="Git 常用指令"></a>Git 常用指令</h1><p><strong>Git 是否有安裝成功：</strong><code>git --version</code></p>
-<a id="more"></a>
-
-<p><strong>設定/修改個人資料</strong></p>
-<ul>
-<li>輸入姓名：<code>git config --global user.name &quot;gon&quot;</code></li>
-<li>輸入個人的 email：<code>git config --global user.email &quot;gonsakon@gmail.com&quot;</code></li>
-<li>查詢 git 設定內容：<code>git config --list</code></li>
-<li>查看用户名：<code>git config user.name</code></li>
-<li>查看用户邮箱：<code>git config user.email</code></li>
-</ul>
-<p><strong>Git 常用指令</strong></p>
-<ul>
-<li>初始化數據庫：<code>git init</code></li>
-<li>查詢當前狀態：<code>git status</code></li>
-<li>將檔案加入到索引：<code>git add .</code></li>
-<li>將索引檔案變成一個更新(commit)：<code>git commit -m &quot;修改內容&quot;</code></li>
-<li>觀察 commit 歷史紀錄： <code>git log</code></li>
-<li>下載遠端數據庫：<code>git clone 數據庫網址</code></li>
-<li>更新遠端數據庫：<code>git push origin master</code></li>
-<li>下載同步更新：<code>git pull</code></li>
-</ul>
-<p><strong>分支 (branch)</strong></p>
-<ul>
-<li>新增分支：<code>git branch 分支名稱</code></li>
-<li>查看分支：<code>git branch</code></li>
-<li>切換分支：<code>git checkout 分支名稱</code></li>
-<li>建立並切換分支：<code>git checkout -b 分支名稱</code></li>
-<li>刪除分支：<code>git branch -d 分支名稱</code> (-D 是強制刪除)</li>
-<li>還原上個版本：<code>git reset HEAD^</code> (^為要回去哪一個版本，^^兩個就是回到前兩個版本)</li>
-<li>合併分支：<code>git merge 分支名稱</code></li>
-<li>取消快轉：<code>git merge 分支名稱 --no-ff</code></li>
-<li>觀看線圖：<code>git log —oneline -graph</code></li>
-<li>還原合併前狀態：<code>git reset —hard ORIG_HEAD</code></li>
-</ul>
-<p><strong>還原技巧</strong></p>
-<ul>
-<li>回頭觀看版本內容：<code>git checkout 編號</code></li>
-<li>返回最新的版本：<code>git checkout master(分支名稱)</code></li>
-<li>索引檔案&gt;還原到工作目錄：<code>git reset HEAD</code></li>
-<li>還原前兩個版本：<code>git reset HEAD^^</code></li>
-<li>還原前兩個版本，所有更新檔案都<strong>放棄</strong>：<code>git reset HEAD^^ --hard</code></li>
-<li>觀看詳細所有歷史紀錄：<code>git reflog</code></li>
-<li>新增檔案時，檔案還沒加追蹤時，清空工作目錄<br>顯示此次清除的檔案：<code>git clean -n</code><br>強制清除檔案：<code>git clean -f</code></li>
-<li>檔案已加入追蹤，還原工作目錄上已更改的檔案 ：<code>git checkout -- &lt;file&gt;</code></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>Git指令</tag>
       </tags>
   </entry>
   <entry>
@@ -1020,6 +1020,88 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </tags>
   </entry>
   <entry>
+    <title>var, let, const 變數宣告差別</title>
+    <url>/2021/06/13/js-variable/</url>
+    <content><![CDATA[<p><img src="https://i.imgur.com/W5cIWBE.jpg" alt="Imgur"></p>
+<p>ES6 提出的 let 與 const，能讓宣告變數的使用方式、型態可以更謹慎，也會限制 scope 範圍，一起來看看 var, let, const 之間有什麼差異吧！</p>
+<a id="more"></a>
+
+<h1 id="var-let-const-的差異"><a href="#var-let-const-的差異" class="headerlink" title="var, let, const 的差異"></a>var, let, const 的差異</h1><table>
+<thead>
+<tr>
+<th></th>
+<th>可以被修改</th>
+<th>可重複宣告</th>
+<th>作用域</th>
+<th>hoisting（變量提升）</th>
+<th>宣告前存取</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>var</td>
+<td>✔️ 可以</td>
+<td>✔️ 可重複宣告並覆蓋</td>
+<td>僅限 funciton</td>
+<td>有 hoisting</td>
+<td>undefine</td>
+</tr>
+<tr>
+<td>let</td>
+<td>✔️ 可以</td>
+<td>❌ 不可</td>
+<td>block 區塊</td>
+<td>有 hoisting + TDZ</td>
+<td>ReferenceError</td>
+</tr>
+<tr>
+<td>const</td>
+<td>❌ 不可</td>
+<td>❌ 不可</td>
+<td>block 區塊</td>
+<td>有 hoisting + TDZ</td>
+<td>ReferenceError</td>
+</tr>
+</tbody></table>
+<h1 id="var"><a href="#var" class="headerlink" title="var"></a>var</h1><p>var 的作用域只有在<code>函式</code>區塊，在 if 或 for 迴圈是沒有作用域的，都會被當成全域使用，如有外部程式跟這些變數名稱相同時，容易發生不可預期的錯誤，或在無意間修改了不想修改的變數</p>
+<p>在 var 宣告中會被拆成兩行，變數的宣告會提升，賦值不會提升</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//undefine</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>等同於</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line">a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<br>
+再來看看 var 的作用域
+
+<h2 id="function"><a href="#function" class="headerlink" title="function"></a>function</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line">print(); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>在函式中是有作用域的，函式外的 a 不會被覆蓋掉</p>
+<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(a); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//2 a被覆蓋掉了</span></span><br></pre></td></tr></table></figure>
+<h2 id="for"><a href="#for" class="headerlink" title="for"></a>for</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> a = <span class="number">1</span>; a &lt; <span class="number">10</span>; a++) &#123;</span><br><span class="line">  <span class="keyword">var</span> b = <span class="number">10</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(a); <span class="comment">// 1 2 3 4 5 6 7 8 9</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;a&quot;</span>, a); <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;b&quot;</span>, b); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+<p>在 if 跟 for 裡的變數都會被修改，b 在 global 未宣告，卻可以印出數值，證明在這邊是沒有自己的區塊的</p>
+<p>如將此改為 let，就可以達到我們要的結果</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> a = <span class="number">1</span>; a &lt; <span class="number">10</span>; a++) &#123;</span><br><span class="line">  <span class="keyword">let</span> b = <span class="number">10</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(a); <span class="comment">// 1 2 3 4 5 6 7 8 9</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;a&quot;</span>, a); <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;b&quot;</span>, b); <span class="comment">// b is not defined</span></span><br></pre></td></tr></table></figure>
+<h2 id="迴圈-非同步"><a href="#迴圈-非同步" class="headerlink" title="迴圈+非同步"></a>迴圈+非同步</h2><p>預期: 印出每秒 1-9 的數字</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> a = <span class="number">1</span>; a &lt; <span class="number">10</span>; a++) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 10(印了9次)</span></span><br><span class="line">  &#125;, a * <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>印出來的是 10，並非我們想要的結果，可以用閉包的方式解決</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> a = <span class="number">1</span>; a &lt; <span class="number">10</span>; a++) &#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params">b</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(b); <span class="comment">// 1 2 3 4 5 6 7 8 9</span></span><br><span class="line">    &#125;, b * <span class="number">1000</span>);</span><br><span class="line">  &#125;)(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如此一來可以出現我們要的結果，但最簡單的方式還是直接改為 let 就可以輕易的做到</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> a = <span class="number">1</span>; a &lt; <span class="number">10</span>; a++) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 1 2 3 4 5 6 7 8 9</span></span><br><span class="line">  &#125;, a * <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="let-amp-const"><a href="#let-amp-const" class="headerlink" title="let &amp; const"></a>let &amp; const</h1><p>let、const 的作用域都在 block{}區塊，他們兩者最大的不同是<br>let 可以被修改的變數<br>const 不可以被修改的常數，除非是參考值(物件、陣列)</p>
+<p>比較特別的是，let、const 有「暫時死區」（Temporal Dead Zone，TDZ）的特性，中文解釋為「時間上暫時無法達到的區域」，如果在宣告變數之前使用變數，這個變數就是存在「暫時死區」中無法存取，可以幫助我們養成在變數還沒宣告之前，不要使用他的好習慣，讓程式碼可讀性提高。<br>那 let、const 會不會有 hoisting 呢?<br>答案是: 有的! let、const 存在變數提升，但是在「提升之後」以及「賦值之前」的 TDZ 之間是不存在的。</p>
+<h2 id="物件是參考"><a href="#物件是參考" class="headerlink" title="物件是參考"></a>物件是參考</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line">a[<span class="number">5</span>] = <span class="number">6</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  name: <span class="string">&quot;John&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(person);</span><br></pre></td></tr></table></figure>
+<p>const 如果為參考值(by reference)是可以被修改的<br><br><br>ES6 提出的 let 與 const，能讓宣告變數可以更謹慎，也會限制範圍，才不會造成出乎意料的結果。</p>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>var</tag>
+        <tag>let</tag>
+        <tag>const</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ES6-Promise 非同步的解決方案</title>
     <url>/2021/07/29/js-promise/</url>
     <content><![CDATA[<p><img src="https://imgur.com/RuN7HR6.png" alt="Imgur"></p>
@@ -1114,88 +1196,6 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </tags>
   </entry>
   <entry>
-    <title>var, let, const 變數宣告差別</title>
-    <url>/2021/06/13/js-variable/</url>
-    <content><![CDATA[<p><img src="https://i.imgur.com/W5cIWBE.jpg" alt="Imgur"></p>
-<p>ES6 提出的 let 與 const，能讓宣告變數的使用方式、型態可以更謹慎，也會限制 scope 範圍，一起來看看 var, let, const 之間有什麼差異吧！</p>
-<a id="more"></a>
-
-<h1 id="var-let-const-的差異"><a href="#var-let-const-的差異" class="headerlink" title="var, let, const 的差異"></a>var, let, const 的差異</h1><table>
-<thead>
-<tr>
-<th></th>
-<th>可以被修改</th>
-<th>可重複宣告</th>
-<th>作用域</th>
-<th>hoisting（變量提升）</th>
-<th>宣告前存取</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>var</td>
-<td>✔️ 可以</td>
-<td>✔️ 可重複宣告並覆蓋</td>
-<td>僅限 funciton</td>
-<td>有 hoisting</td>
-<td>undefine</td>
-</tr>
-<tr>
-<td>let</td>
-<td>✔️ 可以</td>
-<td>❌ 不可</td>
-<td>block 區塊</td>
-<td>有 hoisting + TDZ</td>
-<td>ReferenceError</td>
-</tr>
-<tr>
-<td>const</td>
-<td>❌ 不可</td>
-<td>❌ 不可</td>
-<td>block 區塊</td>
-<td>有 hoisting + TDZ</td>
-<td>ReferenceError</td>
-</tr>
-</tbody></table>
-<h1 id="var"><a href="#var" class="headerlink" title="var"></a>var</h1><p>var 的作用域只有在<code>函式</code>區塊，在 if 或 for 迴圈是沒有作用域的，都會被當成全域使用，如有外部程式跟這些變數名稱相同時，容易發生不可預期的錯誤，或在無意間修改了不想修改的變數</p>
-<p>在 var 宣告中會被拆成兩行，變數的宣告會提升，賦值不會提升</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//undefine</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<p>等同於</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line">a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<br>
-再來看看 var 的作用域
-
-<h2 id="function"><a href="#function" class="headerlink" title="function"></a>function</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line">print(); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-<p>在函式中是有作用域的，函式外的 a 不會被覆蓋掉</p>
-<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(a); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//2 a被覆蓋掉了</span></span><br></pre></td></tr></table></figure>
-<h2 id="for"><a href="#for" class="headerlink" title="for"></a>for</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> a = <span class="number">1</span>; a &lt; <span class="number">10</span>; a++) &#123;</span><br><span class="line">  <span class="keyword">var</span> b = <span class="number">10</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(a); <span class="comment">// 1 2 3 4 5 6 7 8 9</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;a&quot;</span>, a); <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;b&quot;</span>, b); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
-<p>在 if 跟 for 裡的變數都會被修改，b 在 global 未宣告，卻可以印出數值，證明在這邊是沒有自己的區塊的</p>
-<p>如將此改為 let，就可以達到我們要的結果</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> a = <span class="number">1</span>; a &lt; <span class="number">10</span>; a++) &#123;</span><br><span class="line">  <span class="keyword">let</span> b = <span class="number">10</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(a); <span class="comment">// 1 2 3 4 5 6 7 8 9</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;a&quot;</span>, a); <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;b&quot;</span>, b); <span class="comment">// b is not defined</span></span><br></pre></td></tr></table></figure>
-<h2 id="迴圈-非同步"><a href="#迴圈-非同步" class="headerlink" title="迴圈+非同步"></a>迴圈+非同步</h2><p>預期: 印出每秒 1-9 的數字</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> a = <span class="number">1</span>; a &lt; <span class="number">10</span>; a++) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 10(印了9次)</span></span><br><span class="line">  &#125;, a * <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>印出來的是 10，並非我們想要的結果，可以用閉包的方式解決</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> a = <span class="number">1</span>; a &lt; <span class="number">10</span>; a++) &#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params">b</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(b); <span class="comment">// 1 2 3 4 5 6 7 8 9</span></span><br><span class="line">    &#125;, b * <span class="number">1000</span>);</span><br><span class="line">  &#125;)(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如此一來可以出現我們要的結果，但最簡單的方式還是直接改為 let 就可以輕易的做到</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> a = <span class="number">1</span>; a &lt; <span class="number">10</span>; a++) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 1 2 3 4 5 6 7 8 9</span></span><br><span class="line">  &#125;, a * <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br>
-
-<h1 id="let-amp-const"><a href="#let-amp-const" class="headerlink" title="let &amp; const"></a>let &amp; const</h1><p>let、const 的作用域都在 block{}區塊，他們兩者最大的不同是<br>let 可以被修改的變數<br>const 不可以被修改的常數，除非是參考值(物件、陣列)</p>
-<p>比較特別的是，let、const 有「暫時死區」（Temporal Dead Zone，TDZ）的特性，中文解釋為「時間上暫時無法達到的區域」，如果在宣告變數之前使用變數，這個變數就是存在「暫時死區」中無法存取，可以幫助我們養成在變數還沒宣告之前，不要使用他的好習慣，讓程式碼可讀性提高。<br>那 let、const 會不會有 hoisting 呢?<br>答案是: 有的! let、const 存在變數提升，但是在「提升之後」以及「賦值之前」的 TDZ 之間是不存在的。</p>
-<h2 id="物件是參考"><a href="#物件是參考" class="headerlink" title="物件是參考"></a>物件是參考</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line">a[<span class="number">5</span>] = <span class="number">6</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  name: <span class="string">&quot;John&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(person);</span><br></pre></td></tr></table></figure>
-<p>const 如果為參考值(by reference)是可以被修改的<br><br><br>ES6 提出的 let 與 const，能讓宣告變數可以更謹慎，也會限制範圍，才不會造成出乎意料的結果。</p>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>var</tag>
-        <tag>let</tag>
-        <tag>const</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Node.js 與 npm 更新的方式</title>
     <url>/2021/02/08/nodeJS-update/</url>
     <content><![CDATA[<h2 id="Node-js-更新"><a href="#Node-js-更新" class="headerlink" title="Node.js 更新"></a>Node.js 更新</h2><h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm cache clean -f</span><br><span class="line">npm install -g n</span><br><span class="line"><span class="comment">// 若要更新到最後一個版本</span></span><br><span class="line">n latest</span><br><span class="line"><span class="comment">// 若要更新到穩定版本</span></span><br><span class="line">n stable</span><br></pre></td></tr></table></figure>
@@ -1215,30 +1215,6 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       <tags>
         <tag>nodeJs</tag>
         <tag>npm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 npm ci 不更新 package-lock.json</title>
-    <url>/2022/01/01/npm-ci/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/95xxPeT.png" alt="npm"></p>
-<p>最近在 clone 新專案時，下了 npm install，發現 package-lock.json 裡的套件版本被更新了，但又怕推上去會有版本上的問題😓<br>爬了一下文才知道，原來 npm install 會自動幫你更新套件😨 可是瑞凡~~~我沒有要更新啊!!<br>不過意外也發現了另一個好東西<code>npm ci</code>，可以解決這個問題。</p>
-<a id="more"></a>
-
-<h1 id="什麼是-npm-ci"><a href="#什麼是-npm-ci" class="headerlink" title="什麼是 npm ci ?"></a>什麼是 npm ci ?</h1><p>npm ci 跟 npm i 一樣，都可以安裝依賴，npm ci 的 ci 是「Continuous Integration」，中文是持續集成的意思，這個指令在 npm 5.7.1 的版本才能使用。</p>
-<h1 id="npm-install-與-npm-ci-有什麼差別"><a href="#npm-install-與-npm-ci-有什麼差別" class="headerlink" title="npm install 與 npm ci 有什麼差別?"></a>npm install 與 npm ci 有什麼差別?</h1><p>npm install 針對 package.json 的版本來安裝套件，執行後會出現 node_modules、package-lock.json，會自動還原專案並更新套件</p>
-<p>npm ci 針對 package-lock.json 的版本來安裝套件，專案需有 package-lock.json 或 npm-shrinkwrap.json 文件存在，因為是參照package-lock.json 的版本，所以不會有版本自動更新的問題<br>另外還有一些 npm ci 需注意的地方<br>🔸 當 package-lock.json 中的依賴於 package.json 不一致時，npm ci 退出但不會修改 package-lock.json<br>🔸 npm ci 只可以一次性的安裝整個專案依賴，但無法新增單個依賴項<br>🔸 如果 node_modules 已經存在，它會先刪除 node_modules 之後再安裝，以確保乾淨的狀態</p>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
-<h3 id="參考文獻"><a href="#參考文獻" class="headerlink" title="參考文獻:"></a>參考文獻:</h3><p><a href="https://hsiangfeng.github.io/nodejs/20211027/1827968017/">npm ci 與 npm install 差異</a></p>
-<hr>
-]]></content>
-      <categories>
-        <category>npm</category>
-      </categories>
-      <tags>
-        <tag>npm ci</tag>
-        <tag>npm install</tag>
-        <tag>package-lock被更新</tag>
       </tags>
   </entry>
   <entry>
@@ -1354,6 +1330,30 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </tags>
   </entry>
   <entry>
+    <title>使用 npm ci 不更新 package-lock.json</title>
+    <url>/2022/01/01/npm-ci/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/95xxPeT.png" alt="npm"></p>
+<p>最近在 clone 新專案時，下了 npm install，發現 package-lock.json 裡的套件版本被更新了，但又怕推上去會有版本上的問題😓<br>爬了一下文才知道，原來 npm install 會自動幫你更新套件😨 可是瑞凡~~~我沒有要更新啊!!<br>不過意外也發現了另一個好東西<code>npm ci</code>，可以解決這個問題。</p>
+<a id="more"></a>
+
+<h1 id="什麼是-npm-ci"><a href="#什麼是-npm-ci" class="headerlink" title="什麼是 npm ci ?"></a>什麼是 npm ci ?</h1><p>npm ci 跟 npm i 一樣，都可以安裝依賴，npm ci 的 ci 是「Continuous Integration」，中文是持續集成的意思，這個指令在 npm 5.7.1 的版本才能使用。</p>
+<h1 id="npm-install-與-npm-ci-有什麼差別"><a href="#npm-install-與-npm-ci-有什麼差別" class="headerlink" title="npm install 與 npm ci 有什麼差別?"></a>npm install 與 npm ci 有什麼差別?</h1><p>npm install 針對 package.json 的版本來安裝套件，執行後會出現 node_modules、package-lock.json，會自動還原專案並更新套件</p>
+<p>npm ci 針對 package-lock.json 的版本來安裝套件，專案需有 package-lock.json 或 npm-shrinkwrap.json 文件存在，因為是參照package-lock.json 的版本，所以不會有版本自動更新的問題<br>另外還有一些 npm ci 需注意的地方<br>🔸 當 package-lock.json 中的依賴於 package.json 不一致時，npm ci 退出但不會修改 package-lock.json<br>🔸 npm ci 只可以一次性的安裝整個專案依賴，但無法新增單個依賴項<br>🔸 如果 node_modules 已經存在，它會先刪除 node_modules 之後再安裝，以確保乾淨的狀態</p>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+<h3 id="參考文獻"><a href="#參考文獻" class="headerlink" title="參考文獻:"></a>參考文獻:</h3><p><a href="https://hsiangfeng.github.io/nodejs/20211027/1827968017/">npm ci 與 npm install 差異</a></p>
+<hr>
+]]></content>
+      <categories>
+        <category>npm</category>
+      </categories>
+      <tags>
+        <tag>npm ci</tag>
+        <tag>npm install</tag>
+        <tag>package-lock被更新</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React基本入門</title>
     <url>/2022/06/28/react-basic/</url>
     <content><![CDATA[<p><img src="https://imgur.com/PWYji3a.jpg" alt="React"><br>React 是一個陳述式、高效且具有彈性的 JavaScript 函式庫，用以建立使用者介面，這篇介紹基本的 React 入門</p>
@@ -1463,6 +1463,52 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </categories>
       <tags>
         <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React Context API跨組件溝通傳遞資料</title>
+    <url>/2022/07/04/react-context-api/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/PWYji3a.jpg" alt="React"></p>
+<p>context api 可以跨組件溝通傳遞資料，讓組件可以省去組件層層傳遞的麻煩</p>
+<a id="more"></a>
+
+<p>以下範例情境: 點擊按鈕，讓 header 的總數量增加</p>
+<p>App 為最外層、Header 顯示訂單數量、ProductList 訂單、Product 每個品項增加按鈕</p>
+<p><img src="https://imgur.com/nvRnhNa.jpg" alt="context-api"></p>
+<p><br/><br/></p>
+<h1 id="設定-Context"><a href="#設定-Context" class="headerlink" title="設定 Context"></a>設定 Context</h1><p>import createContext，並設定 createContext 的預設值，<br>範例預設為: 訂單陣列 orders、增加訂單函式 addOrder</p>
+<p><strong>Provider（提供者）是用來提供 context 值</strong></p>
+<p><strong>Consumer（消費者）是用來使用 context 值</strong></p>
+<p>/src/context/order.js</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createContext &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> &#123; Provider, Consumer &#125; = createContext(&#123;</span><br><span class="line">  orders: [],</span><br><span class="line">  addOrder: <span class="function">() =&gt;</span> &#123;&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<h1 id="設定-Provider，contextValue-傳入-context"><a href="#設定-Provider，contextValue-傳入-context" class="headerlink" title="設定 Provider，contextValue 傳入 context"></a>設定 Provider，contextValue 傳入 context</h1><p>在外層設定值與函式，傳入 context</p>
+<p>在需使用到的組件外，包一層 Provider，傳入需要的 value，使底下的組件都可以使用 value 裡的值</p>
+<p>App.js</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">&quot;./Header&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ProductList <span class="keyword">from</span> <span class="string">&quot;./ProductList&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">&quot;./context/order.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    orders: []</span><br><span class="line">  &#125;</span><br><span class="line">  addOrder = <span class="function"><span class="params">order</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      orders: [...this.state.orders, order]</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; orders &#125; = <span class="built_in">this</span>.state;</span><br><span class="line">    <span class="keyword">const</span> contextValue = &#123;</span><br><span class="line">      orders,</span><br><span class="line">      addOrder: <span class="built_in">this</span>.addOrder</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;Provider value=&#123;contextValue&#125;&gt;</span><br><span class="line">          &lt;Header /&gt;</span><br><span class="line">          &lt;ProductList /&gt;</span><br><span class="line">        &lt;/Provider&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<h1 id="Consumer-使用-context"><a href="#Consumer-使用-context" class="headerlink" title="Consumer 使用 context"></a>Consumer 使用 context</h1><p>在需要使用 context value 的地方包一層 Consumer，需注意 <strong>value 必須用函式傳入</strong></p>
+<p>這麼一來就可以取到 context 的值囉！</p>
+<p>Header.js</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Consumer &#125; <span class="keyword">from</span> <span class="string">&quot;./context/order.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Header = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;header&gt;</span><br><span class="line">      &lt;Consumer&gt;</span><br><span class="line">       &#123; <span class="function"><span class="params">value</span> =&gt;</span> (<span class="string">`購物車(<span class="subst">$&#123;value.orders.length&#125;</span>)`</span>)&#125;</span><br><span class="line">      &lt;/Consumer&gt;</span><br><span class="line">      &lt;hr/&gt;</span><br><span class="line">    &lt;/header&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Header;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>ProductList.js</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Product <span class="keyword">from</span> <span class="string">&quot;./Product&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> menu = [</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="number">0</span>, <span class="attr">name</span>: <span class="string">&#x27;雞肉鍋&#x27;</span>&#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">&#x27;豬肉鍋&#x27;</span>&#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">name</span>: <span class="string">&#x27;牛肉鍋&#x27;</span>&#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="number">3</span>, <span class="attr">name</span>: <span class="string">&#x27;海鮮鍋&#x27;</span>&#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="number">4</span>, <span class="attr">name</span>: <span class="string">&#x27;泡菜鍋&#x27;</span>&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ProductList = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span>(</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &#123;menu.map(<span class="function"><span class="params">item</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Product</span> <span class="attr">key</span>=<span class="string">&#123;item.id&#125;</span> &#123;<span class="attr">...item</span>&#125; /&gt;</span></span>)&#125;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> ProductList;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>Product.js</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Consumer &#125; <span class="keyword">from</span> <span class="string">&quot;./context/order.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Product = <span class="function">(<span class="params">&#123; id, name &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;li&gt;</span><br><span class="line">      &lt;label&gt;&#123;name&#125;&lt;/label&gt;</span><br><span class="line">      &lt;Consumer&gt;</span><br><span class="line">        &#123;</span><br><span class="line">          value =&gt; (</span><br><span class="line">            &lt;button onClick=&#123;<span class="function">() =&gt;</span> &#123;value.addOrder(id)&#125;&#125;&gt;+&lt;/button&gt;</span><br><span class="line">          )</span><br><span class="line">        &#125;</span><br><span class="line">      &lt;/Consumer&gt;</span><br><span class="line">    &lt;/li&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Product;</span><br></pre></td></tr></table></figure>
+<p><br/><br/><br>React Hooks 的 useContext 可以不使用 Consumer，可參考 <a href="https://happy9990929.github.io/2022/07/05/react-hooks">React 常用 Hooks</a></p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React Context</tag>
+        <tag>Context API</tag>
+        <tag>React Provider</tag>
+        <tag>React Consumer</tag>
       </tags>
   </entry>
   <entry>
@@ -1619,49 +1665,81 @@ App.js
       </tags>
   </entry>
   <entry>
-    <title>React Context API跨組件溝通傳遞資料</title>
-    <url>/2022/07/04/react-context-api/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/PWYji3a.jpg" alt="React"></p>
-<p>context api 可以跨組件溝通傳遞資料，讓組件可以省去組件層層傳遞的麻煩</p>
+    <title>【DAY 4】React 專案結構說明與配置(File Structure)</title>
+    <url>/2022/10/19/react-file-structure/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/dGZ8NgX.jpg" alt="cover"></p>
 <a id="more"></a>
 
-<p>以下範例情境: 點擊按鈕，讓 header 的總數量增加</p>
-<p>App 為最外層、Header 顯示訂單數量、ProductList 訂單、Product 每個品項增加按鈕</p>
-<p><img src="https://imgur.com/nvRnhNa.jpg" alt="context-api"></p>
-<p><br/><br/></p>
-<h1 id="設定-Context"><a href="#設定-Context" class="headerlink" title="設定 Context"></a>設定 Context</h1><p>import createContext，並設定 createContext 的預設值，<br>範例預設為: 訂單陣列 orders、增加訂單函式 addOrder</p>
-<p><strong>Provider（提供者）是用來提供 context 值</strong></p>
-<p><strong>Consumer（消費者）是用來使用 context 值</strong></p>
-<p>/src/context/order.js</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createContext &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> &#123; Provider, Consumer &#125; = createContext(&#123;</span><br><span class="line">  orders: [],</span><br><span class="line">  addOrder: <span class="function">() =&gt;</span> &#123;&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><br/><br/></p>
-<h1 id="設定-Provider，contextValue-傳入-context"><a href="#設定-Provider，contextValue-傳入-context" class="headerlink" title="設定 Provider，contextValue 傳入 context"></a>設定 Provider，contextValue 傳入 context</h1><p>在外層設定值與函式，傳入 context</p>
-<p>在需使用到的組件外，包一層 Provider，傳入需要的 value，使底下的組件都可以使用 value 裡的值</p>
-<p>App.js</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">&quot;./Header&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ProductList <span class="keyword">from</span> <span class="string">&quot;./ProductList&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">&quot;./context/order.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    orders: []</span><br><span class="line">  &#125;</span><br><span class="line">  addOrder = <span class="function"><span class="params">order</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      orders: [...this.state.orders, order]</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; orders &#125; = <span class="built_in">this</span>.state;</span><br><span class="line">    <span class="keyword">const</span> contextValue = &#123;</span><br><span class="line">      orders,</span><br><span class="line">      addOrder: <span class="built_in">this</span>.addOrder</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;Provider value=&#123;contextValue&#125;&gt;</span><br><span class="line">          &lt;Header /&gt;</span><br><span class="line">          &lt;ProductList /&gt;</span><br><span class="line">        &lt;/Provider&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
-<p><br/><br/></p>
-<h1 id="Consumer-使用-context"><a href="#Consumer-使用-context" class="headerlink" title="Consumer 使用 context"></a>Consumer 使用 context</h1><p>在需要使用 context value 的地方包一層 Consumer，需注意 <strong>value 必須用函式傳入</strong></p>
-<p>這麼一來就可以取到 context 的值囉！</p>
-<p>Header.js</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Consumer &#125; <span class="keyword">from</span> <span class="string">&quot;./context/order.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Header = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;header&gt;</span><br><span class="line">      &lt;Consumer&gt;</span><br><span class="line">       &#123; <span class="function"><span class="params">value</span> =&gt;</span> (<span class="string">`購物車(<span class="subst">$&#123;value.orders.length&#125;</span>)`</span>)&#125;</span><br><span class="line">      &lt;/Consumer&gt;</span><br><span class="line">      &lt;hr/&gt;</span><br><span class="line">    &lt;/header&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Header;</span><br></pre></td></tr></table></figure>
-<br/>
-
-<p>ProductList.js</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Product <span class="keyword">from</span> <span class="string">&quot;./Product&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> menu = [</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="number">0</span>, <span class="attr">name</span>: <span class="string">&#x27;雞肉鍋&#x27;</span>&#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">&#x27;豬肉鍋&#x27;</span>&#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">name</span>: <span class="string">&#x27;牛肉鍋&#x27;</span>&#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="number">3</span>, <span class="attr">name</span>: <span class="string">&#x27;海鮮鍋&#x27;</span>&#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="number">4</span>, <span class="attr">name</span>: <span class="string">&#x27;泡菜鍋&#x27;</span>&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ProductList = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span>(</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &#123;menu.map(<span class="function"><span class="params">item</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Product</span> <span class="attr">key</span>=<span class="string">&#123;item.id&#125;</span> &#123;<span class="attr">...item</span>&#125; /&gt;</span></span>)&#125;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> ProductList;</span><br></pre></td></tr></table></figure>
-<br/>
-
-<p>Product.js</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Consumer &#125; <span class="keyword">from</span> <span class="string">&quot;./context/order.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Product = <span class="function">(<span class="params">&#123; id, name &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;li&gt;</span><br><span class="line">      &lt;label&gt;&#123;name&#125;&lt;/label&gt;</span><br><span class="line">      &lt;Consumer&gt;</span><br><span class="line">        &#123;</span><br><span class="line">          value =&gt; (</span><br><span class="line">            &lt;button onClick=&#123;<span class="function">() =&gt;</span> &#123;value.addOrder(id)&#125;&#125;&gt;+&lt;/button&gt;</span><br><span class="line">          )</span><br><span class="line">        &#125;</span><br><span class="line">      &lt;/Consumer&gt;</span><br><span class="line">    &lt;/li&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Product;</span><br></pre></td></tr></table></figure>
-<p><br/><br/><br>React Hooks 的 useContext 可以不使用 Consumer，可參考 <a href="https://happy9990929.github.io/2022/07/05/react-hooks">React 常用 Hooks</a></p>
+<p><strong>［情境劇場］</strong></p>
+<p>CRA 師傅：賀！店面已經裝潢好囉！剩下的擺飾交給你們去運用囉～</p>
+<p>解師傅：太好了～真是感謝 CRA 師傅的幫忙，這店面空間很大呢～老闆，我買了一些餐廳需要使用的桌子和一些裝飾，我們一起來想想看怎麼擺設好嗎？</p>
+<hr>
+<h1 id="專案結構"><a href="#專案結構" class="headerlink" title="專案結構"></a>專案結構</h1><p>完成前置作業的安裝後，開啟專案，會看到以下的結構，這是 Create React App 預設的專案結構</p>
+<p><img src="https://imgur.com/f2emj0X.jpg" alt="Structure"></p>
+<p>先介紹一下目前看到的檔案功能<br/></p>
+<ul>
+<li>node_modules 資料夾</li>
+</ul>
+<p>下載套件/函式庫(package/library)在 local 的存放位置，也就是執行 <code>npm install</code> 後，NPM 預設會將下載回來的套件都放在 <code>node_modules</code><br><br/><br><br/></p>
+<ul>
+<li>public 資料夾</li>
+</ul>
+<p>公開的檔案資料夾，可以放入不會被編譯的檔案</p>
+<p>index.html：為頁面模版，用 react 開發的結果會 render 至檔案的 <code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code><br><br/><br><br/></p>
+<ul>
+<li>src 資料夾</li>
+</ul>
+<p>主要開發環境的檔案，放置 js、css、圖片等等，這是我們等等需要規劃架構的地方</p>
+<p>index.js：開發 React 專案的進入點，會將 react 組件渲染到 <code>public/index.html</code> 的根元素 <code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code></p>
+<p>reportWebVitals.js：Web Vitals 是由 Google 分析大量使用者資料後，用來量化網站使用者體驗的指標，藉由測量 Web Vitals 分數讓開發者能更有方向的優化網站體驗<br><br/><br><br/></p>
+<ul>
+<li>.gitignore</li>
+</ul>
+<p>要被 Git 忽略的檔案。只要在 <code>.gitignore</code> 設定不想存在 Git 的檔案或資料夾名稱，即使檔案存在這個目錄裡，但它已被 Git 無視，就不會被推上 Git<br><br/><br><br/></p>
+<ul>
+<li>package.json</li>
+</ul>
+<p>運行環境所使用的安裝套件管理，只會記錄你通過 <code>npm install</code> 方式安裝的模組資訊，不會記錄子模組資訊</p>
+<p>在 <code>npm install</code> 後，node 會先從 <code>package.json</code> 檔案中讀取所有 <code>dependencies</code> 資訊，根據 <code>dependencies</code> 中的資訊與 <code>node_modules</code> 中的模組進行對比，沒有的直接下載，已有的檢查更新(因有 <code>package-lock.json</code> 就不會自動更新版本)<br><br/><br><br/></p>
+<ul>
+<li>package-lock.json</li>
+</ul>
+<p>鎖定所有套件具體來源和版本號，包括主模組和所有套件子模組，在執行 <code>npm install</code> 的時候，node 從 <code>package.json</code> 檔案讀取模組名稱，從 <code>package-lock.json</code> 檔案中獲取版本號，然後進行下載或者更新<br><br/><br><br/></p>
+<h1 id="常見的基本架構"><a href="#常見的基本架構" class="headerlink" title="常見的基本架構"></a>常見的基本架構</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">src</span><br><span class="line">├── components</span><br><span class="line">├── pages</span><br><span class="line">├── images</span><br></pre></td></tr></table></figure>
+<ul>
+<li>components</li>
+</ul>
+<p>可以共用的各種組件，可以 <code>import</code> 在任何頁面中，在 components 資料夾中，因組件可能會有很多，通常會再做分類，方便查找與維護</p>
+<p>常見的分類為，「以種類分類」或「以功能分類」兩種，個人是偏好功能型的分類</p>
+<p><strong>以種類分類</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">components</span><br><span class="line">├── btn</span><br><span class="line">  ├── PrimaryButton.js</span><br><span class="line">  ├── SecondaryButton.js</span><br><span class="line"></span><br><span class="line">├── modal</span><br><span class="line">  ├── LoginModal.js</span><br><span class="line">  ├── SuccessModal.js</span><br><span class="line"></span><br><span class="line">├── card</span><br><span class="line">  ├── ImageCard.js</span><br></pre></td></tr></table></figure>
+<p>依照組件的類型來分類，按鈕組件都放置 btn 資料夾，modal 組件都歸類在 modal 資料夾，以此類推<br><br/><br><br/></p>
+<p><strong>以功能分類</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">components</span><br><span class="line">├── user</span><br><span class="line">  ├── UserCard.js</span><br><span class="line">  ├── UserButton.js</span><br><span class="line"></span><br><span class="line">├── about</span><br><span class="line">  ├── AboutCard.js</span><br><span class="line"></span><br><span class="line">├── Footer.js</span><br><span class="line">├── Header.js</span><br></pre></td></tr></table></figure>
+<p>依功能做分類，好處是可以依照功能直接找到組件，查找組件時較清楚<br><br/><br><br/></p>
+<ul>
+<li>pages</li>
+</ul>
+<p>專案中有使用到 Route 路由的頁面，在後面的章節會講到 Route 的部分<br><br/><br><br/></p>
+<ul>
+<li>images</li>
+</ul>
+<p>圖片檔案，如 jpg、png、gif… 等等<br><br/><br><br/></p>
+<h1 id="依專案需求新增資料夾"><a href="#依專案需求新增資料夾" class="headerlink" title="依專案需求新增資料夾"></a>依專案需求新增資料夾</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">src</span><br><span class="line">├── components</span><br><span class="line">├── pages</span><br><span class="line">├── assets</span><br><span class="line">├── style</span><br><span class="line">├── api</span><br><span class="line">├── hooks</span><br><span class="line">├── utils</span><br></pre></td></tr></table></figure>
+<p>專案結構沒有一定，你可以依專案的需求再自行新增資料夾<br><br/><br><br/></p>
+<h1 id="避免太多巢狀"><a href="#避免太多巢狀" class="headerlink" title="避免太多巢狀"></a>避免太多巢狀</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Component form <span class="string">&#x27;../Component.js&#x27;</span> <span class="comment">// O 導入時較容易</span></span><br><span class="line"><span class="keyword">import</span> Component form <span class="string">&#x27;../../../../../../Component.js&#x27;</span> <span class="comment">// X 不利於相對導入或檔案移動</span></span><br></pre></td></tr></table></figure>
+<p>一個專案中建議使用最多三層或四層資料夾，除非你有必須使用深度巢狀資料夾的原因，過多的巢狀會讓相對導入或檔案移動時變得困難<br><br/><br><br/></p>
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>基本怎麼放專案資料夾並沒有任何對錯，React 並沒有強制的專案結構，只要團隊討論好，大家對此架構有共識就好，一開始不用花太多時間在思考架構上，畢竟在你寫了一些真正的程式碼後你很可能會想重新思考，今天的分享就到這邊，明天見囉！！<br><br/><br><br/></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://reactjs.org/docs/faq-structure.html">React 官方 File Structure</a></p>
+<hr>
+<p>本文為 IT 鐵人賽系列文 <a href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
+<hr>
 ]]></content>
       <categories>
-        <category>React</category>
+        <category>【IT 鐵人賽】你React了嗎? 30天解鎖React技能</category>
       </categories>
       <tags>
-        <tag>React Context</tag>
-        <tag>Context API</tag>
-        <tag>React Provider</tag>
-        <tag>React Consumer</tag>
+        <tag>react</tag>
       </tags>
   </entry>
   <entry>
@@ -1869,6 +1947,86 @@ src/Product.js
       </tags>
   </entry>
   <entry>
+    <title>【DAY 3】React 環境安裝-完成前置作業</title>
+    <url>/2022/10/18/react-install/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/BhMRQL0.jpg" alt="cover"></p>
+<a id="more"></a>
+
+<p><strong>［情境劇場］</strong></p>
+<p>解師傅：嘿！老闆！我找到了一間不錯的店面，CRA 師傅會幫我們完成它！</p>
+<p>要開一間 React 熱炒店，想當然要先有一間環境店面，即使小當家有再高的廚藝，沒有店面也是無用武之地，我們請 CRA 師傅幫我們建好環境，一起期待我們的新店面吧！!</p>
+<hr>
+<p>因為要建置一個 JavaScript 的開發環境，一般都會用 Node.js 來作為測試或開發用的本地端伺服器，所以在安裝 React 之前，要先確認：</p>
+<ul>
+<li>是否已安裝 Node</li>
+<li>Node 版本需 &gt;= 14.0.0</li>
+<li>npm 需 &gt;= 5.6</li>
+</ul>
+<p>安裝 Node 就等於已安裝了 npm 工具，所以只需要檢查 npm 版本即可<br><br/><br><br/><br><br/></p>
+<h1 id="安裝-Node-js"><a href="#安裝-Node-js" class="headerlink" title="安裝 Node.js"></a>安裝 Node.js</h1><p>先到 <a href="https://nodejs.org/en/">Node 官網</a>，會看到有兩個版本</p>
+<ul>
+<li>LTS 長期支援版本：官方長期維護，較為穩定，供一般開發專案使用</li>
+<li>Current 最新版本：具有現在最新功能，但可能會有變動，較不穩定，要對新功能做研究測試才會使用這個版本</li>
+</ul>
+<p>我們只是要執行專案，下載 LTS 長期支援版本<br/><br><br/><br><img src="https://imgur.com/c5Kj0ru.jpg" alt="nodejs"><br><br/><br><br/></p>
+<h2 id="確認版本"><a href="#確認版本" class="headerlink" title="確認版本"></a>確認版本</h2><p>檢查是否安裝成功，打開命令提示字元(在 windows 搜尋 <code>cmd</code> 或在鍵盤按 開始 + <code>R</code>)</p>
+<ul>
+<li><p>確認 Node 版本</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>確認 npm 版本</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<p><img src="https://imgur.com/elSlDav.jpg" alt="check node"><br>確認 Node 安裝完就可以來安裝 React 囉！<br/></p>
+<br/>
+<br/>
+<br/>
+
+</li>
+</ul>
+<h1 id="安裝-React"><a href="#安裝-React" class="headerlink" title="安裝 React"></a>安裝 React</h1><p><a href="https://github.com/facebook/create-react-app">Create React App</a> 簡稱為 CRA，是一個適合學習 React 的環境，<br>也是使用 React 建立一個 <strong>全新的 single-page 應用程式</strong> 的最佳方法</p>
+<p>你可以在你要的資料夾下指令 <code>cmd</code> 開啟命令提示字元，<br>接著從下面選擇一種方式安裝 Create React App，官方使用 NPX</p>
+<p>my-app 為專案名稱，依專案自行命名<br/></p>
+<ul>
+<li>NPX<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npx create-react-app my-app</span><br></pre></td></tr></table></figure></li>
+<li>NPM<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm init react-app my-app</span><br></pre></td></tr></table></figure></li>
+<li>Yarn<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn create react-app my-app</span><br></pre></td></tr></table></figure>
+<br/>
+<br/>
+
+</li>
+</ul>
+<blockquote>
+<p>⭕ npm 與 npx 的差異<br>npm 為永久安裝，npx 安裝後即移除<br>Create React App 只有最一開始建立專案會用到，之後就不會用了，就很適合用 npx 來安裝</p>
+</blockquote>
+<br/>
+<br/>
+
+<p>安裝成功後，會出現建議的指令</p>
+<p><img src="https://imgur.com/KMqwA2o.jpg" alt="CRA"></p>
+<br/>
+<br/>
+
+<p><code>cd my-app</code>  進入 my-app</p>
+<p><code>npm start</code>  開啟專案<br/><br><br/><br><br/><br><br/></p>
+<p>如果記不起來指令也沒關係，使用編輯器開啟專案(這邊使用的是 Visual Studio Code)</p>
+<p>點擊 package.json，<code>scripts</code> 的地方也會顯示指令</p>
+<p><img src="https://imgur.com/WpfOXlM.jpg" alt="script"></p>
+<p><code>npm start</code> 執行專案</p>
+<p><code>npm run build</code> 打包專案</p>
+<p><code>npm test</code> 執行測試</p>
+<p><code>npm run eject</code> 對 Create React App 配置進行高度修改<br/><br><br/><br><br/><br><br/></p>
+<p>安裝完就大功告成囉！!</p>
+<p><img src="https://imgur.com/XCbyYyx.jpg" alt="react"><br><br/><br><br/><br><br/></p>
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>我們今天用 Create React App 成功安裝好 React 了，接著可以進行專案上的開發，明天再來介紹專案內的檔案分別是做什麼功用，以及專案結構該怎麼分配吧！!</p>
+<hr>
+<p>本文為 IT 鐵人賽系列文 <a href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
+<hr>
+]]></content>
+      <categories>
+        <category>【IT 鐵人賽】你React了嗎? 30天解鎖React技能</category>
+      </categories>
+  </entry>
+  <entry>
     <title>React生命週期、錯誤處理</title>
     <url>/2022/07/04/react-lifecycle/</url>
     <content><![CDATA[<p><img src="https://imgur.com/tkfJbzu.jpg" alt="React"></p>
@@ -2067,112 +2225,6 @@ src/Product.js
       </tags>
   </entry>
   <entry>
-    <title>React列表渲染-將陣列、物件渲染成元素</title>
-    <url>/2022/07/01/react-render-list/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/PWYji3a.jpg" alt="React"><br>在 Vue 框架渲染列表時會有自己的語法 v-for，不過 React 沒有自定義的語法，而是直接使用 JS 的語法</p>
-<a id="more"></a>
-
-<h1 id="陣列渲染成元素"><a href="#陣列渲染成元素" class="headerlink" title="陣列渲染成元素"></a>陣列渲染成元素</h1><p>使用 JS 的 map 把每個 item 渲染出來，組件 Item 需要被代入 key 屬性，</p>
-<p><strong>key 必須是唯一值</strong>，如陣列改變，才不會再被重新渲染，影響效能</p>
-<p>key 如果為 index 也會被重新渲染，只是不會跳出警告，除非沒有唯一值才用 index，或是請後端加上唯一值</p>
-<p>List.js</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">&quot;./Item&quot;</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> steps = [</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&#x27;hello&#x27;</span>&#125;,</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&#x27;world&#x27;</span>&#125;,</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&#x27;hello world&#x27;</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &#123;steps.map(<span class="function">(<span class="params">item, idx</span>) =&gt;</span></span><br><span class="line">          (<span class="xml"><span class="tag">&lt;<span class="name">Item</span> <span class="attr">key</span>=<span class="string">&#123;item.text&#125;</span>&gt;</span>&#123; item.text &#125;(&#123; idx &#125;)<span class="tag">&lt;/<span class="name">Item</span>&gt;</span></span>)</span><br><span class="line">        )&#125;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> List;</span><br></pre></td></tr></table></figure>
-<p>Item.js</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Item</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;li&gt;&#123;<span class="built_in">this</span>.props.children&#125;&lt;/li&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Item;</span><br></pre></td></tr></table></figure>
-<p><br/><br/></p>
-<h1 id="物件渲染成元素"><a href="#物件渲染成元素" class="headerlink" title="物件渲染成元素"></a>物件渲染成元素</h1><p>物件使用 <code>Object.keys</code> 先把物件屬性變成陣列，再使用 map 渲染</p>
-<p><strong>物件渲染出來的結果順序不一定相同，如果要照資料排序須將資料改為陣列</strong></p>
-<p>List.js</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">&quot;./Item&quot;</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> dog = &#123;</span><br><span class="line">      name: <span class="string">&#x27;bobee&#x27;</span>,</span><br><span class="line">      age: <span class="number">12</span>,</span><br><span class="line">      height: <span class="number">64</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &#123; <span class="built_in">Object</span>.keys(dog).map(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> value = dog[key];</span><br><span class="line">            <span class="keyword">return</span> (</span><br><span class="line">              &lt;Item key=&#123;value&#125;&gt;&#123;key&#125;: &#123;value&#125;&lt;/Item&gt;</span><br><span class="line">            )</span><br><span class="line">        &#125;) &#125;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> List;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>React列表渲染</tag>
-        <tag>react map</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【DAY 3】React 環境安裝-完成前置作業</title>
-    <url>/2022/10/18/react-install/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/BhMRQL0.jpg" alt="cover"></p>
-<a id="more"></a>
-
-<p><strong>［情境劇場］</strong></p>
-<p>解師傅：嘿！老闆！我找到了一間不錯的店面，CRA 師傅會幫我們完成它！</p>
-<p>要開一間 React 熱炒店，想當然要先有一間環境店面，即使小當家有再高的廚藝，沒有店面也是無用武之地，我們請 CRA 師傅幫我們建好環境，一起期待我們的新店面吧！!</p>
-<hr>
-<p>因為要建置一個 JavaScript 的開發環境，一般都會用 Node.js 來作為測試或開發用的本地端伺服器，所以在安裝 React 之前，要先確認：</p>
-<ul>
-<li>是否已安裝 Node</li>
-<li>Node 版本需 &gt;= 14.0.0</li>
-<li>npm 需 &gt;= 5.6</li>
-</ul>
-<p>安裝 Node 就等於已安裝了 npm 工具，所以只需要檢查 npm 版本即可<br><br/><br><br/><br><br/></p>
-<h1 id="安裝-Node-js"><a href="#安裝-Node-js" class="headerlink" title="安裝 Node.js"></a>安裝 Node.js</h1><p>先到 <a href="https://nodejs.org/en/">Node 官網</a>，會看到有兩個版本</p>
-<ul>
-<li>LTS 長期支援版本：官方長期維護，較為穩定，供一般開發專案使用</li>
-<li>Current 最新版本：具有現在最新功能，但可能會有變動，較不穩定，要對新功能做研究測試才會使用這個版本</li>
-</ul>
-<p>我們只是要執行專案，下載 LTS 長期支援版本<br/><br><br/><br><img src="https://imgur.com/c5Kj0ru.jpg" alt="nodejs"><br><br/><br><br/></p>
-<h2 id="確認版本"><a href="#確認版本" class="headerlink" title="確認版本"></a>確認版本</h2><p>檢查是否安裝成功，打開命令提示字元(在 windows 搜尋 <code>cmd</code> 或在鍵盤按 開始 + <code>R</code>)</p>
-<ul>
-<li><p>確認 Node 版本</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>確認 npm 版本</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-<p><img src="https://imgur.com/elSlDav.jpg" alt="check node"><br>確認 Node 安裝完就可以來安裝 React 囉！<br/></p>
-<br/>
-<br/>
-<br/>
-
-</li>
-</ul>
-<h1 id="安裝-React"><a href="#安裝-React" class="headerlink" title="安裝 React"></a>安裝 React</h1><p><a href="https://github.com/facebook/create-react-app">Create React App</a> 簡稱為 CRA，是一個適合學習 React 的環境，<br>也是使用 React 建立一個 <strong>全新的 single-page 應用程式</strong> 的最佳方法</p>
-<p>你可以在你要的資料夾下指令 <code>cmd</code> 開啟命令提示字元，<br>接著從下面選擇一種方式安裝 Create React App，官方使用 NPX</p>
-<p>my-app 為專案名稱，依專案自行命名<br/></p>
-<ul>
-<li>NPX<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npx create-react-app my-app</span><br></pre></td></tr></table></figure></li>
-<li>NPM<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm init react-app my-app</span><br></pre></td></tr></table></figure></li>
-<li>Yarn<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn create react-app my-app</span><br></pre></td></tr></table></figure>
-<br/>
-<br/>
-
-</li>
-</ul>
-<blockquote>
-<p>⭕ npm 與 npx 的差異<br>npm 為永久安裝，npx 安裝後即移除<br>Create React App 只有最一開始建立專案會用到，之後就不會用了，就很適合用 npx 來安裝</p>
-</blockquote>
-<br/>
-<br/>
-
-<p>安裝成功後，會出現建議的指令</p>
-<p><img src="https://imgur.com/KMqwA2o.jpg" alt="CRA"></p>
-<br/>
-<br/>
-
-<p><code>cd my-app</code>  進入 my-app</p>
-<p><code>npm start</code>  開啟專案<br/><br><br/><br><br/><br><br/></p>
-<p>如果記不起來指令也沒關係，使用編輯器開啟專案(這邊使用的是 Visual Studio Code)</p>
-<p>點擊 package.json，<code>scripts</code> 的地方也會顯示指令</p>
-<p><img src="https://imgur.com/WpfOXlM.jpg" alt="script"></p>
-<p><code>npm start</code> 執行專案</p>
-<p><code>npm run build</code> 打包專案</p>
-<p><code>npm test</code> 執行測試</p>
-<p><code>npm run eject</code> 對 Create React App 配置進行高度修改<br/><br><br/><br><br/><br><br/></p>
-<p>安裝完就大功告成囉！!</p>
-<p><img src="https://imgur.com/XCbyYyx.jpg" alt="react"><br><br/><br><br/><br><br/></p>
-<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>我們今天用 Create React App 成功安裝好 React 了，接著可以進行專案上的開發，明天再來介紹專案內的檔案分別是做什麼功用，以及專案結構該怎麼分配吧！!</p>
-<hr>
-<p>本文為 IT 鐵人賽系列文 <a href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
-<hr>
-]]></content>
-      <categories>
-        <category>【IT 鐵人賽】你React了嗎? 30天解鎖React技能</category>
-      </categories>
-  </entry>
-  <entry>
     <title>React-router-dom路由設定教學，實現頁面跳轉！</title>
     <url>/2022/07/20/react-router-dom/</url>
     <content><![CDATA[<p><img src="https://imgur.com/PWYji3a.jpg" alt="React"></p>
@@ -2264,6 +2316,32 @@ src/Product.js
         <tag>React useParams</tag>
         <tag>React useSearchParams</tag>
         <tag>React useLocation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React列表渲染-將陣列、物件渲染成元素</title>
+    <url>/2022/07/01/react-render-list/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/PWYji3a.jpg" alt="React"><br>在 Vue 框架渲染列表時會有自己的語法 v-for，不過 React 沒有自定義的語法，而是直接使用 JS 的語法</p>
+<a id="more"></a>
+
+<h1 id="陣列渲染成元素"><a href="#陣列渲染成元素" class="headerlink" title="陣列渲染成元素"></a>陣列渲染成元素</h1><p>使用 JS 的 map 把每個 item 渲染出來，組件 Item 需要被代入 key 屬性，</p>
+<p><strong>key 必須是唯一值</strong>，如陣列改變，才不會再被重新渲染，影響效能</p>
+<p>key 如果為 index 也會被重新渲染，只是不會跳出警告，除非沒有唯一值才用 index，或是請後端加上唯一值</p>
+<p>List.js</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">&quot;./Item&quot;</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> steps = [</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&#x27;hello&#x27;</span>&#125;,</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&#x27;world&#x27;</span>&#125;,</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&#x27;hello world&#x27;</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &#123;steps.map(<span class="function">(<span class="params">item, idx</span>) =&gt;</span></span><br><span class="line">          (<span class="xml"><span class="tag">&lt;<span class="name">Item</span> <span class="attr">key</span>=<span class="string">&#123;item.text&#125;</span>&gt;</span>&#123; item.text &#125;(&#123; idx &#125;)<span class="tag">&lt;/<span class="name">Item</span>&gt;</span></span>)</span><br><span class="line">        )&#125;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> List;</span><br></pre></td></tr></table></figure>
+<p>Item.js</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Item</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;li&gt;&#123;<span class="built_in">this</span>.props.children&#125;&lt;/li&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Item;</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<h1 id="物件渲染成元素"><a href="#物件渲染成元素" class="headerlink" title="物件渲染成元素"></a>物件渲染成元素</h1><p>物件使用 <code>Object.keys</code> 先把物件屬性變成陣列，再使用 map 渲染</p>
+<p><strong>物件渲染出來的結果順序不一定相同，如果要照資料排序須將資料改為陣列</strong></p>
+<p>List.js</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">&quot;./Item&quot;</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> dog = &#123;</span><br><span class="line">      name: <span class="string">&#x27;bobee&#x27;</span>,</span><br><span class="line">      age: <span class="number">12</span>,</span><br><span class="line">      height: <span class="number">64</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &#123; <span class="built_in">Object</span>.keys(dog).map(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> value = dog[key];</span><br><span class="line">            <span class="keyword">return</span> (</span><br><span class="line">              &lt;Item key=&#123;value&#125;&gt;&#123;key&#125;: &#123;value&#125;&lt;/Item&gt;</span><br><span class="line">            )</span><br><span class="line">        &#125;) &#125;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> List;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React列表渲染</tag>
+        <tag>react map</tag>
       </tags>
   </entry>
   <entry>
@@ -3190,6 +3268,38 @@ package.json 設定 --mode staging
       </tags>
   </entry>
   <entry>
+    <title>Vue3 setup、CSS新寫法</title>
+    <url>/2021/03/21/vue-other-issues/</url>
+    <content><![CDATA[<p>Vue3 還有很多新功能官方正在進行中，目前有幾個差不多定案的新功能</p>
+<a id="more"></a>
+
+<h1 id="Script-Setup"><a href="#Script-Setup" class="headerlink" title="Script Setup"></a>Script Setup</h1><p><b>原本寫法</b></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      name,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<p><b>新寫法</b><br>直接將 Setup 寫在 script 上，不用 export、return<br>如果沒有在 template 寫變數，就自動不會 return 出來</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123;ref&#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="變數綁定-CSS"><a href="#變數綁定-CSS" class="headerlink" title="變數綁定 CSS"></a>變數綁定 CSS</h1><p>用 v-bind 綁定 JS 變數，可以直接變換屬性的值</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; ref &#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">const colorBlue = ref(<span class="string">&quot;#000FFF&quot;</span>);</span><br><span class="line">const changeColor = () =&gt; &#123;</span><br><span class="line">  colorBlue.value = <span class="string">&quot;#FF0000&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;changeColor&quot;</span>&gt;</span>changeColor<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">v-bind</span>(colorBlue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+]]></content>
+      <categories>
+        <category>Vue3</category>
+      </categories>
+      <tags>
+        <tag>Vue.js</tag>
+        <tag>javascript</tag>
+        <tag>Composition API</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue Router 網址路由設定、History modes</title>
     <url>/2021/03/14/vue-router/</url>
     <content><![CDATA[<h1 id="單頁式應用"><a href="#單頁式應用" class="headerlink" title="單頁式應用"></a>單頁式應用</h1><p>single-page application，縮寫 SPA<br>透過 JS 動態渲染當前頁面來與使用者互動，而非傳統的從伺服器重新載入整個新頁面。這種方法避免了頁面之間切換打斷用戶體驗，使應用程式更像一個桌面應用程式。</p>
@@ -3220,38 +3330,6 @@ package.json 設定 --mode staging
         <tag>Vue.js</tag>
         <tag>javascript</tag>
         <tag>router</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue3 setup、CSS新寫法</title>
-    <url>/2021/03/21/vue-other-issues/</url>
-    <content><![CDATA[<p>Vue3 還有很多新功能官方正在進行中，目前有幾個差不多定案的新功能</p>
-<a id="more"></a>
-
-<h1 id="Script-Setup"><a href="#Script-Setup" class="headerlink" title="Script Setup"></a>Script Setup</h1><p><b>原本寫法</b></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      name,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<br>
-
-<p><b>新寫法</b><br>直接將 Setup 寫在 script 上，不用 export、return<br>如果沒有在 template 寫變數，就自動不會 return 出來</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123;ref&#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<br>
-
-<h1 id="變數綁定-CSS"><a href="#變數綁定-CSS" class="headerlink" title="變數綁定 CSS"></a>變數綁定 CSS</h1><p>用 v-bind 綁定 JS 變數，可以直接變換屬性的值</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; ref &#125; from <span class="string">&quot;vue&quot;</span>;</span><br><span class="line">const name = ref(<span class="string">&quot;Bobee&quot;</span>);</span><br><span class="line">const colorBlue = ref(<span class="string">&quot;#000FFF&quot;</span>);</span><br><span class="line">const changeColor = () =&gt; &#123;</span><br><span class="line">  colorBlue.value = <span class="string">&quot;#FF0000&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;changeColor&quot;</span>&gt;</span>changeColor<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">v-bind</span>(colorBlue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
-]]></content>
-      <categories>
-        <category>Vue3</category>
-      </categories>
-      <tags>
-        <tag>Vue.js</tag>
-        <tag>javascript</tag>
-        <tag>Composition API</tag>
       </tags>
   </entry>
   <entry>
@@ -3295,6 +3373,46 @@ package.json 設定 --mode staging
         <tag>Vue.js</tag>
         <tag>javascript</tag>
         <tag>ref</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vuex &amp; API 資料流整合</title>
+    <url>/2021/03/21/vue-vuex-api-example/</url>
+    <content><![CDATA[<h1 id="圖片切換範例"><a href="#圖片切換範例" class="headerlink" title="圖片切換範例"></a>圖片切換範例</h1><h2 id="API-抽離管理，清楚管理資料"><a href="#API-抽離管理，清楚管理資料" class="headerlink" title="API 抽離管理，清楚管理資料"></a>API 抽離管理，清楚管理資料</h2><p>axios create 的物件會變成 axios 的實體<br>axios interceptors 攔截器，可以做驗證檢查</p>
+<a id="more"></a>
+
+<p>@/api/photoRequest.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// create的物件會變成axios的實體</span></span><br><span class="line"><span class="keyword">const</span> photoRequest = axios.create(&#123;</span><br><span class="line">  baseURL: <span class="string">&quot;https://vue-lessons-api.herokuapp.com/&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// axios 攔截器，可以做驗證檢查</span></span><br><span class="line"><span class="comment">// 發出 request以前執行</span></span><br><span class="line">photoRequest.interceptors.request.use(</span><br><span class="line">  (config) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">true</span>) <span class="keyword">throw</span> &#123; <span class="attr">response</span>: &#123; <span class="attr">data</span>: <span class="string">&quot;資料不得為空&quot;</span> &#125; &#125;;</span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;,</span><br><span class="line">  (error) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接到 response 之前執行</span></span><br><span class="line">photoRequest.interceptors.response.use(</span><br><span class="line">  (response) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(response);</span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;,</span><br><span class="line">  (error) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getPhotoRequest = <span class="function">() =&gt;</span> photoRequest.get(<span class="string">&quot;/photo/list&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="api-模組入口"><a href="#api-模組入口" class="headerlink" title="api 模組入口"></a>api 模組入口</h2><p>index.js 做各模組的分類，當成模組的入口，方便管理，components 只需引入 index.js</p>
+<p>@/api/index.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; getPhotoRequest &#125; <span class="keyword">from</span> <span class="string">&quot;./photoRequest.js&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> apiGetPhotoRequest = getPhotoRequest;</span><br></pre></td></tr></table></figure>
+<h2 id="資料管理"><a href="#資料管理" class="headerlink" title="資料管理"></a>資料管理</h2><p>store/index.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; apiGetPhotoRequest &#125; <span class="keyword">from</span> <span class="string">&quot;../api&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> createStore(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    photoArr: [],</span><br><span class="line">    idx: <span class="number">0</span>,</span><br><span class="line">    isLoad: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    <span class="comment">// 為確保API資料拿回再進行handImgLoad()，需回傳Promise，axios本身就是一個Promise的回傳</span></span><br><span class="line">    <span class="comment">// async / await 接近同步呼叫</span></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="title">handInit</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> res = <span class="keyword">await</span> apiGetPhotoRequest();</span><br><span class="line">        commit(<span class="string">&quot;init&quot;</span>, res.data);</span><br><span class="line">        <span class="keyword">return</span> res.data;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error.response.data);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 上面async等於</span></span><br><span class="line">    <span class="comment">// handInit(&#123; commit &#125;) &#123;</span></span><br><span class="line">    <span class="comment">//   const res = apiGetPhotoRequest();</span></span><br><span class="line">    <span class="comment">//   return res.then((response) =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     commit(&quot;init&quot;, response.data);</span></span><br><span class="line">    <span class="comment">//     return response.data;</span></span><br><span class="line">    <span class="comment">//   &#125;)</span></span><br><span class="line">    <span class="comment">// &#125;,</span></span><br><span class="line">    <span class="function"><span class="title">handLoadState</span>(<span class="params">&#123; commit &#125;, bool</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;loadState&quot;</span>, bool);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">handAdd</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;Add&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">handRemove</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;Remove&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    <span class="function"><span class="title">init</span>(<span class="params">state, payload</span>)</span> &#123;</span><br><span class="line">      state.photoArr = payload;</span><br><span class="line">      <span class="built_in">console</span>.log(state.photoArr);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">loadState</span>(<span class="params">state, bool</span>)</span> &#123;</span><br><span class="line">      state.isLoad = bool;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">Add</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      state.idx++;</span><br><span class="line">      <span class="keyword">if</span> (state.idx &gt; state.photoArr.length - <span class="number">1</span>) &#123;</span><br><span class="line">        state.idx = <span class="number">0</span>; <span class="comment">// 大於總數量時返回第一張</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">Remove</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      state.idx--;</span><br><span class="line">      <span class="keyword">if</span> (state.idx &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        state.idx = state.photoArr.length - <span class="number">1</span>; <span class="comment">//小於0時返回最後一張</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    <span class="function"><span class="title">isLoad</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.isLoad;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">photoArr</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.photoArr;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">idx</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.idx;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="組件"><a href="#組件" class="headerlink" title="組件"></a>組件</h2><p>App.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ImageBox <span class="keyword">from</span> <span class="string">&quot;./components/ImageBox/index.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> LoadingBar <span class="keyword">from</span> <span class="string">&quot;./components/LoadingBar.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    LoadingBar,</span><br><span class="line">    ImageBox,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> handImgLoad = <span class="function">(<span class="params">imgArr</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">      imgArr.forEach(<span class="function">(<span class="params">image</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newImage = <span class="keyword">new</span> Image();</span><br><span class="line">        newImage.src = image.url;</span><br><span class="line">        newImage.onload = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          i++;</span><br><span class="line">          store.dispatch(<span class="string">&quot;handLoadState&quot;</span>, i === imgArr.length);</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> init = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handInit&quot;</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        handImgLoad(res); <span class="comment">// res為handInit回傳的資料</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      init();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">LoadingBar</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ImageBox</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>loading 組件<br>components/LoadingBar.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> isLoad = computed(<span class="function">() =&gt;</span> store.getters.isLoad);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; isLoad &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">v-show</span>=<span class="string">&quot;!isLoad&quot;</span> <span class="attr">class</span>=<span class="string">&quot;load&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../assets/load.gif&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>圖片組件<br>components/ImageBox/index.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ImgShow <span class="keyword">from</span> <span class="string">&quot;./ImgShow.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ChangeBtn <span class="keyword">from</span> <span class="string">&quot;./ChangeBtn.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    ImgShow,</span><br><span class="line">    ChangeBtn,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> isLoad = computed(<span class="function">() =&gt;</span> store.getters.isLoad);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; isLoad &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span> <span class="attr">v-show</span>=<span class="string">&quot;isLoad&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ImgShow</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ChangeBtn</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>圖片切換按鈕<br>components/ImageBox/ChangeBtn.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> addImg = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handAdd&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> removeImg = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handRemove&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; addImg, removeImg &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;btnbox&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">&quot;removeImg&quot;</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span>&gt;</span>上一張<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">&quot;addImg&quot;</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span>&gt;</span>下一張<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>圖片顯示組件<br>components/ImageBox/ImgShow.vue</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> photoArr = computed(<span class="function">() =&gt;</span> store.getters.photoArr);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> idx = computed(<span class="function">() =&gt;</span> store.getters.idx);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; photoArr, idx &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  &lt;img</span><br><span class="line">    class=&quot;img&quot;</span><br><span class="line">    v-for=&quot;(item, s) in photoArr&quot;</span><br><span class="line">    v-show=&quot;idx === s&quot;</span><br><span class="line">    :key=&quot;item.url&quot;</span><br><span class="line">    :src=&quot;item.url&quot;</span><br><span class="line">    alt=&quot;&quot;</span><br><span class="line">  /&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+]]></content>
+      <categories>
+        <category>Vue3</category>
+      </categories>
+      <tags>
+        <tag>Vue.js</tag>
+        <tag>javascript</tag>
+        <tag>vuex</tag>
       </tags>
   </entry>
   <entry>
@@ -3365,46 +3483,6 @@ package.json 設定 --mode staging
       <tags>
         <tag>vee-validate4</tag>
         <tag>veeValidate4 教學</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vuex &amp; API 資料流整合</title>
-    <url>/2021/03/21/vue-vuex-api-example/</url>
-    <content><![CDATA[<h1 id="圖片切換範例"><a href="#圖片切換範例" class="headerlink" title="圖片切換範例"></a>圖片切換範例</h1><h2 id="API-抽離管理，清楚管理資料"><a href="#API-抽離管理，清楚管理資料" class="headerlink" title="API 抽離管理，清楚管理資料"></a>API 抽離管理，清楚管理資料</h2><p>axios create 的物件會變成 axios 的實體<br>axios interceptors 攔截器，可以做驗證檢查</p>
-<a id="more"></a>
-
-<p>@/api/photoRequest.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// create的物件會變成axios的實體</span></span><br><span class="line"><span class="keyword">const</span> photoRequest = axios.create(&#123;</span><br><span class="line">  baseURL: <span class="string">&quot;https://vue-lessons-api.herokuapp.com/&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// axios 攔截器，可以做驗證檢查</span></span><br><span class="line"><span class="comment">// 發出 request以前執行</span></span><br><span class="line">photoRequest.interceptors.request.use(</span><br><span class="line">  (config) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">true</span>) <span class="keyword">throw</span> &#123; <span class="attr">response</span>: &#123; <span class="attr">data</span>: <span class="string">&quot;資料不得為空&quot;</span> &#125; &#125;;</span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;,</span><br><span class="line">  (error) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接到 response 之前執行</span></span><br><span class="line">photoRequest.interceptors.response.use(</span><br><span class="line">  (response) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(response);</span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;,</span><br><span class="line">  (error) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getPhotoRequest = <span class="function">() =&gt;</span> photoRequest.get(<span class="string">&quot;/photo/list&quot;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="api-模組入口"><a href="#api-模組入口" class="headerlink" title="api 模組入口"></a>api 模組入口</h2><p>index.js 做各模組的分類，當成模組的入口，方便管理，components 只需引入 index.js</p>
-<p>@/api/index.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; getPhotoRequest &#125; <span class="keyword">from</span> <span class="string">&quot;./photoRequest.js&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> apiGetPhotoRequest = getPhotoRequest;</span><br></pre></td></tr></table></figure>
-<h2 id="資料管理"><a href="#資料管理" class="headerlink" title="資料管理"></a>資料管理</h2><p>store/index.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; apiGetPhotoRequest &#125; <span class="keyword">from</span> <span class="string">&quot;../api&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> createStore(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    photoArr: [],</span><br><span class="line">    idx: <span class="number">0</span>,</span><br><span class="line">    isLoad: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    <span class="comment">// 為確保API資料拿回再進行handImgLoad()，需回傳Promise，axios本身就是一個Promise的回傳</span></span><br><span class="line">    <span class="comment">// async / await 接近同步呼叫</span></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="title">handInit</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> res = <span class="keyword">await</span> apiGetPhotoRequest();</span><br><span class="line">        commit(<span class="string">&quot;init&quot;</span>, res.data);</span><br><span class="line">        <span class="keyword">return</span> res.data;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error.response.data);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 上面async等於</span></span><br><span class="line">    <span class="comment">// handInit(&#123; commit &#125;) &#123;</span></span><br><span class="line">    <span class="comment">//   const res = apiGetPhotoRequest();</span></span><br><span class="line">    <span class="comment">//   return res.then((response) =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     commit(&quot;init&quot;, response.data);</span></span><br><span class="line">    <span class="comment">//     return response.data;</span></span><br><span class="line">    <span class="comment">//   &#125;)</span></span><br><span class="line">    <span class="comment">// &#125;,</span></span><br><span class="line">    <span class="function"><span class="title">handLoadState</span>(<span class="params">&#123; commit &#125;, bool</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;loadState&quot;</span>, bool);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">handAdd</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;Add&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">handRemove</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      commit(<span class="string">&quot;Remove&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    <span class="function"><span class="title">init</span>(<span class="params">state, payload</span>)</span> &#123;</span><br><span class="line">      state.photoArr = payload;</span><br><span class="line">      <span class="built_in">console</span>.log(state.photoArr);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">loadState</span>(<span class="params">state, bool</span>)</span> &#123;</span><br><span class="line">      state.isLoad = bool;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">Add</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      state.idx++;</span><br><span class="line">      <span class="keyword">if</span> (state.idx &gt; state.photoArr.length - <span class="number">1</span>) &#123;</span><br><span class="line">        state.idx = <span class="number">0</span>; <span class="comment">// 大於總數量時返回第一張</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">Remove</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      state.idx--;</span><br><span class="line">      <span class="keyword">if</span> (state.idx &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        state.idx = state.photoArr.length - <span class="number">1</span>; <span class="comment">//小於0時返回最後一張</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    <span class="function"><span class="title">isLoad</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.isLoad;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">photoArr</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.photoArr;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">idx</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.idx;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="組件"><a href="#組件" class="headerlink" title="組件"></a>組件</h2><p>App.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onMounted &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ImageBox <span class="keyword">from</span> <span class="string">&quot;./components/ImageBox/index.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> LoadingBar <span class="keyword">from</span> <span class="string">&quot;./components/LoadingBar.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    LoadingBar,</span><br><span class="line">    ImageBox,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> handImgLoad = <span class="function">(<span class="params">imgArr</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">      imgArr.forEach(<span class="function">(<span class="params">image</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newImage = <span class="keyword">new</span> Image();</span><br><span class="line">        newImage.src = image.url;</span><br><span class="line">        newImage.onload = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          i++;</span><br><span class="line">          store.dispatch(<span class="string">&quot;handLoadState&quot;</span>, i === imgArr.length);</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> init = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handInit&quot;</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        handImgLoad(res); <span class="comment">// res為handInit回傳的資料</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      init();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">LoadingBar</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ImageBox</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>loading 組件<br>components/LoadingBar.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> isLoad = computed(<span class="function">() =&gt;</span> store.getters.isLoad);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; isLoad &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">v-show</span>=<span class="string">&quot;!isLoad&quot;</span> <span class="attr">class</span>=<span class="string">&quot;load&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../assets/load.gif&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>圖片組件<br>components/ImageBox/index.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ImgShow <span class="keyword">from</span> <span class="string">&quot;./ImgShow.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ChangeBtn <span class="keyword">from</span> <span class="string">&quot;./ChangeBtn.vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    ImgShow,</span><br><span class="line">    ChangeBtn,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> isLoad = computed(<span class="function">() =&gt;</span> store.getters.isLoad);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; isLoad &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span> <span class="attr">v-show</span>=<span class="string">&quot;isLoad&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ImgShow</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ChangeBtn</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>圖片切換按鈕<br>components/ImageBox/ChangeBtn.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> addImg = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handAdd&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> removeImg = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      store.dispatch(<span class="string">&quot;handRemove&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; addImg, removeImg &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;btnbox&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">&quot;removeImg&quot;</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span>&gt;</span>上一張<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">&quot;addImg&quot;</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span>&gt;</span>下一張<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>圖片顯示組件<br>components/ImageBox/ImgShow.vue</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> store = useStore();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> photoArr = computed(<span class="function">() =&gt;</span> store.getters.photoArr);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> idx = computed(<span class="function">() =&gt;</span> store.getters.idx);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123; photoArr, idx &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  &lt;img</span><br><span class="line">    class=&quot;img&quot;</span><br><span class="line">    v-for=&quot;(item, s) in photoArr&quot;</span><br><span class="line">    v-show=&quot;idx === s&quot;</span><br><span class="line">    :key=&quot;item.url&quot;</span><br><span class="line">    :src=&quot;item.url&quot;</span><br><span class="line">    alt=&quot;&quot;</span><br><span class="line">  /&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
-]]></content>
-      <categories>
-        <category>Vue3</category>
-      </categories>
-      <tags>
-        <tag>Vue.js</tag>
-        <tag>javascript</tag>
-        <tag>vuex</tag>
       </tags>
   </entry>
   <entry>
@@ -3657,6 +3735,37 @@ MenuBtn.vue
       </tags>
   </entry>
   <entry>
+    <title>HTTP 狀態碼</title>
+    <url>/2021/08/07/web-http-status-code/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/8GHhzql.jpg" alt="Imgur"></p>
+<h1 id="什麼是-HTTP-狀態碼-HTTP-Status-Codes"><a href="#什麼是-HTTP-狀態碼-HTTP-Status-Codes" class="headerlink" title="什麼是 HTTP 狀態碼(HTTP Status Codes)?"></a>什麼是 HTTP 狀態碼(HTTP Status Codes)?</h1><p>HTTP 狀態碼是伺服器對瀏覽器請求回應(HTTP Response)的狀態，由 RFC 2616 規範定義的，並得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 與 RFC 4918 等規範擴充。伺服器用一個三位數的代碼來回應瀏覽器的請求，狀態的分類可區分三個層級，第一個數字為大類、第二個數字為中類、第三個數字為小類。</p>
+<a id="more"></a>
+
+<p>了解狀態代碼以及如何使用它們將有助於快速診斷網站錯誤</p>
+<h2 id="HTTP-狀態碼大致分成-5-類"><a href="#HTTP-狀態碼大致分成-5-類" class="headerlink" title="HTTP 狀態碼大致分成 5 類"></a>HTTP 狀態碼大致分成 5 類</h2><p>1xx Informationa - 參考資訊<br>2xx Successful - 成功<br>3xx Redirection - 重新導向<br>4xx Client Error - 用戶端錯誤<br>5xx Server Error - 伺服器錯誤</p>
+<h3 id="1xx-Informational-參考資訊"><a href="#1xx-Informational-參考資訊" class="headerlink" title="1xx Informational 參考資訊"></a>1xx Informational 參考資訊</h3><p>這些狀態碼代表請求已被接受，需要繼續處理，這類回應是臨時回應，所以在接收一般的回應之前，用戶端應準備接收一個或多個 1xx 的回應，等待伺服器採取進一步行動。</p>
+<p>100 Continue - 繼續執行所發出的請求<br>101 Switching Protocols - 切換通訊協定</p>
+<h3 id="2xx-Successful-成功"><a href="#2xx-Successful-成功" class="headerlink" title="2xx Successful 成功"></a>2xx Successful 成功</h3><p>這類的狀態碼表示伺服器成功接收到用戶端的要求、理解並接受。</p>
+<p>200 OK - 確定。用戶端要求成功<br>201 Created - 請求已經被實現<br>202 Accepted - 伺服器已接受請求，但尚未處理<br>203 Non-Authoritative Information - 非授權資訊<br>204 No Content - 無內容，伺服器成功處理了請求，沒有返回任何內容<br>205 Reset Content - 重設內容，伺服器成功處理了請求，但沒有返回任何內容。與 204 回應不同，此回應要求請求者重設文件視圖<br>206 Partial Content - 伺服器已經成功處理了部分 GET 請求<br>207 Multi-Status - 代表之後的訊息體將是一個 XML 訊息，並且可能依照之前子請求數量的不同，包含一系列獨立的回應代碼<br>208 Already Reported - DAV 繫結的成員已經在（多狀態）回應之前的部分被列舉，且未被再次包含<br>226 IM Used - 伺服器已經滿足了對資源的請求，對實體請求的一個或多個實體操作的結果表示</p>
+<h3 id="3xx-Redirection-重新導向"><a href="#3xx-Redirection-重新導向" class="headerlink" title="3xx Redirection 重新導向"></a>3xx Redirection 重新導向</h3><p>用戶端瀏覽器必須採取進一步的操作才能完成要求。這些狀態碼用來重新導向，例如瀏覽器可能必須重新發出 HTTP Request 要求伺服器上的不同頁面。客戶端應當自動監測無限迴圈重新導向（例如：A→B→C→……→A 或 A→A），因為這會導致伺服器和客戶端大量不必要的資源消耗。按照 HTTP/1.0 版規範的建議，瀏覽器不應自動存取超過 5 次的重新導向。</p>
+<p>300 Multiple Choices - 被請求的資源有一系列可供選擇的回饋資訊，每個都有自己特定的位址和瀏覽器驅動的商議資訊。使用者或瀏覽器能夠自行選擇一個首選的位址進行重新導向<br>301 Moved Permanently - 要求的網頁已經永久改變網址。此狀態要求用戶端未來在連結此網址時應該導向至指定的 URI<br>302 Found - 要求客戶端執行臨時重新導向<br>303 See Other - 通知用戶端使用 GET 連到另一個 URI 去查看<br>304 Not Modified - 未修改。用戶端要求該網頁時，其內容並沒有變更<br>305 Use Proxy - 要求的網頁必須透過 Server 指定的 proxy 才能查看(需透過 Location 標頭)<br>306 Switch Proxy - 在最新版的規範中，306 狀態碼已經不再被使用。最初是指「後續請求應使用指定的代理」<br>307 Temporary Redirect - 在這種情況下，請求應該與另一個 URI 重複，但後續的請求應仍使用原始的 URI。 與 302 相反，當重新發出原始請求時，不允許更改請求方法。 例如，應該使用另一個 POST 請求來重複 POST 請求</p>
+<h3 id="4xx-Client-Error-用戶端錯誤"><a href="#4xx-Client-Error-用戶端錯誤" class="headerlink" title="4xx Client Error 用戶端錯誤"></a>4xx Client Error 用戶端錯誤</h3><p>這代表錯誤發生，且這錯誤的發生的原因跟「用戶端」有關，妨礙了伺服器的處理。例如：用戶端可能連結到不存在的頁面、用戶端的權限不足、或可能未提供有效的驗證資訊(輸入的帳號、密碼錯誤)。</p>
+<p>400 Bad Request - 錯誤的要求<br>401 Unauthorized - 拒絕存取<br>402 Payment Required - 該狀態碼是為了將來可能的需求而預留的。該狀態碼最初的意圖可能被用作某種形式的數字現金或線上支付方案的一部分，但幾乎沒有哪家服務商使用，而且這個狀態碼通常不被使用<br>403 Forbidden - 伺服器已經理解請求，但是拒絕執行它<br>404 Not Found - 找不到，請求失敗，請求所希望得到的資源未被在伺服器上發現，但允許使用者的後續請求<br>405 Method Not Allowed - 用來存取這個頁面的 HTTP 動詞不受允許 (方法不受允許)<br>406 Not Acceptable - 用戶端瀏覽器不接受要求頁面的 MIME 類型<br>407 Proxy Authentication Required - 需要 Proxy 驗證<br>408 Request Timeout - 請求逾時<br>409 Conflict - 資源狀態衝突<br>410 Gone - 資源已不存在且無轉址資訊<br>411 Length Required - 要求的 Content-Length 沒有定義<br>412 Precondition Failed - 指定條件失敗<br>413 Request Entity Too Large - 要求的實體太大<br>414 Request-URI Too Long - 要求 URI 太長。會因伺服器或瀏覽器而異，建議 2048 字元以下比較保險<br>415 Unsupported Media Type - 不支援的媒體類型<br>416 Requested Range Not Satisfiable - 無法滿足要求的範圍<br>417 Expectation Failed - 執行失敗</p>
+<h3 id="5xx-Server-Error-伺服器錯誤"><a href="#5xx-Server-Error-伺服器錯誤" class="headerlink" title="5xx Server Error 伺服器錯誤"></a>5xx Server Error 伺服器錯誤</h3><p>這代表錯誤發生，且這錯誤發生的原因跟「伺服器」有關。伺服器因為發生錯誤或例外狀況(Exception)而無法完成要求(Request)時，就會回應 5xx 的錯誤，且這肯定跟伺服器有關。</p>
+<p>500 Internal Server Error - 內部伺服器錯誤。<br>501 Not Implemented – 標頭值指定未實作的設定。<br>502 Bad Gateway - Web 伺服器在作為閘道或 Proxy 時收到無效的回應。<br>503 Service Unavailable - 服務無法使用。 這是 IIS 6.0 專用的錯誤碼。<br>504 Gateway Timeout - 閘道逾時。<br>505 HTTP Version Not Supported - 不支援的 HTTP 版本。</p>
+<hr>
+<h3 id="參考文獻"><a href="#參考文獻" class="headerlink" title="參考文獻:"></a>參考文獻:</h3><p><a href="https://blog.poychang.net/http-status-code/">HTTP 狀態碼一覽表</a><br><a href="https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81">HTTP 狀態碼</a></p>
+<hr>
+]]></content>
+      <categories>
+        <category>網頁程式技術探討</category>
+      </categories>
+      <tags>
+        <tag>HTTP 狀態碼</tag>
+        <tag>HTTP Status Codes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HTTPS 和 HTTP 的差別？</title>
     <url>/2021/08/07/web-https/</url>
     <content><![CDATA[<p><img src="https://imgur.com/aJkfXyD.jpg" alt="Imgur"><br>我們在拜訪網站時，你有沒有看過這個畫面呢?<br>這是瀏覽器針對 HTTP 網址，對使用者發出的「不安全」提示，藉此來要求網站開發者盡快將網站轉為透過 HTTPS 傳輸資料</p>
@@ -3690,37 +3799,6 @@ MenuBtn.vue
       <tags>
         <tag>HTTPS</tag>
         <tag>HTTP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTTP 狀態碼</title>
-    <url>/2021/08/07/web-http-status-code/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/8GHhzql.jpg" alt="Imgur"></p>
-<h1 id="什麼是-HTTP-狀態碼-HTTP-Status-Codes"><a href="#什麼是-HTTP-狀態碼-HTTP-Status-Codes" class="headerlink" title="什麼是 HTTP 狀態碼(HTTP Status Codes)?"></a>什麼是 HTTP 狀態碼(HTTP Status Codes)?</h1><p>HTTP 狀態碼是伺服器對瀏覽器請求回應(HTTP Response)的狀態，由 RFC 2616 規範定義的，並得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 與 RFC 4918 等規範擴充。伺服器用一個三位數的代碼來回應瀏覽器的請求，狀態的分類可區分三個層級，第一個數字為大類、第二個數字為中類、第三個數字為小類。</p>
-<a id="more"></a>
-
-<p>了解狀態代碼以及如何使用它們將有助於快速診斷網站錯誤</p>
-<h2 id="HTTP-狀態碼大致分成-5-類"><a href="#HTTP-狀態碼大致分成-5-類" class="headerlink" title="HTTP 狀態碼大致分成 5 類"></a>HTTP 狀態碼大致分成 5 類</h2><p>1xx Informationa - 參考資訊<br>2xx Successful - 成功<br>3xx Redirection - 重新導向<br>4xx Client Error - 用戶端錯誤<br>5xx Server Error - 伺服器錯誤</p>
-<h3 id="1xx-Informational-參考資訊"><a href="#1xx-Informational-參考資訊" class="headerlink" title="1xx Informational 參考資訊"></a>1xx Informational 參考資訊</h3><p>這些狀態碼代表請求已被接受，需要繼續處理，這類回應是臨時回應，所以在接收一般的回應之前，用戶端應準備接收一個或多個 1xx 的回應，等待伺服器採取進一步行動。</p>
-<p>100 Continue - 繼續執行所發出的請求<br>101 Switching Protocols - 切換通訊協定</p>
-<h3 id="2xx-Successful-成功"><a href="#2xx-Successful-成功" class="headerlink" title="2xx Successful 成功"></a>2xx Successful 成功</h3><p>這類的狀態碼表示伺服器成功接收到用戶端的要求、理解並接受。</p>
-<p>200 OK - 確定。用戶端要求成功<br>201 Created - 請求已經被實現<br>202 Accepted - 伺服器已接受請求，但尚未處理<br>203 Non-Authoritative Information - 非授權資訊<br>204 No Content - 無內容，伺服器成功處理了請求，沒有返回任何內容<br>205 Reset Content - 重設內容，伺服器成功處理了請求，但沒有返回任何內容。與 204 回應不同，此回應要求請求者重設文件視圖<br>206 Partial Content - 伺服器已經成功處理了部分 GET 請求<br>207 Multi-Status - 代表之後的訊息體將是一個 XML 訊息，並且可能依照之前子請求數量的不同，包含一系列獨立的回應代碼<br>208 Already Reported - DAV 繫結的成員已經在（多狀態）回應之前的部分被列舉，且未被再次包含<br>226 IM Used - 伺服器已經滿足了對資源的請求，對實體請求的一個或多個實體操作的結果表示</p>
-<h3 id="3xx-Redirection-重新導向"><a href="#3xx-Redirection-重新導向" class="headerlink" title="3xx Redirection 重新導向"></a>3xx Redirection 重新導向</h3><p>用戶端瀏覽器必須採取進一步的操作才能完成要求。這些狀態碼用來重新導向，例如瀏覽器可能必須重新發出 HTTP Request 要求伺服器上的不同頁面。客戶端應當自動監測無限迴圈重新導向（例如：A→B→C→……→A 或 A→A），因為這會導致伺服器和客戶端大量不必要的資源消耗。按照 HTTP/1.0 版規範的建議，瀏覽器不應自動存取超過 5 次的重新導向。</p>
-<p>300 Multiple Choices - 被請求的資源有一系列可供選擇的回饋資訊，每個都有自己特定的位址和瀏覽器驅動的商議資訊。使用者或瀏覽器能夠自行選擇一個首選的位址進行重新導向<br>301 Moved Permanently - 要求的網頁已經永久改變網址。此狀態要求用戶端未來在連結此網址時應該導向至指定的 URI<br>302 Found - 要求客戶端執行臨時重新導向<br>303 See Other - 通知用戶端使用 GET 連到另一個 URI 去查看<br>304 Not Modified - 未修改。用戶端要求該網頁時，其內容並沒有變更<br>305 Use Proxy - 要求的網頁必須透過 Server 指定的 proxy 才能查看(需透過 Location 標頭)<br>306 Switch Proxy - 在最新版的規範中，306 狀態碼已經不再被使用。最初是指「後續請求應使用指定的代理」<br>307 Temporary Redirect - 在這種情況下，請求應該與另一個 URI 重複，但後續的請求應仍使用原始的 URI。 與 302 相反，當重新發出原始請求時，不允許更改請求方法。 例如，應該使用另一個 POST 請求來重複 POST 請求</p>
-<h3 id="4xx-Client-Error-用戶端錯誤"><a href="#4xx-Client-Error-用戶端錯誤" class="headerlink" title="4xx Client Error 用戶端錯誤"></a>4xx Client Error 用戶端錯誤</h3><p>這代表錯誤發生，且這錯誤的發生的原因跟「用戶端」有關，妨礙了伺服器的處理。例如：用戶端可能連結到不存在的頁面、用戶端的權限不足、或可能未提供有效的驗證資訊(輸入的帳號、密碼錯誤)。</p>
-<p>400 Bad Request - 錯誤的要求<br>401 Unauthorized - 拒絕存取<br>402 Payment Required - 該狀態碼是為了將來可能的需求而預留的。該狀態碼最初的意圖可能被用作某種形式的數字現金或線上支付方案的一部分，但幾乎沒有哪家服務商使用，而且這個狀態碼通常不被使用<br>403 Forbidden - 伺服器已經理解請求，但是拒絕執行它<br>404 Not Found - 找不到，請求失敗，請求所希望得到的資源未被在伺服器上發現，但允許使用者的後續請求<br>405 Method Not Allowed - 用來存取這個頁面的 HTTP 動詞不受允許 (方法不受允許)<br>406 Not Acceptable - 用戶端瀏覽器不接受要求頁面的 MIME 類型<br>407 Proxy Authentication Required - 需要 Proxy 驗證<br>408 Request Timeout - 請求逾時<br>409 Conflict - 資源狀態衝突<br>410 Gone - 資源已不存在且無轉址資訊<br>411 Length Required - 要求的 Content-Length 沒有定義<br>412 Precondition Failed - 指定條件失敗<br>413 Request Entity Too Large - 要求的實體太大<br>414 Request-URI Too Long - 要求 URI 太長。會因伺服器或瀏覽器而異，建議 2048 字元以下比較保險<br>415 Unsupported Media Type - 不支援的媒體類型<br>416 Requested Range Not Satisfiable - 無法滿足要求的範圍<br>417 Expectation Failed - 執行失敗</p>
-<h3 id="5xx-Server-Error-伺服器錯誤"><a href="#5xx-Server-Error-伺服器錯誤" class="headerlink" title="5xx Server Error 伺服器錯誤"></a>5xx Server Error 伺服器錯誤</h3><p>這代表錯誤發生，且這錯誤發生的原因跟「伺服器」有關。伺服器因為發生錯誤或例外狀況(Exception)而無法完成要求(Request)時，就會回應 5xx 的錯誤，且這肯定跟伺服器有關。</p>
-<p>500 Internal Server Error - 內部伺服器錯誤。<br>501 Not Implemented – 標頭值指定未實作的設定。<br>502 Bad Gateway - Web 伺服器在作為閘道或 Proxy 時收到無效的回應。<br>503 Service Unavailable - 服務無法使用。 這是 IIS 6.0 專用的錯誤碼。<br>504 Gateway Timeout - 閘道逾時。<br>505 HTTP Version Not Supported - 不支援的 HTTP 版本。</p>
-<hr>
-<h3 id="參考文獻"><a href="#參考文獻" class="headerlink" title="參考文獻:"></a>參考文獻:</h3><p><a href="https://blog.poychang.net/http-status-code/">HTTP 狀態碼一覽表</a><br><a href="https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81">HTTP 狀態碼</a></p>
-<hr>
-]]></content>
-      <categories>
-        <category>網頁程式技術探討</category>
-      </categories>
-      <tags>
-        <tag>HTTP 狀態碼</tag>
-        <tag>HTTP Status Codes</tag>
       </tags>
   </entry>
 </search>
