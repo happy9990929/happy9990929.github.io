@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="【DAY 5】認識 JSX，用 JS 寫 HTML 語法">
+<meta property="og:url" content="https://happy9990929.github.io/2022/10/20/react-jsx/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/zIwYpvB.jpg">
+<meta property="og:image" content="https://imgur.com/DzpZZKn.jpg">
+<meta property="article:published_time" content="2022-10-20T08:17:27.000Z">
+<meta property="article:modified_time" content="2022-10-20T08:23:02.593Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="jsx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/zIwYpvB.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/10/20/react-jsx/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>【DAY 5】認識 JSX，用 JS 寫 HTML 語法 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/10/20/react-jsx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【DAY 5】認識 JSX，用 JS 寫 HTML 語法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-10-20 16:17:27 / 修改時間：16:23:02" itemprop="dateCreated datePublished" datetime="2022-10-20T16:17:27+08:00">2022-10-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%90IT-%E9%90%B5%E4%BA%BA%E8%B3%BD%E3%80%91%E4%BD%A0React%E4%BA%86%E5%97%8E-30%E5%A4%A9%E8%A7%A3%E9%8E%96React%E6%8A%80%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">【IT 鐵人賽】你React了嗎? 30天解鎖React技能</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/10/20/react-jsx/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/10/20/react-jsx/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/zIwYpvB.jpg" alt="cover"></p>
+<a id="more"></a>
+
+<p><strong>［情境劇場］</strong></p>
+<p>解師傅：你們看一下，我找到了傳說中的廚具～這個怎麼樣</p>
+<p>小當家：我看了說明書，它可以幫我們把複雜的料理簡單化，使用方法就跟一般的廚具一樣，嗯…不過好像有一些地方要注意？</p>
+<p>解師傅：這好像不是什麼大問題～我們一起來研究看看吧！</p>
+<hr>
+<h1 id="認識-JSX"><a href="#認識-JSX" class="headerlink" title="認識 JSX"></a>認識 JSX</h1><p>在介紹 React 怎麼開發之前，先打開我們先前建立的專案 <code>/src/App.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logo <span class="keyword">from</span> <span class="string">&#x27;./logo.svg&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./App.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">      &lt;header className=<span class="string">&quot;App-header&quot;</span>&gt;</span><br><span class="line">        &lt;img src=&#123;logo&#125; className=<span class="string">&quot;App-logo&quot;</span> alt=<span class="string">&quot;logo&quot;</span> /&gt;</span><br><span class="line">        &lt;p&gt;Learn React&lt;/p&gt;</span><br><span class="line">      &lt;/header&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<p>這是 HTML 嗎？ 但怎麼有 function 又有 render？🤔</p>
+<br/>
+<br/>
+
+<p>NONONO~他既不是 HTML 也不是 JavaScript，而是 JSX</p>
+<p>JSX 全名為 <code>JavaScript Extension Syntax</code>，是一個 JavaScript 的語法擴充，因瀏覽器只認得 HTML、CSS、JS，所以 JSX 需透過 <code>Babel</code> 轉譯，<code>Create React App</code> 已經幫我們處理好這些設定，React 官方也推薦使用 JSX 語法來寫 React</p>
+<p>我們可以透過 JSX 就像寫 HTML 一樣，直接控制使用者介面的外觀，並能使用 JavaScript 所有的功能<br/><br><br/><br><br/></p>
+<p>如果不使用 JSX，用原生 JS 寫大概會像下面這樣</p>
+<p>以下是用 <a target="_blank" rel="noopener" href="https://babeljs.io/repl">Babel</a> 轉譯出來</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logo <span class="keyword">from</span> <span class="string">&#x27;./logo.svg&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./App.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> React.createElement(<span class="string">&quot;div&quot;</span>, &#123;</span><br><span class="line">    className: <span class="string">&quot;App&quot;</span></span><br><span class="line">  &#125;, React.createElement(<span class="string">&quot;header&quot;</span>, &#123;</span><br><span class="line">    className: <span class="string">&quot;App-header&quot;</span></span><br><span class="line">  &#125;, React.createElement(<span class="string">&quot;img&quot;</span>, &#123;</span><br><span class="line">    src: logo,</span><br><span class="line">    className: <span class="string">&quot;App-logo&quot;</span>,</span><br><span class="line">    alt: <span class="string">&quot;logo&quot;</span></span><br><span class="line">  &#125;), React.createElement(<span class="string">&quot;p&quot;</span>, <span class="literal">null</span>, <span class="string">&quot;Learn React&quot;</span>)));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<p>可讀性跟維護性高下立判!😱</p>
+<p>這只是一小部分，如頁面元素再多一點，應該很快就眼花了!😵<br>用這 debug 應該會崩潰吧！<br><br/><br><br/></p>
+<h1 id="JSX-使用方法"><a href="#JSX-使用方法" class="headerlink" title="JSX 使用方法"></a>JSX 使用方法</h1><p>如果熟悉 HTML 與 JS 的朋友應該可以快速上手 JSX 語法，基本上 HTML 的語法在 JSX 都是通用的，只有幾個特殊的地方需要注意</p>
+<h2 id="◆-每個標籤需-close"><a href="#◆-每個標籤需-close" class="headerlink" title="◆ 每個標籤需 close"></a>◆ 每個標籤需 close</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Hello React！&lt;<span class="regexp">/p&gt; /</span><span class="regexp">/ (start tag、end tag)</span></span><br><span class="line"><span class="regexp">&lt;img src=&quot;&#123;logo&#125;&quot; /</span>&gt; <span class="comment">// (self-closing)</span></span><br><span class="line">&lt;img src=&#123;logo&#125; alt=<span class="string">&#x27;&#x27;</span>&gt;&lt;/img&gt;</span><br><span class="line">&lt;div className /&gt;</span><br></pre></td></tr></table></figure>
+<p>不管是 <code>start tag</code>、<code>end tag</code> 或 <code>self-closing</code>，每個元素一定都要關閉，特別的是，在 JSX 每個標籤都可以 <code>self-closing</code>，原本在 HTML 只能 <code>self-closing</code> 的元素，也可以用標籤的方式關閉，這些在 JSX 都是合法使用的<br/><br><br/><br><br/></p>
+<h2 id="◆-保留字改寫-className-htmlFor"><a href="#◆-保留字改寫-className-htmlFor" class="headerlink" title="◆ 保留字改寫 className / htmlFor"></a>◆ 保留字改寫 className / htmlFor</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className=<span class="string">&#x27;red&#x27;</span> /&gt;</span><br><span class="line">&lt;label htmlFor=<span class="string">&#x27;check&#x27;</span> /&gt;</span><br><span class="line">&lt;input type=<span class="string">&#x27;checkbox&#x27;</span> id=<span class="string">&#x27;check&#x27;</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>由於 class 和 for 因與 JS 語法撞名，</p>
+<p>需要將 <code>class</code> 改寫為 <code>className</code>，<code>for</code> 改寫為 <code>htmlFor</code><br><br/><br><br/></p>
+<h2 id="◆-事件、屬性使用駝峰式命名-camelCase"><a href="#◆-事件、屬性使用駝峰式命名-camelCase" class="headerlink" title="◆ 事件、屬性使用駝峰式命名(camelCase)"></a>◆ 事件、屬性使用駝峰式命名(camelCase)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input onChange=&#123;<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&#x27;change&#x27;</span>&#125; /&gt;</span><br><span class="line">&lt;div tabIndex=<span class="string">&quot;1&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>基本上都使用駝峰命名，除<code>aria-*</code>, <code>data-*</code> 不需要使用 camelCase 作為屬性命名規範<br><br/><br><br/></p>
+<h2 id="◆-可用-括號塞值或表達式"><a href="#◆-可用-括號塞值或表達式" class="headerlink" title="◆ 可用 { } 括號塞值或表達式"></a>◆ 可用 { } 括號塞值或表達式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div onClick=&#123; handleClick &#125; /&gt;</span><br><span class="line">&lt;div onClick=&#123;<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&#x27;click&#x27;</span>&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<p>用 {} 塞值或表達式<br><br/><br><br/></p>
+<h2 id="◆-必須被根元素包住"><a href="#◆-必須被根元素包住" class="headerlink" title="◆ 必須被根元素包住"></a>◆ 必須被根元素包住</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;h1&gt;React&lt;/h1&gt;,</span><br><span class="line">	&lt;p&gt;開心學前端&lt;/p&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>如果沒有包住將會出現錯誤</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> (</span><br><span class="line">  &lt;h1&gt;React&lt;/h1&gt;,</span><br><span class="line">  &lt;p&gt;開心學前端&lt;/p&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><img src="https://imgur.com/DzpZZKn.jpg" alt="root"></p>
+<br/>
+<br/>
+
+<p>或是用虛擬的包裝元素 <code>Fragment</code> 包住，渲染出來後 <code>Fragment</code> 不會顯示在 HTML上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Fragment &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    &lt;Fragment&gt;</span><br><span class="line">      &lt;h1&gt;React&lt;/h1&gt;</span><br><span class="line">      &lt;p&gt;開心學前端&lt;/p&gt;</span><br><span class="line">    &lt;/Fragment&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>直接給空標籤，效果也會跟 <code>Fragment</code> 一樣</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span>(</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &lt;h1&gt;React&lt;/h1&gt;</span><br><span class="line">	  &lt;p&gt;開心學前端&lt;/p&gt;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<h1 id="副檔名要用-js-還是-jsx"><a href="#副檔名要用-js-還是-jsx" class="headerlink" title="副檔名要用 .js 還是 .jsx?"></a>副檔名要用 .js 還是 .jsx?</h1><p>你可能會看過一些 React 專案裡有 <code>.jsx</code> 的檔案格式，其實與 <code>.js</code> 副檔名的並<strong>無差異</strong></p>
+<p>有些人認為如果程式碼裡用了 JSX 語法，就使用 <code>.jsx</code> 副檔名，這樣比較好作區別，在實作上不管是 <code>.js</code> 或是 <code>.jsx</code> 都是可以成功運作哦！<br><br/><br><br/></p>
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>了解完 JSX 的使用方式，只要遵循 JSX 的用法，就可以準備開發專案囉！明天就來試著新增一個組件吧！!</p>
+<hr>
+<p>本文為 IT 鐵人賽系列文 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
+<hr>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/react/" rel="tag"># react</a>
+              <a href="/tags/jsx/" rel="tag"># jsx</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/10/19/react-file-structure/" rel="prev" title="【DAY 4】React 專案結構說明與配置(File Structure)">
+      <i class="fa fa-chevron-left"></i> 【DAY 4】React 專案結構說明與配置(File Structure)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AA%8D%E8%AD%98-JSX"><span class="nav-number">1.</span> <span class="nav-text">認識 JSX</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSX-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">JSX 使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%97%86-%E6%AF%8F%E5%80%8B%E6%A8%99%E7%B1%A4%E9%9C%80-close"><span class="nav-number">2.1.</span> <span class="nav-text">◆ 每個標籤需 close</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%97%86-%E4%BF%9D%E7%95%99%E5%AD%97%E6%94%B9%E5%AF%AB-className-htmlFor"><span class="nav-number">2.2.</span> <span class="nav-text">◆ 保留字改寫 className &#x2F; htmlFor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%97%86-%E4%BA%8B%E4%BB%B6%E3%80%81%E5%B1%AC%E6%80%A7%E4%BD%BF%E7%94%A8%E9%A7%9D%E5%B3%B0%E5%BC%8F%E5%91%BD%E5%90%8D-camelCase"><span class="nav-number">2.3.</span> <span class="nav-text">◆ 事件、屬性使用駝峰式命名(camelCase)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%97%86-%E5%8F%AF%E7%94%A8-%E6%8B%AC%E8%99%9F%E5%A1%9E%E5%80%BC%E6%88%96%E8%A1%A8%E9%81%94%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">◆ 可用 { } 括號塞值或表達式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%97%86-%E5%BF%85%E9%A0%88%E8%A2%AB%E6%A0%B9%E5%85%83%E7%B4%A0%E5%8C%85%E4%BD%8F"><span class="nav-number">2.5.</span> <span class="nav-text">◆ 必須被根元素包住</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%AF%E6%AA%94%E5%90%8D%E8%A6%81%E7%94%A8-js-%E9%82%84%E6%98%AF-jsx"><span class="nav-number">3.</span> <span class="nav-text">副檔名要用 .js 還是 .jsx?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">4.</span> <span class="nav-text">結語</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">208</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/10/20/react-jsx/";
+    this.page.identifier = "2022/10/20/react-jsx/";
+    this.page.title = "【DAY 5】認識 JSX，用 JS 寫 HTML 語法";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
