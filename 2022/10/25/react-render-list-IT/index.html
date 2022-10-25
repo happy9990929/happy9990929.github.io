@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="【DAY 8】React 列表渲染，將陣列、物件渲染成元素">
+<meta property="og:url" content="https://happy9990929.github.io/2022/10/25/react-render-list-IT/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/wmMA1ws.jpg">
+<meta property="og:image" content="https://imgur.com/ioDgcy6.jpg">
+<meta property="article:published_time" content="2022-10-25T03:42:33.000Z">
+<meta property="article:modified_time" content="2022-10-25T03:51:19.229Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="jsx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/wmMA1ws.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/10/25/react-render-list-IT/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>【DAY 8】React 列表渲染，將陣列、物件渲染成元素 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/10/25/react-render-list-IT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【DAY 8】React 列表渲染，將陣列、物件渲染成元素
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-10-25 11:42:33 / 修改時間：11:51:19" itemprop="dateCreated datePublished" datetime="2022-10-25T11:42:33+08:00">2022-10-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%90IT-%E9%90%B5%E4%BA%BA%E8%B3%BD%E3%80%91%E4%BD%A0React%E4%BA%86%E5%97%8E-30%E5%A4%A9%E8%A7%A3%E9%8E%96React%E6%8A%80%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">【IT 鐵人賽】你React了嗎? 30天解鎖React技能</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/10/25/react-render-list-IT/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/10/25/react-render-list-IT/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/wmMA1ws.jpg" alt="cover"></p>
+<a id="more"></a>
+
+<p><strong>［情境任務］</strong></p>
+<p>小當家：我把餐廳大致上的料理都開發出來囉！名單都整理好了，直接列上去就行</p>
+<p>解師傅：太好了～哇！這菜色有點多呢！一個一個列好像太花時間了…不知道能不能一次把這些通通放到菜單上呢？老闆你有什麼想法嗎？</p>
+<p>用複製組件的方法雖然不是不行，但我們想要更有效率且好維護的方法!😕</p>
+<hr>
+<h1 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h1><p>當資料開始多時，將每個元件都複製、塞 props，這並不是一個好維護的作法，<br>明明是做同一件事卻看起來很冗長</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;List name=<span class="string">&quot;蘆筍沙拉&quot;</span> price=&#123;<span class="number">100</span>&#125; /&gt;</span><br><span class="line">    &lt;List name=<span class="string">&quot;辣炒空心菜&quot;</span> price=&#123;<span class="number">120</span>&#125; /&gt;</span><br><span class="line">    &lt;List name=<span class="string">&quot;雞蛋豆腐&quot;</span> price=&#123;<span class="number">150</span>&#125;/&gt;</span><br><span class="line">    &lt;List name=<span class="string">&quot;鳳梨蝦球&quot;</span> price=&#123;<span class="number">300</span>&#125;/&gt;</span><br><span class="line">    &lt;List name=<span class="string">&quot;糖醋雞丁&quot;</span> price=&#123;<span class="number">200</span>&#125;/&gt;</span><br><span class="line">    &lt;List name=<span class="string">&quot;砂鍋魚頭&quot;</span> price=&#123;<span class="number">500</span>&#125;/&gt;</span><br><span class="line">    &lt;List name=<span class="string">&quot;竹筍炒肉絲&quot;</span> price=&#123;<span class="number">150</span>&#125;/&gt;</span><br><span class="line">    &lt;List name=<span class="string">&quot;梨山高麗菜&quot;</span> price=&#123;<span class="number">120</span>&#125;/&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<p>這結構其實都一樣，我們可以將資料模組化，再從一個集合中把資料渲染到畫面，像 Vue、Angular 會有自定義渲染列表的模版，而 React 並沒有列表模版，大多是使用 JavaScript 本身的語法 <code>map</code> 產生，以下列出陣列與物件的渲染方式<br/><br><br/><br><br/></p>
+<h2 id="◆-陣列渲染成元素"><a href="#◆-陣列渲染成元素" class="headerlink" title="◆ 陣列渲染成元素"></a>◆ 陣列渲染成元素</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> chef = [</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;小當家&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;解師傅&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;雷恩&quot;</span> &#125;</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &#123;chef.map(<span class="function">(<span class="params">item, index</span>) =&gt;</span> (</span><br><span class="line">        &lt;li key=&#123;item.name&#125;&gt;</span><br><span class="line">          &#123;index + <span class="number">1</span>&#125;. &#123;item.name&#125;</span><br><span class="line">        &lt;/li&gt;</span><br><span class="line">      ))&#125;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<p>資料為一個陣列，要重複渲染的地方用大括弧 {} 包住，使用 JavaScript 的陣列語法 <code>map</code> 將每個 <code>item</code> 渲染出來，<code>map</code> 的第二個參數為索引值 <code>index</code></p>
+<iframe src="https://codesandbox.io/embed/usestate-array-b7iqdo?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="useState-Array"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+<br/>
+<br/>
+除了陣列，物件也可以渲染
+<br/>
+<br/>
+
+<h2 id="◆-物件渲染成元素"><a href="#◆-物件渲染成元素" class="headerlink" title="◆ 物件渲染成元素"></a>◆ 物件渲染成元素</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> chef = &#123;</span><br><span class="line">    name: <span class="string">&quot;小當家&quot;</span>,</span><br><span class="line">    age: <span class="number">13</span>,</span><br><span class="line">    height: <span class="number">150</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &#123;<span class="built_in">Object</span>.keys(chef).map(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> value = chef[key];</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          &lt;li key=&#123;value&#125;&gt;</span><br><span class="line">            &#123;key&#125;: &#123;value&#125;</span><br><span class="line">          &lt;/li&gt;</span><br><span class="line">        );</span><br><span class="line">      &#125;)&#125;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>物件使用 <code>Object.keys</code> 先把物件屬性變成陣列，再使用 <code>map</code> 渲染</p>
+<p><strong>物件渲染出來的結果順序不一定相同，如果要照資料排序須將資料改為陣列</strong><br><br/><br><br/></p>
+<iframe src="https://codesandbox.io/embed/usestate-object-sfqhps?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="useState-object"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+<br/>
+<br/>
+
+<p>你可能會發現，不管是陣列或物件，為什麼渲染列表第一個元素都有 <code>key</code> 屬性？!<br><br/><br><br/></p>
+<h1 id="key-必須是唯一值"><a href="#key-必須是唯一值" class="headerlink" title="key 必須是唯一值"></a>key 必須是唯一值</h1><p>不管是陣列或物件，渲染出來的第一個元素需要帶入 <code>key</code> 屬性，<code>key</code> 是用來辨別元素的改變或增減</p>
+<p>如陣列改變，React 會透過 <code>key</code> 去比較新舊元素有無變更，只改變有變更的元素，才不會整個列表再被重新渲染，影響效能</p>
+<p>如果你忘了加 <code>key</code>，在 console 也會跳出錯誤，提醒你要加 <code>key</code></p>
+<p><img src="https://imgur.com/ioDgcy6.jpg" alt="key"></p>
+<p>◆ 不建議使用索引作為 <code>key</code>，尤其如果項目的順序會改變的話，這會對效能產生不好的影響，也可能會讓 component 資料產生問題，最好的方法還是加上唯一值，通常可以加上 id<br><br/><br><br/></p>
+<p><strong>［任務解題］</strong><br>利用陣列渲染出 menu，渲染 component，並帶入 item 的 props，記得也要加上 key 哦！</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> List <span class="keyword">from</span> <span class="string">&quot;./components/List&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> menu = [</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;蘆筍沙拉&quot;</span>, <span class="attr">price</span>: <span class="number">100</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;辣炒空心菜&quot;</span>, <span class="attr">price</span>: <span class="number">120</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;雞蛋豆腐&quot;</span>, <span class="attr">price</span>: <span class="number">150</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;鳳梨蝦球&quot;</span>, <span class="attr">price</span>: <span class="number">300</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;糖醋雞丁&quot;</span>, <span class="attr">price</span>: <span class="number">200</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;砂鍋魚頭&quot;</span>, <span class="attr">price</span>: <span class="number">500</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;竹筍炒肉絲&quot;</span>, <span class="attr">price</span>: <span class="number">150</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;梨山高麗菜&quot;</span>, <span class="attr">price</span>: <span class="number">120</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;五更腸旺&quot;</span>, <span class="attr">price</span>: <span class="number">250</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;客家小炒&quot;</span>, <span class="attr">price</span>: <span class="number">250</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&quot;三杯杏鮑菇&quot;</span>, <span class="attr">price</span>: <span class="number">180</span> &#125;</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">      &lt;h1&gt;React 熱炒店&lt;/h1&gt;</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &#123;menu.map(<span class="function">(<span class="params">item, index</span>) =&gt;</span> (</span><br><span class="line">          &lt;List</span><br><span class="line">            key=&#123;item.name&#125;</span><br><span class="line">            name=&#123;item.name&#125;</span><br><span class="line">            price=&#123;item.price&#125;</span><br><span class="line">            index=&#123;index&#125;</span><br><span class="line">          &gt;&lt;/List&gt;</span><br><span class="line">        ))&#125;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<br/>
+餐廳的菜單列表就這樣被渲染出來囉！!🤩
+
+<p>有新的菜色或需要調整時，直接更改 menu 陣列就可以了！<br><br/></p>
+<iframe src="https://codesandbox.io/embed/render-list-e6gin6?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="render-List"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+<br/>
+<br/>
+
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>學會渲染列表就可以做很多事了，看起來簡短很多，重要的是好維護，當需要修改資料時，不用去找 component 的 props，直接統一在資料模組管理就好了！</p>
+<hr>
+<p>本文為 IT 鐵人賽系列文 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
+<hr>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/react/" rel="tag"># react</a>
+              <a href="/tags/jsx/" rel="tag"># jsx</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/10/24/react-props/" rel="prev" title="【DAY 7】props 上面傳下來的屬性">
+      <i class="fa fa-chevron-left"></i> 【DAY 7】props 上面傳下來的屬性
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93"><span class="nav-number">1.</span> <span class="nav-text">列表渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%97%86-%E9%99%A3%E5%88%97%E6%B8%B2%E6%9F%93%E6%88%90%E5%85%83%E7%B4%A0"><span class="nav-number">1.1.</span> <span class="nav-text">◆ 陣列渲染成元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%97%86-%E7%89%A9%E4%BB%B6%E6%B8%B2%E6%9F%93%E6%88%90%E5%85%83%E7%B4%A0"><span class="nav-number">1.2.</span> <span class="nav-text">◆ 物件渲染成元素</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#key-%E5%BF%85%E9%A0%88%E6%98%AF%E5%94%AF%E4%B8%80%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">key 必須是唯一值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">3.</span> <span class="nav-text">結語</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">209</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/10/25/react-render-list-IT/";
+    this.page.identifier = "2022/10/25/react-render-list-IT/";
+    this.page.title = "【DAY 8】React 列表渲染，將陣列、物件渲染成元素";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
