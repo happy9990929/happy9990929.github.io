@@ -797,60 +797,6 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </tags>
   </entry>
   <entry>
-    <title>搞懂JS-什麼是 closure 閉包</title>
-    <url>/2021/07/25/js-closure/</url>
-    <content><![CDATA[<p><img src="https://i.imgur.com/vCMSnlu.png" alt="Imgur"></p>
-<p>閉包是由英文的 closure 直接翻譯過來的，所以從字面上看起來，可能也不知道閉包是什麼。</p>
-<a id="more"></a>
-
-<p>closure 是函式在與其語彙範疇之外被調用，也仍記得並能夠被存取的能力，可說是指向特定範疇的參考。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line">baz(); <span class="comment">// 2 closure</span></span><br></pre></td></tr></table></figure>
-<p>bar() 函式能夠存取 foo 的內層範疇。<br>一般來說我們預期 foo() 的整個內層範疇都會消失，基本上函式離開執行環境時，也會同時將佔用的記憶體空間給釋放出來，但 closure 不會讓這件事發生，foo() 內層的範疇實際上仍在使用，因此不會消失。誰在使用它呢? 就是 bar() 函式本身。</p>
-<br/>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">  bar(baz);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  fn(); <span class="comment">// closure</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我們將內層函式 baz 傳給了 bar，並呼叫 bar 的內層函式 fn，包覆 foo() 內層範疇的 closure 就能藉由存取 a 來觀察。</p>
-<p>而這些到處傳遞的函式也可以是間接的</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> fn;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">  fn = baz; <span class="comment">// 指定 baz 給全域變數</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  fn(); <span class="comment">// closure</span></span><br><span class="line">&#125;</span><br><span class="line">foo();</span><br><span class="line">bar(); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-<p>不管我們使用了何種方法，將一個內層函式運送到其語彙範疇之外，它依然會保留對他原本宣告處的一個範疇參考。</p>
-<h1 id="迴圈與-Closure"><a href="#迴圈與-Closure" class="headerlink" title="迴圈與 Closure"></a>迴圈與 Closure</h1><p>closure 最經典的範例</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;, i * <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我們預期它會每秒印出 1、2、3、4、5，但實際上是每秒印出了五次 6!?<br>這是因為 setTimeout 在迴圈結束後才執行，因此每次都會出現 6，那到底我們程式中缺少了什麼呢?</p>
-<p>我們想要讓迴圈每次迭代都能在該次迭代進行時捕捉到他自己的 i 的一份拷貝，然而，那些計時器函式全都是在迴圈完成後執行，所有的那五個函式，雖然都是在各自的迴圈迭代中分別定義的，但它們都會覆蓋同一個共同的全域範疇，其中實際上只有一個 i 存在。</p>
-<p>我們需要更多已被封閉包圍的範疇，也就是說，每次迭代都需要一個新的 closure scope</p>
-<p>解決方式 IIFE：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(j);</span><br><span class="line">    &#125;, j * <span class="number">1000</span>);</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>利用 IIFE 建立專屬範疇，並有自己的變數，來放置每次迭代 i 的一份拷貝</p>
-<h1 id="重返區塊範疇"><a href="#重返區塊範疇" class="headerlink" title="重返區塊範疇"></a>重返區塊範疇</h1><p>我們用了 IIFE 來建立專屬每次迭代的新範疇，實際上，我們需要的是各次迭代專屬的區塊範疇。<br>let 宣告會劫持一個區塊，且每次重新宣告變數 i，並將上一次迭代的結果作為這一次的初始值。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;, i * <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>區塊範疇和 closure 攜手合作，解決了所有的問題。</p>
-<h1 id="模組"><a href="#模組" class="headerlink" title="模組"></a>模組</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CoolModule</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> something = <span class="string">&#x27;cool&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> another = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(something);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doAnother</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(another.join(<span class="string">&#x27;!&#x27;</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    doSomething: doSomething,</span><br><span class="line">    doAnother: doAnother,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = CoolModule();</span><br><span class="line">foo.doSomething(); <span class="comment">// cool</span></span><br><span class="line">foo.doAnother(); <span class="comment">// 1!2!3</span></span><br></pre></td></tr></table></figure>
-<p>模組模式又稱揭露模組(revealing module)，可以將內層函式的資料<code>保持隱藏和私有</code>，調用時只回傳對外公開的 API，<br>這個物件回傳最終會指定給外層變數 foo，就能存取 API 的特性方法，例如 foo.doSomething()</p>
-<p>要行使模組模式，有兩個必要條件：</p>
-<ol>
-<li>必須有一個外層的包含函式，而它必須至少被調用一次(每次都會建立一個新的模組實體)</li>
-<li>這個包含函式至少得回傳一個內層函式，如此這個內層函式才能有覆蓋那個私有範疇的 closure，因此得以存取或修改那個私有狀態</li>
-</ol>
-<p>帶有一個函式特性的物件本身並不是一個真正的模組，從一次函式調用所回傳的物件，如果其上只有資料特性，沒有產生 closure 的函式，那它也不是一個真正的模組。</p>
-<p>CoolModule()展示了一個獨立的模組創造器，可以被調用數次，每次都會建立一個新的模組實體。<br>如果只想要單一個實體的時候：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = (<span class="function"><span class="keyword">function</span> <span class="title">CoolModule</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> something = <span class="string">&#x27;cool&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> another = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(something);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doAnother</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(another.join(<span class="string">&#x27;!&#x27;</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    doSomething: doSomething,</span><br><span class="line">    doAnother: doAnother,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">foo.doSomething(); <span class="comment">// cool</span></span><br><span class="line">foo.doAnother(); <span class="comment">// 1!2!3</span></span><br></pre></td></tr></table></figure>
-<p>模組函式變成了一個 IIFE，即刻調用，並將回傳值直接指定給我們單一個模組實體式別字 foo</p>
-<p>模組只是函式，所以能夠接收參數：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CoolMoudule</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">identify</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(id);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    identify: identify,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> foo1 = CoolMoudule(<span class="string">&#x27;foo 1&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> foo2 = CoolMoudule(<span class="string">&#x27;foo 2&#x27;</span>);</span><br><span class="line"></span><br><span class="line">foo1.identify(); <span class="comment">// &quot;foo 1&quot;</span></span><br><span class="line">foo2.identify(); <span class="comment">// &quot;foo 2&quot;</span></span><br></pre></td></tr></table></figure>
-<p>為公開 API 的回傳物件取個名稱：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = (<span class="function"><span class="keyword">function</span> <span class="title">CoolModule</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">change</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// modify the public API</span></span><br><span class="line">    publicAPI.identify = identify2;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">identify1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(id);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">identify2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(id.toUpperCase());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> publicAPI = &#123;</span><br><span class="line">    change: change,</span><br><span class="line">    identify: identify1,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> publicAPI;</span><br><span class="line">&#125;)(<span class="string">&#x27;foo module&#x27;</span>);</span><br><span class="line"></span><br><span class="line">foo.identify(); <span class="comment">// foo module</span></span><br><span class="line">foo.change();</span><br><span class="line">foo.identify(); <span class="comment">// FOO MODULE</span></span><br></pre></td></tr></table></figure>
-<p>在模組實體中保留對公開 API 物件的一個內層參考，就能夠從內部修改那個模組實體，包括新增與移除方法和特性，還有變更它們的值。</p>
-<hr>
-<h3 id="參考書籍：-你不知道的-JS-範疇與-Closures"><a href="#參考書籍：-你不知道的-JS-範疇與-Closures" class="headerlink" title="參考書籍： 你不知道的 JS-範疇與 Closures"></a>參考書籍： 你不知道的 JS-範疇與 Closures</h3><hr>
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>closure</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>搞懂JS-什麼是hoisting?</title>
     <url>/2021/06/14/js-hoisting/</url>
     <content><![CDATA[<p><img src="https://i.imgur.com/n7k7xaM.jpg" alt="Imgur"></p>
@@ -905,6 +851,60 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </categories>
       <tags>
         <tag>hoisting</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搞懂JS-什麼是 closure 閉包</title>
+    <url>/2021/07/25/js-closure/</url>
+    <content><![CDATA[<p><img src="https://i.imgur.com/vCMSnlu.png" alt="Imgur"></p>
+<p>閉包是由英文的 closure 直接翻譯過來的，所以從字面上看起來，可能也不知道閉包是什麼。</p>
+<a id="more"></a>
+
+<p>closure 是函式在與其語彙範疇之外被調用，也仍記得並能夠被存取的能力，可說是指向特定範疇的參考。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line">baz(); <span class="comment">// 2 closure</span></span><br></pre></td></tr></table></figure>
+<p>bar() 函式能夠存取 foo 的內層範疇。<br>一般來說我們預期 foo() 的整個內層範疇都會消失，基本上函式離開執行環境時，也會同時將佔用的記憶體空間給釋放出來，但 closure 不會讓這件事發生，foo() 內層的範疇實際上仍在使用，因此不會消失。誰在使用它呢? 就是 bar() 函式本身。</p>
+<br/>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">  bar(baz);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  fn(); <span class="comment">// closure</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我們將內層函式 baz 傳給了 bar，並呼叫 bar 的內層函式 fn，包覆 foo() 內層範疇的 closure 就能藉由存取 a 來觀察。</p>
+<p>而這些到處傳遞的函式也可以是間接的</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> fn;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">  fn = baz; <span class="comment">// 指定 baz 給全域變數</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  fn(); <span class="comment">// closure</span></span><br><span class="line">&#125;</span><br><span class="line">foo();</span><br><span class="line">bar(); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p>不管我們使用了何種方法，將一個內層函式運送到其語彙範疇之外，它依然會保留對他原本宣告處的一個範疇參考。</p>
+<h1 id="迴圈與-Closure"><a href="#迴圈與-Closure" class="headerlink" title="迴圈與 Closure"></a>迴圈與 Closure</h1><p>closure 最經典的範例</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;, i * <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我們預期它會每秒印出 1、2、3、4、5，但實際上是每秒印出了五次 6!?<br>這是因為 setTimeout 在迴圈結束後才執行，因此每次都會出現 6，那到底我們程式中缺少了什麼呢?</p>
+<p>我們想要讓迴圈每次迭代都能在該次迭代進行時捕捉到他自己的 i 的一份拷貝，然而，那些計時器函式全都是在迴圈完成後執行，所有的那五個函式，雖然都是在各自的迴圈迭代中分別定義的，但它們都會覆蓋同一個共同的全域範疇，其中實際上只有一個 i 存在。</p>
+<p>我們需要更多已被封閉包圍的範疇，也就是說，每次迭代都需要一個新的 closure scope</p>
+<p>解決方式 IIFE：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(j);</span><br><span class="line">    &#125;, j * <span class="number">1000</span>);</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>利用 IIFE 建立專屬範疇，並有自己的變數，來放置每次迭代 i 的一份拷貝</p>
+<h1 id="重返區塊範疇"><a href="#重返區塊範疇" class="headerlink" title="重返區塊範疇"></a>重返區塊範疇</h1><p>我們用了 IIFE 來建立專屬每次迭代的新範疇，實際上，我們需要的是各次迭代專屬的區塊範疇。<br>let 宣告會劫持一個區塊，且每次重新宣告變數 i，並將上一次迭代的結果作為這一次的初始值。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;, i * <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>區塊範疇和 closure 攜手合作，解決了所有的問題。</p>
+<h1 id="模組"><a href="#模組" class="headerlink" title="模組"></a>模組</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CoolModule</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> something = <span class="string">&#x27;cool&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> another = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(something);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doAnother</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(another.join(<span class="string">&#x27;!&#x27;</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    doSomething: doSomething,</span><br><span class="line">    doAnother: doAnother,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = CoolModule();</span><br><span class="line">foo.doSomething(); <span class="comment">// cool</span></span><br><span class="line">foo.doAnother(); <span class="comment">// 1!2!3</span></span><br></pre></td></tr></table></figure>
+<p>模組模式又稱揭露模組(revealing module)，可以將內層函式的資料<code>保持隱藏和私有</code>，調用時只回傳對外公開的 API，<br>這個物件回傳最終會指定給外層變數 foo，就能存取 API 的特性方法，例如 foo.doSomething()</p>
+<p>要行使模組模式，有兩個必要條件：</p>
+<ol>
+<li>必須有一個外層的包含函式，而它必須至少被調用一次(每次都會建立一個新的模組實體)</li>
+<li>這個包含函式至少得回傳一個內層函式，如此這個內層函式才能有覆蓋那個私有範疇的 closure，因此得以存取或修改那個私有狀態</li>
+</ol>
+<p>帶有一個函式特性的物件本身並不是一個真正的模組，從一次函式調用所回傳的物件，如果其上只有資料特性，沒有產生 closure 的函式，那它也不是一個真正的模組。</p>
+<p>CoolModule()展示了一個獨立的模組創造器，可以被調用數次，每次都會建立一個新的模組實體。<br>如果只想要單一個實體的時候：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = (<span class="function"><span class="keyword">function</span> <span class="title">CoolModule</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> something = <span class="string">&#x27;cool&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> another = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(something);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doAnother</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(another.join(<span class="string">&#x27;!&#x27;</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    doSomething: doSomething,</span><br><span class="line">    doAnother: doAnother,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">foo.doSomething(); <span class="comment">// cool</span></span><br><span class="line">foo.doAnother(); <span class="comment">// 1!2!3</span></span><br></pre></td></tr></table></figure>
+<p>模組函式變成了一個 IIFE，即刻調用，並將回傳值直接指定給我們單一個模組實體式別字 foo</p>
+<p>模組只是函式，所以能夠接收參數：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CoolMoudule</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">identify</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(id);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    identify: identify,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> foo1 = CoolMoudule(<span class="string">&#x27;foo 1&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> foo2 = CoolMoudule(<span class="string">&#x27;foo 2&#x27;</span>);</span><br><span class="line"></span><br><span class="line">foo1.identify(); <span class="comment">// &quot;foo 1&quot;</span></span><br><span class="line">foo2.identify(); <span class="comment">// &quot;foo 2&quot;</span></span><br></pre></td></tr></table></figure>
+<p>為公開 API 的回傳物件取個名稱：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = (<span class="function"><span class="keyword">function</span> <span class="title">CoolModule</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">change</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// modify the public API</span></span><br><span class="line">    publicAPI.identify = identify2;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">identify1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(id);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">identify2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(id.toUpperCase());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> publicAPI = &#123;</span><br><span class="line">    change: change,</span><br><span class="line">    identify: identify1,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> publicAPI;</span><br><span class="line">&#125;)(<span class="string">&#x27;foo module&#x27;</span>);</span><br><span class="line"></span><br><span class="line">foo.identify(); <span class="comment">// foo module</span></span><br><span class="line">foo.change();</span><br><span class="line">foo.identify(); <span class="comment">// FOO MODULE</span></span><br></pre></td></tr></table></figure>
+<p>在模組實體中保留對公開 API 物件的一個內層參考，就能夠從內部修改那個模組實體，包括新增與移除方法和特性，還有變更它們的值。</p>
+<hr>
+<h3 id="參考書籍：-你不知道的-JS-範疇與-Closures"><a href="#參考書籍：-你不知道的-JS-範疇與-Closures" class="headerlink" title="參考書籍： 你不知道的 JS-範疇與 Closures"></a>參考書籍： 你不知道的 JS-範疇與 Closures</h3><hr>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>closure</tag>
       </tags>
   </entry>
   <entry>
@@ -1020,81 +1020,6 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </tags>
   </entry>
   <entry>
-    <title>ES6-Promise 非同步的解決方案</title>
-    <url>/2021/07/29/js-promise/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/RuN7HR6.png" alt="Imgur"></p>
-<p>由於非同步的程式沒辦法照順序執行，像是 AJAX、setTimeout 都是典型的非同步，ES6 提出了 Promise 的新物件，可以確保非同步處理完畢後，再進行下一步的動作，Promise 就是來解決非同步的程式碼。</p>
-<a id="more"></a>
-
-<h1 id="Promise-物件的三種狀態"><a href="#Promise-物件的三種狀態" class="headerlink" title="Promise 物件的三種狀態"></a>Promise 物件的三種狀態</h1><p>在建立 Promise 之前，先來了解 Promise 只會出現以下三種狀態</p>
-<ol>
-<li>pending 初始狀態 (進行中)</li>
-<li>fulfilled 事件已完成，回傳 resolve 的結果</li>
-<li>rejected 事件已失敗，回傳 rejected 的結果</li>
-</ol>
-<p>Promise 狀態的改變只有兩種可能<br>從 pending 變成 fulfilled<br>從 pending 變成 rejected<br>而一但狀態改變就會固定，永遠不會再改變狀態了。</p>
-<br>
-
-<h1 id="建立一個-Promise-物件"><a href="#建立一個-Promise-物件" class="headerlink" title="建立一個 Promise 物件"></a>建立一個 Promise 物件</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    resolve(<span class="string">&#x27;成功&#x27;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(<span class="string">&#x27;失敗&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<ol>
-<li>創建一個新 Promise 構造函數，並代入一個 function</li>
-<li>function 代入兩個參數，這兩個參數也是函式，分別為 resolve (執行成功)、reject (執行失敗)</li>
-<li>設定 resolve / reject 回傳方法<br>resolve() 執行成功的函式<br>reject() 執行失敗的函式</li>
-</ol>
-<br>
-
-<h1 id="取得-Promise-結果"><a href="#取得-Promise-結果" class="headerlink" title="取得 Promise 結果"></a>取得 Promise 結果</h1><p>Promise 物件生成後，可以用 Promise 的原型方法來執行取得的結果</p>
-<h2 id="then"><a href="#then" class="headerlink" title=".then()"></a>.then()</h2><p>綁定當 fulfilled 或 rejected 狀態時，分別要執行的函數，.then 可傳入兩個參數</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise.then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 當狀態是 fulfilled (成功) 時，執行這個函數</span></span><br><span class="line">    <span class="comment">// value 是透過 resolve() 傳進來的參數</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 當狀態是 rejected (失敗) 時，執行這個函數</span></span><br><span class="line">    <span class="comment">// error 是透過 reject() 傳進來的參數</span></span><br><span class="line">    <span class="comment">// 此參數選擇性的，不一定需要</span></span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h2 id="catch"><a href="#catch" class="headerlink" title=".catch()"></a>.catch()</h2><p>綁定當 rejected 狀態時，要執行的函數</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise.catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="finally"><a href="#finally" class="headerlink" title=".finally()"></a>.finally()</h2><p>不帶有任何參數，表示非同步執行完畢，無論是否正確完成，要執行的函數</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise</span><br><span class="line">  .then(<span class="function">(<span class="params">success</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(success);</span><br><span class="line">  &#125;)</span><br><span class="line">  .finally(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;done&#x27;</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-<br>
-
-<h1 id="Chaining-串接"><a href="#Chaining-串接" class="headerlink" title="Chaining 串接"></a>Chaining 串接</h1><p>then、catch 執行後都會返回一個新的 Promise 物件，可以使用鏈接的方式不斷的進行<br>後面的 then 會接收前一個 then 的 return value 當作參數</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  resolve(<span class="string">&#x27;123&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str + <span class="string">&#x27; 456&#x27;</span>;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(str); <span class="comment">// 123456</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-<br>
-
-<h1 id="Promise-方法介紹"><a href="#Promise-方法介紹" class="headerlink" title="Promise 方法介紹"></a>Promise 方法介紹</h1><h2 id="Promise-all-iterable"><a href="#Promise-all-iterable" class="headerlink" title="Promise.all(iterable)"></a>Promise.all(iterable)</h2><p>透過陣列的形式傳入多個 promise 函式，Promise.all 會回傳一個陣列，分別有三種情況</p>
-<ol>
-<li>當引數 iterable 中所有的 promises 都被實現（resolved）</li>
-<li>引數 iterable 不含任何 promise 時，被實現</li>
-<li>得到一個 rejected 時，第一個被 reject 的值會被傳進回 all Promise 物件的 callback</li>
-</ol>
-<p>當全部執行完成後回傳陣列結果，陣列的結果順序與傳入的順序一致，適合用在多支 API 要一起執行，並確保全部完成後才進行其他工作時</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = <span class="built_in">Promise</span>.resolve(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p2 = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p3 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">100</span>, <span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all([p1, p2, p3]).then(<span class="function"><span class="keyword">function</span> (<span class="params">values</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(values); <span class="comment">// [3, 123, &quot;foo&quot;]</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<br>
-
-<h2 id="Promise-race-iterable"><a href="#Promise-race-iterable" class="headerlink" title="Promise.race(iterable)"></a>Promise.race(iterable)</h2><p>透過陣列的形式傳入多個 promise 函式，Promise.race 的結果為第一個最先改變狀態的 Promise 物件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">500</span>, <span class="string">&#x27;one&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> p2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">100</span>, <span class="string">&#x27;two&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.race([p1, p2]).then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value); <span class="comment">// 會顯示 &quot;two&quot;，因為 p2 比較快被 resolve</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<br>
-
-<h2 id="Promise-resolve-value"><a href="#Promise-resolve-value" class="headerlink" title="Promise.resolve(value)"></a>Promise.resolve(value)</h2><p>直接定義 Promise 物件 resolve 的狀態，回傳一個 Promise 物件，value 有三種可能</p>
-<ol>
-<li>value 為具有”then”方法的 Promise，回傳的 promise 將依其結果採取其最終狀態</li>
-<li>value 為 promise，呼叫 Promise.resolve 之結果</li>
-<li>其他情形都將回傳以 value 實現的 promise</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.resolve(<span class="string">&#x27;Success&#x27;</span>).then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Fail&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 輸出 &quot;Success&quot;</span></span><br></pre></td></tr></table></figure>
-<br>
-
-<h2 id="Promise-reject-reason"><a href="#Promise-reject-reason" class="headerlink" title="Promise.reject(reason)"></a>Promise.reject(reason)</h2><p>回傳一個以 reason 拒絕的 Promise 物件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;Fail&#x27;</span>)).then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Success&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Fail&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 輸出 &quot;Fail&quot;</span></span><br></pre></td></tr></table></figure>
-<p><br><br><br>有了 Promise 非同步語法，就可以捨棄古早時期使用的 callback hell，變得更清楚直觀，程式碼可讀性更高了 👍</p>
-<hr>
-<h3 id="參考文獻：-Fooish-程式技術、MDN、卡斯柏’s-blog"><a href="#參考文獻：-Fooish-程式技術、MDN、卡斯柏’s-blog" class="headerlink" title="參考文獻： Fooish 程式技術、MDN、卡斯柏’s blog"></a>參考文獻： <a href="https://www.fooish.com/javascript/ES6/Promise.html">Fooish 程式技術</a>、<a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">MDN</a>、<a href="https://wcc723.github.io/development/2020/02/16/all-new-promise/">卡斯柏’s blog</a></h3><hr>
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>ES6</tag>
-        <tag>Javascript</tag>
-        <tag>promise</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>var, let, const 變數宣告差別</title>
     <url>/2021/06/13/js-variable/</url>
     <content><![CDATA[<p><img src="https://i.imgur.com/W5cIWBE.jpg" alt="Imgur"></p>
@@ -1177,25 +1102,78 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </tags>
   </entry>
   <entry>
-    <title>Node.js 與 npm 更新的方式</title>
-    <url>/2021/02/08/nodeJS-update/</url>
-    <content><![CDATA[<h2 id="Node-js-更新"><a href="#Node-js-更新" class="headerlink" title="Node.js 更新"></a>Node.js 更新</h2><h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm cache clean -f</span><br><span class="line">npm install -g n</span><br><span class="line"><span class="comment">// 若要更新到最後一個版本</span></span><br><span class="line">n latest</span><br><span class="line"><span class="comment">// 若要更新到穩定版本</span></span><br><span class="line">n stable</span><br></pre></td></tr></table></figure>
+    <title>ES6-Promise 非同步的解決方案</title>
+    <url>/2021/07/29/js-promise/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/RuN7HR6.png" alt="Imgur"></p>
+<p>由於非同步的程式沒辦法照順序執行，像是 AJAX、setTimeout 都是典型的非同步，ES6 提出了 Promise 的新物件，可以確保非同步處理完畢後，再進行下一步的動作，Promise 就是來解決非同步的程式碼。</p>
 <a id="more"></a>
 
-<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>上面的方法用在 windows 是行不通的，由於 n 模塊不支援 windows，需在瀏覽器中打開 node 官網下載 LTS 版本的 node 安裝包，安裝後覆蓋同路徑即可。<br><br>查看 node 安裝路徑<br></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">where</span> node</span><br></pre></td></tr></table></figure>
-<h2 id="檢查-Node-js-版本"><a href="#檢查-Node-js-版本" class="headerlink" title="檢查 Node.js 版本"></a>檢查 Node.js 版本</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
-<h2 id="NPM-更新"><a href="#NPM-更新" class="headerlink" title="NPM 更新"></a>NPM 更新</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g npm</span><br></pre></td></tr></table></figure>
-<h2 id="檢查-NPM-版本"><a href="#檢查-NPM-版本" class="headerlink" title="檢查 NPM 版本"></a>檢查 NPM 版本</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<h1 id="Promise-物件的三種狀態"><a href="#Promise-物件的三種狀態" class="headerlink" title="Promise 物件的三種狀態"></a>Promise 物件的三種狀態</h1><p>在建立 Promise 之前，先來了解 Promise 只會出現以下三種狀態</p>
+<ol>
+<li>pending 初始狀態 (進行中)</li>
+<li>fulfilled 事件已完成，回傳 resolve 的結果</li>
+<li>rejected 事件已失敗，回傳 rejected 的結果</li>
+</ol>
+<p>Promise 狀態的改變只有兩種可能<br>從 pending 變成 fulfilled<br>從 pending 變成 rejected<br>而一但狀態改變就會固定，永遠不會再改變狀態了。</p>
+<br>
+
+<h1 id="建立一個-Promise-物件"><a href="#建立一個-Promise-物件" class="headerlink" title="建立一個 Promise 物件"></a>建立一個 Promise 物件</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    resolve(<span class="string">&#x27;成功&#x27;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(<span class="string">&#x27;失敗&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>創建一個新 Promise 構造函數，並代入一個 function</li>
+<li>function 代入兩個參數，這兩個參數也是函式，分別為 resolve (執行成功)、reject (執行失敗)</li>
+<li>設定 resolve / reject 回傳方法<br>resolve() 執行成功的函式<br>reject() 執行失敗的函式</li>
+</ol>
+<br>
+
+<h1 id="取得-Promise-結果"><a href="#取得-Promise-結果" class="headerlink" title="取得 Promise 結果"></a>取得 Promise 結果</h1><p>Promise 物件生成後，可以用 Promise 的原型方法來執行取得的結果</p>
+<h2 id="then"><a href="#then" class="headerlink" title=".then()"></a>.then()</h2><p>綁定當 fulfilled 或 rejected 狀態時，分別要執行的函數，.then 可傳入兩個參數</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise.then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 當狀態是 fulfilled (成功) 時，執行這個函數</span></span><br><span class="line">    <span class="comment">// value 是透過 resolve() 傳進來的參數</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 當狀態是 rejected (失敗) 時，執行這個函數</span></span><br><span class="line">    <span class="comment">// error 是透過 reject() 傳進來的參數</span></span><br><span class="line">    <span class="comment">// 此參數選擇性的，不一定需要</span></span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="catch"><a href="#catch" class="headerlink" title=".catch()"></a>.catch()</h2><p>綁定當 rejected 狀態時，要執行的函數</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise.catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="finally"><a href="#finally" class="headerlink" title=".finally()"></a>.finally()</h2><p>不帶有任何參數，表示非同步執行完畢，無論是否正確完成，要執行的函數</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise</span><br><span class="line">  .then(<span class="function">(<span class="params">success</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(success);</span><br><span class="line">  &#125;)</span><br><span class="line">  .finally(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;done&#x27;</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="Chaining-串接"><a href="#Chaining-串接" class="headerlink" title="Chaining 串接"></a>Chaining 串接</h1><p>then、catch 執行後都會返回一個新的 Promise 物件，可以使用鏈接的方式不斷的進行<br>後面的 then 會接收前一個 then 的 return value 當作參數</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  resolve(<span class="string">&#x27;123&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str + <span class="string">&#x27; 456&#x27;</span>;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(str); <span class="comment">// 123456</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="Promise-方法介紹"><a href="#Promise-方法介紹" class="headerlink" title="Promise 方法介紹"></a>Promise 方法介紹</h1><h2 id="Promise-all-iterable"><a href="#Promise-all-iterable" class="headerlink" title="Promise.all(iterable)"></a>Promise.all(iterable)</h2><p>透過陣列的形式傳入多個 promise 函式，Promise.all 會回傳一個陣列，分別有三種情況</p>
+<ol>
+<li>當引數 iterable 中所有的 promises 都被實現（resolved）</li>
+<li>引數 iterable 不含任何 promise 時，被實現</li>
+<li>得到一個 rejected 時，第一個被 reject 的值會被傳進回 all Promise 物件的 callback</li>
+</ol>
+<p>當全部執行完成後回傳陣列結果，陣列的結果順序與傳入的順序一致，適合用在多支 API 要一起執行，並確保全部完成後才進行其他工作時</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = <span class="built_in">Promise</span>.resolve(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p2 = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p3 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">100</span>, <span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all([p1, p2, p3]).then(<span class="function"><span class="keyword">function</span> (<span class="params">values</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(values); <span class="comment">// [3, 123, &quot;foo&quot;]</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="Promise-race-iterable"><a href="#Promise-race-iterable" class="headerlink" title="Promise.race(iterable)"></a>Promise.race(iterable)</h2><p>透過陣列的形式傳入多個 promise 函式，Promise.race 的結果為第一個最先改變狀態的 Promise 物件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">500</span>, <span class="string">&#x27;one&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> p2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">100</span>, <span class="string">&#x27;two&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.race([p1, p2]).then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value); <span class="comment">// 會顯示 &quot;two&quot;，因為 p2 比較快被 resolve</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="Promise-resolve-value"><a href="#Promise-resolve-value" class="headerlink" title="Promise.resolve(value)"></a>Promise.resolve(value)</h2><p>直接定義 Promise 物件 resolve 的狀態，回傳一個 Promise 物件，value 有三種可能</p>
+<ol>
+<li>value 為具有”then”方法的 Promise，回傳的 promise 將依其結果採取其最終狀態</li>
+<li>value 為 promise，呼叫 Promise.resolve 之結果</li>
+<li>其他情形都將回傳以 value 實現的 promise</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.resolve(<span class="string">&#x27;Success&#x27;</span>).then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Fail&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 輸出 &quot;Success&quot;</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="Promise-reject-reason"><a href="#Promise-reject-reason" class="headerlink" title="Promise.reject(reason)"></a>Promise.reject(reason)</h2><p>回傳一個以 reason 拒絕的 Promise 物件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;Fail&#x27;</span>)).then(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Success&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Fail&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 輸出 &quot;Fail&quot;</span></span><br></pre></td></tr></table></figure>
+<p><br><br><br>有了 Promise 非同步語法，就可以捨棄古早時期使用的 callback hell，變得更清楚直觀，程式碼可讀性更高了 👍</p>
 <hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+<h3 id="參考文獻：-Fooish-程式技術、MDN、卡斯柏’s-blog"><a href="#參考文獻：-Fooish-程式技術、MDN、卡斯柏’s-blog" class="headerlink" title="參考文獻： Fooish 程式技術、MDN、卡斯柏’s blog"></a>參考文獻： <a href="https://www.fooish.com/javascript/ES6/Promise.html">Fooish 程式技術</a>、<a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">MDN</a>、<a href="https://wcc723.github.io/development/2020/02/16/all-new-promise/">卡斯柏’s blog</a></h3><hr>
 ]]></content>
       <categories>
-        <category>nodeJs</category>
+        <category>Javascript</category>
       </categories>
       <tags>
-        <tag>nodeJs</tag>
-        <tag>npm</tag>
+        <tag>ES6</tag>
+        <tag>Javascript</tag>
+        <tag>promise</tag>
       </tags>
   </entry>
   <entry>
@@ -1215,6 +1193,28 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
         <tag>Vue.js</tag>
         <tag>javascript</tag>
         <tag>生命週期</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node.js 與 npm 更新的方式</title>
+    <url>/2021/02/08/nodeJS-update/</url>
+    <content><![CDATA[<h2 id="Node-js-更新"><a href="#Node-js-更新" class="headerlink" title="Node.js 更新"></a>Node.js 更新</h2><h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm cache clean -f</span><br><span class="line">npm install -g n</span><br><span class="line"><span class="comment">// 若要更新到最後一個版本</span></span><br><span class="line">n latest</span><br><span class="line"><span class="comment">// 若要更新到穩定版本</span></span><br><span class="line">n stable</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>上面的方法用在 windows 是行不通的，由於 n 模塊不支援 windows，需在瀏覽器中打開 node 官網下載 LTS 版本的 node 安裝包，安裝後覆蓋同路徑即可。<br><br>查看 node 安裝路徑<br></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">where</span> node</span><br></pre></td></tr></table></figure>
+<h2 id="檢查-Node-js-版本"><a href="#檢查-Node-js-版本" class="headerlink" title="檢查 Node.js 版本"></a>檢查 Node.js 版本</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+<h2 id="NPM-更新"><a href="#NPM-更新" class="headerlink" title="NPM 更新"></a>NPM 更新</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g npm</span><br></pre></td></tr></table></figure>
+<h2 id="檢查-NPM-版本"><a href="#檢查-NPM-版本" class="headerlink" title="檢查 NPM 版本"></a>檢查 NPM 版本</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+]]></content>
+      <categories>
+        <category>nodeJs</category>
+      </categories>
+      <tags>
+        <tag>nodeJs</tag>
+        <tag>npm</tag>
       </tags>
   </entry>
   <entry>
@@ -1466,6 +1466,65 @@ vue 目前僅支援 vue3，所以不能使用與 vue3 不兼容的套件<br />
       </tags>
   </entry>
   <entry>
+    <title>【DAY 6】建立一個可重複利用的 Component 吧！</title>
+    <url>/2022/10/21/react-component-rerender/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/oMWPYPc.jpg" alt="cover"></p>
+<a id="more"></a>
+
+<p><strong>[ 情境任務 ]</strong></p>
+<p>小當家：我開發了第一道料理「蘆筍沙拉」，可以幫我放在菜單上嗎？價格就由老闆來訂吧！</p>
+<hr>
+<p>設計一個 UI 畫面時，可以將頁面看做是由小元件與區塊堆疊起來的一個大元件，就好比一台相機都是用一堆小零件組成的，而這些小元件都是可以重複再利用的，並且專注於各別程式碼的思考，提高<strong>程式的重用性、開發效率</strong><br><br/></p>
+<p><img src="https://imgur.com/bVgZIMN.jpg" alt="web"><br>以這個網站為例，吉他的卡片會依資料的筆數去呈現畫面會有幾張卡片，而卡片除了內容(圖片、品名、價格)不一樣，其他樣式框架很明顯都是一樣的，這時候就可以把卡片抽成 Component，每當長資料時，就複用卡片的 Component，如果需要做調整時，只需要修改一個 Component，<strong>不只提升維護性，也提高了易讀性</strong>。<br/><br><br/><br><br/></p>
+<p>事不宜遲，我們來用 component 建立一個菜單吧！!😎<br><br/><br><br/></p>
+<h1 id="建立-Component"><a href="#建立-Component" class="headerlink" title="建立 Component"></a>建立 Component</h1><p>先在 <code>/src</code> 底下新增 components 資料夾，並新增一個 <code>List.js</code>，如圖</p>
+<p><img src="https://imgur.com/ejgt8N3.jpg" alt="components"></p>
+<blockquote>
+<p>⭕ Tips：檔名通常會用首字大寫來命名 component</p>
+</blockquote>
+<p>components/List.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> List = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// props</span></span><br><span class="line">  <span class="comment">// hooks</span></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;li&gt;</span><br><span class="line">      &lt;span&gt;蘆筍沙拉&lt;/span&gt;</span><br><span class="line">      &lt;span&gt;$<span class="number">100</span>&lt;/span&gt;</span><br><span class="line">    &lt;/li&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> List;</span><br></pre></td></tr></table></figure>
+<p>一個組件裡可以包含 <code>props</code>、 <code>hooks</code>、跟至少一個 <code>return</code> 資料，最後會<strong>把資料轉成視覺畫面</strong>，你可以稱之為 Function Component，<code>return</code> 出來可以是一個 jsx 元素、array、number、boolean、string、null、portal<br><br/><br><br/><br>在 App.js 引入 List.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> List <span class="keyword">from</span> <span class="string">&quot;./components/List&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">      &lt;h1&gt;React 熱炒店&lt;/h1&gt;</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &lt;List /&gt;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<p>在父層引用 List component，並放入其中<br/><br><br/><br><br/></p>
+<h1 id="渲染組件到畫面"><a href="#渲染組件到畫面" class="headerlink" title="渲染組件到畫面"></a><strong><strong>渲染組件到畫面</strong></strong></h1><p>src/index.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">&#x27;react-dom/client&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> reportWebVitals <span class="keyword">from</span> <span class="string">&#x27;./reportWebVitals&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> root = ReactDOM.createRoot(<span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>));</span><br><span class="line">root.render(</span><br><span class="line">  &lt;React.StrictMode&gt;</span><br><span class="line">    &lt;App /&gt;</span><br><span class="line">  &lt;/React.StrictMode&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">reportWebVitals();</span><br></pre></td></tr></table></figure>
+<p>在進入點 index.js 引入 App.js，一開始建立專案時預設就有引入了<br>React18 使用 createRoot 渲染 App 到 root<br>root 就是在 <code>public/index.html</code> 裡的 <code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code></p>
+<p>如此一來，組件就會在頁面上出現了</p>
+<iframe src="https://codesandbox.io/embed/create-component-wscf18?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="create-component"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+<br/>
+<br/>
+
+<h1 id="StrictMode"><a href="#StrictMode" class="headerlink" title="StrictMode"></a>StrictMode</h1><p>你可能會疑惑，index.js 裡的 <code>React.StrictMode</code> 有什麼作用呢</p>
+<p><code>StrictMode</code> 為<strong>嚴格模式</strong>，可以幫助：</p>
+<ul>
+<li>發現擁有不安全生命週期的 component</li>
+<li>警告使用了 legacy string ref API</li>
+<li>警告使用到了被棄用的 findDOMNode</li>
+<li>偵測意想不到的副作用</li>
+<li>偵測 legacy context API</li>
+<li>確保可重用的 state</li>
+</ul>
+<p>你可以在應用程式的任何地方打開嚴格模式，嚴格模式檢查只會在開發模式中執行，嚴格模式不會影響正式環境。<br><br/><br><br/></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><p><a href="https://zh-hant.reactjs.org/docs/strict-mode.html">React 嚴格模式</a></p>
+<hr>
+<p>本文為 IT 鐵人賽系列文 <a href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
+<hr>
+]]></content>
+      <categories>
+        <category>【IT 鐵人賽】你React了嗎? 30天解鎖React技能</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+        <tag>Component</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React組件應用</title>
     <url>/2022/06/30/react-component/</url>
     <content><![CDATA[<p><img src="https://imgur.com/PWYji3a.jpg" alt="React"></p>
@@ -1662,65 +1721,6 @@ App.js
         <tag>Context API</tag>
         <tag>React Provider</tag>
         <tag>React Consumer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【DAY 6】建立一個可重複利用的 Component 吧！</title>
-    <url>/2022/10/21/react-component-rerender/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/oMWPYPc.jpg" alt="cover"></p>
-<a id="more"></a>
-
-<p><strong>[ 情境任務 ]</strong></p>
-<p>小當家：我開發了第一道料理「蘆筍沙拉」，可以幫我放在菜單上嗎？價格就由老闆來訂吧！</p>
-<hr>
-<p>設計一個 UI 畫面時，可以將頁面看做是由小元件與區塊堆疊起來的一個大元件，就好比一台相機都是用一堆小零件組成的，而這些小元件都是可以重複再利用的，並且專注於各別程式碼的思考，提高<strong>程式的重用性、開發效率</strong><br><br/></p>
-<p><img src="https://imgur.com/bVgZIMN.jpg" alt="web"><br>以這個網站為例，吉他的卡片會依資料的筆數去呈現畫面會有幾張卡片，而卡片除了內容(圖片、品名、價格)不一樣，其他樣式框架很明顯都是一樣的，這時候就可以把卡片抽成 Component，每當長資料時，就複用卡片的 Component，如果需要做調整時，只需要修改一個 Component，<strong>不只提升維護性，也提高了易讀性</strong>。<br/><br><br/><br><br/></p>
-<p>事不宜遲，我們來用 component 建立一個菜單吧！!😎<br><br/><br><br/></p>
-<h1 id="建立-Component"><a href="#建立-Component" class="headerlink" title="建立 Component"></a>建立 Component</h1><p>先在 <code>/src</code> 底下新增 components 資料夾，並新增一個 <code>List.js</code>，如圖</p>
-<p><img src="https://imgur.com/ejgt8N3.jpg" alt="components"></p>
-<blockquote>
-<p>⭕ Tips：檔名通常會用首字大寫來命名 component</p>
-</blockquote>
-<p>components/List.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> List = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// props</span></span><br><span class="line">  <span class="comment">// hooks</span></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;li&gt;</span><br><span class="line">      &lt;span&gt;蘆筍沙拉&lt;/span&gt;</span><br><span class="line">      &lt;span&gt;$<span class="number">100</span>&lt;/span&gt;</span><br><span class="line">    &lt;/li&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> List;</span><br></pre></td></tr></table></figure>
-<p>一個組件裡可以包含 <code>props</code>、 <code>hooks</code>、跟至少一個 <code>return</code> 資料，最後會<strong>把資料轉成視覺畫面</strong>，你可以稱之為 Function Component，<code>return</code> 出來可以是一個 jsx 元素、array、number、boolean、string、null、portal<br><br/><br><br/><br>在 App.js 引入 List.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> List <span class="keyword">from</span> <span class="string">&quot;./components/List&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">      &lt;h1&gt;React 熱炒店&lt;/h1&gt;</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &lt;List /&gt;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
-<p>在父層引用 List component，並放入其中<br/><br><br/><br><br/></p>
-<h1 id="渲染組件到畫面"><a href="#渲染組件到畫面" class="headerlink" title="渲染組件到畫面"></a><strong><strong>渲染組件到畫面</strong></strong></h1><p>src/index.js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">&#x27;react-dom/client&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> reportWebVitals <span class="keyword">from</span> <span class="string">&#x27;./reportWebVitals&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> root = ReactDOM.createRoot(<span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>));</span><br><span class="line">root.render(</span><br><span class="line">  &lt;React.StrictMode&gt;</span><br><span class="line">    &lt;App /&gt;</span><br><span class="line">  &lt;/React.StrictMode&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">reportWebVitals();</span><br></pre></td></tr></table></figure>
-<p>在進入點 index.js 引入 App.js，一開始建立專案時預設就有引入了<br>React18 使用 createRoot 渲染 App 到 root<br>root 就是在 <code>public/index.html</code> 裡的 <code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code></p>
-<p>如此一來，組件就會在頁面上出現了</p>
-<iframe src="https://codesandbox.io/embed/create-component-wscf18?fontsize=14&hidenavigation=1&theme=light"
-  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-  title="create-component"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
-<br/>
-<br/>
-
-<h1 id="StrictMode"><a href="#StrictMode" class="headerlink" title="StrictMode"></a>StrictMode</h1><p>你可能會疑惑，index.js 裡的 <code>React.StrictMode</code> 有什麼作用呢</p>
-<p><code>StrictMode</code> 為<strong>嚴格模式</strong>，可以幫助：</p>
-<ul>
-<li>發現擁有不安全生命週期的 component</li>
-<li>警告使用了 legacy string ref API</li>
-<li>警告使用到了被棄用的 findDOMNode</li>
-<li>偵測意想不到的副作用</li>
-<li>偵測 legacy context API</li>
-<li>確保可重用的 state</li>
-</ul>
-<p>你可以在應用程式的任何地方打開嚴格模式，嚴格模式檢查只會在開發模式中執行，嚴格模式不會影響正式環境。<br><br/><br><br/></p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><p><a href="https://zh-hant.reactjs.org/docs/strict-mode.html">React 嚴格模式</a></p>
-<hr>
-<p>本文為 IT 鐵人賽系列文 <a href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
-<hr>
-]]></content>
-      <categories>
-        <category>【IT 鐵人賽】你React了嗎? 30天解鎖React技能</category>
-      </categories>
-      <tags>
-        <tag>react</tag>
-        <tag>Component</tag>
       </tags>
   </entry>
   <entry>
@@ -2317,6 +2317,37 @@ src/Product.js
       </tags>
   </entry>
   <entry>
+    <title>React Portal 傳送組件到指定元素</title>
+    <url>/2022/07/04/react-portal/</url>
+    <content><![CDATA[<p><img src="https://imgur.com/PWYji3a.jpg" alt="React"></p>
+<p>Portal 可以傳送組件到指定的元素，常用在有階層層級的 Modal</p>
+<a id="more"></a>
+
+<p>在 index.html 新增 id=”modal” 的元素<br>/public/index.html</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;modal&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<p>render App 到 #root</p>
+<p>/src/index.js</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createRoot &#125; <span class="keyword">from</span> <span class="string">&#x27;react-dom/client&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&quot;./App&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> container = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> root = createRoot(container);</span><br><span class="line">root.render(<span class="xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span>);</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<p>import Modal Component</p>
+<p>/src/App.js</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Modal <span class="keyword">from</span> <span class="string">&quot;./Modal&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Modal/&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<p>import createPortal，並 return createPortal  到 #modal</p>
+<p>/src/Modal.js</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createPortal &#125; <span class="keyword">from</span> <span class="string">&quot;react-dom&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Modal</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> createPortal (</span><br><span class="line">      &lt;div&gt;Modal&lt;/div&gt;,</span><br><span class="line">      <span class="built_in">document</span>.getElementById(<span class="string">&#x27;modal&#x27;</span>)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Modal;</span><br></pre></td></tr></table></figure>
+<p><br><br><br>最後設定的內容就會出現在 #modal 裡囉！</p>
+<p><img src="https://imgur.com/DrGcz6E.jpg" alt="htmlModal"></p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React Portal</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【DAY 7】props 上面傳下來的屬性</title>
     <url>/2022/10/24/react-props/</url>
     <content><![CDATA[<p><img src="https://imgur.com/tILSATY.jpg" alt="cover"></p>
@@ -2378,37 +2409,6 @@ src/Product.js
       <tags>
         <tag>props</tag>
         <tag>react</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React Portal 傳送組件到指定元素</title>
-    <url>/2022/07/04/react-portal/</url>
-    <content><![CDATA[<p><img src="https://imgur.com/PWYji3a.jpg" alt="React"></p>
-<p>Portal 可以傳送組件到指定的元素，常用在有階層層級的 Modal</p>
-<a id="more"></a>
-
-<p>在 index.html 新增 id=”modal” 的元素<br>/public/index.html</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;modal&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><br/><br/></p>
-<p>render App 到 #root</p>
-<p>/src/index.js</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createRoot &#125; <span class="keyword">from</span> <span class="string">&#x27;react-dom/client&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&quot;./App&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> container = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> root = createRoot(container);</span><br><span class="line">root.render(<span class="xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span>);</span><br></pre></td></tr></table></figure>
-<p><br/><br/></p>
-<p>import Modal Component</p>
-<p>/src/App.js</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Modal <span class="keyword">from</span> <span class="string">&quot;./Modal&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Modal/&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
-<p><br/><br/></p>
-<p>import createPortal，並 return createPortal  到 #modal</p>
-<p>/src/Modal.js</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createPortal &#125; <span class="keyword">from</span> <span class="string">&quot;react-dom&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Modal</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> createPortal (</span><br><span class="line">      &lt;div&gt;Modal&lt;/div&gt;,</span><br><span class="line">      <span class="built_in">document</span>.getElementById(<span class="string">&#x27;modal&#x27;</span>)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Modal;</span><br></pre></td></tr></table></figure>
-<p><br><br><br>最後設定的內容就會出現在 #modal 裡囉！</p>
-<p><img src="https://imgur.com/DrGcz6E.jpg" alt="htmlModal"></p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>React Portal</tag>
       </tags>
   </entry>
   <entry>
@@ -2777,7 +2777,7 @@ src/Product.js
       </categories>
       <tags>
         <tag>react</tag>
-        <tag>event-handler</tag>
+        <tag>useState</tag>
       </tags>
   </entry>
   <entry>
@@ -2910,6 +2910,67 @@ src/Product.js
       </tags>
   </entry>
   <entry>
+    <title>環境建置 &amp; Vue-cli專案</title>
+    <url>/2021/03/08/vue-cli/</url>
+    <content><![CDATA[<h1 id="Node-js-環境建置"><a href="#Node-js-環境建置" class="headerlink" title="Node.js 環境建置"></a>Node.js 環境建置</h1><h2 id="下載-NVM"><a href="#下載-NVM" class="headerlink" title="下載 NVM"></a>下載 NVM</h2><p>nvm 是 Node.js 的版本管理器 (version manager)，可在同一台主機上安裝多個版本的 Node.js 環境，因為不同專案可能會使用不同的 Node.js 版本，那就需要透過一個版本管理器來切換不同的 Node.js 版本。<br><br>NVM install - 點選右邊的 releases<br><a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a></p>
+<a id="more"></a>
+
+<p>NVM 常用指令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm list // 列出目前電腦有安裝的 nodejs 版本</span><br><span class="line">nvm list available // 目前網路上可用的 nodejs 版本列表</span><br><span class="line">nvm install v12.19.0 // 該 nodejs 版本下載安裝</span><br><span class="line">nvm uninstall v12.19.0 // 移除該 nodejs 版本</span><br><span class="line">nvm use v12.19.0 // 使用該 nodejs 版本</span><br><span class="line">nvm -v // 目前該 nvm 版本</span><br></pre></td></tr></table></figure>
+<h2 id="下載-node-js"><a href="#下載-node-js" class="headerlink" title="下載 node.js"></a>下載 node.js</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm install v12.19.0 // 該 nodejs 版本下載安裝</span><br><span class="line">nvm use v12.19.0 // 使用該 nodejs 版本</span><br><span class="line">node -v // 目前該 node 版本</span><br></pre></td></tr></table></figure>
+<h2 id="檢查-npm-是否安裝成功"><a href="#檢查-npm-是否安裝成功" class="headerlink" title="檢查 npm 是否安裝成功"></a>檢查 npm 是否安裝成功</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm -v // 目前該 npm 版本</span><br></pre></td></tr></table></figure>
+<p>npm 常用指令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm -v // 查看目前npm的版本</span><br><span class="line">npm install &lt;package&gt; // 安裝npm套件</span><br><span class="line">npm install &lt;package&gt;  -D // 安裝開發階段套件</span><br><span class="line">npm install &lt;package&gt;  -S // 安裝上線階段套件</span><br><span class="line">npm rm &lt;package&gt; // 移除該套件</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="安裝-Vue-cli"><a href="#安裝-Vue-cli" class="headerlink" title="安裝 Vue-cli"></a>安裝 Vue-cli</h1><p>Vue CLI 是一個基於 Vue.js 進行快速開發的完整系統，確保各種構建工具能夠平穩銜接，使開發人員可以專注在撰寫應用上，而不必花好幾天去糾結配置的問題。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br></pre></td></tr></table></figure>
+<h1 id="建構一個新的-Vue-專案"><a href="#建構一個新的-Vue-專案" class="headerlink" title="建構一個新的 Vue 專案"></a>建構一個新的 Vue 專案</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vue create my-project // my-project 為要創建的資料夾名稱</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">vue ui // ui介面設定</span><br></pre></td></tr></table></figure>
+<br>
+Please pick a preset: (請選擇一個預設)
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Manually select features //手動選擇功能</span><br></pre></td></tr></table></figure>
+<br>
+Check the features needed for your project: (檢查項目所需的功能)
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Choose Vue version //選擇 Vue 版本</span><br><span class="line">Babel //JavaScript 轉譯器，可將 ES6+ 程式碼轉為等效的 ES5 程式碼</span><br><span class="line">Router // 路由</span><br><span class="line">CSS pre-processors //CSS 預處理器</span><br></pre></td></tr></table></figure>
+<br>
+Choose a version of Vue.js that you want to start the project with (選擇Vue版本)
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">3.x (Preview)</span><br></pre></td></tr></table></figure>
+<br>
+Use history mode for router?
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Y</span><br></pre></td></tr></table></figure>
+<br>
+Pick a CSS pre-processor
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Sass/SCSS (with dart-sass)</span><br></pre></td></tr></table></figure>
+<br>
+Where do you prefer placing config for Babel, ESLint, etc.?
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">In package.json</span><br></pre></td></tr></table></figure>
+<br>
+Save this as a preset for future projects?
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Y</span><br></pre></td></tr></table></figure>
+<p>Save preset as: 直接 ENTER<br><br></p>
+<p>建立完後啟動 serve</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> my-project // 進入資料夾</span><br><span class="line">npm run serve // 開啟serve</span><br><span class="line">npm run build // 建立dist</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Vue-cli-專案結構解析"><a href="#Vue-cli-專案結構解析" class="headerlink" title="Vue-cli 專案結構解析"></a>Vue-cli 專案結構解析</h1><p>node_modules：透過 npm 下載的套件跟工具都會放在這個資料夾裡面<br><br>package.json：關於這整包專案所有的資訊，包含安裝套件版本、專案版本、npm 指令都可以在這個 json 檔案裡面找得到，之後要搬移專案重新安裝套件也需要靠這個 json 檔案<br><br>package-lock.json：專門紀錄 package.json 裡面更細節的內容，例如安裝的套件的詳細版本，或是確認你的 dependency (依賴)是被哪個函式庫所要求的等等<br><br>babel.config.js: babel 轉換 JS 時所用的套件</p>
+<hr>
+<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
+]]></content>
+      <categories>
+        <category>Vue3</category>
+      </categories>
+      <tags>
+        <tag>Vue.js</tag>
+        <tag>javascript</tag>
+        <tag>Vue-cli</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Composition API 共用邏輯的封裝</title>
     <url>/2021/03/21/vue-composition-api/</url>
     <content><![CDATA[<h1 id="Vue-處理共用邏輯的方式"><a href="#Vue-處理共用邏輯的方式" class="headerlink" title="Vue 處理共用邏輯的方式"></a>Vue 處理共用邏輯的方式</h1><p>以往用 Vue2 處理共用邏輯有幾種方式</p>
@@ -2999,67 +3060,6 @@ src/Product.js
         <tag>Vue.js</tag>
         <tag>javascript</tag>
         <tag>Composition API</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>環境建置 &amp; Vue-cli專案</title>
-    <url>/2021/03/08/vue-cli/</url>
-    <content><![CDATA[<h1 id="Node-js-環境建置"><a href="#Node-js-環境建置" class="headerlink" title="Node.js 環境建置"></a>Node.js 環境建置</h1><h2 id="下載-NVM"><a href="#下載-NVM" class="headerlink" title="下載 NVM"></a>下載 NVM</h2><p>nvm 是 Node.js 的版本管理器 (version manager)，可在同一台主機上安裝多個版本的 Node.js 環境，因為不同專案可能會使用不同的 Node.js 版本，那就需要透過一個版本管理器來切換不同的 Node.js 版本。<br><br>NVM install - 點選右邊的 releases<br><a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a></p>
-<a id="more"></a>
-
-<p>NVM 常用指令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm list // 列出目前電腦有安裝的 nodejs 版本</span><br><span class="line">nvm list available // 目前網路上可用的 nodejs 版本列表</span><br><span class="line">nvm install v12.19.0 // 該 nodejs 版本下載安裝</span><br><span class="line">nvm uninstall v12.19.0 // 移除該 nodejs 版本</span><br><span class="line">nvm use v12.19.0 // 使用該 nodejs 版本</span><br><span class="line">nvm -v // 目前該 nvm 版本</span><br></pre></td></tr></table></figure>
-<h2 id="下載-node-js"><a href="#下載-node-js" class="headerlink" title="下載 node.js"></a>下載 node.js</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm install v12.19.0 // 該 nodejs 版本下載安裝</span><br><span class="line">nvm use v12.19.0 // 使用該 nodejs 版本</span><br><span class="line">node -v // 目前該 node 版本</span><br></pre></td></tr></table></figure>
-<h2 id="檢查-npm-是否安裝成功"><a href="#檢查-npm-是否安裝成功" class="headerlink" title="檢查 npm 是否安裝成功"></a>檢查 npm 是否安裝成功</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm -v // 目前該 npm 版本</span><br></pre></td></tr></table></figure>
-<p>npm 常用指令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm -v // 查看目前npm的版本</span><br><span class="line">npm install &lt;package&gt; // 安裝npm套件</span><br><span class="line">npm install &lt;package&gt;  -D // 安裝開發階段套件</span><br><span class="line">npm install &lt;package&gt;  -S // 安裝上線階段套件</span><br><span class="line">npm rm &lt;package&gt; // 移除該套件</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="安裝-Vue-cli"><a href="#安裝-Vue-cli" class="headerlink" title="安裝 Vue-cli"></a>安裝 Vue-cli</h1><p>Vue CLI 是一個基於 Vue.js 進行快速開發的完整系統，確保各種構建工具能夠平穩銜接，使開發人員可以專注在撰寫應用上，而不必花好幾天去糾結配置的問題。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br></pre></td></tr></table></figure>
-<h1 id="建構一個新的-Vue-專案"><a href="#建構一個新的-Vue-專案" class="headerlink" title="建構一個新的 Vue 專案"></a>建構一個新的 Vue 專案</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vue create my-project // my-project 為要創建的資料夾名稱</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">vue ui // ui介面設定</span><br></pre></td></tr></table></figure>
-<br>
-Please pick a preset: (請選擇一個預設)
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Manually select features //手動選擇功能</span><br></pre></td></tr></table></figure>
-<br>
-Check the features needed for your project: (檢查項目所需的功能)
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Choose Vue version //選擇 Vue 版本</span><br><span class="line">Babel //JavaScript 轉譯器，可將 ES6+ 程式碼轉為等效的 ES5 程式碼</span><br><span class="line">Router // 路由</span><br><span class="line">CSS pre-processors //CSS 預處理器</span><br></pre></td></tr></table></figure>
-<br>
-Choose a version of Vue.js that you want to start the project with (選擇Vue版本)
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">3.x (Preview)</span><br></pre></td></tr></table></figure>
-<br>
-Use history mode for router?
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Y</span><br></pre></td></tr></table></figure>
-<br>
-Pick a CSS pre-processor
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Sass/SCSS (with dart-sass)</span><br></pre></td></tr></table></figure>
-<br>
-Where do you prefer placing config for Babel, ESLint, etc.?
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">In package.json</span><br></pre></td></tr></table></figure>
-<br>
-Save this as a preset for future projects?
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Y</span><br></pre></td></tr></table></figure>
-<p>Save preset as: 直接 ENTER<br><br></p>
-<p>建立完後啟動 serve</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> my-project // 進入資料夾</span><br><span class="line">npm run serve // 開啟serve</span><br><span class="line">npm run build // 建立dist</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="Vue-cli-專案結構解析"><a href="#Vue-cli-專案結構解析" class="headerlink" title="Vue-cli 專案結構解析"></a>Vue-cli 專案結構解析</h1><p>node_modules：透過 npm 下載的套件跟工具都會放在這個資料夾裡面<br><br>package.json：關於這整包專案所有的資訊，包含安裝套件版本、專案版本、npm 指令都可以在這個 json 檔案裡面找得到，之後要搬移專案重新安裝套件也需要靠這個 json 檔案<br><br>package-lock.json：專門紀錄 package.json 裡面更細節的內容，例如安裝的套件的詳細版本，或是確認你的 dependency (依賴)是被哪個函式庫所要求的等等<br><br>babel.config.js: babel 轉換 JS 時所用的套件</p>
-<hr>
-<p>以上是我的學習筆記，希望也有幫助到你哦 😀<br></p>
-]]></content>
-      <categories>
-        <category>Vue3</category>
-      </categories>
-      <tags>
-        <tag>Vue.js</tag>
-        <tag>javascript</tag>
-        <tag>Vue-cli</tag>
       </tags>
   </entry>
   <entry>
