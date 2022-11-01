@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="【DAY 13】React 引入圖片檔案，圖片懶加載與預加載">
+<meta property="og:url" content="https://happy9990929.github.io/2022/11/01/react-image-load/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/4Rv3JIp.jpg">
+<meta property="og:image" content="https://imgur.com/5zjWNR7.gif">
+<meta property="og:image" content="https://imgur.com/IgSHQQE.jpg">
+<meta property="article:published_time" content="2022-11-01T14:53:51.000Z">
+<meta property="article:modified_time" content="2022-11-01T15:07:53.934Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="import">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="require">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/4Rv3JIp.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/11/01/react-image-load/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>【DAY 13】React 引入圖片檔案，圖片懶加載與預加載 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/11/01/react-image-load/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【DAY 13】React 引入圖片檔案，圖片懶加載與預加載
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-11-01 22:53:51 / 修改時間：23:07:53" itemprop="dateCreated datePublished" datetime="2022-11-01T22:53:51+08:00">2022-11-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%90IT-%E9%90%B5%E4%BA%BA%E8%B3%BD%E3%80%91%E4%BD%A0React%E4%BA%86%E5%97%8E-30%E5%A4%A9%E8%A7%A3%E9%8E%96React%E6%8A%80%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">【IT 鐵人賽】你React了嗎? 30天解鎖React技能</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/11/01/react-image-load/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/11/01/react-image-load/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/4Rv3JIp.jpg" alt="cover"></p>
+<a id="more"></a>
+
+<p><strong>［情境任務］</strong></p>
+<p>小當家：客人點了一大桌的桌菜，真是累死我了！</p>
+<p>解師傅：哇～這些菜看起來太美味了！看看那個醬汁！讓我拍個照先～</p>
+<p>解師傅拍的照片真漂亮，我們把它們放在菜單上吧！</p>
+<hr>
+<h1 id="設置外部圖片"><a href="#設置外部圖片" class="headerlink" title="設置外部圖片"></a>設置外部圖片</h1><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=<span class="string">&quot;https://picsum.photos/200/300?random=1&quot;</span> alt=<span class="string">&quot;&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>要放圖片其實很簡單，如果是外部的圖片，可以直接像平常 HTML 的方式 <code>src=&quot;圖片網址&quot;</code> 設置<br><br/><br><br/></p>
+<h1 id="引入內部圖片檔案"><a href="#引入內部圖片檔案" class="headerlink" title="引入內部圖片檔案"></a>引入內部圖片檔案</h1><p>如果是引入在專案中的圖片，有兩種方式</p>
+<ul>
+<li>使用 require 將圖檔引入</li>
+<li>使用 import 將圖檔引入<br/>
+<br/>
+<br/>
+
+</li>
+</ul>
+<h2 id="1-使用-require-將圖檔引入"><a href="#1-使用-require-將圖檔引入" class="headerlink" title="1. 使用 require 將圖檔引入"></a>1. 使用 require 將圖檔引入</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&#123;<span class="built_in">require</span>(<span class="string">&#x27;./images/logo.jpg&#x27;</span>)&#125; alt=<span class="string">&quot;&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>require 方法是 CommonJs 推出的，NodeJs 自帶了這個功能<br><br/><br><br/></p>
+<h2 id="2-使用-import-將圖檔引入"><a href="#2-使用-import-將圖檔引入" class="headerlink" title="2.使用 import 將圖檔引入"></a>2.使用 import 將圖檔引入</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Img <span class="keyword">from</span> <span class="string">&quot;./images/react.jpg&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;img src=&#123;Img&#125; alt=<span class="string">&quot;&quot;</span>/&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<p>import 是 <code>ES6</code> 的語法，透過 <code>Babel</code> 轉譯後還是會使用 <code>CommonJS</code> 加載，也就是如果你寫了 import 最後還是會被轉成 require，import 的寫法等同於第一種的 require 方法<br/><br><br/><br><br/><br><strong>兩種方法效能上基本上沒區別，因為轉譯過後還是一樣的東西</strong><br><br/><br><br/><br>不過以 require / exports 來說，只有簡單的寫法</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> demo = <span class="built_in">require</span>(<span class="string">&#x27;demo&#x27;</span>)</span><br><span class="line"><span class="built_in">exports</span>.demo = demo</span><br><span class="line"><span class="built_in">module</span>.exports = demo</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>而 import / export 的寫法就很多樣了</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> demo <span class="keyword">from</span> <span class="string">&#x27;demo&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="keyword">default</span> <span class="keyword">as</span> demo &#125; <span class="keyword">from</span> <span class="string">&#x27;demo&#x27;</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> demo <span class="keyword">from</span> <span class="string">&#x27;demo&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; readFile &#125; <span class="keyword">from</span> <span class="string">&#x27;demo&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; readFile <span class="keyword">as</span> read &#125; <span class="keyword">from</span> <span class="string">&#x27;demo&#x27;</span></span><br><span class="line"><span class="keyword">import</span> demo, &#123; readFile &#125; <span class="keyword">from</span> <span class="string">&#x27;demo&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> demo</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> demo</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">readFile</span></span></span><br><span class="line"><span class="function"><span class="title">export</span> </span>&#123; readFile, read &#125;</span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">from</span> <span class="string">&#x27;demo&#x27;</span></span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>import 屬於靜態編譯，所以沒辦法動態加載，但 require 可以</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">&quot;a&quot;</span> + <span class="string">&quot;b&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> url <span class="comment">// X 錯誤</span></span><br><span class="line"><span class="built_in">require</span>(url) <span class="comment">// OK</span></span><br></pre></td></tr></table></figure>
+<br/>
+<br/>
+<br/>
+
+<h1 id="圖片懶加載-Lazy-load"><a href="#圖片懶加載-Lazy-load" class="headerlink" title="圖片懶加載(Lazy load)"></a>圖片懶加載(Lazy load)</h1><p>講完如何載入圖片，來談談圖片的懶加載。</p>
+<p>有些網站載入時，一開始圖片會有一個佔位符，可能是一個色塊或是一個佔位符圖片，當滾輪往下移動時，真正的圖片才顯示出來，像 unsplash 就是一個例子</p>
+<p><img src="https://imgur.com/5zjWNR7.gif" alt="unsplash"></p>
+<p>圖片懶加載可以節省一堆圖片的運算，滾到需要顯示的圖片才載入，頁面的加載速度會比較快，不占用後台資源，頁面的速度也利於 SEO，適用在圖片較多的地方，如電商、圖片素材庫等</p>
+<p>缺點</p>
+<ul>
+<li>因要監聽圖片是否顯示，較耗瀏覽器效能</li>
+<li>如網路不好，圖片會很慢才顯示，會有一段空白時間</li>
+</ul>
+<p>推薦一個簡易就可以達到圖片懶加載的套件 <code>React Lazy Load Image Component</code><br><br/><br><br/><br><br/></p>
+<h2 id="React-Lazy-Load-Image-使用方法"><a href="#React-Lazy-Load-Image-使用方法" class="headerlink" title="React Lazy Load Image 使用方法"></a>React Lazy Load Image 使用方法</h2><ul>
+<li>安裝 <code>React Lazy Load Image Component</code></li>
+<li>載入 <code>LazyLoadImage</code>  組件</li>
+<li>使用 <code>LazyLoadImage</code> 組件</li>
+<li>添加佔位符圖片</li>
+<li>添加佔位符模糊效果<br/>
+<br/>
+<br/>
+
+</li>
+</ul>
+<h3 id="1-安裝-React-Lazy-Load-Image-Component"><a href="#1-安裝-React-Lazy-Load-Image-Component" class="headerlink" title="1. 安裝 React Lazy Load Image Component"></a>1. 安裝 React Lazy Load Image Component</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Yarn</span><br><span class="line">$ yarn add react-lazy-load-image-component</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; NPM</span><br><span class="line">$ npm i --save react-lazy-load-image-component</span><br></pre></td></tr></table></figure>
+<p>你可以用 npm 或 yarn 來安裝 <code>react-lazy-load-image-component</code><br><br/><br><br/><br><br/></p>
+<h3 id="2-載入-LazyLoadImage-組件"><a href="#2-載入-LazyLoadImage-組件" class="headerlink" title="2. 載入 LazyLoadImage  組件"></a>2. 載入 LazyLoadImage  組件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import Image from &quot;..&#x2F;images&#x2F;dog.jpg&quot;;</span><br><span class="line">import &#123; LazyLoadImage &#125; from &quot;react-lazy-load-image-component&quot;;</span><br></pre></td></tr></table></figure>
+<p>載入 <code>LazyLoadImage</code> 就可以使用此組件<br><br/><br><br/><br><br/></p>
+<h3 id="3-使用-LazyLoadImage-組件"><a href="#3-使用-LazyLoadImage-組件" class="headerlink" title="3. 使用 LazyLoadImage 組件"></a>3. 使用 LazyLoadImage 組件</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Image <span class="keyword">from</span> <span class="string">&quot;../images/dog.jpg&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; LazyLoadImage &#125; <span class="keyword">from</span> <span class="string">&quot;react-lazy-load-image-component&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;LazyLoadImage</span><br><span class="line">		src=&#123;Image&#125;</span><br><span class="line">        width=&#123;<span class="number">500</span>&#125;</span><br><span class="line">		height=&#123;<span class="number">500</span>&#125;</span><br><span class="line">        alt=<span class="string">&quot;&quot;</span></span><br><span class="line">      /&gt;</span><br><span class="line">     &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>img 的標籤改為 <code>LazyLoadImage</code> 組件，並明確加上寬高，以避免<a target="_blank" rel="noopener" href="https://web.dev/cls/">累積佈局偏移(CLS)</a>問題，到這邊已經可以有 lazy load 的效果</p>
+<iframe src="https://codesandbox.io/embed/react-lazy-load-qi43fq?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="react-lazy-load"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+<br/>
+<br/>
+<br/>
+
+<h3 id="4-添加佔位符圖片"><a href="#4-添加佔位符圖片" class="headerlink" title="4. 添加佔位符圖片"></a>4. 添加佔位符圖片</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Image <span class="keyword">from</span> <span class="string">&quot;../images/dog.jpg&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> PlaceholderImage <span class="keyword">from</span> <span class="string">&quot;../images/placeholder.jpg&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; LazyLoadImage &#125; <span class="keyword">from</span> <span class="string">&#x27;react-lazy-load-image-component&#x27;</span>;</span><br><span class="line"></span><br><span class="line">&lt;LazyLoadImage</span><br><span class="line">    src=&#123;Image&#125;</span><br><span class="line">    width=&#123;<span class="number">600</span>&#125;</span><br><span class="line">    height=&#123;<span class="number">400</span>&#125;</span><br><span class="line">    placeholdersrc=&#123;PlaceholderImage&#125;</span><br><span class="line">    alt=<span class="string">&quot;&quot;</span></span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+<p>可以準備一張低解析的佔位符圖片，是用來滾下卷軸前顯示的圖片，並指向 <code>placeholdersrc</code> 屬性<br><br/><br><br/><br><br/></p>
+<h3 id="5-添加佔位符模糊效果"><a href="#5-添加佔位符模糊效果" class="headerlink" title="5. 添加佔位符模糊效果"></a>5. 添加佔位符模糊效果</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Image <span class="keyword">from</span> <span class="string">&quot;../images/dog.jpg&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> PlaceholderImage <span class="keyword">from</span> <span class="string">&quot;../images/placeholder.jpg&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; LazyLoadImage &#125; <span class="keyword">from</span> <span class="string">&#x27;react-lazy-load-image-component&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;react-lazy-load-image-component/src/effects/blur.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line">&lt;LazyLoadImage</span><br><span class="line">	src=&#123;Image&#125;</span><br><span class="line">    width=&#123;<span class="number">600</span>&#125;</span><br><span class="line">	height=&#123;<span class="number">400</span>&#125;</span><br><span class="line">    placeholdersrc=&#123;PlaceholderImage&#125;</span><br><span class="line">	effect=<span class="string">&quot;blur&quot;</span></span><br><span class="line">    alt=<span class="string">&quot;&quot;</span></span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+<p>佔位符圖片也可以有模糊效果，顯示圖片前會將圖片模糊，需載入 css，並加入屬性 <code>effect=&quot;blur&quot;</code></p>
+<p>可以打開 Network 看看 Img 的變化，在滾動之前 Img 會是空的，直到滾到圖片的地方才載入，將 Network 調到 Slow 3G 效果會更明顯</p>
+<p><img src="https://imgur.com/IgSHQQE.jpg" alt="network"></p>
+<p>這邊附上 <a href="https://happy9990929.github.io/react-lazy-load/"><strong>Demo</strong></a>，一起觀察看看吧！<br><br/><br><br/><br><br/></p>
+<h1 id="圖片預加載"><a href="#圖片預加載" class="headerlink" title="圖片預加載"></a>圖片預加載</h1><p>有懶加載就會有預加載，預加載跟懶加載相反，頁面一進來就先把圖片都先載入，將圖片存入緩存，圖片就不會有延遲的效果，可以享受無需等待直接預覽的效果，適用的地方如漫畫、圖片畫廊等<strong>不希望讓用戶看到加載時空白的場景</strong></p>
+<p>缺點</p>
+<ul>
+<li>預加載會占用較多後台資源</li>
+<li>頁面一開始載入的時間較長</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> image1 <span class="keyword">from</span> <span class="string">&quot;../images/image1.jpg&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> image2 <span class="keyword">from</span> <span class="string">&quot;../images/image2.jpg&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> image3 <span class="keyword">from</span> <span class="string">&quot;../images/image3.jpg&quot;</span>;</span><br><span class="line"></span><br><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> imageList = [image1, image2, image3]</span><br><span class="line">  imageList.forEach(<span class="function">(<span class="params">image</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">new</span> Image().src = image</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>［任務解題］</strong></p>
+<p>圖片的部分，這邊用了 <a target="_blank" rel="noopener" href="https://picsum.photos/">Lorem Picsum</a> 的 random 圖片作替代，也加上了 lazy-load 的效果</p>
+<p>菜單的圖片也完成囉！</p>
+<iframe src="https://codesandbox.io/embed/react-with-image-tjf8i4?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="React with image"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+<br/>
+<br/>
+
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>圖片載入的方法可以用 require 或 import，個人是比較喜歡用 ES6 import 的寫法，我們也學到了懶加載和預加載使用方法，可以依據需求或適用情境去做加載，一起練習看看吧！!</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://blog.niclin.tw/2019/10/03/nodejs-require-vs-es6-import-export/">JavaScript 中 require, import 的差別及效能</a><br><a target="_blank" rel="noopener" href="https://chinese.freecodecamp.org/news/how-to-lazy-load-images-in-react/">如何在React 中實現圖片懶加載</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7004001535206260749">超詳細的圖片預加載和懶加載教程</a></p>
+<hr>
+<p>本文為 IT 鐵人賽系列文 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
+<hr>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/import/" rel="tag"># import</a>
+              <a href="/tags/react/" rel="tag"># react</a>
+              <a href="/tags/require/" rel="tag"># require</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/10/31/react-render-condition/" rel="prev" title="【DAY 12】條件式 render 與 && 邏輯運算子">
+      <i class="fa fa-chevron-left"></i> 【DAY 12】條件式 render 與 && 邏輯運算子
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E7%BD%AE%E5%A4%96%E9%83%A8%E5%9C%96%E7%89%87"><span class="nav-number">1.</span> <span class="nav-text">設置外部圖片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E5%85%A7%E9%83%A8%E5%9C%96%E7%89%87%E6%AA%94%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">引入內部圖片檔案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8-require-%E5%B0%87%E5%9C%96%E6%AA%94%E5%BC%95%E5%85%A5"><span class="nav-number">2.1.</span> <span class="nav-text">1. 使用 require 將圖檔引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8-import-%E5%B0%87%E5%9C%96%E6%AA%94%E5%BC%95%E5%85%A5"><span class="nav-number">2.2.</span> <span class="nav-text">2.使用 import 將圖檔引入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%96%E7%89%87%E6%87%B6%E5%8A%A0%E8%BC%89-Lazy-load"><span class="nav-number">3.</span> <span class="nav-text">圖片懶加載(Lazy load)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-Lazy-Load-Image-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">React Lazy Load Image 使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%9D-React-Lazy-Load-Image-Component"><span class="nav-number">3.1.1.</span> <span class="nav-text">1. 安裝 React Lazy Load Image Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BC%89%E5%85%A5-LazyLoadImage-%E7%B5%84%E4%BB%B6"><span class="nav-number">3.1.2.</span> <span class="nav-text">2. 載入 LazyLoadImage  組件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BD%BF%E7%94%A8-LazyLoadImage-%E7%B5%84%E4%BB%B6"><span class="nav-number">3.1.3.</span> <span class="nav-text">3. 使用 LazyLoadImage 組件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%B7%BB%E5%8A%A0%E4%BD%94%E4%BD%8D%E7%AC%A6%E5%9C%96%E7%89%87"><span class="nav-number">3.1.4.</span> <span class="nav-text">4. 添加佔位符圖片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%B7%BB%E5%8A%A0%E4%BD%94%E4%BD%8D%E7%AC%A6%E6%A8%A1%E7%B3%8A%E6%95%88%E6%9E%9C"><span class="nav-number">3.1.5.</span> <span class="nav-text">5. 添加佔位符模糊效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%96%E7%89%87%E9%A0%90%E5%8A%A0%E8%BC%89"><span class="nav-number">4.</span> <span class="nav-text">圖片預加載</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">5.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">216</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/11/01/react-image-load/";
+    this.page.identifier = "2022/11/01/react-image-load/";
+    this.page.title = "【DAY 13】React 引入圖片檔案，圖片懶加載與預加載";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
