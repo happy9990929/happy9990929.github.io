@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="【DAY 15】React 表單處理，更新資料及儲存表單">
+<meta property="og:url" content="https://happy9990929.github.io/2022/11/03/react-form-IT/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/eXSWUsy.jpg">
+<meta property="article:published_time" content="2022-11-03T15:32:35.000Z">
+<meta property="article:modified_time" content="2022-11-03T15:36:40.195Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="xss">
+<meta property="article:tag" content="dangerouslySetInnerHTML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/eXSWUsy.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/11/03/react-form-IT/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>【DAY 15】React 表單處理，更新資料及儲存表單 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/11/03/react-form-IT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【DAY 15】React 表單處理，更新資料及儲存表單
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-11-03 23:32:35 / 修改時間：23:36:40" itemprop="dateCreated datePublished" datetime="2022-11-03T23:32:35+08:00">2022-11-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%90IT-%E9%90%B5%E4%BA%BA%E8%B3%BD%E3%80%91%E4%BD%A0React%E4%BA%86%E5%97%8E-30%E5%A4%A9%E8%A7%A3%E9%8E%96React%E6%8A%80%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">【IT 鐵人賽】你React了嗎? 30天解鎖React技能</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/11/03/react-form-IT/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/11/03/react-form-IT/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/eXSWUsy.jpg" alt="cover"></p>
+<a id="more"></a>
+
+<p><strong>［情境任務］</strong></p>
+<p>解師傅：我們的餐廳生意越來越好了，為了不讓客人排隊，我想客製一個點餐機～</p>
+<p>小當家：啥？這是什麼玩意？</p>
+<p>解師傅：直接在點餐機上選擇餐點跟輸入客人的資料，我們既不用自己點餐，客人也不用排隊，根本一舉兩得阿！</p>
+<p>小當家：解師傅，你真是個天才！</p>
+<p>現在我們已經有餐點了，還需要方便客人填寫資料的表單，一起動手做吧！</p>
+<hr>
+<h1 id="表單處理"><a href="#表單處理" class="headerlink" title="表單處理"></a>表單處理</h1><p>還記得在 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10291393">DAY 2</a> 時有提到，React 不做資料綁定，所以在資料有變更時，常常會用 <code>onChange</code> 去做資料的更新</p>
+<p>由於一個表單可能會有多個欄位，所以這邊使用 object 來當預設值，方便之後擴充<br>為了不混淆，會將每個欄位拆開來看，以下分別為各種類型 <code>input</code>、<code>select</code>、<code>radio</code>、<code>checkbox</code>、<code>file</code> 的欄位運用<br><br/><br><br/><br><br/></p>
+<h1 id="input-文字輸入"><a href="#input-文字輸入" class="headerlink" title="input 文字輸入"></a>input 文字輸入</h1><h2 id="input-類型為-text"><a href="#input-類型為-text" class="headerlink" title="input 類型為 text"></a>input 類型為 text</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [form, setForm] = useState(&#123;</span><br><span class="line">    name: <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeName = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...state,</span><br><span class="line">      name: e.target.value</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;form&gt;</span><br><span class="line">      &lt;label htmlFor=<span class="string">&quot;name&quot;</span>&gt;姓名&lt;/label&gt;</span><br><span class="line">      &lt;input</span><br><span class="line">        id=<span class="string">&quot;name&quot;</span></span><br><span class="line">        type=<span class="string">&quot;text&quot;</span></span><br><span class="line">		name=<span class="string">&quot;name&quot;</span></span><br><span class="line">        value=&#123;form.name&#125;</span><br><span class="line">        onChange=&#123;changeName&#125;</span><br><span class="line">      /&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>input 會接收 <code>value</code> 和 <code>onChange</code> 事件，如 input 輸入的值變更，setForm 會將 <code>form.name</code> 變更為新的值，以達成 input 雙向綁定<br><br/><br><br/><br><br/></p>
+<h2 id="input-類型為其他型別"><a href="#input-類型為其他型別" class="headerlink" title="input 類型為其他型別"></a>input 類型為其他型別</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [form, setForm] = useState(&#123;</span><br><span class="line">    number: <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeNumber = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...state,</span><br><span class="line">      number: <span class="built_in">parseInt</span>(e.target.value, <span class="number">10</span>)</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;form&gt;</span><br><span class="line">      &lt;label htmlFor=<span class="string">&quot;num&quot;</span>&gt;此次用餐人數&lt;/label&gt;</span><br><span class="line">      &lt;input</span><br><span class="line">        id=<span class="string">&quot;num&quot;</span></span><br><span class="line">        type=<span class="string">&quot;number&quot;</span></span><br><span class="line">		name=<span class="string">&quot;number&quot;</span></span><br><span class="line">        value=&#123;form.number&#125;</span><br><span class="line">        onChange=&#123;changeNumber&#125;</span><br><span class="line">      /&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>「value 傳入的值一定會是字串」，所以如想要的值為其他型別，要記得轉型，上例的 input 為 Number 型態，需再使用 <code>parseInt</code> 將字串轉型為 number<br><br/><br><br/><br><br/></p>
+<h1 id="Select-下拉選單"><a href="#Select-下拉選單" class="headerlink" title="Select 下拉選單"></a>Select 下拉選單</h1><h2 id="Select-綁定字串陣列"><a href="#Select-綁定字串陣列" class="headerlink" title="Select 綁定字串陣列"></a>Select 綁定字串陣列</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> age = [</span><br><span class="line">    <span class="string">&quot;18歲以下&quot;</span>,</span><br><span class="line">    <span class="string">&quot;18歲~29歲&quot;</span>,</span><br><span class="line">    <span class="string">&quot;30歲~39歲&quot;</span>,</span><br><span class="line">    <span class="string">&quot;40歲~49歲&quot;</span>,</span><br><span class="line">    <span class="string">&quot;50歲~59歲&quot;</span>,</span><br><span class="line">    <span class="string">&quot;60歲以上&quot;</span></span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> [form, setForm] = useState(&#123;</span><br><span class="line">    age: age[<span class="number">0</span>]</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeAge = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...state,</span><br><span class="line">      age: e.target.value</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;form&gt;</span><br><span class="line">      &lt;label&gt;請選擇您的年齡區間&lt;/label&gt;</span><br><span class="line"></span><br><span class="line">      &lt;select name=<span class="string">&quot;age&quot;</span> value=&#123;form.age&#125; onChange=&#123;changeAge&#125;&gt;</span><br><span class="line">        &#123;age.map(<span class="function">(<span class="params">item</span>) =&gt;</span> (</span><br><span class="line">          &lt;option key=&#123;item.value&#125; value=&#123;item&#125;&gt;&#123;item&#125;&lt;/option&gt;</span><br><span class="line">        ))&#125;</span><br><span class="line">      &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">	  &lt;h1&gt;您選擇了: &#123;form.age&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>只有字串的陣列很單純，預設值設定第 0 筆，並用 map 渲染出列表，select 接收 <code>value</code> 和 <code>onChange</code> 事件，setForm 會將 <code>form.age</code> 變更為新的值，達成 select 雙向綁定<br><br/><br><br/><br><br/></p>
+<h2 id="Select-綁定物件陣列"><a href="#Select-綁定物件陣列" class="headerlink" title="Select 綁定物件陣列"></a>Select 綁定物件陣列</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> age = [</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;18歲以下&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;0&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;18歲~29歲&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;1&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;30歲~39歲&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;2&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;40歲~49歲&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;3&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;50歲~59歲&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;4&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;60歲以上&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;5&quot;</span> &#125;</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> [form, setForm] = useState(&#123;</span><br><span class="line">    age: age[<span class="number">0</span>].value</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeAge = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...state,</span><br><span class="line">      age: e.target.value</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;form&gt;</span><br><span class="line">      &lt;label&gt;請選擇您的年齡區間&lt;/label&gt;</span><br><span class="line"></span><br><span class="line">      &lt;select name=<span class="string">&quot;age&quot;</span> value=&#123;form.age&#125; onChange=&#123;changeAge&#125;&gt;</span><br><span class="line">        &#123;age.map(<span class="function">(<span class="params">item</span>) =&gt;</span> (</span><br><span class="line">          &lt;option key=&#123;item.value&#125; value=&#123;item.value&#125;&gt;</span><br><span class="line">            &#123;item.label&#125;</span><br><span class="line">          &lt;/option&gt;</span><br><span class="line">        ))&#125;</span><br><span class="line">      &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">      &lt;h1&gt;您選擇了: &#123;age.find(<span class="function">(<span class="params">item</span>) =&gt;</span> item.value === form.age).label&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有時候 select 的文字，跟要傳入的 value 是不一樣的，這時候可以用物件陣列，做法跟綁定字串陣列差不多，只要綁定物件裡的 value 就可以了</p>
+<p>特別注意的是，要顯示選擇的項目，因為 <code>form.age</code> 綁定的是 value 值，我們想顯示 label 需要從 age 陣列去找 value 跟 <code>form.age</code> 相同的的物件，再取得物件的 label<br><br/><br><br/><br><br/></p>
+<h1 id="radio-單選"><a href="#radio-單選" class="headerlink" title="radio 單選"></a>radio 單選</h1><h2 id="radio-綁定物件"><a href="#radio-綁定物件" class="headerlink" title="radio 綁定物件"></a>radio 綁定物件</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [form, setForm] = useState(&#123;</span><br><span class="line">    gender: <span class="string">&quot;male&quot;</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeGender = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...state,</span><br><span class="line">      gender: e.target.value</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;form&gt;</span><br><span class="line">      &lt;label&gt;性別&lt;/label&gt;</span><br><span class="line"></span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input</span><br><span class="line">          type=<span class="string">&quot;radio&quot;</span></span><br><span class="line">          id=<span class="string">&quot;male&quot;</span></span><br><span class="line">		  name=<span class="string">&quot;gender&quot;</span></span><br><span class="line">          value=<span class="string">&quot;male&quot;</span></span><br><span class="line">          onChange=&#123;changeGender&#125;</span><br><span class="line">          checked=&#123;form.gender === <span class="string">&quot;male&quot;</span>&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;label htmlFor=<span class="string">&quot;male&quot;</span>&gt;男性&lt;/label&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input</span><br><span class="line">          type=<span class="string">&quot;radio&quot;</span></span><br><span class="line">          id=<span class="string">&quot;female&quot;</span></span><br><span class="line">		  name=<span class="string">&quot;gender&quot;</span></span><br><span class="line">          value=<span class="string">&quot;female&quot;</span></span><br><span class="line">          onChange=&#123;changeGender&#125;</span><br><span class="line">          checked=&#123;form.gender === <span class="string">&quot;female&quot;</span>&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;label htmlFor=<span class="string">&quot;female&quot;</span>&gt;女性&lt;/label&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>利用 <code>value</code> 和 <code>onChange</code> 達成雙向綁定，radio 還有 <code>checked</code> 屬性，依據 form.gender 去判斷是否 checked<br><br/><br><br/><br><br/></p>
+<h2 id="radio-綁定陣列"><a href="#radio-綁定陣列" class="headerlink" title="radio 綁定陣列"></a>radio 綁定陣列</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">const</span> gender = [</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;男性&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;male&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;女性&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;female&quot;</span> &#125;</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> [form, setForm] = useState(&#123;</span><br><span class="line">    gender: <span class="string">&quot;male&quot;</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeGender = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...state,</span><br><span class="line">      gender: e.target.value</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;form&gt;</span><br><span class="line">      &lt;label&gt;性別&lt;/label&gt;</span><br><span class="line"></span><br><span class="line">      &#123;gender.map(<span class="function">(<span class="params">item</span>) =&gt;</span> (</span><br><span class="line">        &lt;div key=&#123;item.value&#125;&gt;</span><br><span class="line">          &lt;input</span><br><span class="line">            type=<span class="string">&quot;radio&quot;</span></span><br><span class="line">            id=&#123;item.value&#125;</span><br><span class="line">			name=<span class="string">&quot;gender&quot;</span></span><br><span class="line">            value=&#123;item.value&#125;</span><br><span class="line">            onChange=&#123;changeGender&#125;</span><br><span class="line">            checked=&#123;form.gender === item.value&#125;</span><br><span class="line">          /&gt;</span><br><span class="line"></span><br><span class="line">          &lt;label htmlFor=&#123;item.value&#125;&gt;</span><br><span class="line">            &#123;item.label&#125;</span><br><span class="line">          &lt;/label&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      ))&#125;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>將項目整理成陣列，用 map 渲染列表，並綁定 <code>value</code>、<code>checked</code> 的值<br><br/><br><br/><br><br/></p>
+<h1 id="checkbox-多選"><a href="#checkbox-多選" class="headerlink" title="checkbox 多選"></a>checkbox 多選</h1><h2 id="checkbox-綁定物件"><a href="#checkbox-綁定物件" class="headerlink" title="checkbox 綁定物件"></a>checkbox 綁定物件</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> purpose = [</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;約會聚餐&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;date&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;朋友聚會&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;friend&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;商務用餐&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;business&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;慶祝生日&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;birthday&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;其他&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;others&quot;</span> &#125;</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> [form, setForm] = useState(&#123;</span><br><span class="line">    purpose: &#123;</span><br><span class="line">      date: <span class="literal">false</span>,</span><br><span class="line">      friend: <span class="literal">false</span>,</span><br><span class="line">      business: <span class="literal">false</span>,</span><br><span class="line">      birthday: <span class="literal">false</span>,</span><br><span class="line">      others: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changePurpose = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> key = e.target.value;</span><br><span class="line"></span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...state,</span><br><span class="line">      purpose: &#123;</span><br><span class="line">        ...state.purpose,</span><br><span class="line">        [key]: !state.purpose[key]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;form&gt;</span><br><span class="line">      &lt;label&gt;此次用餐目的&lt;/label&gt;</span><br><span class="line"></span><br><span class="line">	  &#123;purpose.map(<span class="function">(<span class="params">item</span>) =&gt;</span> (</span><br><span class="line">        &lt;div key=&#123;item.value&#125;&gt;</span><br><span class="line">          &lt;input</span><br><span class="line">            type=<span class="string">&quot;checkbox&quot;</span></span><br><span class="line">			name=<span class="string">&quot;purpose&quot;</span></span><br><span class="line">            value=&#123;item.value&#125;</span><br><span class="line">            id=&#123;item.value&#125;</span><br><span class="line">            checked=&#123;form.purpose[item.value]&#125;</span><br><span class="line">            onChange=&#123;changePurpose&#125;</span><br><span class="line">          /&gt;</span><br><span class="line"></span><br><span class="line">          &lt;label htmlFor=&#123;item.value&#125;&gt;</span><br><span class="line">            &#123;item.label&#125;</span><br><span class="line">          &lt;/label&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      ))&#125;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>綁定物件的 <code>boolean</code> 值去控制是否 <code>checked</code>，並在 setForm 做開關的動作<br><br/><br><br/><br><br/></p>
+<h2 id="checkbox-綁定陣列"><a href="#checkbox-綁定陣列" class="headerlink" title="checkbox 綁定陣列"></a>checkbox 綁定陣列</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> purpose = [</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;約會聚餐&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;date&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;朋友聚會&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;friend&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;商務用餐&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;business&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;慶祝生日&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;birthday&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;其他&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;others&quot;</span> &#125;</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> [form, setForm] = useState(&#123;</span><br><span class="line">    purpose: []</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changePurpose = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> value = e.target.value;</span><br><span class="line"></span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (state.purpose.includes(value)) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          ...state,</span><br><span class="line">          purpose: state.purpose.filter(<span class="function">(<span class="params">item</span>) =&gt;</span> item !== value)</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          ...state,</span><br><span class="line">          purpose: [...state.purpose, value]</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;form&gt;</span><br><span class="line">	  &lt;label&gt;此次用餐目的&lt;/label&gt;</span><br><span class="line"></span><br><span class="line">      &#123;purpose.map(<span class="function">(<span class="params">item, idx</span>) =&gt;</span> (</span><br><span class="line">        &lt;div key=&#123;item.value&#125;&gt;</span><br><span class="line">          &lt;input</span><br><span class="line">            type=<span class="string">&quot;checkbox&quot;</span></span><br><span class="line">            value=&#123;item.value&#125;</span><br><span class="line">			name=<span class="string">&quot;purpose&quot;</span></span><br><span class="line">            id=&#123;item.value&#125;</span><br><span class="line">            checked=&#123;form.purpose.includes(item.value)&#125;</span><br><span class="line">            onChange=&#123;changePurpose&#125;</span><br><span class="line">          /&gt;</span><br><span class="line"></span><br><span class="line">          &lt;label htmlFor=&#123;item.value&#125;&gt;</span><br><span class="line">            &#123;item.label&#125;</span><br><span class="line">          &lt;/label&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      ))&#125;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>陣列會傳入有 <code>checked</code> 的 value，如點擊已 checked 的項目，則會用 <code>filter</code> 過濾掉此 value<br><br/><br><br/><br><br/></p>
+<h1 id="file-檔案上傳與圖片預覽"><a href="#file-檔案上傳與圖片預覽" class="headerlink" title="file 檔案上傳與圖片預覽"></a>file 檔案上傳與圖片預覽</h1><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [form, setForm] = useState(&#123;</span><br><span class="line">    file: <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeFile = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 取得第0筆檔案</span></span><br><span class="line">    <span class="keyword">const</span> file = e.target.files[<span class="number">0</span>];</span><br><span class="line">    <span class="comment">// FileReader 讀取瀏覽器選中的檔案</span></span><br><span class="line">    <span class="keyword">const</span> fileReader = <span class="keyword">new</span> FileReader();</span><br><span class="line">    <span class="comment">// 讀取完改變 img</span></span><br><span class="line">    fileReader.addEventListener(<span class="string">&quot;load&quot;</span>, fileLoad);</span><br><span class="line">    <span class="comment">// 將圖片繪出，轉換成 Base64 編碼</span></span><br><span class="line">    fileReader.readAsDataURL(file);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> fileLoad = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 此處的 e 為 fileReader</span></span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...state,</span><br><span class="line">      file: e.target.result</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;form&gt;</span><br><span class="line">      &lt;label&gt;相關圖片&lt;/label&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input</span><br><span class="line">          type=<span class="string">&quot;file&quot;</span></span><br><span class="line">          id=<span class="string">&quot;upload&quot;</span></span><br><span class="line">		  name=<span class="string">&quot;file&quot;</span></span><br><span class="line">          onChange=&#123;changeFile&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;img src=&#123;form.file&#125; width=<span class="string">&quot;100%&quot;</span> alt=<span class="string">&quot;&quot;</span> /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>type 為 file 時，沒辦法用 value 指定，透過 <code>fileReader</code> 讀取檔案，再轉換給 form.file<br><br/><br><br/><br><br/></p>
+<h1 id="統一-function"><a href="#統一-function" class="headerlink" title="統一 function"></a>統一 function</h1><p>因為 changeName、changeAge、changeGender 的 function 邏輯都是一樣的，所以可以在 <code>onChange</code> 時統一讀取同一個 function，如下讀取 changeValue，取得欄位的 <code>name</code> 屬性，並賦予新值</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> changeValue = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> name = e.target.name;</span><br><span class="line"></span><br><span class="line">  setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">    ...state,</span><br><span class="line">    [name]: e.target.value</span><br><span class="line">  &#125;));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>完整 form 表單如下</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> age = [</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;18歲以下&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;0&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;18歲~29歲&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;1&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;30歲~39歲&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;2&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;40歲~49歲&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;3&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;50歲~59歲&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;4&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;60歲以上&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;5&quot;</span> &#125;</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> gender = [</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;男性&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;male&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;女性&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;female&quot;</span> &#125;</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> purpose = [</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;約會聚餐&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;date&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;朋友聚會&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;friend&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;商務用餐&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;business&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;慶祝生日&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;birthday&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">label</span>: <span class="string">&quot;其他&quot;</span>, <span class="attr">value</span>: <span class="string">&quot;others&quot;</span> &#125;</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> [form, setForm] = useState(&#123;</span><br><span class="line">    name: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    number: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    gender: <span class="string">&quot;male&quot;</span>,</span><br><span class="line">    age: age[<span class="number">0</span>].value,</span><br><span class="line">    purpose: [],</span><br><span class="line">    file: <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeNumber = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...state,</span><br><span class="line">      number: <span class="built_in">parseInt</span>(e.target.value, <span class="number">10</span>)</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeValue = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> name = e.target.name;</span><br><span class="line"></span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...state,</span><br><span class="line">      [name]: e.target.value</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changePurpose = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> value = e.target.value;</span><br><span class="line"></span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (state.purpose.includes(value)) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          ...state,</span><br><span class="line">          purpose: state.purpose.filter(<span class="function">(<span class="params">item</span>) =&gt;</span> item !== value)</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          ...state,</span><br><span class="line">          purpose: [...state.purpose, value]</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeFile = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 取得第0筆檔案</span></span><br><span class="line">    <span class="keyword">const</span> file = e.target.files[<span class="number">0</span>];</span><br><span class="line">    <span class="comment">// FileReader 讀取瀏覽器選中的檔案</span></span><br><span class="line">    <span class="keyword">const</span> fileReader = <span class="keyword">new</span> FileReader();</span><br><span class="line">    <span class="comment">// 讀取完改變 img</span></span><br><span class="line">    fileReader.addEventListener(<span class="string">&quot;load&quot;</span>, fileLoad);</span><br><span class="line">    <span class="comment">// 將圖片繪出，轉換成 Base64 編碼</span></span><br><span class="line">    fileReader.readAsDataURL(file);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> fileLoad = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 此處的 e 為 fileReader</span></span><br><span class="line">    setForm(<span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...state,</span><br><span class="line">      file: e.target.result</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;React 熱炒店訂購單&lt;/h1&gt;</span><br><span class="line">      &lt;form&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;label htmlFor=<span class="string">&quot;name&quot;</span>&gt;</span><br><span class="line">            姓名</span><br><span class="line">          &lt;/label&gt;</span><br><span class="line">          &lt;input</span><br><span class="line">            id=<span class="string">&quot;name&quot;</span></span><br><span class="line">            type=<span class="string">&quot;text&quot;</span></span><br><span class="line">            name=<span class="string">&quot;name&quot;</span></span><br><span class="line">            value=&#123;form.name&#125;</span><br><span class="line">            onChange=&#123;changeValue&#125;</span><br><span class="line">          /&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;label htmlFor=<span class="string">&quot;num&quot;</span>&gt;</span><br><span class="line">            此次用餐人數</span><br><span class="line">          &lt;/label&gt;</span><br><span class="line">          &lt;input</span><br><span class="line">            id=<span class="string">&quot;num&quot;</span></span><br><span class="line">            type=<span class="string">&quot;number&quot;</span></span><br><span class="line">            value=&#123;form.number&#125;</span><br><span class="line">            onChange=&#123;changeNumber&#125;</span><br><span class="line">          /&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;label&gt;性別&lt;/label&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &#123;gender.map(<span class="function">(<span class="params">item</span>) =&gt;</span> (</span><br><span class="line">              &lt;div key=&#123;item.value&#125;&gt;</span><br><span class="line">                &lt;input</span><br><span class="line">                  type=<span class="string">&quot;radio&quot;</span></span><br><span class="line">                  name=<span class="string">&quot;gender&quot;</span></span><br><span class="line">                  id=&#123;item.value&#125;</span><br><span class="line">                  value=&#123;item.value&#125;</span><br><span class="line">                  onChange=&#123;changeValue&#125;</span><br><span class="line">                  checked=&#123;form.gender === item.value&#125;</span><br><span class="line">                /&gt;</span><br><span class="line">                &lt;label htmlFor=&#123;item.value&#125;&gt;</span><br><span class="line">                  &#123;item.label&#125;</span><br><span class="line">                &lt;/label&gt;</span><br><span class="line">              &lt;/div&gt;</span><br><span class="line">            ))&#125;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;label&gt;請選擇您的年齡區間&lt;/label&gt;</span><br><span class="line"></span><br><span class="line">          &lt;select</span><br><span class="line">            name=<span class="string">&quot;age&quot;</span></span><br><span class="line">            value=&#123;form.age&#125;</span><br><span class="line">            onChange=&#123;changeValue&#125;</span><br><span class="line">          &gt;</span><br><span class="line">            &#123;age.map(<span class="function">(<span class="params">item</span>) =&gt;</span> (</span><br><span class="line">              &lt;option key=&#123;item.value&#125; value=&#123;item.value&#125;&gt;</span><br><span class="line">                &#123;item.label&#125;</span><br><span class="line">              &lt;/option&gt;</span><br><span class="line">            ))&#125;</span><br><span class="line">          &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">          &lt;h6&gt;</span><br><span class="line">            您選擇了: &#123;age.find(<span class="function">(<span class="params">item</span>) =&gt;</span> item.value === form.age).label&#125;</span><br><span class="line">          &lt;/h6&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;label&gt;此次用餐目的&lt;/label&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &#123;purpose.map(<span class="function">(<span class="params">item, idx</span>) =&gt;</span> (</span><br><span class="line">              &lt;div key=&#123;item.value&#125;&gt;</span><br><span class="line">                &lt;input</span><br><span class="line">                  type=<span class="string">&quot;checkbox&quot;</span></span><br><span class="line">                  value=&#123;item.value&#125;</span><br><span class="line">                  id=&#123;item.value&#125;</span><br><span class="line">                  checked=&#123;form.purpose.includes(item.value)&#125;</span><br><span class="line">                  onChange=&#123;changePurpose&#125;</span><br><span class="line">                /&gt;</span><br><span class="line">                &lt;label htmlFor=&#123;item.value&#125;&gt;</span><br><span class="line">                  &#123;item.label&#125;</span><br><span class="line">                &lt;/label&gt;</span><br><span class="line">              &lt;/div&gt;</span><br><span class="line">            ))&#125;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;label&gt;相關圖片&lt;/label&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;input</span><br><span class="line">              type=<span class="string">&quot;file&quot;</span></span><br><span class="line">              id=<span class="string">&quot;upload&quot;</span></span><br><span class="line">              onChange=&#123;changeFile&#125;</span><br><span class="line">            /&gt;</span><br><span class="line">            &lt;button</span><br><span class="line">              type=<span class="string">&quot;button&quot;</span></span><br><span class="line">              id=<span class="string">&quot;upload&quot;</span></span><br><span class="line">            &gt;</span><br><span class="line">              上傳</span><br><span class="line">            &lt;/button&gt;</span><br><span class="line"></span><br><span class="line">            &lt;img src=&#123;form.file&#125; width=<span class="string">&quot;100%&quot;</span> /&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/form&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>［任務解題］</strong></p>
+<p>依照上面的範例，加上了 className，已完成訂購單囉！你真是幫了餐廳一個大忙！</p>
+<iframe src="https://codesandbox.io/embed/react-form-jkzuio?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="react-form"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+<br/><br/>
+
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>表單的處理在 React 也是一門學問，React 不像其他框架有做雙向綁定的模版，所以利用 onChange 可以幫助我們綁定新的值，就達到雙向綁定的效果囉！</p>
+<hr>
+<p>本文為 IT 鐵人賽系列文 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
+<hr>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/react/" rel="tag"># react</a>
+              <a href="/tags/xss/" rel="tag"># xss</a>
+              <a href="/tags/dangerouslySetInnerHTML/" rel="tag"># dangerouslySetInnerHTML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/02/react-dangerouslySetInnerHTML/" rel="prev" title="【DAY 14】塞入你的 HTML-dangerouslySetInnerHTML">
+      <i class="fa fa-chevron-left"></i> 【DAY 14】塞入你的 HTML-dangerouslySetInnerHTML
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E5%96%AE%E8%99%95%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">表單處理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#input-%E6%96%87%E5%AD%97%E8%BC%B8%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">input 文字輸入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#input-%E9%A1%9E%E5%9E%8B%E7%82%BA-text"><span class="nav-number">2.1.</span> <span class="nav-text">input 類型為 text</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input-%E9%A1%9E%E5%9E%8B%E7%82%BA%E5%85%B6%E4%BB%96%E5%9E%8B%E5%88%A5"><span class="nav-number">2.2.</span> <span class="nav-text">input 類型為其他型別</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Select-%E4%B8%8B%E6%8B%89%E9%81%B8%E5%96%AE"><span class="nav-number">3.</span> <span class="nav-text">Select 下拉選單</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Select-%E7%B6%81%E5%AE%9A%E5%AD%97%E4%B8%B2%E9%99%A3%E5%88%97"><span class="nav-number">3.1.</span> <span class="nav-text">Select 綁定字串陣列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Select-%E7%B6%81%E5%AE%9A%E7%89%A9%E4%BB%B6%E9%99%A3%E5%88%97"><span class="nav-number">3.2.</span> <span class="nav-text">Select 綁定物件陣列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#radio-%E5%96%AE%E9%81%B8"><span class="nav-number">4.</span> <span class="nav-text">radio 單選</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#radio-%E7%B6%81%E5%AE%9A%E7%89%A9%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">radio 綁定物件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#radio-%E7%B6%81%E5%AE%9A%E9%99%A3%E5%88%97"><span class="nav-number">4.2.</span> <span class="nav-text">radio 綁定陣列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#checkbox-%E5%A4%9A%E9%81%B8"><span class="nav-number">5.</span> <span class="nav-text">checkbox 多選</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#checkbox-%E7%B6%81%E5%AE%9A%E7%89%A9%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">checkbox 綁定物件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkbox-%E7%B6%81%E5%AE%9A%E9%99%A3%E5%88%97"><span class="nav-number">5.2.</span> <span class="nav-text">checkbox 綁定陣列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#file-%E6%AA%94%E6%A1%88%E4%B8%8A%E5%82%B3%E8%88%87%E5%9C%96%E7%89%87%E9%A0%90%E8%A6%BD"><span class="nav-number">6.</span> <span class="nav-text">file 檔案上傳與圖片預覽</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%B1%E4%B8%80-function"><span class="nav-number">7.</span> <span class="nav-text">統一 function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">8.</span> <span class="nav-text">結語</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">218</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/11/03/react-form-IT/";
+    this.page.identifier = "2022/11/03/react-form-IT/";
+    this.page.title = "【DAY 15】React 表單處理，更新資料及儲存表單";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
