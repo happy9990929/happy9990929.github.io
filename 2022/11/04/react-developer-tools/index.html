@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="【DAY 16】好用的 React Developer Tools 偵錯工具">
+<meta property="og:url" content="https://happy9990929.github.io/2022/11/04/react-developer-tools/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/RAaNADv.jpg">
+<meta property="og:image" content="https://imgur.com/ZB6gqES.jpg">
+<meta property="og:image" content="https://imgur.com/MZ7pdP8.jpg">
+<meta property="og:image" content="https://imgur.com/P1epPxw.jpg">
+<meta property="og:image" content="https://imgur.com/HENfa96.jpg">
+<meta property="og:image" content="https://imgur.com/qrE0yMk.jpg">
+<meta property="og:image" content="https://imgur.com/o2ALF9U.jpg">
+<meta property="og:image" content="https://imgur.com/SzeBIaH.jpg">
+<meta property="og:image" content="https://imgur.com/LF58ZHW.jpg">
+<meta property="og:image" content="https://imgur.com/yO1kvvQ.jpg">
+<meta property="og:image" content="https://imgur.com/XiitXUS.jpg">
+<meta property="article:published_time" content="2022-11-04T15:43:10.000Z">
+<meta property="article:modified_time" content="2022-11-04T15:46:45.716Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="React Developer Tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/RAaNADv.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/11/04/react-developer-tools/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>【DAY 16】好用的 React Developer Tools 偵錯工具 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/11/04/react-developer-tools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【DAY 16】好用的 React Developer Tools 偵錯工具
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-11-04 23:43:10 / 修改時間：23:46:45" itemprop="dateCreated datePublished" datetime="2022-11-04T23:43:10+08:00">2022-11-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%90IT-%E9%90%B5%E4%BA%BA%E8%B3%BD%E3%80%91%E4%BD%A0React%E4%BA%86%E5%97%8E-30%E5%A4%A9%E8%A7%A3%E9%8E%96React%E6%8A%80%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">【IT 鐵人賽】你React了嗎? 30天解鎖React技能</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/11/04/react-developer-tools/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/11/04/react-developer-tools/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/RAaNADv.jpg" alt="cover"></p>
+<a id="more"></a>
+
+<p><strong>［情境劇場］</strong></p>
+<p>解師傅：話說小當家，你這彈跳甲魚湯還真是好喝，這麼多食材，為什麼你總是能分辨那些食材是新鮮的？</p>
+<p>小當家：哎…解師傅，你忘了舌頭是我最厲害的武器了嗎！每個食材只要讓我舔一下，經過我舌頭精密的計算，就能判斷它到底有沒有資格變成我的料理</p>
+<p>解師傅：…希望你不會拉肚子</p>
+<hr>
+<h1 id="React-Developer-Tools"><a href="#React-Developer-Tools" class="headerlink" title="React Developer Tools"></a><strong><strong>React Developer Tools</strong></strong></h1><p><code>React Developer Tools</code> 是由 Facebook 團隊開發的偵錯工具，目前已超過 300 萬使用者</p>
+<p>在開發 React 專案時非常好用，它可以看到各個組件的結構，觀察組件中 <code>props</code>、<code>hooks</code> 的變化，還能直接編輯，讓開發流程順利、有效率，目前的 Firefox、Chrome 瀏覽器都可安裝 React Developer Tools 擴充套件，本篇會以 Chrome 做教學<br><br/><br><br/><br><br/></p>
+<h1 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h1><p>先在瀏覽器安裝擴充套件</p>
+<h2 id="Chrome-安裝-→-Chrome-React-Developer-Tools"><a href="#Chrome-安裝-→-Chrome-React-Developer-Tools" class="headerlink" title="Chrome 安裝 → Chrome React Developer Tools"></a>Chrome 安裝 → <a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi">Chrome React Developer Tools</a></h2><h2 id="Firefox-安裝-→-Firefox-React-Developer-Tools"><a href="#Firefox-安裝-→-Firefox-React-Developer-Tools" class="headerlink" title="Firefox 安裝 →  Firefox React Developer Tools"></a>Firefox 安裝 →  <a target="_blank" rel="noopener" href="https://addons.mozilla.org/zh-TW/firefox/addon/react-devtools/">Firefox React Developer Tools</a></h2><p><img src="https://imgur.com/ZB6gqES.jpg" alt="chrome"><br>點選加到 Chrome，安裝完畢之後請重開 chrome<br><br/><br><br/><br><br/></p>
+<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><p><img src="https://imgur.com/MZ7pdP8.jpg" alt="img"><br>開啟一個 React 專案，打開 F12 dev tools，會看到多了兩個標籤，分別是 <code>Components</code>、<code>Profiler</code>，沒看到的話可以看一下有沒有收合在「 &gt;&gt;」裡<br><br/><br><br/><br><br/></p>
+<p><img src="https://imgur.com/P1epPxw.jpg" alt="img2"><br>這邊拿了前面使用過的範例來看，點擊 <code>Components</code>，會看到所有 App 包含的組件結構，點擊元件，會出現 <code>props</code>、<code>hooks</code>、<code>rendered by</code>、<code>source</code> 等相關資訊</p>
+<p>rendered by、source 會顯示組件的來源及 react-dom 的版本<br><br/><br><br/><br><br/></p>
+<p><img src="https://imgur.com/HENfa96.jpg" alt="img3"><br>可以直接改動裡面的值，畫面也會跟著變動<br><br/><br><br/><br><br/></p>
+<p><img src="https://imgur.com/qrE0yMk.jpg" alt="img4"><br>在 codesandbox 也可以直接使用 React DevTools，<br>有興趣的人可以點選 <a target="_blank" rel="noopener" href="https://codesandbox.io/s/react-with-render-if-else-uewlgj"><strong>React DevTools 範例</strong></a> 觀察<br><br/><br><br/><br><br/></p>
+<h1 id="那-Profiler-有什麼功能"><a href="#那-Profiler-有什麼功能" class="headerlink" title="那 Profiler 有什麼功能?"></a>那 Profiler 有什麼功能?</h1><p>Profiler 可以幫助我們觀察應用程序的效能分析，只需要三個步驟</p>
+<h3 id="1-點擊藍色按鈕進行錄製，開始錄製時會呈現紅色"><a href="#1-點擊藍色按鈕進行錄製，開始錄製時會呈現紅色" class="headerlink" title="1. 點擊藍色按鈕進行錄製，開始錄製時會呈現紅色"></a>1. 點擊藍色按鈕進行錄製，開始錄製時會呈現紅色</h3><p><img src="https://imgur.com/o2ALF9U.jpg" alt="Profiler1"><br><br/></p>
+<h3 id="2-請正常使用你的應用程序"><a href="#2-請正常使用你的應用程序" class="headerlink" title="2. 請正常使用你的應用程序"></a>2. 請正常使用你的應用程序</h3><br/>
+<br/>
+<br/>
+
+<h3 id="3-停止錄製"><a href="#3-停止錄製" class="headerlink" title="3. 停止錄製"></a>3. 停止錄製</h3><p><img src="https://imgur.com/SzeBIaH.jpg" alt="Profiler3"></p>
+<h1 id="讀取效能數據"><a href="#讀取效能數據" class="headerlink" title="讀取效能數據"></a>讀取效能數據</h1><h2 id="火焰圖"><a href="#火焰圖" class="headerlink" title="火焰圖"></a>火焰圖</h2><p>你可以看到渲染的元件的狀況，包含了哪些組件有重新渲染，及渲染時間</p>
+<p>• 黃色 - 渲染時間比較久的組件<br>• 藍色 - 組件渲染時間相對較短<br>• 灰色 - 組件在提交期間根本沒有渲染</p>
+<p><img src="https://imgur.com/LF58ZHW.jpg" alt="fire"></p>
+<p><img src="https://imgur.com/yO1kvvQ.jpg" alt="fire2"><br>單選各個組件，可於右側看到詳細的渲染信息<br><br/><br><br/><br><br/></p>
+<h2 id="排名圖"><a href="#排名圖" class="headerlink" title="排名圖"></a>排名圖</h2><p><img src="https://imgur.com/XiitXUS.jpg" alt="ranked"></p>
+<p>當您單擊 Profiler 選項卡中的<code>Ranked</code>按鈕時，會看到 Ranked 圖表視圖。<br>此視圖根據渲染時間顯示組件的順序，花費更多時間的組件將位於頂部，由此視圖可以了解哪些組件對頁面重新加載影響較大。<br><br/><br><br/><br><br/></p>
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>如還想知道關於 Profiler 的資訊，可看看 <a target="_blank" rel="noopener" href="https://blog.bitsrc.io/profiling-performance-of-react-apps-using-react-profiler-d02d77f3c96a">Profiling Performance of React Apps using React Profiler</a>的文章，裡面有更詳細的介紹，好的工具讓你開發效率事半功倍！!<br><br/></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://blog.bitsrc.io/profiling-performance-of-react-apps-using-react-profiler-d02d77f3c96a">Profiling Performance of React Apps using React Profiler</a></p>
+<hr>
+<p>本文為 IT 鐵人賽系列文 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
+<hr>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/react/" rel="tag"># react</a>
+              <a href="/tags/React-Developer-Tools/" rel="tag"># React Developer Tools</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/03/react-form-IT/" rel="prev" title="【DAY 15】React 表單處理，更新資料及儲存表單">
+      <i class="fa fa-chevron-left"></i> 【DAY 15】React 表單處理，更新資料及儲存表單
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React-Developer-Tools"><span class="nav-number">1.</span> <span class="nav-text">React Developer Tools</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E5%A5%97%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">安裝套件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome-%E5%AE%89%E8%A3%9D-%E2%86%92-Chrome-React-Developer-Tools"><span class="nav-number">2.1.</span> <span class="nav-text">Chrome 安裝 → Chrome React Developer Tools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Firefox-%E5%AE%89%E8%A3%9D-%E2%86%92-Firefox-React-Developer-Tools"><span class="nav-number">2.2.</span> <span class="nav-text">Firefox 安裝 →  Firefox React Developer Tools</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">如何使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%82%A3-Profiler-%E6%9C%89%E4%BB%80%E9%BA%BC%E5%8A%9F%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text">那 Profiler 有什麼功能?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%BB%9E%E6%93%8A%E8%97%8D%E8%89%B2%E6%8C%89%E9%88%95%E9%80%B2%E8%A1%8C%E9%8C%84%E8%A3%BD%EF%BC%8C%E9%96%8B%E5%A7%8B%E9%8C%84%E8%A3%BD%E6%99%82%E6%9C%83%E5%91%88%E7%8F%BE%E7%B4%85%E8%89%B2"><span class="nav-number">4.0.1.</span> <span class="nav-text">1. 點擊藍色按鈕進行錄製，開始錄製時會呈現紅色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%AB%8B%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8%E4%BD%A0%E7%9A%84%E6%87%89%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.0.2.</span> <span class="nav-text">2. 請正常使用你的應用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%81%9C%E6%AD%A2%E9%8C%84%E8%A3%BD"><span class="nav-number">4.0.3.</span> <span class="nav-text">3. 停止錄製</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%80%E5%8F%96%E6%95%88%E8%83%BD%E6%95%B8%E6%93%9A"><span class="nav-number">5.</span> <span class="nav-text">讀取效能數據</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%81%AB%E7%84%B0%E5%9C%96"><span class="nav-number">5.1.</span> <span class="nav-text">火焰圖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%90%8D%E5%9C%96"><span class="nav-number">5.2.</span> <span class="nav-text">排名圖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">6.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">219</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/11/04/react-developer-tools/";
+    this.page.identifier = "2022/11/04/react-developer-tools/";
+    this.page.title = "【DAY 16】好用的 React Developer Tools 偵錯工具";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
