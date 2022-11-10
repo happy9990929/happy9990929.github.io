@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="【DAY 17】useEffect 處理副作用">
+<meta property="og:url" content="https://happy9990929.github.io/2022/11/10/react-useEffect/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/xgLhnXk.jpg">
+<meta property="og:image" content="https://imgur.com/ESNkcFB.jpg">
+<meta property="article:published_time" content="2022-11-10T13:25:54.000Z">
+<meta property="article:modified_time" content="2022-11-10T13:33:59.280Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="useEffect">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/xgLhnXk.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/11/10/react-useEffect/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>【DAY 17】useEffect 處理副作用 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/11/10/react-useEffect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【DAY 17】useEffect 處理副作用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-11-10 21:25:54 / 修改時間：21:33:59" itemprop="dateCreated datePublished" datetime="2022-11-10T21:25:54+08:00">2022-11-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%90IT-%E9%90%B5%E4%BA%BA%E8%B3%BD%E3%80%91%E4%BD%A0React%E4%BA%86%E5%97%8E-30%E5%A4%A9%E8%A7%A3%E9%8E%96React%E6%8A%80%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">【IT 鐵人賽】你React了嗎? 30天解鎖React技能</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/11/10/react-useEffect/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/11/10/react-useEffect/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/xgLhnXk.jpg" alt="cover"></p>
+<a id="more"></a>
+
+<p><strong>［情境劇場］</strong></p>
+<p>解師傅：餐廳請了歌手來駐唱，讓生意越來越好了，卻引來了隔壁小吃店的不滿，在我們版上留了負評</p>
+<p>小當家：人紅是非多…這也是沒辦法的事，金錢才是王道啊！！</p>
+<hr>
+<h1 id="Side-Effect-副作用"><a href="#Side-Effect-副作用" class="headerlink" title="Side Effect 副作用"></a>Side Effect 副作用</h1><p>在介紹 useEffect 先來認識什麼是 Effect，Effect 指的是「<code>Side Effect</code>」，簡稱 <code>Effect</code> ，中文是副作用的意思。</p>
+<p>我們最常聽到的副作用，也就是醫生開藥的藥單上面都會寫哪些藥，上面寫著作用跟副作用，作用是緩解鼻塞、流鼻水，可能會伴隨的副作用是會想睡覺</p>
+<p>在 JavaScript 的也是這樣的存在，「在執行函式或行為時，會導致原有的狀態被改變或有附加功能」，就稱之為 Side Effect，例如：改變全域變數狀態、發送 HTTP Request、手動操作 DOM 元素 、改變系統狀態等等<br><br/><br><br/><br><br/></p>
+<h1 id="認識-useEffect"><a href="#認識-useEffect" class="headerlink" title="認識 useEffect"></a>認識 useEffect</h1><p>useEffect 就是來處理 Side Effect 的 Hook，早期的 Class Component 是使用生命週期 (lifecycle)來管理組件函式，但這讓相同邏輯的函式，被迫拆開在不同的生命週期</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FriendStatus</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.state = &#123; <span class="attr">isOnline</span>: <span class="literal">null</span> &#125;;</span><br><span class="line">    <span class="built_in">this</span>.handleStatusChange = <span class="built_in">this</span>.handleStatusChange.bind(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    ChatAPI.subscribeToFriendStatus(</span><br><span class="line">      <span class="built_in">this</span>.props.friend.id,</span><br><span class="line">      <span class="built_in">this</span>.handleStatusChange</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">componentWillUnmount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    ChatAPI.unsubscribeFromFriendStatus(</span><br><span class="line">      <span class="built_in">this</span>.props.friend.id,</span><br><span class="line">      <span class="built_in">this</span>.handleStatusChange</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">handleStatusChange</span>(<span class="params">status</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      isOnline: status.isOnline</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.state.isOnline === <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&#x27;Loading...&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state.isOnline ? <span class="string">&#x27;Online&#x27;</span> : <span class="string">&#x27;Offline&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+因此 useEffect 的設計在將其保持在一起，易於管理，在程式碼上也較簡潔許多
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FriendStatus</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [isOnline, setIsOnline] = useState(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">handleStatusChange</span>(<span class="params">status</span>) </span>&#123;</span><br><span class="line">      setIsOnline(status.isOnline);</span><br><span class="line">    &#125;</span><br><span class="line">    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">cleanup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (isOnline === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Loading...&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> isOnline ? <span class="string">&#x27;Online&#x27;</span> : <span class="string">&#x27;Offline&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+<br/>
+<br/>
+
+<h1 id="useEffect-使用方法"><a href="#useEffect-使用方法" class="headerlink" title="useEffect 使用方法"></a>useEffect 使用方法</h1><ul>
+<li>從 react 中載入 useEffect</li>
+<li>useEffect  帶入一個函式，函式裡帶入要執行的 effect</li>
+<li>如有 dependencies，將 dependencies 帶入第二個參數陣列<br/>
+<br/>
+<br/>
+
+</li>
+</ul>
+<h2 id="1-從-react-中載入-useEffect"><a href="#1-從-react-中載入-useEffect" class="headerlink" title="1. 從 react 中載入 useEffect"></a>1. 從 react 中載入 useEffect</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<br/>
+<br/>
+<br/>
+
+<h2 id="2-useEffect-帶入一個函式，函式裡帶入要執行的-effect"><a href="#2-useEffect-帶入一個函式，函式裡帶入要執行的-effect" class="headerlink" title="2. useEffect  帶入一個函式，函式裡帶入要執行的 effect"></a>2. useEffect  帶入一個函式，函式裡帶入要執行的 effect</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//...要執行的 effect</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>useEffect 會在參數中帶入一個函式，而這個函式會在「畫面渲染完成」後被呼叫，函式裡面放入畫面完成後需要執行的 effect<br><br/><br><br/><br><br/></p>
+<h2 id="3-如有-dependencies，將-dependencies-帶入第二個參數陣列"><a href="#3-如有-dependencies，將-dependencies-帶入第二個參數陣列" class="headerlink" title="3. 如有 dependencies，將 dependencies 帶入第二個參數陣列"></a>3. 如有 dependencies，將 dependencies 帶入第二個參數陣列</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//...要執行的 effect</span></span><br><span class="line">&#125;, [dependencies])</span><br></pre></td></tr></table></figure>
+<p>useEffect 第二個參數為一個陣列，陣列裡會放入需要重新渲染 effect 的依賴，我們稱之為 dependencies，如 dependencies 有變動，才會重新執行 effect<br><br/><br><br/><br><br/></p>
+<h2 id="看個範例"><a href="#看個範例" class="headerlink" title="看個範例"></a>看個範例</h2><br/>
+<iframe src="https://codesandbox.io/embed/react-useeffect-pyxuff?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="react-useEffect"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+<br/>
+
+<p>這是一個單純的計數器功能，一開始畫面渲染完畢後，會接著執行 useEffect，執行結束後，一直到變更了 count 的值，才會再執行一次 useEffect</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;useEffect&quot;</span>);</span><br><span class="line">  &#125;, [count]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;Count: &#123;count&#125;&lt;/h1&gt;</span><br><span class="line">      &lt;button</span><br><span class="line">        onClick=&#123;<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          setCount(<span class="function">(<span class="params">state</span>) =&gt;</span> state + <span class="number">1</span>);</span><br><span class="line">        &#125;&#125;</span><br><span class="line">      &gt;</span><br><span class="line">        Add Count</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<h3 id="嘿！為什麼畫面一開始就渲染兩次"><a href="#嘿！為什麼畫面一開始就渲染兩次" class="headerlink" title="嘿！為什麼畫面一開始就渲染兩次 ?"></a>嘿！為什麼畫面一開始就渲染兩次 ?</h3><br/>
+
+<p>為什麼畫面渲染完畢後，會跑了兩次 console.log？</p>
+<p>你可以點擊 src/index.js 檔案，會看到裡面有 <code>Strict Mode</code> 嚴格模式</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root.render(</span><br><span class="line">  &lt;StrictMode&gt;</span><br><span class="line">    &lt;App /&gt;</span><br><span class="line">  &lt;/StrictMode&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>Strict Mode 在開發模式下，為了檢測到渲染期生命週期的預期之外的 Side Effect，故意調用函式兩次，來幫助我們發現 Side Effect</p>
+<p>這些函式有</p>
+<ul>
+<li>Class component <code>constructor</code>、<code>render</code> 和 <code>shouldComponentUpdate</code> 方法</li>
+<li>Class component 的靜態 <code>getDerivedStateFromProps</code> 方法</li>
+<li>Function component 的內容</li>
+<li>狀態更新函式（<code>setState</code> 的第一個參數）</li>
+<li>函數傳遞至 <code>useState</code>、<code>useMemo</code> 或 <code>useReducer</code></li>
+</ul>
+<br/>
+<br/>
+
+<p>如果我們在 index.js 下了 console.log(”index.js”)，會發現 index.js 只渲染了一次</p>
+<p><img src="https://imgur.com/ESNkcFB.jpg" alt="useEffect"></p>
+<p>問題就很清楚了，Strict Mode 的開發模式下確實會渲染兩次</p>
+<blockquote>
+<p>Strict Mode 只會在開發模式中執行，故不會調用在正式環境</p>
+</blockquote>
+<br/>
+<br/>
+<br/>
+
+<h1 id="useEffect-使用的四種方式"><a href="#useEffect-使用的四種方式" class="headerlink" title="useEffect 使用的四種方式"></a>useEffect 使用的四種方式</h1><h2 id="1-只執行在畫面渲染後"><a href="#1-只執行在畫面渲染後" class="headerlink" title="1. 只執行在畫面渲染後"></a>1. 只執行在畫面渲染後</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;mounted&quot;</span>);</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
+<p>不依賴於任何 props 或 state 的值，不需要重新執行的函式或行為，可以直接傳遞一個空陣列<br>如果你有學過 Class Component，就會像是 lifecycle 中的 <code>componentDidMount</code><br><br/><br><br/><br><br/></p>
+<h2 id="2-組件更新就執行"><a href="#2-組件更新就執行" class="headerlink" title="2. 組件更新就執行"></a>2. 組件更新就執行</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&quot;updated&quot;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>只要任何組件發生變動就會執行，會像是 class lifecycle 中的 <code>componentDidUpdate</code><br><br/><br><br/><br><br/></p>
+<h2 id="3-組件-dependencies-有變更才執行"><a href="#3-組件-dependencies-有變更才執行" class="headerlink" title="3. 組件 dependencies 有變更才執行"></a>3. 組件 dependencies 有變更才執行</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;updated with dependencies&quot;</span>);</span><br><span class="line">&#125;, [count])</span><br></pre></td></tr></table></figure>
+<p>dependencies 發生改變才執行，如範例中的 count 如有變更，才會觸發 console.log，避免在每次 render 都進行昂貴的計算<br><br/><br><br/><br><br/></p>
+<h2 id="4-清理需被銷毀的函式"><a href="#4-清理需被銷毀的函式" class="headerlink" title="4. 清理需被銷毀的函式"></a>4. 清理需被銷毀的函式</h2><p>清理函式會在組件每次重新渲染時執行，先清除上次留下來的 effect，useEffect 會做的 4 個步驟：</p>
+<ol>
+<li>判斷第二個參數的陣列是否一樣，如果一樣才會繼續</li>
+<li>執行上一次存下來的清理函式</li>
+<li>執行<code>useEffect</code>的內容</li>
+<li>把 清理函式 存下來，供下次使用</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> onMousedown = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;mousedown&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">&quot;mousedown&quot;</span>, onMousedown);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">const</span> timer = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Hello React&#x27;</span>);</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;cleanup&quot;</span>);</span><br><span class="line">    <span class="built_in">window</span>.removeEventListener(<span class="string">&quot;mousedown&quot;</span>, onMousedown);</span><br><span class="line">		<span class="built_in">clearInterval</span>(timer);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在 useEffect 函式裡 <code>return</code> 一個函式，這個函式就是清除 effect 的函式，就像是 class lifecycle 中的 <code>componentWillUnmount</code> ，如果沒有將 effect 清除，當組件重新渲染，都會執行一個新的事件監聽，這很可能會發生錯誤，也會讓效能下降，常見的需要清除的函式如：setInterval、setTimeout、addEventListener…等<br><br/></p>
+<iframe src="https://codesandbox.io/embed/react-useeffect-example-o38jy9?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="react-useEffect-example"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+<br/>
+<br/>
+<br/>
+
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>認識了 useEffect 跟使用方法，讓我們得以處理 side effect，useEffect 跟之前的 class lifecycle 相比好寫很多，把相同邏輯放在一起也舒服很多～一起練習看看吧！<br><br/><br><br/><br><br/></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://zh-hant.reactjs.org/docs/hooks-effect.html">官方 Effect Hook</a></p>
+<hr>
+<p>本文為 IT 鐵人賽系列文 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
+<hr>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/react/" rel="tag"># react</a>
+              <a href="/tags/useEffect/" rel="tag"># useEffect</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/04/react-developer-tools/" rel="prev" title="【DAY 16】好用的 React Developer Tools 偵錯工具">
+      <i class="fa fa-chevron-left"></i> 【DAY 16】好用的 React Developer Tools 偵錯工具
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Side-Effect-%E5%89%AF%E4%BD%9C%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">Side Effect 副作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AA%8D%E8%AD%98-useEffect"><span class="nav-number">2.</span> <span class="nav-text">認識 useEffect</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useEffect-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">useEffect 使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BE%9E-react-%E4%B8%AD%E8%BC%89%E5%85%A5-useEffect"><span class="nav-number">3.1.</span> <span class="nav-text">1. 從 react 中載入 useEffect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-useEffect-%E5%B8%B6%E5%85%A5%E4%B8%80%E5%80%8B%E5%87%BD%E5%BC%8F%EF%BC%8C%E5%87%BD%E5%BC%8F%E8%A3%A1%E5%B8%B6%E5%85%A5%E8%A6%81%E5%9F%B7%E8%A1%8C%E7%9A%84-effect"><span class="nav-number">3.2.</span> <span class="nav-text">2. useEffect  帶入一個函式，函式裡帶入要執行的 effect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%A6%82%E6%9C%89-dependencies%EF%BC%8C%E5%B0%87-dependencies-%E5%B8%B6%E5%85%A5%E7%AC%AC%E4%BA%8C%E5%80%8B%E5%8F%83%E6%95%B8%E9%99%A3%E5%88%97"><span class="nav-number">3.3.</span> <span class="nav-text">3. 如有 dependencies，將 dependencies 帶入第二個參數陣列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%8B%E5%80%8B%E7%AF%84%E4%BE%8B"><span class="nav-number">3.4.</span> <span class="nav-text">看個範例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%98%BF%EF%BC%81%E7%82%BA%E4%BB%80%E9%BA%BC%E7%95%AB%E9%9D%A2%E4%B8%80%E9%96%8B%E5%A7%8B%E5%B0%B1%E6%B8%B2%E6%9F%93%E5%85%A9%E6%AC%A1"><span class="nav-number">3.4.1.</span> <span class="nav-text">嘿！為什麼畫面一開始就渲染兩次 ?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useEffect-%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9B%9B%E7%A8%AE%E6%96%B9%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">useEffect 使用的四種方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%8F%AA%E5%9F%B7%E8%A1%8C%E5%9C%A8%E7%95%AB%E9%9D%A2%E6%B8%B2%E6%9F%93%E5%BE%8C"><span class="nav-number">4.1.</span> <span class="nav-text">1. 只執行在畫面渲染後</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%B5%84%E4%BB%B6%E6%9B%B4%E6%96%B0%E5%B0%B1%E5%9F%B7%E8%A1%8C"><span class="nav-number">4.2.</span> <span class="nav-text">2. 組件更新就執行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%B5%84%E4%BB%B6-dependencies-%E6%9C%89%E8%AE%8A%E6%9B%B4%E6%89%8D%E5%9F%B7%E8%A1%8C"><span class="nav-number">4.3.</span> <span class="nav-text">3. 組件 dependencies 有變更才執行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%B8%85%E7%90%86%E9%9C%80%E8%A2%AB%E9%8A%B7%E6%AF%80%E7%9A%84%E5%87%BD%E5%BC%8F"><span class="nav-number">4.4.</span> <span class="nav-text">4. 清理需被銷毀的函式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">5.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">220</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/11/10/react-useEffect/";
+    this.page.identifier = "2022/11/10/react-useEffect/";
+    this.page.title = "【DAY 17】useEffect 處理副作用";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
