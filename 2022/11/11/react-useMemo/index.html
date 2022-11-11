@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="【DAY 18】useMemo 緩存記憶體，避免重新渲染">
+<meta property="og:url" content="https://happy9990929.github.io/2022/11/11/react-useMemo/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/LlQ4ynF.jpg">
+<meta property="og:image" content="https://imgur.com/WMabrmb.jpg">
+<meta property="article:published_time" content="2022-11-11T11:50:00.000Z">
+<meta property="article:modified_time" content="2022-11-11T12:11:05.055Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="useEffect">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/LlQ4ynF.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/11/11/react-useMemo/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>【DAY 18】useMemo 緩存記憶體，避免重新渲染 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/11/11/react-useMemo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【DAY 18】useMemo 緩存記憶體，避免重新渲染
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-11-11 19:50:00 / 修改時間：20:11:05" itemprop="dateCreated datePublished" datetime="2022-11-11T19:50:00+08:00">2022-11-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%90IT-%E9%90%B5%E4%BA%BA%E8%B3%BD%E3%80%91%E4%BD%A0React%E4%BA%86%E5%97%8E-30%E5%A4%A9%E8%A7%A3%E9%8E%96React%E6%8A%80%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">【IT 鐵人賽】你React了嗎? 30天解鎖React技能</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/11/11/react-useMemo/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/11/11/react-useMemo/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/LlQ4ynF.jpg" alt="cover"></p>
+<a id="more"></a>
+
+<p><strong>［情境劇場］</strong></p>
+<p>解師傅：本來明天要請周Ｊ倫來表演，但他臨時有事，所以改請六月天樂團了！</p>
+<p>小當家：哦！！那我要改一下了</p>
+<p>解師傅：改什麼？</p>
+<p>小當家：我的腦袋記錄名單裡，周Ｊ倫愛吃雞蛋豆腐，六月天裡面的團員有兩個不愛，因為現在變更名單，所以明天上的菜色將會做更動</p>
+<p>解師傅：真有你的．．．</p>
+<hr>
+<h1 id="認識-useMemo"><a href="#認識-useMemo" class="headerlink" title="認識 useMemo"></a>認識 useMemo</h1><p>useMemo 是一個 Memorized Hook，每當 render 時都會重新渲染(<code>re-render</code>)組件，如果遇到不必要渲染程式，重新渲染就會造成效能上的浪費，透過 useMemo 可以將函式運算完的值存一個記憶體(memoization)，你也可以把它視為緩存值，以減少組件不必要的重新渲染<br><br><br><br><br><br></p>
+<h1 id="useMemo-使用方法"><a href="#useMemo-使用方法" class="headerlink" title="useMemo 使用方法"></a>useMemo 使用方法</h1><ul>
+<li>從 react 中載入 useMemo 方法</li>
+<li>useMemo 帶入參數，第一個參數為函式，第二個參數為 dependencies 陣列<br>
+<br>
+<br>
+
+</li>
+</ul>
+<h2 id="1-從-react-中載入-useMemo-方法"><a href="#1-從-react-中載入-useMemo-方法" class="headerlink" title="1. 從 react 中載入 useMemo 方法"></a>1. 從 react 中載入 useMemo 方法</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useMemo &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br></pre></td></tr></table></figure>
+<br>
+<br>
+<br>
+
+<h2 id="2-useMemo-帶入參數"><a href="#2-useMemo-帶入參數" class="headerlink" title="2. useMemo 帶入參數"></a>2. useMemo 帶入參數</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> memoizedValue = useMemo(<span class="function">() =&gt;</span> &#123; <span class="keyword">return</span> fn(a) &#125;, [a]);</span><br></pre></td></tr></table></figure>
+<p>第一個參數為函式，函式回傳不必要重新渲染的程式</p>
+<p>第二個參數為 dependencies 陣列，useMemo 會依 dependencies 陣列去做比對差異，如果 dependencies 有變動，才會重新渲染，並回傳一個值<br>如沒有 dependencies，則放空陣列，每次 render 時都會計算新的值。<br><br><br><br><br><br></p>
+<h1 id="useMemo-使用情境"><a href="#useMemo-使用情境" class="headerlink" title="useMemo 使用情境"></a>useMemo 使用情境</h1><ul>
+<li>減少組件重新渲染大量複雜的計算</li>
+<li>useEffect 的 dependencies 為物件或陣列<br>
+<br>
+<br>
+
+</li>
+</ul>
+<h2 id="1-減少組件重新渲染大量複雜的計算"><a href="#1-減少組件重新渲染大量複雜的計算" class="headerlink" title="1. 減少組件重新渲染大量複雜的計算"></a>1. 減少組件重新渲染大量複雜的計算</h2><p>複雜的計算本身就會吃比較多效能，每次狀態有變動又 re-render，但事實上我們只需要加上 <code>dependencies</code> 就可以減少 re-render 的次數</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = useState(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeCount = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    setCount(value);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> evenNumbers = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= count; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">2</span> === <span class="number">0</span> &amp;&amp; <span class="built_in">String</span>(i).includes(<span class="string">&quot;2&quot;</span>)) &#123;</span><br><span class="line">      evenNumbers.push(i);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h2&gt;&#123;count&#125;&lt;/h2&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input type=<span class="string">&quot;number&quot;</span> value=&#123;count&#125; onChange=&#123;<span class="function">(<span class="params">e</span>) =&gt;</span> changeCount(e)&#125; /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;div&gt;<span class="number">1</span>~&#123;count&#125; 為偶數且數字有 <span class="number">2</span> 的號碼：&lt;/div&gt;</span><br><span class="line">      &#123;evenNumbers.join(<span class="string">&quot;, &quot;</span>)&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以不用太仔細讀程式碼，這邊簡單說明一下程式範例目的：</p>
+<ul>
+<li>這是一個數字型態的 input</li>
+<li>輸入數字後便會計算出偶數且數字有 2 的號碼<br>
+
+</li>
+</ul>
+<iframe src="https://codesandbox.io/embed/react-usememo-example1-rbhybh?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="react-useMemo_example1"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+<br>
+<br>
+<br>
+
+<p>這邊乍看之下沒什麼太大的問題，於是再加入了一個計時器進來</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = useState(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> changeCount = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    setCount(value);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> evenNumbers = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= count; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">2</span> === <span class="number">0</span> &amp;&amp; <span class="built_in">String</span>(i).includes(<span class="string">&quot;2&quot;</span>)) &#123;</span><br><span class="line">      evenNumbers.push(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;render evenNumbers&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> time = useTime();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">useTime</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [time, setTime] = useState(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> interval = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        setTime(i++);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;render time&quot;</span>);</span><br><span class="line">      &#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">clearInterval</span>(interval);</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;, []);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> time;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;span&gt;time：&#123;time&#125;&lt;/span&gt;</span><br><span class="line">      &lt;h2&gt;&#123;count&#125;&lt;/h2&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input type=<span class="string">&quot;number&quot;</span> value=&#123;count&#125; onChange=&#123;<span class="function">(<span class="params">e</span>) =&gt;</span> changeCount(e)&#125; /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;div&gt;<span class="number">1</span>~&#123;count&#125; 為偶數且數字有 <span class="number">2</span> 的號碼：&lt;/div&gt;</span><br><span class="line">      &#123;evenNumbers.join(<span class="string">&quot;, &quot;</span>)&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>加了計時器後，每 1 秒計時器會 +1</p>
+<p>為了方便觀察，我們在計時器和 evenNumbers 的函式分別下了 <code>console.log</code> ，每當計時器變動，會發現 evenNumbers 的地方又重新渲染了一次！</p>
+<p>由此可知，只要有元素狀態變更，整個都會重新 render 一次，這造成了效能上的浪費</p>
+<iframe src="https://codesandbox.io/embed/react-usememo-example2-n4zjwj?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="react-useMemo_example2"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+<br>
+<br>
+<br>
+
+<p>這時候就可以用 <code>useMemo</code> 解救這個問題！<br><br><br><br></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> evenNumbers = useMemo(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> result = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= count; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">2</span> === <span class="number">0</span> &amp;&amp; <span class="built_in">String</span>(i).includes(<span class="string">&quot;2&quot;</span>)) &#123;</span><br><span class="line">      result.push(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;evenNumbers&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;, [count]);</span><br></pre></td></tr></table></figure>
+<p>我們用了 useMemo ，讓 evenNumbers 只在 count 有變動時才會渲染，現在可以看到，即使計時器一直變動，evenNumbers 也不會再重新 render 囉！<br><br></p>
+<iframe src="https://codesandbox.io/embed/react-usememo-example3-0zt8uh?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="react-useMemo_example3"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+<br>
+<br>
+<br>
+
+<h2 id="2-useEffect-的-dependencies-為物件或陣列"><a href="#2-useEffect-的-dependencies-為物件或陣列" class="headerlink" title="2. useEffect 的 dependencies 為物件或陣列"></a>2. useEffect 的 dependencies 為物件或陣列</h2><p>在 JavaScript 用相同的物件或陣列做比對時，你會發現</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#125; &#x3D;&#x3D;&#x3D; &#123;&#125; &#x2F;&#x2F; false</span><br><span class="line">[] &#x3D;&#x3D;&#x3D; [] &#x2F;&#x2F; false</span><br></pre></td></tr></table></figure>
+<p>因為 <code>object</code> 跟 <code>Array</code> 非基本型態，比較都是 by reference，雖然內容一樣，但實際上是不一樣的 object、Array，所以如果我們把 object、Array 當作 <code>dependencies</code>，還是會每次都再重新渲染一次，這樣是沒有意義的<br><br><br><br><br><br></p>
+<h3 id="［範例］"><a href="#［範例］" class="headerlink" title="［範例］"></a>［範例］</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect, useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [state, setState] = useState(<span class="literal">true</span>);</span><br><span class="line">  <span class="keyword">const</span> [inputValue, setInputValue] = useState(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> style = &#123;</span><br><span class="line">    backgroundColor: state ? <span class="string">&quot;black&quot;</span> : <span class="string">&quot;yellow&quot;</span>,</span><br><span class="line">    width: <span class="string">&quot;100px&quot;</span>,</span><br><span class="line">    height: <span class="string">&quot;100px&quot;</span>,</span><br><span class="line">		margin: <span class="string">&quot;auto&quot;</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;Change Color&quot;</span>);</span><br><span class="line">  &#125;, [style]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;div style=&#123;style&#125;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">      &lt;input</span><br><span class="line">        value=&#123;inputValue&#125;</span><br><span class="line">        onChange=&#123;<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">          setInputValue(e.target.value);</span><br><span class="line">        &#125;&#125;</span><br><span class="line">        placeholder=<span class="string">&quot;輸入文字&quot;</span></span><br><span class="line">      /&gt;</span><br><span class="line"></span><br><span class="line">      &lt;button</span><br><span class="line">        onClick=&#123;<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          setState(<span class="function">(<span class="params">state</span>) =&gt;</span> !state);</span><br><span class="line">        &#125;&#125;</span><br><span class="line">      &gt;</span><br><span class="line">        Change Color</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<p>簡單說明一下情境：</p>
+<ul>
+<li>這邊有一個輸入文字框</li>
+<li>跟換顏色的按鈕</li>
+<li>預期顏色變換後才執行 side effect (style 變更將印出 “Change Color”)<br>
+
+</li>
+</ul>
+<iframe src="https://codesandbox.io/embed/render-usememo-reference-vp2rvq?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="render-useMemo-reference"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+<br>
+<br>
+<br>
+目前只有一開始執行的 useEffect，看起來沒什麼大問題
+
+<p>試著輸入文字將會發現</p>
+<p><img src="https://imgur.com/WMabrmb.jpg" alt="usememo"><br><br><br><br><br><br></p>
+<p>還是執行了 side effect！！<br><br><br><br><br><br></p>
+<p>這就是因為物件或陣列即使做了比對，但因為是 <code>by reference</code>，所以還是會被認定為不一樣，進而呼叫 side effect</p>
+<p>我們只要用 <code>useMemo</code> 包起來，就可以解決這個問題</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> style = useMemo(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    backgroundColor: state ? <span class="string">&quot;black&quot;</span> : <span class="string">&quot;yellow&quot;</span>,</span><br><span class="line">    width: <span class="string">&quot;100px&quot;</span>,</span><br><span class="line">    height: <span class="string">&quot;100px&quot;</span>,</span><br><span class="line">    margin: <span class="string">&quot;auto&quot;</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;, [state]);</span><br></pre></td></tr></table></figure>
+
+<p>現在即使輸入了文字，也不會再執行 side effect 囉！</p>
+<iframe src="https://codesandbox.io/embed/render-usememo-reference2-tpw1j5?fontsize=14&hidenavigation=1&theme=light"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="render-useMemo-reference2"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+<br>
+<br>
+<br>
+
+<p>其實遇到這種情況，eslint 也會跳出建議訊息，防止開發者沒注意到這個問題</p>
+<blockquote>
+<p>The ‘style’ object makes the dependencies of useEffect Hook (at line 17) change on every render. To fix this, wrap the initialization of ‘style’ in its own useMemo() Hook. (react-hooks/exhaustive-deps)eslint</p>
+</blockquote>
+<br>
+<br>
+<br>
+
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p><code>useMemo</code> 替我們節省了很多效能，但也不要濫用 <code>useMemo</code> ，過多的記憶體，也是會造成效能上的問題，所以我們要用在適當的情境使用，如會頻繁的渲染就較不適合，最好是用在執行速度很慢、變動性不大的函式，以減少重新渲染的目的。<br><br><br><br><br><br></p>
+<h2 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h2><p><a target="_blank" rel="noopener" href="https://www.joshwcomeau.com/react/usememo-and-usecallback/">Understanding useMemo and useCallback</a><br><a target="_blank" rel="noopener" href="https://blog.webdevsimplified.com/2020-05/memoization-in-react/">How To Use Memoization To Drastically Increase React Performance</a></p>
+<hr>
+<p>本文為 IT 鐵人賽系列文 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20115919/ironman/5602">你 React 了嗎? 30 天解鎖 React 技能</a></p>
+<hr>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/react/" rel="tag"># react</a>
+              <a href="/tags/useEffect/" rel="tag"># useEffect</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/10/react-useEffect/" rel="prev" title="【DAY 17】useEffect 處理副作用">
+      <i class="fa fa-chevron-left"></i> 【DAY 17】useEffect 處理副作用
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AA%8D%E8%AD%98-useMemo"><span class="nav-number">1.</span> <span class="nav-text">認識 useMemo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useMemo-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">useMemo 使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BE%9E-react-%E4%B8%AD%E8%BC%89%E5%85%A5-useMemo-%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">1. 從 react 中載入 useMemo 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-useMemo-%E5%B8%B6%E5%85%A5%E5%8F%83%E6%95%B8"><span class="nav-number">2.2.</span> <span class="nav-text">2. useMemo 帶入參數</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useMemo-%E4%BD%BF%E7%94%A8%E6%83%85%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">useMemo 使用情境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B8%9B%E5%B0%91%E7%B5%84%E4%BB%B6%E9%87%8D%E6%96%B0%E6%B8%B2%E6%9F%93%E5%A4%A7%E9%87%8F%E8%A4%87%E9%9B%9C%E7%9A%84%E8%A8%88%E7%AE%97"><span class="nav-number">3.1.</span> <span class="nav-text">1. 減少組件重新渲染大量複雜的計算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-useEffect-%E7%9A%84-dependencies-%E7%82%BA%E7%89%A9%E4%BB%B6%E6%88%96%E9%99%A3%E5%88%97"><span class="nav-number">3.2.</span> <span class="nav-text">2. useEffect 的 dependencies 為物件或陣列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%BB%E7%AF%84%E4%BE%8B%EF%BC%BD"><span class="nav-number">3.2.1.</span> <span class="nav-text">［範例］</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">4.</span> <span class="nav-text">結語</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">Reference：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">220</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/11/11/react-useMemo/";
+    this.page.identifier = "2022/11/11/react-useMemo/";
+    this.page.title = "【DAY 18】useMemo 緩存記憶體，避免重新渲染";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
