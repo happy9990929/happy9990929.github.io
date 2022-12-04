@@ -50,9 +50,11 @@
 <meta property="og:image" content="https://imgur.com/VWiSoxn.jpg">
 <meta property="og:image" content="https://imgur.com/VLmRQgB.jpg">
 <meta property="article:published_time" content="2022-12-04T13:07:32.000Z">
-<meta property="article:modified_time" content="2022-12-04T13:13:20.917Z">
+<meta property="article:modified_time" content="2022-12-04T13:15:48.406Z">
 <meta property="article:author" content="Lala Wang">
 <meta property="article:tag" content="react">
+<meta property="article:tag" content="Redux Toolkit">
+<meta property="article:tag" content="Redux DevTools">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://imgur.com/TntjuyI.jpg">
 
@@ -236,7 +238,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2022-12-04 21:07:32 / 修改時間：21:13:20" itemprop="dateCreated datePublished" datetime="2022-12-04T21:07:32+08:00">2022-12-04</time>
+              <time title="創建時間：2022-12-04 21:07:32 / 修改時間：21:15:48" itemprop="dateCreated datePublished" datetime="2022-12-04T21:07:32+08:00">2022-12-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,7 +284,7 @@
       
         <p><img src="https://imgur.com/TntjuyI.jpg" alt="cover"></p>
 <a id="more"></a>
-<p>在後面的幾天將會以  Redux Toolkit 來做說明，而在了解  Redux Toolkit，我們先來了解 Redux 的運作原理，在後面的操作上也會比較好理解<br><br><br><br></p>
+<p>在後面的幾天將會以 Redux Toolkit 來做說明，而在了解  Redux Toolkit，我們先來了解 Redux 的運作原理，在後面的操作上也會比較好理解<br><br><br><br></p>
 <h1 id="Redux-原理"><a href="#Redux-原理" class="headerlink" title="Redux 原理"></a>Redux 原理</h1><p>在 <a href="https://happy9990929.github.io/2022/12/04/react-useContext">DAY 22</a> 時有介紹到 Context API 可以做到跨組件溝通傳遞資料，而同樣的，「Redux」也可以跨組件溝通傳遞資料、管理全域狀態，Redux 不是 React 的 library，但很多 React 專案都會使用 Redux 來管理狀態，如果專案的架構很大，使用 Redux 是一個不錯的選擇。</p>
 <p>Redux 可以讓不同的組件，使用到共用的資料和方法，統一集中管理共用的狀態</p>
 <p>Redux 會有一個存放狀態的 store，當組件需要資料或方法時，直接從 store 提取，讓組件可以省去組件層層傳遞 (Props drilling) 的麻煩</p>
@@ -340,6 +342,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/react/" rel="tag"># react</a>
+              <a href="/tags/Redux-Toolkit/" rel="tag"># Redux Toolkit</a>
+              <a href="/tags/Redux-DevTools/" rel="tag"># Redux DevTools</a>
           </div>
 
         
@@ -351,7 +355,10 @@
     <a href="/2022/12/04/react-fetch/" rel="prev" title="【DAY 25】串接 API，透過 Fetch 將遠端資料渲染在畫面">
       <i class="fa fa-chevron-left"></i> 【DAY 25】串接 API，透過 Fetch 將遠端資料渲染在畫面
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/12/04/react-redux-toolkit-store/" rel="next" title="【DAY 27】Redux Toolkit 管理組件的共用資料">
+      【DAY 27】Redux Toolkit 管理組件的共用資料 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -447,7 +454,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">96</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -460,7 +467,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">238</span>
+        <span class="site-state-item-count">244</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
