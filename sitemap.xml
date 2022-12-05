@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://happy9990929.github.io/2022/12/05/react-useReducer/</loc>
+    
+    <lastmod>2022-12-05</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/2022/12/05/react-redux-tookit-createAsyncThunk/</loc>
     
     <lastmod>2022-12-05</lastmod>
@@ -704,14 +711,7 @@
 
   
   <url>
-    <loc>https://happy9990929.github.io/tags/defineProps/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/defineEmits/</loc>
+    <loc>https://happy9990929.github.io/tags/axios/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -732,28 +732,21 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/defineProps/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/defineEmits/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/Vue-cli/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/axios/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/emit/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/props/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -830,6 +823,20 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/emit/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/props/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/vite/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
@@ -859,6 +866,27 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/Git%E6%8C%87%E4%BB%A4/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/call/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/apply/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/bind/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1061,21 +1089,7 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/call/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/apply/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/bind/</loc>
+    <loc>https://happy9990929.github.io/tags/hoisting/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1103,7 +1117,28 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/Math/</loc>
+    <loc>https://happy9990929.github.io/tags/import/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/export/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/ES6/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/promise/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1111,6 +1146,13 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/Javascript/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/Math/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1180,35 +1222,21 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/hoisting/</loc>
+    <loc>https://happy9990929.github.io/tags/%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/import/</loc>
+    <loc>https://happy9990929.github.io/tags/nodeJs/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/export/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/ES6/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/promise/</loc>
+    <loc>https://happy9990929.github.io/tags/npm/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1230,48 +1258,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/const/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/npm-ci/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/npm-install/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/package-lock%E8%A2%AB%E6%9B%B4%E6%96%B0/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/nodeJs/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/npm/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1306,6 +1292,27 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/npm-ci/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/npm-install/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/package-lock%E8%A2%AB%E6%9B%B4%E6%96%B0/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/React/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
@@ -1314,13 +1321,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/React-component/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/react/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1342,6 +1342,20 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/createRoot/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/react/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/Component/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1425,20 +1439,6 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/Component/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/Custom-Hook/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/React-Context/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
@@ -1467,6 +1467,13 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/Custom-Hook/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/xss/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
@@ -1481,6 +1488,13 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/event-handler/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/React-Developer-Tools/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
@@ -1489,13 +1503,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/Fetch/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/event-handler/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1600,13 +1607,6 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/jsx/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/react-lifecycle/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
@@ -1678,6 +1678,13 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/react-componentDidCatch/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/jsx/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1768,13 +1775,6 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/render/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/Redux-%E6%95%99%E5%AD%B8/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
@@ -1811,6 +1811,13 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/react-redux/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/render/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2055,7 +2062,7 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/useRef/</loc>
+    <loc>https://happy9990929.github.io/tags/useReducer/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2063,6 +2070,13 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/useState/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/useRef/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2132,14 +2146,14 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/directive/</loc>
+    <loc>https://happy9990929.github.io/tags/Composition-API/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/Composition-API/</loc>
+    <loc>https://happy9990929.github.io/tags/directive/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2195,13 +2209,6 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/loading/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/asyncData/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
@@ -2223,7 +2230,7 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/plugins/</loc>
+    <loc>https://happy9990929.github.io/tags/loading/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2244,6 +2251,13 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/plugins/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/Router/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
@@ -2251,14 +2265,14 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/SEO/</loc>
+    <loc>https://happy9990929.github.io/tags/vuex/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/vuex/</loc>
+    <loc>https://happy9990929.github.io/tags/SEO/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2287,34 +2301,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/veeValidate4-%E6%95%99%E5%AD%B8/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/VueJs/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/computed/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/watch/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/watchEffect/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2377,6 +2363,34 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/VueJs/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/computed/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/watch/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/watchEffect/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/HTTP-%E7%8B%80%E6%85%8B%E7%A2%BC/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
@@ -2414,14 +2428,14 @@
 
   
   <url>
-    <loc>https://happy9990929.github.io/categories/Bug%E8%A8%98%E9%8C%84/</loc>
+    <loc>https://happy9990929.github.io/categories/Vue3/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/categories/Vue3/</loc>
+    <loc>https://happy9990929.github.io/categories/Bug%E8%A8%98%E9%8C%84/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2449,6 +2463,13 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/categories/Javascript/</loc>
+    <lastmod>2022-12-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/categories/Plugins/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
@@ -2463,7 +2484,7 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/categories/Javascript/</loc>
+    <loc>https://happy9990929.github.io/categories/nodeJs/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2471,13 +2492,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/categories/npm/</loc>
-    <lastmod>2022-12-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/categories/nodeJs/</loc>
     <lastmod>2022-12-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
