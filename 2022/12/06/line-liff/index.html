@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="什麼是LINE LIFF？LIFF 是一種可以在 Line 中直接操作網頁的平台，全名為 LINE Front-end Framework，是 LINE 的前端框架。能取得用戶的唯一辨識碼 UserId、公開資料，這讓用戶可以不必手動輸入資料，就可以直接綁定用戶在 LINE 的個人資料，除此之外，還有傳送訊息、分享訊息給好友的功能，下面將會一一介紹">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LINE LIFF 功能介紹教學，綁定用戶資料，傳送分享訊息">
+<meta property="og:url" content="https://happy9990929.github.io/2022/12/06/line-liff/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:description" content="什麼是LINE LIFF？LIFF 是一種可以在 Line 中直接操作網頁的平台，全名為 LINE Front-end Framework，是 LINE 的前端框架。能取得用戶的唯一辨識碼 UserId、公開資料，這讓用戶可以不必手動輸入資料，就可以直接綁定用戶在 LINE 的個人資料，除此之外，還有傳送訊息、分享訊息給好友的功能，下面將會一一介紹">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/PG4oeoN.jpg">
+<meta property="og:image" content="https://imgur.com/6tTy5Ce.jpg">
+<meta property="og:image" content="https://imgur.com/AhCHgoH.jpg">
+<meta property="article:published_time" content="2022-12-06T14:34:09.000Z">
+<meta property="article:modified_time" content="2022-12-06T14:56:38.506Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="LINE">
+<meta property="article:tag" content="LIFF">
+<meta property="article:tag" content="LINE LIFF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/PG4oeoN.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2022/12/06/line-liff/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>LINE LIFF 功能介紹教學，綁定用戶資料，傳送分享訊息 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2022/12/06/line-liff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/pvToiN1.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LINE LIFF 功能介紹教學，綁定用戶資料，傳送分享訊息
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-12-06 22:34:09 / 修改時間：22:56:38" itemprop="dateCreated datePublished" datetime="2022-12-06T22:34:09+08:00">2022-12-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LINE/" itemprop="url" rel="index"><span itemprop="name">LINE</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2022/12/06/line-liff/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/12/06/line-liff/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/PG4oeoN.jpg" alt="Imgur"></p>
+<h1 id="什麼是LINE-LIFF？"><a href="#什麼是LINE-LIFF？" class="headerlink" title="什麼是LINE LIFF？"></a><strong>什麼是LINE LIFF？</strong></h1><p>LIFF 是一種可以在 Line 中直接操作網頁的平台，全名為 LINE Front-end Framework，是 LINE 的前端框架。能取得用戶的唯一辨識碼 UserId、公開資料，這讓用戶可以不必手動輸入資料，就可以直接綁定用戶在 LINE 的個人資料，除此之外，還有傳送訊息、分享訊息給好友的功能，下面將會一一介紹</p>
+<a id="more"></a>
+
+<p>使用 LIFF 前請先在 <a target="_blank" rel="noopener" href="https://developers.line.biz/console">LINE LIFF 後台</a> 建立 LINE Login<br><br><br><br></p>
+<h1 id="安裝-LIFF-SDK"><a href="#安裝-LIFF-SDK" class="headerlink" title="安裝 LIFF SDK"></a>安裝 LIFF SDK</h1><p>依自己喜好引入 LIFF SDK</p>
+<p>CDN</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;https://static.line-scdn.net/liff/edge/2/sdk.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>NPM</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i @line/liff</span><br></pre></td></tr></table></figure>
+<br>
+<br>
+
+<h1 id="LIFF-初始化"><a href="#LIFF-初始化" class="headerlink" title="LIFF 初始化"></a><strong><strong>LIFF 初始化</strong></strong></h1><h2 id="init"><a href="#init" class="headerlink" title="init"></a><strong><strong>init</strong></strong></h2><p>開始寫 LIFF 的程式時，第一步要先 init 初始化，需要帶入 LIFF ID，LIFF ID 預設為 null</p>
+<p>在 LIFF 後台的地方會顯示 LIFF ID</p>
+<p><img src="https://imgur.com/6tTy5Ce.jpg" alt="liffID.jpg"></p>
+<p>init 後才可以開始使用 LIFF 的各項函式</p>
+<p>由於需要 init 後才能執行其他動作，所以是使用 Promise，之後要執行的程式再寫在 then 裡面</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> liff <span class="keyword">from</span> <span class="string">&#x27;@line/liff&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> liffId = <span class="string">&#x27;1657706202-XXXXXXXX&#x27;</span>;</span><br><span class="line"></span><br><span class="line">liff.init(&#123;</span><br><span class="line">  liffId: liffId</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;LIFF init&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 這邊開始寫使用其他功能</span></span><br><span class="line"></span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<p>或是也可使用 <code>ready</code> 來執行接下來的動作，liff.ready 為 LIFF SDK 提供的屬性，也是一個 Promise 物件，會在 liff.init 完成後執行</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">liff.init(&#123;</span><br><span class="line">  liffId: liffId</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">liff.ready.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 這邊開始寫使用其他功能</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<br>
+
+<p>當然，你也可以使用 <code>async</code> <code>await</code> 的方式，並用 <code>try catch</code> 除錯</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> liffInit = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> liffId = <span class="string">&#x27;1657706202-XXXXXXXX&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">await</span> liff.init(&#123; <span class="attr">liffId</span>: liffId &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 這邊開始寫使用其他功能</span></span><br><span class="line"></span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    alert(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="LIFF-取得環境資訊"><a href="#LIFF-取得環境資訊" class="headerlink" title="LIFF 取得環境資訊"></a><strong><strong>LIFF 取得環境資訊</strong></strong></h1><h2 id="liff-getOS"><a href="#liff-getOS" class="headerlink" title="liff.getOS()"></a>liff.getOS()</h2><p>取得使用者作業系統：ios (iOS 或 iPadOS)、android、web(非 ios、android 的作業系統)</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> OS = liff.getOS();</span><br><span class="line"><span class="comment">// ios || android || web</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-getLanguage"><a href="#liff-getLanguage" class="headerlink" title="liff.getLanguage()"></a>liff.getLanguage()</h2><p>頁面中的語系（lang）</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> language = liff.getLanguage();</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-getVersion"><a href="#liff-getVersion" class="headerlink" title="liff.getVersion()"></a>liff.getVersion()</h2><p>LIFF SDK 的版本</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> version = liff.getVersion();</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-getLineVersion"><a href="#liff-getLineVersion" class="headerlink" title="liff.getLineVersion()"></a>liff.getLineVersion()</h2><p>使用者的 LINE 版本</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> lineVersion = liff.getLineVersion();</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-getContext"><a href="#liff-getContext" class="headerlink" title="liff.getContext()"></a>liff.getContext()</h2><p>使用者功能相關資訊、liffId</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> context = liff.getContext();</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-isInClient"><a href="#liff-isInClient" class="headerlink" title="liff.isInClient()"></a>liff.isInClient()</h2><p>目前 LIFF 是否在 LINE App 中開啟</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isInClient = liff.isInClient();</span><br><span class="line"><span class="comment">// true || false</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-isLoggedIn"><a href="#liff-isLoggedIn" class="headerlink" title="liff.isLoggedIn()"></a>liff.isLoggedIn()</h2><p>使用者是否登入 LINE 帳號</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isLoggedIn = liff.isLoggedIn();</span><br><span class="line"><span class="comment">// true || false</span></span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-isApiAvailable"><a href="#liff-isApiAvailable" class="headerlink" title="liff.isApiAvailable()"></a><strong><strong>liff.isApiAvailable()</strong></strong></h2><p>確認目前環境是否可以使用 API</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (liff.isApiAvailable(<span class="string">&#x27;shareTargetPicker&#x27;</span>)) &#123;</span><br><span class="line">  liff.shareTargetPicker([</span><br><span class="line">    &#123;</span><br><span class="line">      type: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">      text: <span class="string">&quot;Hello, World!&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ])</span><br><span class="line">    .then(</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;ShareTargetPicker was launched&quot;</span>)</span><br><span class="line">    ).catch(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;Failed to launch ShareTargetPicker&quot;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="LIFF-驗證"><a href="#LIFF-驗證" class="headerlink" title="LIFF 驗證"></a>LIFF 驗證</h1><h2 id="liff-login"><a href="#liff-login" class="headerlink" title="liff.login()"></a><strong><strong>liff.login()</strong></strong></h2><p>登入 LIFF</p>
+<p>登入、登出 LINE 的功能只能在外部瀏覽器時有作用，</p>
+<p>在 LIFF 瀏覽器中，liff.init 後會自動登入</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">liff.login();</span><br></pre></td></tr></table></figure>
+<p>登入成功後會導向 LIFF 後台的 Endpoint URL</p>
+<p><img src="https://imgur.com/AhCHgoH.jpg" alt="endpoint.jpg"><br><br></p>
+<h2 id="liff-logout"><a href="#liff-logout" class="headerlink" title="liff.logout()"></a><strong><strong>liff.logout()</strong></strong></h2><p>登出 LIFF</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">liff.logout();</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-getAccessToken"><a href="#liff-getAccessToken" class="headerlink" title="liff.getAccessToken()"></a><strong><strong>liff.getAccessToken()</strong></strong></h2><p>取得 access token</p>
+<p>access token 在發出後 12 小時內有效。 當用戶關閉應用程序時，access token 將被撤銷。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> accessToken = liff.getAccessToken();</span><br><span class="line"><span class="keyword">if</span> (accessToken) &#123;</span><br><span class="line">  fetch(<span class="string">&quot;https://api...&quot;</span>, &#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">      Authorization: <span class="string">`Bearer <span class="subst">$&#123;accessToken&#125;</span>`</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-getIDToken"><a href="#liff-getIDToken" class="headerlink" title="liff.getIDToken()"></a><strong><strong>liff.getIDToken()</strong></strong></h2><p>取得 LIFF ID token</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">liff.init(&#123;</span><br><span class="line">  liffId: <span class="string">&quot;123456-abcedfg&quot;</span>, <span class="comment">// Use own liffId</span></span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> idToken = liff.getIDToken();</span><br><span class="line">  <span class="built_in">console</span>.log(idToken); <span class="comment">// print raw idToken object</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-getDecodedIDToken"><a href="#liff-getDecodedIDToken" class="headerlink" title="liff.getDecodedIDToken()"></a><strong><strong>liff.getDecodedIDToken()</strong></strong></h2><p>解碼 ID token 的資料</p>
+<p>可取得使用者的 email、token 到期日、暱稱、頭像</p>
+<p>後台 Basic settings 的 Email address permission 需 Applied</p>
+<p>LIFF 的設定，Scopes 的「email*」要打勾</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">liff</span><br><span class="line">  .init(&#123;</span><br><span class="line">    liffId: <span class="string">&quot;123456-abcedfg&quot;</span>, <span class="comment">// Use own liffId</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> idToken = liff.getDecodedIDToken();</span><br><span class="line">    <span class="built_in">console</span>.log(idToken); <span class="comment">// print decoded idToken object</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-permission-query"><a href="#liff-permission-query" class="headerlink" title="liff.permission.query()"></a><strong><strong>liff.permission.query()</strong></strong></h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">liff.permission.query(<span class="string">&quot;profile&quot;</span>).then(<span class="function">(<span class="params">permissionStatus</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// permissionStatus = &#123; state: &#x27;granted&#x27; &#125;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-permission-requestAll"><a href="#liff-permission-requestAll" class="headerlink" title="liff.permission.requestAll()"></a><strong><strong>liff.permission.requestAll()</strong></strong></h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">liff.permission.query(<span class="string">&quot;profile&quot;</span>).then(<span class="function">(<span class="params">permissionStatus</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (permissionStatus.state === <span class="string">&quot;prompt&quot;</span>) &#123;</span><br><span class="line">    liff.permission.requestAll();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="LIFF-取得使用者公開資料"><a href="#LIFF-取得使用者公開資料" class="headerlink" title="LIFF 取得使用者公開資料"></a><strong><strong>LIFF 取得使用者公開資料</strong></strong></h1><h2 id="liff-getProfile"><a href="#liff-getProfile" class="headerlink" title="liff.getProfile()"></a>liff.getProfile()</h2><p>可取得 userId、暱稱、頭像路徑、狀態消息。</p>
+<p>LIFF 後台的「Scopes」要設定開啟 profile, openid</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> profile = liff.getProfile()</span><br></pre></td></tr></table></figure>
+<p>回應的值有以下：</p>
+<ul>
+<li><code>userId</code>: “123456789…”</li>
+<li><code>displayName</code>: “Lala”</li>
+<li><code>pictureUrl</code>: “<a target="_blank" rel="noopener" href="https://profile.line-scdn.net/abcdefghijklmn">https://</a>xxxx.com”</li>
+<li><code>statusMessage</code>: “LIFF is great！”</li>
+</ul>
+<br>
+
+<h2 id="liff-getFriendship"><a href="#liff-getFriendship" class="headerlink" title="liff.getFriendship()"></a><strong><strong>liff.getFriendship()</strong></strong></h2><p>獲取用戶與 LINE 官方帳號是否為好友狀態</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">liff.getFriendship().then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (data.friendFlag) &#123;</span><br><span class="line">    <span class="comment">// something you want to do</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="開啟、關閉-LIFF-視窗"><a href="#開啟、關閉-LIFF-視窗" class="headerlink" title="開啟、關閉 LIFF 視窗"></a><strong><strong>開啟、關閉 LIFF 視窗</strong></strong></h1><h2 id="liff-openWindow"><a href="#liff-openWindow" class="headerlink" title="liff.openWindow()"></a><strong><strong>liff.openWindow()</strong></strong></h2><p>開啟 LIFF 視窗</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">liff.openWindow(&#123;</span><br><span class="line">  url: <span class="string">&quot;https://line.me&quot;</span>,</span><br><span class="line">  external: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>url</code>：網址連結，必填</li>
+<li><code>external</code>：是否允許外部瀏覽器開啟，預設 <code>false</code></li>
+</ul>
+<br>
+
+<h2 id="liff-closeWindow"><a href="#liff-closeWindow" class="headerlink" title="liff.closeWindow()"></a><strong><strong>liff.closeWindow()</strong></strong></h2><p>關閉 LIFF 視窗</p>
+<p>關閉 LIFF 的功能只能在 LINE App 開啟 LIFF 的狀況下才有作用。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">liff.closeWindow();</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="LIFF-傳送訊息"><a href="#LIFF-傳送訊息" class="headerlink" title="LIFF 傳送訊息"></a><strong><strong>LIFF 傳送訊息</strong></strong></h1><h2 id="liff-sendMessages"><a href="#liff-sendMessages" class="headerlink" title="liff.sendMessages()"></a><strong><strong>liff.sendMessages()</strong></strong></h2><p>傳給打開這個 LIFF 的當下群組、好友、機器人、LINE@</p>
+<p>這個傳訊息功能，後台的「chat_message.write」必須要打勾才能使用。</p>
+<p>在外部瀏覽器無法使用此功能，要用 LINE App 內開啟 LIFF 才能用。</p>
+<p>使用者在登入 LINE 帳號時，「傳送訊息至聊天室」這項必須要是「許可」的才能使用。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">liff.sendMessages([</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">&#x27;text&#x27;</span>,</span><br><span class="line">    text: <span class="string">&#x27;Hello, World!&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">]).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-shareTargetPicker"><a href="#liff-shareTargetPicker" class="headerlink" title="liff.shareTargetPicker()"></a><strong><strong>liff.shareTargetPicker()</strong></strong></h2><p>傳給指定好友、群組</p>
+<p>這個傳訊息功能，後台的「shareTargetPicker」必須要打勾才能使用。</p>
+<p>使用者在登入 LINE 帳號時，「傳送訊息至聊天室」這項必須要是「許可」的才能使用。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">liff.shareTargetPicker(</span><br><span class="line">  [</span><br><span class="line">    &#123;</span><br><span class="line">      type: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">      text: <span class="string">&quot;Hello, World!&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">  &#123;</span><br><span class="line">    isMultiple: <span class="literal">true</span>,</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 發送成功後要做的事</span></span><br><span class="line"></span><br><span class="line">	&#125;).catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">	  <span class="built_in">console</span>.log(<span class="string">&#x27;something wrong happen&#x27;</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>isMultiple</code>：是否可以多選</li>
+</ul>
+<p>不管是 sendMessages 或 shareTargetPicker 訊息的表現都支援多種方式</p>
+<ul>
+<li>文字訊息 (Text message)</li>
+<li>貼圖訊息 (Sticker message)</li>
+<li>圖片訊息 (Image message)</li>
+<li>影片訊息 (Video message)</li>
+<li>音檔訊息 (Audio message)</li>
+<li>位置訊息 (Location message)</li>
+<li>模板訊息 (Template message)</li>
+<li>Flex 訊息 (Flex Message)</li>
+</ul>
+<h3 id="文字訊息-Text-message"><a href="#文字訊息-Text-message" class="headerlink" title="文字訊息 (Text message)"></a>文字訊息 (Text message)</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">  <span class="string">&quot;text&quot;</span>: <span class="string">&quot;Hello, world&quot;</span></span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">  <span class="string">&quot;text&quot;</span>: <span class="string">&quot;$ LINE emoji $&quot;</span>,</span><br><span class="line">  <span class="string">&quot;emojis&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;index&quot;</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="string">&quot;productId&quot;</span>: <span class="string">&quot;5ac1bfd5040ab15980c9b435&quot;</span>,</span><br><span class="line">      <span class="string">&quot;emojiId&quot;</span>: <span class="string">&quot;001&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;index&quot;</span>: <span class="number">13</span>,</span><br><span class="line">      <span class="string">&quot;productId&quot;</span>: <span class="string">&quot;5ac1bfd5040ab15980c9b435&quot;</span>,</span><br><span class="line">      <span class="string">&quot;emojiId&quot;</span>: <span class="string">&quot;002&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>type</code>(String) ：類型 (必填)</li>
+<li><code>text</code>(String) ：文字  (必填)，最多5000字<strong>，</strong>可包含 emojis</li>
+<li><code>emojis</code> ：最多 20 個<ul>
+<li><code>index</code>：位置索引</li>
+<li><code>productId</code>(String)：Product ID</li>
+<li><code>emojiId</code>(String)：Emoji ID</li>
+</ul>
+</li>
+</ul>
+<p><code>productId</code>、<code>emojiId</code> 可參考<a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/messaging-api/emoji-list/">List of available LINE emojis</a></p>
+<br>
+
+<h3 id="貼圖訊息-Sticker-message"><a href="#貼圖訊息-Sticker-message" class="headerlink" title="貼圖訊息 (Sticker message)"></a>貼圖訊息 (Sticker message)</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;sticker&quot;</span>,</span><br><span class="line">  <span class="string">&quot;packageId&quot;</span>: <span class="string">&quot;446&quot;</span>,</span><br><span class="line">  <span class="string">&quot;stickerId&quot;</span>: <span class="string">&quot;1988&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>type</code> (String)：類型 (必填)</li>
+<li><code>packageId</code>(String) ：Package ID  (必填)</li>
+<li><code>stickerId</code> (String)：Sticker ID  (必填)</li>
+</ul>
+<p><code>packageId</code>、<code>stickerId</code> 可參考 <strong><a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/messaging-api/sticker-list/">List of available stickers</a></strong></p>
+<br>
+
+<h3 id="圖片訊息-Image-message"><a href="#圖片訊息-Image-message" class="headerlink" title="圖片訊息 (Image message)"></a>圖片訊息 (Image message)</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;image&quot;</span>,</span><br><span class="line">  <span class="string">&quot;originalContentUrl&quot;</span>: <span class="string">&quot;https://example.com/original.jpg&quot;</span>,</span><br><span class="line">  <span class="string">&quot;previewImageUrl&quot;</span>: <span class="string">&quot;https://example.com/preview.jpg&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>type</code>(String)：類型 (必填)</li>
+<li><code>originalContentUrl</code>(String) ：圖片路徑 JPG、JPEG、PNG，文件最大 10 MB (必填)</li>
+<li><code>previewImageUrl</code>(String)：縮圖路徑 JPG、JPEG、PNG，文件最大 1 MB (必填)</li>
+</ul>
+<br>
+
+<h3 id="影片訊息-Video-message"><a href="#影片訊息-Video-message" class="headerlink" title="影片訊息 (Video message)"></a>影片訊息 (Video message)</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;video&quot;</span>,</span><br><span class="line">  <span class="string">&quot;originalContentUrl&quot;</span>: <span class="string">&quot;https://example.com/original.mp4&quot;</span>,</span><br><span class="line">  <span class="string">&quot;previewImageUrl&quot;</span>: <span class="string">&quot;https://example.com/preview.jpg&quot;</span>,</span><br><span class="line">  <span class="string">&quot;trackingId&quot;</span>: <span class="string">&quot;track-id&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>type</code>(String)：類型 (必填)</li>
+<li><code>originalContentUrl</code>(String)：影片路徑 mp4，文件最大 200 MB (必填)</li>
+<li><code>previewImageUrl</code>(String)：縮圖路徑 JPG、JPEG、PNG，文件最大 1 MB (必填)</li>
+<li><code>trackingId</code>(String)：用戶播完影片後，用於識別影片的 ID</li>
+</ul>
+<br>
+
+<h3 id="音檔訊息-Audio-message"><a href="#音檔訊息-Audio-message" class="headerlink" title="音檔訊息 (Audio message)"></a>音檔訊息 (Audio message)</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;audio&quot;</span>,</span><br><span class="line">  <span class="string">&quot;originalContentUrl&quot;</span>: <span class="string">&quot;https://example.com/original.m4a&quot;</span>,</span><br><span class="line">  <span class="string">&quot;duration&quot;</span>: <span class="number">60000</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>type</code>(String)：類型 (必填)</li>
+<li><code>originalContentUrl</code>(String)：音檔路徑 m4a，文件最大 200 MB (必填)</li>
+<li><code>duration</code>：音檔長度毫秒(必填)</li>
+</ul>
+<br>
+
+<h3 id="位置訊息-Location-message"><a href="#位置訊息-Location-message" class="headerlink" title="位置訊息 (Location message)"></a>位置訊息 (Location message)</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;location&quot;</span>,</span><br><span class="line">  <span class="string">&quot;title&quot;</span>: <span class="string">&quot;my location&quot;</span>,</span><br><span class="line">  <span class="string">&quot;address&quot;</span>: <span class="string">&quot;1-6-1 Yotsuya, Shinjuku-ku, Tokyo, 160-0004, Japan&quot;</span>,</span><br><span class="line">  <span class="string">&quot;latitude&quot;</span>: <span class="number">35.687574</span>,</span><br><span class="line">  <span class="string">&quot;longitude&quot;</span>: <span class="number">139.72922</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>type</code>(String)：類型 (必填)</li>
+<li><code>title</code>(String)：標題，最多 100 字元</li>
+<li><code>address</code>(String)：地址，最多 100 字元</li>
+<li><code>latitude</code>(Decimal**)**：緯度</li>
+<li><code>longitude</code>(Decimal**)**：經度</li>
+</ul>
+<br>
+
+<h3 id="模板訊息-Template-message"><a href="#模板訊息-Template-message" class="headerlink" title="模板訊息 (Template message)"></a>模板訊息 (Template message)</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;template&quot;</span>,</span><br><span class="line">  <span class="string">&quot;altText&quot;</span>: <span class="string">&quot;This is a buttons template&quot;</span>,</span><br><span class="line">  <span class="string">&quot;template&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;buttons&quot;</span>,</span><br><span class="line">    <span class="string">&quot;thumbnailImageUrl&quot;</span>: <span class="string">&quot;https://example.com/bot/images/image.jpg&quot;</span>,</span><br><span class="line">    <span class="string">&quot;imageAspectRatio&quot;</span>: <span class="string">&quot;rectangle&quot;</span>,</span><br><span class="line">    <span class="string">&quot;imageSize&quot;</span>: <span class="string">&quot;cover&quot;</span>,</span><br><span class="line">    <span class="string">&quot;imageBackgroundColor&quot;</span>: <span class="string">&quot;#FFFFFF&quot;</span>,</span><br><span class="line">    <span class="string">&quot;title&quot;</span>: <span class="string">&quot;Menu&quot;</span>,</span><br><span class="line">    <span class="string">&quot;text&quot;</span>: <span class="string">&quot;Please select&quot;</span>,</span><br><span class="line">    <span class="string">&quot;defaultAction&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;type&quot;</span>: <span class="string">&quot;uri&quot;</span>,</span><br><span class="line">      <span class="string">&quot;label&quot;</span>: <span class="string">&quot;View detail&quot;</span>,</span><br><span class="line">      <span class="string">&quot;uri&quot;</span>: <span class="string">&quot;http://example.com/page/123&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;actions&quot;</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;uri&quot;</span>,</span><br><span class="line">        <span class="string">&quot;label&quot;</span>: <span class="string">&quot;View detail&quot;</span>,</span><br><span class="line">        <span class="string">&quot;uri&quot;</span>: <span class="string">&quot;http://example.com/page/123&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>type</code>(String)：類型 (必填)</li>
+<li><code>altText</code>：通知推播文字，最多 400 字元 (必填)</li>
+<li><code>template</code>：可選擇 <a target="_blank" rel="noopener" href="https://developers.line.biz/en/reference/messaging-api/#buttons">Buttons</a>, <a target="_blank" rel="noopener" href="https://developers.line.biz/en/reference/messaging-api/#confirm">Confirm</a>, <a target="_blank" rel="noopener" href="https://developers.line.biz/en/reference/messaging-api/#carousel">Carousel</a>, or <a target="_blank" rel="noopener" href="https://developers.line.biz/en/reference/messaging-api/#image-carousel">Image Carousel</a> 物件 (必填)</li>
+</ul>
+<p>actions 僅能使用 uri 類型</p>
+<br>
+
+<h3 id="Flex-訊息-Flex-Message"><a href="#Flex-訊息-Flex-Message" class="headerlink" title="Flex 訊息 (Flex Message)"></a>Flex 訊息 (Flex Message)</h3><p>可自行客製版型</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;flex&quot;</span>,</span><br><span class="line">  <span class="string">&quot;altText&quot;</span>: <span class="string">&quot;this is a flex message&quot;</span>,</span><br><span class="line">  <span class="string">&quot;contents&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;bubble&quot;</span>,</span><br><span class="line">    <span class="string">&quot;body&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;type&quot;</span>: <span class="string">&quot;box&quot;</span>,</span><br><span class="line">      <span class="string">&quot;layout&quot;</span>: <span class="string">&quot;vertical&quot;</span>,</span><br><span class="line">      <span class="string">&quot;contents&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">          <span class="string">&quot;text&quot;</span>: <span class="string">&quot;hello&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">          <span class="string">&quot;text&quot;</span>: <span class="string">&quot;world&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>type</code>(String)：類型 (必填)</li>
+<li><code>altText</code>：通知推播文字，最多 400 字元 (必填)</li>
+<li><code>contents</code>：Flex Message <a target="_blank" rel="noopener" href="https://developers.line.biz/en/reference/messaging-api/#container">container</a></li>
+</ul>
+<p>可於 <a target="_blank" rel="noopener" href="https://developers.line.biz/flex-simulator/">FLEX MESSAGE SIMULATOR</a> 製作</p>
+<hr>
+<h1 id="LIFF-連結"><a href="#LIFF-連結" class="headerlink" title="LIFF 連結"></a><strong><strong>LIFF 連結</strong></strong></h1><h2 id="liff-permanentLink-createUrlBy"><a href="#liff-permanentLink-createUrlBy" class="headerlink" title="liff.permanentLink.createUrlBy()"></a><strong><strong>liff.permanentLink.createUrlBy()</strong></strong></h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// For example, if the endpoint URL of the LIFF app</span></span><br><span class="line"><span class="comment">// is https://example.com/path1?q1=v1</span></span><br><span class="line"><span class="comment">// and its LIFF ID is 1234567890-AbcdEfgh</span></span><br><span class="line">liff.permanentLink</span><br><span class="line">  .createUrlBy(<span class="string">&quot;https://example.com/path1?q1=v1&quot;</span>)</span><br><span class="line">  .then(<span class="function">(<span class="params">permanentLink</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// https://liff.line.me/1234567890-AbcdEfgh</span></span><br><span class="line">    <span class="built_in">console</span>.log(permanentLink);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">liff.permanentLink</span><br><span class="line">  .createUrlBy(<span class="string">&quot;https://example.com/path1/path2?q1=v1&amp;q2=v2&quot;</span>)</span><br><span class="line">  .then(<span class="function">(<span class="params">permanentLink</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// https://liff.line.me/1234567890-AbcdEfgh/path2?q=2=v2</span></span><br><span class="line">    <span class="built_in">console</span>.log(permanentLink);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">liff.permanentLink</span><br><span class="line">  .createUrlBy(<span class="string">&quot;https://example.com/&quot;</span>)</span><br><span class="line">  .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Error: currentPageUrl must start with endpoint URL of LIFF App.</span></span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-permanentLink-createUrl"><a href="#liff-permanentLink-createUrl" class="headerlink" title="liff.permanentLink.createUrl()"></a><strong><strong>liff.permanentLink.createUrl()</strong></strong></h2><p>取得當下的網址</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myLink = liff.permanentLink.createUrl();</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="liff-permanentLink-setExtraQueryParam"><a href="#liff-permanentLink-setExtraQueryParam" class="headerlink" title="liff.permanentLink.setExtraQueryParam()"></a><strong><strong>liff.permanentLink.setExtraQueryParam()</strong></strong></h2><p>網址上要加入其他參數</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">liff.permanentLink.setExtraQueryParam(<span class="string">&quot;user_tracking_id=8888&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> myLink = liff.permanentLink.createUrl();</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="LIFF-打開-QR-Code-掃描器"><a href="#LIFF-打開-QR-Code-掃描器" class="headerlink" title="LIFF 打開 QR Code 掃描器"></a><strong><strong>LIFF 打開 QR Code 掃描器</strong></strong></h1><h2 id="liff-scanCodeV2"><a href="#liff-scanCodeV2" class="headerlink" title="liff.scanCodeV2()"></a><strong><strong>liff.scanCodeV2()</strong></strong></h2><p>打開掃描器</p>
+<p>後台的 Scan QR 要開啟才能使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">liff.scanCodeV2().then(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// result = &#123; value: &quot;&quot; &#125;</span></span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;error&quot;</span>, error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>常常在生活中會開啟 LINE 的瀏覽器，原來很多都是用 LIFF 做到的，玩起來滿有趣的！<br>LINE 還有好多其他功能，改天有機會再來研究看看😀</p>
+<hr>
+<h1 id="REFERENCE"><a href="#REFERENCE" class="headerlink" title="REFERENCE"></a>REFERENCE</h1><p><a target="_blank" rel="noopener" href="https://developers.line.biz/en/reference/liff/">LIFF v2 API reference</a><br><a target="_blank" rel="noopener" href="https://www.letswrite.tw/liff-init/">LIFF v2 基本使用筆記及範例</a></p>
+
+        <div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/lala9990929/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LINE/" rel="tag"># LINE</a>
+              <a href="/tags/LIFF/" rel="tag"># LIFF</a>
+              <a href="/tags/LINE-LIFF/" rel="tag"># LINE LIFF</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/12/05/react-github-pages/" rel="prev" title="【DAY 30】將網站部署到 Github Pages 吧！">
+      <i class="fa fa-chevron-left"></i> 【DAY 30】將網站部署到 Github Pages 吧！
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 100px auto;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AFLINE-LIFF%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什麼是LINE LIFF？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-LIFF-SDK"><span class="nav-number">2.</span> <span class="nav-text">安裝 LIFF SDK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LIFF-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">LIFF 初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#init"><span class="nav-number">3.1.</span> <span class="nav-text">init</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LIFF-%E5%8F%96%E5%BE%97%E7%92%B0%E5%A2%83%E8%B3%87%E8%A8%8A"><span class="nav-number">4.</span> <span class="nav-text">LIFF 取得環境資訊</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-getOS"><span class="nav-number">4.1.</span> <span class="nav-text">liff.getOS()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-getLanguage"><span class="nav-number">4.2.</span> <span class="nav-text">liff.getLanguage()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-getVersion"><span class="nav-number">4.3.</span> <span class="nav-text">liff.getVersion()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-getLineVersion"><span class="nav-number">4.4.</span> <span class="nav-text">liff.getLineVersion()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-getContext"><span class="nav-number">4.5.</span> <span class="nav-text">liff.getContext()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-isInClient"><span class="nav-number">4.6.</span> <span class="nav-text">liff.isInClient()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-isLoggedIn"><span class="nav-number">4.7.</span> <span class="nav-text">liff.isLoggedIn()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-isApiAvailable"><span class="nav-number">4.8.</span> <span class="nav-text">liff.isApiAvailable()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LIFF-%E9%A9%97%E8%AD%89"><span class="nav-number">5.</span> <span class="nav-text">LIFF 驗證</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-login"><span class="nav-number">5.1.</span> <span class="nav-text">liff.login()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-logout"><span class="nav-number">5.2.</span> <span class="nav-text">liff.logout()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-getAccessToken"><span class="nav-number">5.3.</span> <span class="nav-text">liff.getAccessToken()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-getIDToken"><span class="nav-number">5.4.</span> <span class="nav-text">liff.getIDToken()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-getDecodedIDToken"><span class="nav-number">5.5.</span> <span class="nav-text">liff.getDecodedIDToken()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-permission-query"><span class="nav-number">5.6.</span> <span class="nav-text">liff.permission.query()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-permission-requestAll"><span class="nav-number">5.7.</span> <span class="nav-text">liff.permission.requestAll()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LIFF-%E5%8F%96%E5%BE%97%E4%BD%BF%E7%94%A8%E8%80%85%E5%85%AC%E9%96%8B%E8%B3%87%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">LIFF 取得使用者公開資料</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-getProfile"><span class="nav-number">6.1.</span> <span class="nav-text">liff.getProfile()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-getFriendship"><span class="nav-number">6.2.</span> <span class="nav-text">liff.getFriendship()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%96%8B%E5%95%9F%E3%80%81%E9%97%9C%E9%96%89-LIFF-%E8%A6%96%E7%AA%97"><span class="nav-number">7.</span> <span class="nav-text">開啟、關閉 LIFF 視窗</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-openWindow"><span class="nav-number">7.1.</span> <span class="nav-text">liff.openWindow()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-closeWindow"><span class="nav-number">7.2.</span> <span class="nav-text">liff.closeWindow()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LIFF-%E5%82%B3%E9%80%81%E8%A8%8A%E6%81%AF"><span class="nav-number">8.</span> <span class="nav-text">LIFF 傳送訊息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-sendMessages"><span class="nav-number">8.1.</span> <span class="nav-text">liff.sendMessages()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-shareTargetPicker"><span class="nav-number">8.2.</span> <span class="nav-text">liff.shareTargetPicker()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E8%A8%8A%E6%81%AF-Text-message"><span class="nav-number">8.2.1.</span> <span class="nav-text">文字訊息 (Text message)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B2%BC%E5%9C%96%E8%A8%8A%E6%81%AF-Sticker-message"><span class="nav-number">8.2.2.</span> <span class="nav-text">貼圖訊息 (Sticker message)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%96%E7%89%87%E8%A8%8A%E6%81%AF-Image-message"><span class="nav-number">8.2.3.</span> <span class="nav-text">圖片訊息 (Image message)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%B1%E7%89%87%E8%A8%8A%E6%81%AF-Video-message"><span class="nav-number">8.2.4.</span> <span class="nav-text">影片訊息 (Video message)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9F%B3%E6%AA%94%E8%A8%8A%E6%81%AF-Audio-message"><span class="nav-number">8.2.5.</span> <span class="nav-text">音檔訊息 (Audio message)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E8%A8%8A%E6%81%AF-Location-message"><span class="nav-number">8.2.6.</span> <span class="nav-text">位置訊息 (Location message)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E8%A8%8A%E6%81%AF-Template-message"><span class="nav-number">8.2.7.</span> <span class="nav-text">模板訊息 (Template message)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flex-%E8%A8%8A%E6%81%AF-Flex-Message"><span class="nav-number">8.2.8.</span> <span class="nav-text">Flex 訊息 (Flex Message)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LIFF-%E9%80%A3%E7%B5%90"><span class="nav-number">9.</span> <span class="nav-text">LIFF 連結</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-permanentLink-createUrlBy"><span class="nav-number">9.1.</span> <span class="nav-text">liff.permanentLink.createUrlBy()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-permanentLink-createUrl"><span class="nav-number">9.2.</span> <span class="nav-text">liff.permanentLink.createUrl()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-permanentLink-setExtraQueryParam"><span class="nav-number">9.3.</span> <span class="nav-text">liff.permanentLink.setExtraQueryParam()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LIFF-%E6%89%93%E9%96%8B-QR-Code-%E6%8E%83%E6%8F%8F%E5%99%A8"><span class="nav-number">10.</span> <span class="nav-text">LIFF 打開 QR Code 掃描器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#liff-scanCodeV2"><span class="nav-number">10.1.</span> <span class="nav-text">liff.scanCodeV2()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">11.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#REFERENCE"><span class="nav-number">12.</span> <span class="nav-text">REFERENCE</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/pvToiN1.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。 如果你在文章找到bobee，不用懷疑，bobee是全世界最可愛的狗狗</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">249</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2022/12/06/line-liff/";
+    this.page.identifier = "2022/12/06/line-liff/";
+    this.page.title = "LINE LIFF 功能介紹教學，綁定用戶資料，傳送分享訊息";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
