@@ -39,13 +39,14 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="今天來分享如何在 GitHub 上使用 Travis CI，來做自動部署吧！ 在你建立完 Repository 後，每次都要下指令去手動部署，這樣不僅麻煩也浪費很多時間，這時候可以使用 CI&#x2F;CD 去幫我們做自動部署，而 Travis CI 對 GitHub 有著高度的整合，讓使用者可以快速與 GitHub 的 Repository 串接完成，享受 CI&#x2F;CD 的服務。 以下步驟跟著操作，即可建立">
+  <meta name="description" content="今天來分享如何在 GitHub 上使用 Travis CI，來做自動部署吧！ 在你建立完 Repository 後，每次都要下指令去手動部署，這樣不僅麻煩也浪費很多時間，這時候可以使用 CI&#x2F;CD 去幫我們做自動部署，而 Travis CI 對 GitHub 有著高度的整合，讓使用者可以快速與 GitHub 的 Repository 串接完成，享受 CI&#x2F;CD 的服務。 以下步驟跟著操作，即可建">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Travis CI 在 Github Pages 自動部署簡易教學">
 <meta property="og:url" content="https://happy9990929.github.io/2022/12/22/frontend-travis-ci/index.html">
 <meta property="og:site_name" content="Lala的前端大補帖">
-<meta property="og:description" content="今天來分享如何在 GitHub 上使用 Travis CI，來做自動部署吧！ 在你建立完 Repository 後，每次都要下指令去手動部署，這樣不僅麻煩也浪費很多時間，這時候可以使用 CI&#x2F;CD 去幫我們做自動部署，而 Travis CI 對 GitHub 有著高度的整合，讓使用者可以快速與 GitHub 的 Repository 串接完成，享受 CI&#x2F;CD 的服務。 以下步驟跟著操作，即可建立">
+<meta property="og:description" content="今天來分享如何在 GitHub 上使用 Travis CI，來做自動部署吧！ 在你建立完 Repository 後，每次都要下指令去手動部署，這樣不僅麻煩也浪費很多時間，這時候可以使用 CI&#x2F;CD 去幫我們做自動部署，而 Travis CI 對 GitHub 有著高度的整合，讓使用者可以快速與 GitHub 的 Repository 串接完成，享受 CI&#x2F;CD 的服務。 以下步驟跟著操作，即可建">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/eKYQhDq.jpg">
 <meta property="og:image" content="https://imgur.com/NXVn3n1.png">
 <meta property="og:image" content="https://imgur.com/mLRkHPE.png">
 <meta property="og:image" content="https://i.imgur.com/5MthmF7.jpg">
@@ -60,13 +61,13 @@
 <meta property="og:image" content="https://imgur.com/Zbd8eJg.png">
 <meta property="og:image" content="https://imgur.com/judassk.png">
 <meta property="article:published_time" content="2022-12-22T06:08:09.000Z">
-<meta property="article:modified_time" content="2022-12-22T06:40:06.070Z">
+<meta property="article:modified_time" content="2022-12-22T07:49:53.852Z">
 <meta property="article:author" content="Lala Wang">
 <meta property="article:tag" content="Travis CI">
 <meta property="article:tag" content="Github Pages">
 <meta property="article:tag" content="Travis CI 教學">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://imgur.com/NXVn3n1.png">
+<meta name="twitter:image" content="https://imgur.com/eKYQhDq.jpg">
 
 <link rel="canonical" href="https://happy9990929.github.io/2022/12/22/frontend-travis-ci/">
 
@@ -248,7 +249,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2022-12-22 14:08:09 / 修改時間：14:40:06" itemprop="dateCreated datePublished" datetime="2022-12-22T14:08:09+08:00">2022-12-22</time>
+              <time title="創建時間：2022-12-22 14:08:09 / 修改時間：15:49:53" itemprop="dateCreated datePublished" datetime="2022-12-22T14:08:09+08:00">2022-12-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -292,7 +293,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>今天來分享如何在 GitHub 上使用 Travis CI，來做自動部署吧！</p>
+        <p><img src="https://imgur.com/eKYQhDq.jpg" alt="Travis CI"></p>
+<p>今天來分享如何在 GitHub 上使用 Travis CI，來做自動部署吧！</p>
 <p>在你建立完 Repository 後，每次都要下指令去手動部署，這樣不僅麻煩也浪費很多時間，這時候可以使用 CI/CD 去幫我們做自動部署，而 Travis CI 對 GitHub 有著高度的整合，讓使用者可以快速與 GitHub 的 Repository 串接完成，享受 CI/CD 的服務。</p>
 <p>以下步驟跟著操作，即可建立自動部署</p>
 <a id="more"></a>
@@ -387,7 +389,10 @@
     <a href="/2022/12/06/line-liff/" rel="prev" title="LINE LIFF 功能介紹教學，綁定用戶資料，傳送分享訊息">
       <i class="fa fa-chevron-left"></i> LINE LIFF 功能介紹教學，綁定用戶資料，傳送分享訊息
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/12/22/web-excel/" rel="next" title="前端下載 Excel 文件，Blob 物件使用">
+      前端下載 Excel 文件，Blob 物件使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -484,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -497,7 +502,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">251</span>
+        <span class="site-state-item-count">253</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
