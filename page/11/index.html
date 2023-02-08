@@ -205,6 +205,116 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/05/axios-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/0vzcTMQ.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/05/axios-api/" class="post-title-link" itemprop="url">非同步處理 Axios</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-03-05 21:36:48" itemprop="dateCreated datePublished" datetime="2021-03-05T21:36:48+08:00">2021-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-04-26 20:33:18" itemprop="dateModified" datetime="2022-04-26T20:33:18+08:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue3/" itemprop="url" rel="index"><span itemprop="name">Vue3</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/03/05/axios-api/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/05/axios-api/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="使用-Axios-取得-API"><a href="#使用-Axios-取得-API" class="headerlink" title="使用 Axios 取得 API"></a>使用 Axios 取得 API</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; onMounted &#125; = Vue;</span><br><span class="line"><span class="keyword">const</span> app = &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    onMounted(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 在DOM元素渲染完成後執行</span></span><br><span class="line">      axios</span><br><span class="line">        .get(<span class="string">&quot;https://vue-lessons-api.herokuapp.com/photo/list&quot;</span>)</span><br><span class="line">        .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(res.data);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/05/axios-api/" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <div style="margin-top: 100px;">如果我的文章有幫助到你，點擊下方廣告可以為我帶來一點收入，給我點鼓勵吧 ❤️</div>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 0 auto 100px;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/03/05/lifecycle-hooks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -714,7 +824,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -727,7 +837,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">259</span>
+        <span class="site-state-item-count">261</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
