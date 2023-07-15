@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/z6diBQ7.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Vuetify 是一個基於 Vue.js 的開源 UI 框架，它提供了一系列的預製組件和樣式，讓開發者能夠快速地建立美觀、功能豐富的網頁應用程式。Vuetify 的設計目標是簡化前端開發流程，同時提供一致性的外觀和使用者體驗。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vuetify與TailwindCSS類別衝突，如何整合Vuetify utility">
+<meta property="og:url" content="https://happy9990929.github.io/2023/07/15/vuetify-utility/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:description" content="Vuetify 是一個基於 Vue.js 的開源 UI 框架，它提供了一系列的預製組件和樣式，讓開發者能夠快速地建立美觀、功能豐富的網頁應用程式。Vuetify 的設計目標是簡化前端開發流程，同時提供一致性的外觀和使用者體驗。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/dG5pAIN.jpg">
+<meta property="og:image" content="https://imgur.com/UiV19RZ.jpg">
+<meta property="og:image" content="https://imgur.com/rtc8PsM.png">
+<meta property="og:image" content="https://imgur.com/CWQ0nDY.jpg">
+<meta property="article:published_time" content="2023-07-15T15:08:45.000Z">
+<meta property="article:modified_time" content="2023-07-15T15:25:48.782Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="Vuetify">
+<meta property="article:tag" content="Vuetify utility">
+<meta property="article:tag" content="Vuetify TailwindCSS">
+<meta property="article:tag" content="TailwindCSS">
+<meta property="article:tag" content="Vuetify TailwindCSS conflict">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/dG5pAIN.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2023/07/15/vuetify-utility/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Vuetify與TailwindCSS類別衝突，如何整合Vuetify utility | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2023/07/15/vuetify-utility/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/0vzcTMQ.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vuetify與TailwindCSS類別衝突，如何整合Vuetify utility
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2023-07-15 23:08:45 / 修改時間：23:25:48" itemprop="dateCreated datePublished" datetime="2023-07-15T23:08:45+08:00">2023-07-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vuetify/" itemprop="url" rel="index"><span itemprop="name">Vuetify</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2023/07/15/vuetify-utility/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/07/15/vuetify-utility/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/dG5pAIN.jpg" alt="Vuetify"></p>
+<p>Vuetify 是一個基於 Vue.js 的開源 UI 框架，它提供了一系列的預製組件和樣式，讓開發者能夠快速地建立美觀、功能豐富的網頁應用程式。Vuetify 的設計目標是簡化前端開發流程，同時提供一致性的外觀和使用者體驗。</p>
+<a id="more"></a>
+<br/>
+<br/>
+
+<p>近一年來，Vuetify 的下載量也是表現得不錯</p>
+<p><img src="https://imgur.com/UiV19RZ.jpg" alt="Vuetify"></p>
+<br/>
+<br/>
+於是我使用了 Vuetify，並且搭配 TailwindCSS 來做這次的專案
+
+<p>但卻遇到了一個問題．．．<br><br/><br><br/><br>Vuetify 與 TailwindCSS 的樣式互相衝突了！！！😱</p>
+<p><img src="https://imgur.com/rtc8PsM.png" alt="Bobbe"></p>
+<br/>
+<br/>
+
+<p>在設定 mb-1 時，會出現兩個 mb-1<br><br/></p>
+<p><img src="https://imgur.com/CWQ0nDY.jpg" alt="Vuetify"><br><br/><br>Vuetify 的類別會被加上 <code>!important</code>，導致 TailwindCSS 都會被蓋掉了</p>
+<br/>
+<br/>
+
+<p>搜尋了一下解法，TailwindCSS 有支援前綴的方式，如發生命名衝突時，這會是一個好方法，直接在設定檔加上 prefix</p>
+<p>tailwind.config.js</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  prefix: <span class="string">&#x27;tw-&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+<br/>
+
+<p>這麼一來，所有的樣式前面都會被加上 <code>tw-</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tw-text-left</span> &#123;</span><br><span class="line">  <span class="attribute">text-align</span>: left;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tw-text-center</span> &#123;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tw-text-right</span> &#123;</span><br><span class="line">  <span class="attribute">text-align</span>: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+<br/>
+
+<p>在加類名時就會變成</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;tw-text-lg md:tw-text-xl tw-bg-red-500 hover:tw-bg-blue-500&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br/>
+<br/>
+但這有個缺點，TailwindCSS 的類名本來就很長了，每個類名再加上 tw- 後，變得又臭又長，不是很美觀 😥
+
+<p>所以我決定還是從 Vuetify 下手！！</p>
+<br/>
+<br/>
+
+<p>好在爬了幾篇文章後解決了我的問題</p>
+<p>只要三個步驟</p>
+<ul>
+<li>Vuetify 基本設定</li>
+<li>安裝 vite-plugin-vuetify，設定 settings.scss 路徑</li>
+<li>設定 vuetify utility</li>
+</ul>
+<br/>
+<br/>
+<br/>
+
+<h1 id="Vuetify-基本設定"><a href="#Vuetify-基本設定" class="headerlink" title="Vuetify 基本設定"></a>Vuetify 基本設定</h1><p>首先先在進入點加入 Vuetify ，因為我專案需要有一些 icon，所以有加入一些 icon 的檔案，也有針對專案去做一些顏色、breakpoint 的客製設定，這些都可視專案情況加入</p>
+<p>main.js</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./assets/scss/main.scss&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&quot;./App.vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Vuetify</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;vuetify/styles&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createVuetify &#125; <span class="keyword">from</span> <span class="string">&quot;vuetify&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> components <span class="keyword">from</span> <span class="string">&quot;vuetify/components&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> directives <span class="keyword">from</span> <span class="string">&quot;vuetify/directives&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; fa &#125; <span class="keyword">from</span> <span class="string">&quot;vuetify/iconsets/fa&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; aliases, mdi &#125; <span class="keyword">from</span> <span class="string">&quot;vuetify/lib/iconsets/mdi&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;@mdi/font/css/materialdesignicons.css&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;@fortawesome/fontawesome-free/css/all.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> vuetify = createVuetify(&#123;</span><br><span class="line">  theme: &#123;</span><br><span class="line">    themes: &#123;</span><br><span class="line">      light: &#123;</span><br><span class="line">        dark: <span class="literal">false</span>,</span><br><span class="line">        colors: &#123;</span><br><span class="line">          primary: <span class="string">&quot;#288a31&quot;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  icons: &#123;</span><br><span class="line">    defaultSet: <span class="string">&quot;mdi&quot;</span>,</span><br><span class="line">    aliases,</span><br><span class="line">    sets: &#123;</span><br><span class="line">      mdi,</span><br><span class="line">      fa,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  display: &#123;</span><br><span class="line">    mobileBreakpoint: <span class="string">&quot;sm&quot;</span>,</span><br><span class="line">    thresholds: &#123;</span><br><span class="line">      xs: <span class="number">0</span>,</span><br><span class="line">      sm: <span class="number">640</span>,</span><br><span class="line">      md: <span class="number">768</span>,</span><br><span class="line">      lg: <span class="number">1024</span>,</span><br><span class="line">      xl: <span class="number">1280</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  components,</span><br><span class="line">  directives,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = createApp(App);</span><br><span class="line">app.use(vuetify);</span><br><span class="line">app.mount(<span class="string">&quot;#app&quot;</span>);</span><br></pre></td></tr></table></figure>
+<br/>
+<br/>
+
+<h1 id="安裝-vite-plugin-vuetify，設定-settings-scss-路徑"><a href="#安裝-vite-plugin-vuetify，設定-settings-scss-路徑" class="headerlink" title="安裝 vite-plugin-vuetify，設定 settings.scss 路徑"></a>安裝 vite-plugin-vuetify，設定 settings.scss 路徑</h1><p>接著要先安裝 vite-plugin-vuetify，並設定 styles 設定檔的路徑</p>
+<p>vite.config.js</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">&quot;vite&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> vue <span class="keyword">from</span> <span class="string">&quot;@vitejs/plugin-vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> vuetify <span class="keyword">from</span> <span class="string">&quot;vite-plugin-vuetify&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// https://vitejs.dev/config/</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineConfig(&#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    vue(),</span><br><span class="line">    vuetify(&#123;</span><br><span class="line">      styles: &#123; <span class="attr">configFile</span>: <span class="string">&quot;src/assets/scss/settings.scss&quot;</span> &#125;,</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br/>
+<br/>
+
+<h1 id="設定-vuetify-utility"><a href="#設定-vuetify-utility" class="headerlink" title="設定 vuetify utility"></a>設定 vuetify utility</h1><p>新增一個 settings.scss 檔案並設定 vuetify utility，我們可以針對不需要使用的 utility 來做關閉，在這邊我關閉了 vuetify 對 margin 和 padding 的相關類別</p>
+<p>除此之外也可以調整變數的預設值 🥳</p>
+<p>src/assets/scss/settings.scss</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">@use <span class="string">&#x27;vuetify/settings&#x27;</span> <span class="keyword">with</span> (</span><br><span class="line">  $utilities: (</span><br><span class="line">    margin: <span class="literal">false</span>,</span><br><span class="line">    margin-x: <span class="literal">false</span>,</span><br><span class="line">    margin-y: <span class="literal">false</span>,</span><br><span class="line">    margin-top: <span class="literal">false</span>,</span><br><span class="line">    margin-bottom: <span class="literal">false</span>,</span><br><span class="line">    margin-left: <span class="literal">false</span>,</span><br><span class="line">    margin-right: <span class="literal">false</span>,</span><br><span class="line">    margin-start: <span class="literal">false</span>,</span><br><span class="line">    margin-end: <span class="literal">false</span>,</span><br><span class="line">    negative-margin: <span class="literal">false</span>,</span><br><span class="line">    negative-margin-x: <span class="literal">false</span>,</span><br><span class="line">    negative-margin-y: <span class="literal">false</span>,</span><br><span class="line">    negative-margin-top: <span class="literal">false</span>,</span><br><span class="line">    negative-margin-bottom: <span class="literal">false</span>,</span><br><span class="line">    negative-margin-left: <span class="literal">false</span>,</span><br><span class="line">    negative-margin-right: <span class="literal">false</span>,</span><br><span class="line">    negative-margin-start: <span class="literal">false</span>,</span><br><span class="line">    negative-margin-end: <span class="literal">false</span>,</span><br><span class="line">    padding: <span class="literal">false</span>,</span><br><span class="line">    padding-x: <span class="literal">false</span>,</span><br><span class="line">    padding-y: <span class="literal">false</span>,</span><br><span class="line">    padding-top: <span class="literal">false</span>,</span><br><span class="line">    padding-bottom: <span class="literal">false</span>,</span><br><span class="line">    padding-left: <span class="literal">false</span>,</span><br><span class="line">    padding-right: <span class="literal">false</span>,</span><br><span class="line">    padding-start: <span class="literal">false</span>,</span><br><span class="line">    padding-end: <span class="literal">false</span>,</span><br><span class="line">    negative-padding: <span class="literal">false</span>,</span><br><span class="line">    negative-padding-x: <span class="literal">false</span>,</span><br><span class="line">    negative-padding-y: <span class="literal">false</span>,</span><br><span class="line">    negative-padding-top: <span class="literal">false</span>,</span><br><span class="line">    negative-padding-bottom: <span class="literal">false</span>,</span><br><span class="line">    negative-padding-left: <span class="literal">false</span>,</span><br><span class="line">    negative-padding-right: <span class="literal">false</span>,</span><br><span class="line">    negative-padding-start: <span class="literal">false</span>,</span><br><span class="line">    negative-padding-end: <span class="literal">false</span>,</span><br><span class="line">  ),</span><br><span class="line">  $messages-font-size: 14px,</span><br><span class="line">  $input-control-height: 32px,</span><br><span class="line">  $field-focused-border-width: 1px</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>完全解決了我的問題 🥳🥳🥳</p>
+<p>這麼一來就不會有類別覆蓋的問題，也可以結合兩邊的好用之處</p>
+<p>大功告成囉！！</p>
+<br/>
+<br/>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://vuetifyjs.com/en/features/sass-variables">VUETIFY</a></p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/@pierremriau/how-to-replace-vuetify-utility-classes-with-tailwindcss-9a3ebaa21f4f">How to replace Vuetify utility classes with TailwindCSS</a></p>
+<p><a target="_blank" rel="noopener" href="https://npmtrends.com/bootstrap-vue-vs-element-ui-vs-vuetify">npm trends</a></p>
+
+        <br/><br/>
+        <div>
+          <h1>🚀線上課程分享</h1>
+          線上課程可以加速學習的時間，省去了不少看文件的時間XD，以下是我推薦的一些課程<br/>
+          想學習更多關於前端的線上課程，可以參考看看。
+          <h2><a href="https://twshop4coupon.com/track/clicks/4850/c627c2bf900222dff98eec35dc2e9753743940ce71e8e0f1113ff408630c5aee?t=https%3A%2F%2Fhahow.in%2Fgroup%2Fprogramming%2Fweb-frontend" target="_blank">Hahow</a></h2>
+
+          <a target="_blank" rel="noopener" href='https://tlcafftrax.com/track/clicks/4850/ce2bc2bb9a0224d8efcda67f8835ce13286849cc73e8f0ab416db60d6204?subid_1=&subid_2=&subid_3=&subid_4=&subid_5=&t=https%3A%2F%2Fhahow.in%2Fapselect-event%3Fmts_s%3Dap%26mts_m%3Dao%26mts_c%3D19ap'><img src='https://i.imgur.com/oedZItA.jpg' /></a>
+          <br/><br/>
+
+          <h2><a href="https://affclkr.online/track/clicks/4305/c627c2bf900222dffa8aec35dc2e9753743940ce71e8e0f1113ff40863075feb" target="_blank">六角學院</a></h2>
+          如果你是初學者，非常推薦六角學院哦！<br/>
+          剛開始轉職也是上了六角的課，非常的淺顯易懂，隨時還有線上的助教幫你解決問題！<br/>
+          <a target="_blank" rel="noopener" href='https://vbtrax.com/track/clicks/4305/ce2bc2bd9e0522dcefcda67f8835ce13286849cc73e8f0ab416db6066701?subid_1=&subid_2=&subid_3=&subid_4=&subid_5='><img src='https://i.imgur.com/mqjfVQr.jpg' /></a>
+          <br/><br/>
+          <h2><a href="https://abzcoupon.com/track/clicks/4546/c627c2bf900222dffb83ec35dc2e9753743940ce71e8e0f1113ff40863015be8" target="_blank">Udemy</a></h2>
+          Udemy 裡的課程非常的多，品質普遍不錯，且價格都滿實惠的，CP值很高！<br/>
+          也是很多工程師推薦的線上課程網站。
+          <a target="_blank" rel="noopener" href='https://abzcoupon.com/track/clicks/4546/c627c2bf900222dffb83ec35dc2e9753743940ce71e8e0f1113ff40863015be8'><img src='https://i.imgur.com/5eOGFSF.jpg' /></a>
+        </div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vuetify/" rel="tag"># Vuetify</a>
+              <a href="/tags/Vuetify-utility/" rel="tag"># Vuetify utility</a>
+              <a href="/tags/Vuetify-TailwindCSS/" rel="tag"># Vuetify TailwindCSS</a>
+              <a href="/tags/TailwindCSS/" rel="tag"># TailwindCSS</a>
+              <a href="/tags/Vuetify-TailwindCSS-conflict/" rel="tag"># Vuetify TailwindCSS conflict</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/02/09/js-alert-comfirm-prompt/" rel="prev" title="瀏覽器視窗alert、comfirm、prompt">
+      <i class="fa fa-chevron-left"></i> 瀏覽器視窗alert、comfirm、prompt
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <div style="margin-top: 100px;">如果我的文章有幫助到你，點擊下方廣告可以為我帶來一點收入，給我點鼓勵吧 ❤️</div>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 0 auto 100px;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vuetify-%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A"><span class="nav-number">1.</span> <span class="nav-text">Vuetify 基本設定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-vite-plugin-vuetify%EF%BC%8C%E8%A8%AD%E5%AE%9A-settings-scss-%E8%B7%AF%E5%BE%91"><span class="nav-number">2.</span> <span class="nav-text">安裝 vite-plugin-vuetify，設定 settings.scss 路徑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-vuetify-utility"><span class="nav-number">3.</span> <span class="nav-text">設定 vuetify utility</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/0vzcTMQ.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">記錄前端 Vue / Nuxt / Javascript / React 等的學習筆記，網頁問題歡迎技術交流😀lala9990929@gmail.com。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">107</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">269</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2023/07/15/vuetify-utility/";
+    this.page.identifier = "2023/07/15/vuetify-utility/";
+    this.page.title = "Vuetify與TailwindCSS類別衝突，如何整合Vuetify utility";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
