@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/yLTIWcF.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="MongoDB 是一種開源的、高性能的 NoSQL（非關聯型資料庫）資料庫系統，它以文件形式儲存資料，適合處理大量非結構化或半結構化的資料。MongoDB 使用 JSON 格式的文件來儲存資料，這使得資料存取相當靈活，並且非常適合在 Web 開發中應用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB 介紹、安裝">
+<meta property="og:url" content="https://happy9990929.github.io/2023/11/22/nodeJS-mongodb-install/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:description" content="MongoDB 是一種開源的、高性能的 NoSQL（非關聯型資料庫）資料庫系統，它以文件形式儲存資料，適合處理大量非結構化或半結構化的資料。MongoDB 使用 JSON 格式的文件來儲存資料，這使得資料存取相當靈活，並且非常適合在 Web 開發中應用。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/gvWrt7o.jpg">
+<meta property="og:image" content="https://imgur.com/aDoUpCz.jpg">
+<meta property="og:image" content="https://i.imgur.com/h5BmWfo.jpg">
+<meta property="og:image" content="https://i.imgur.com/gO7GsPW.jpg">
+<meta property="article:published_time" content="2023-11-22T12:19:26.000Z">
+<meta property="article:modified_time" content="2023-12-14T02:52:47.337Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/gvWrt7o.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2023/11/22/nodeJS-mongodb-install/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>MongoDB 介紹、安裝 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2023/11/22/nodeJS-mongodb-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/0vzcTMQ.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="專職 Freelancer 自由工作者，專門處理前端 Vue.js、React.js 各大小網站，製作公司官網、購物車系統、公家機構網站、LINE LIFF 活動，歡迎同好一起互相交流 😄 lala9990929@gmail.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB 介紹、安裝
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2023-11-22 20:19:26" itemprop="dateCreated datePublished" datetime="2023-11-22T20:19:26+08:00">2023-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-12-14 10:52:47" itemprop="dateModified" datetime="2023-12-14T10:52:47+08:00">2023-12-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nodeJs/" itemprop="url" rel="index"><span itemprop="name">nodeJs</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2023/11/22/nodeJS-mongodb-install/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/11/22/nodeJS-mongodb-install/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/gvWrt7o.jpg" alt="Imgur"></p>
+<p>MongoDB 是一種開源的、高性能的 NoSQL（非關聯型資料庫）資料庫系統，它以文件形式儲存資料，適合處理大量非結構化或半結構化的資料。MongoDB 使用 JSON 格式的文件來儲存資料，這使得資料存取相當靈活，並且非常適合在 Web 開發中應用。<br><br/></p>
+<a id="more"></a>
+
+<p>MongoDB 與 Node.js 是一對很好的組合。由於 Node.js 是一個非阻塞的、事件驅動的伺服器端運行環境，而 MongoDB 也是一個非阻塞的資料庫系統，這使得它們能夠非常高效地協同工作。<br><br/><br/></p>
+<h1 id="使用-MongoDB-與-Node-js-的好處"><a href="#使用-MongoDB-與-Node-js-的好處" class="headerlink" title="使用 MongoDB 與 Node.js 的好處"></a>使用 MongoDB 與 Node.js 的好處</h1><ul>
+<li><p><strong>非阻塞和高效</strong>：MongoDB 和 Node.js 都是非阻塞的，這意味著它們在處理多個請求時能夠高效地並行運行，提供快速的回應時間。</p>
+</li>
+<li><p><strong>彈性和靈活性</strong>：MongoDB 的文件型資料儲存格式非常靈活，不需要嚴格的結構定義，這讓您能夠輕鬆地修改和擴充資料模型。</p>
+</li>
+<li><p><strong>JSON 格式</strong>：MongoDB 使用 JSON 格式來儲存資料，這與 JavaScript 中的物件表示方式非常相似，使得在 Node.js 中處理資料非常自然和方便。</p>
+</li>
+<li><p><strong>簡化資料庫操作</strong>：使用 Mongoose 套件，您可以在 Node.js 中使用面向物件的方式來操作 MongoDB 資料庫，這使得資料庫操作變得簡單且易於維護。<br><br/><br/></p>
+</li>
+</ul>
+<h1 id="建立資料流程"><a href="#建立資料流程" class="headerlink" title="建立資料流程"></a>建立資料流程</h1><p>建立 <span style="color: #fc6423">Database</span> 資料庫 ⇒ 建立 <span style="color: #fc6423">Collections</span> 集合 ⇒ 建立 <span style="color: #fc6423">Documents</span> 文件(BSON)</p>
+<ul>
+<li><p><strong>Database</strong>：Database 是一個資料庫系統中的最上層容器，用於分隔不同的資料集合。</p>
+</li>
+<li><p><strong>Collections</strong>：Collections 是 MongoDB 中的文件集合，相當於傳統 SQL 資料庫中的表格。Collections 是以 JSON 文件形式儲存資料的，每個文件可以有不同的欄位，但通常具有相似的結構。</p>
+</li>
+<li><p><strong>Documents</strong>：Document 是 MongoDB 中的基本單位，用於儲存資料。每個 Document 是一個 JSON 格式的物件，可以包含各種資料類型，例如文字、數字、日期等。</p>
+<br/>
+
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://affclkr.online/track/clicks/4305/c627c2bf900222dffa8aec35dc2e9753743940ce71e8e0f1113ff40863075feb"><img src="https://imgur.com/aDoUpCz.jpg" alt="資料流程"></a><a href="https://affclkr.online/track/clicks/4305/c627c2bf900222dffa8aec35dc2e9753743940ce71e8e0f1113ff40863075feb" target="_blank" style="font-size: 16px">*圖片來自六角學院</a><br><br/><br/></p>
+<h1 id="Mongo-DB-安裝"><a href="#Mongo-DB-安裝" class="headerlink" title="Mongo DB 安裝"></a><a target="_blank" rel="noopener" href="https://www.mongodb.com/zh-cn">Mongo DB 安裝</a></h1><p>用 Community Edition 安裝，點擊 Enterprise Server</p>
+<p><img src="https://i.imgur.com/h5BmWfo.jpg" alt="Mongo DB"><br><br/><br/></p>
+<p>網站會自動對應 user 的系統，點擊 Download</p>
+<p><img src="https://i.imgur.com/gO7GsPW.jpg" alt="Mongo DB"><br><br/></p>
+<p>更詳細的安裝步驟可以參考兩位大大的文章<br><a target="_blank" rel="noopener" href="https://chalk-freedom-ec6.notion.site/Mongo-DB-6-0-Windows-96f7d1ab284c478cb7346072a796777b">Mongo DB 6.0 安裝與設定流程｜作業系統：Windows（更新版）</a><br><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10311067">使用 Node.js 串接 MongoDB (含CRUD)</a><br><br/><br/></p>
+<h1 id="mongosh-安裝"><a href="#mongosh-安裝" class="headerlink" title="mongosh 安裝"></a><a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/shell">mongosh 安裝</a></h1><p>MongoDB 6.0 以後，已經不再預設安裝 shell 工具，如果要使用 MongoDB Shell，需安裝 mongosh 來執行命令<br><br/><br/></p>
+<h1 id="本站相關文章"><a href="#本站相關文章" class="headerlink" title="本站相關文章"></a>本站相關文章</h1><p>👉 <a href="https://happy9990929.github.io/2023/09/20/nodeJS-module/">三分鐘了解 Node.js 模組原理：import 與 export 的運作</a><br>👉 <a href="https://happy9990929.github.io/2023/09/22/nodeJS-module-http/">Node.js HTTP 模組 | 建立強大的伺服器端應用程式</a><br>👉 <a href="https://happy9990929.github.io/2021/02/08/nodeJS-update/">Node.js 與 npm 更新的方式</a><br>👉 <a href="https://happy9990929.github.io/2023/09/18/nodeJS-initial/">用 Node.js 執行 JavaScript 環境，Node.js 後端開發第一步</a></p>
+
+        <br/><br/>
+        <div>
+          <h1>🚀線上課程分享</h1>
+          線上課程可以加速學習的時間，省去了不少看文件的時間XD，以下是我推薦的一些課程<br/>
+          想學習更多關於前後端的線上課程，可以參考看看。
+
+          <h2><a href="https://tinyurl.com/29pcooue" target="_blank">Hahow</a></h2>
+          Hahow 有各式各樣類型的課程，而且是無限次數觀看，對學生或上班族而言，不用擔心被時間綁住
+          <br/><br/>
+          <a target="_blank" rel="noopener" href='https://affclk.site/track/clicks/4850/ce2bc2bf910026d7fd9cbd2e8d2b891473624acd70ebe3e25826bf016f015f?subid_1=&subid_2=&subid_3=&subid_4=&subid_5=&t=https%3A%2F%2Fhahow.in%2Fapselect-event%3Fmts_s%3Dap%26mts_m%3Dao%26mts_c%3D19ap'><img src='https://affclk.site/track/imp/img/181684/ce2bc2bf910026d7fd9cbd2e8d2b891473624acd70ebe3e25826bf016f015f?subid_1=&subid_2=&subid_3=&subid_4=&subid_5=' border='0' style='max-width: 700px'/></a>
+          <br/><br/>
+
+          <h2><a href="https://affclkr.online/track/clicks/4305/c627c2bf900222dffa8aec35dc2e9753743940ce71e8e0f1113ff40863075feb" target="_blank">六角學院</a></h2>
+          如果你是初學者，非常推薦六角學院哦！<br/>
+          剛開始轉職也是上了六角的課，非常的淺顯易懂，最重要的是，隨時還有線上的助教幫你解決問題！<br/>
+
+          <a target="_blank" rel="noopener" href='https://vbtrax.com/track/clicks/4305/ce2bc2bd9e0522dcefcda67f8835ce13286849cc73e8f0ab416db6066701?subid_1=&subid_2=&subid_3=&subid_4=&subid_5='><img src='https://i.imgur.com/mqjfVQr.jpg' /></a>
+          <br/><br/>
+
+          <h2><a href="https://abzcoupon.com/track/clicks/4546/c627c2bf900222dffb83ec35dc2e9753743940ce71e8e0f1113ff40863015be8" target="_blank">Udemy</a></h2>
+          Udemy 裡的課程非常的多，品質普遍不錯，且價格都滿實惠的，CP值很高！<br/>
+          也是很多工程師推薦的線上課程網站。
+          <a target="_blank" rel="noopener" href='https://abzcoupon.com/track/clicks/4546/c627c2bf900222dffb83ec35dc2e9753743940ce71e8e0f1113ff40863015be8'><img src='https://i.imgur.com/5eOGFSF.jpg' /></a>
+        </div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/11/22/plugins-aos/" rel="prev" title="AOS捲動動畫-三分鐘教學快速上手(Animate On Scroll )">
+      <i class="fa fa-chevron-left"></i> AOS捲動動畫-三分鐘教學快速上手(Animate On Scroll )
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <div style="margin-top: 100px;">❤️</div>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 0 auto 100px;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-MongoDB-%E8%88%87-Node-js-%E7%9A%84%E5%A5%BD%E8%99%95"><span class="nav-number">1.</span> <span class="nav-text">使用 MongoDB 與 Node.js 的好處</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%B3%87%E6%96%99%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">建立資料流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mongo-DB-%E5%AE%89%E8%A3%9D"><span class="nav-number">3.</span> <span class="nav-text">Mongo DB 安裝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mongosh-%E5%AE%89%E8%A3%9D"><span class="nav-number">4.</span> <span class="nav-text">mongosh 安裝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E7%AB%99%E7%9B%B8%E9%97%9C%E6%96%87%E7%AB%A0"><span class="nav-number">5.</span> <span class="nav-text">本站相關文章</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/0vzcTMQ.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">專職 Freelancer 自由工作者，專門處理前端 Vue.js、React.js 各大小網站，製作公司官網、購物車系統、公家機構網站、LINE LIFF 活動，歡迎同好一起互相交流 😄 lala9990929@gmail.com</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">118</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">307</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2023/11/22/nodeJS-mongodb-install/";
+    this.page.identifier = "2023/11/22/nodeJS-mongodb-install/";
+    this.page.title = "MongoDB 介紹、安裝";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
