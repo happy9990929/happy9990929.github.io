@@ -39,21 +39,24 @@
     var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="MongoDB 是一種開源的、高性能的 NoSQL（非關聯型資料庫）資料庫系統，它以文件形式儲存資料，適合處理大量非結構化或半結構化的資料。MongoDB 使用 JSON 格式的文件來儲存資料，這使得資料存取相當靈活，並且非常適合在 Web 開發中應用。">
+  <meta name="description" content="MongoDB 是一種開源的、高性能的 NoSQL（非關聯型資料庫）資料庫系統，它以文件形式儲存資料，適合處理大量非結構化或半結構化的資料。MongoDB 使用 BSON 格式的文件來儲存資料，與 JSON 格式幾乎一樣，這使得資料存取相當靈活，並且非常適合在 Web 開發中應用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MongoDB 介紹、安裝">
+<meta property="og:title" content="MongoDB 安裝與介紹，什麼是 MongoDB">
 <meta property="og:url" content="https://happy9990929.github.io/2023/11/22/nodeJS-mongodb-install/index.html">
 <meta property="og:site_name" content="Lala的前端大補帖">
-<meta property="og:description" content="MongoDB 是一種開源的、高性能的 NoSQL（非關聯型資料庫）資料庫系統，它以文件形式儲存資料，適合處理大量非結構化或半結構化的資料。MongoDB 使用 JSON 格式的文件來儲存資料，這使得資料存取相當靈活，並且非常適合在 Web 開發中應用。">
+<meta property="og:description" content="MongoDB 是一種開源的、高性能的 NoSQL（非關聯型資料庫）資料庫系統，它以文件形式儲存資料，適合處理大量非結構化或半結構化的資料。MongoDB 使用 BSON 格式的文件來儲存資料，與 JSON 格式幾乎一樣，這使得資料存取相當靈活，並且非常適合在 Web 開發中應用。">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/gvWrt7o.jpg">
 <meta property="og:image" content="https://imgur.com/aDoUpCz.jpg">
 <meta property="og:image" content="https://i.imgur.com/h5BmWfo.jpg">
 <meta property="og:image" content="https://i.imgur.com/gO7GsPW.jpg">
 <meta property="article:published_time" content="2023-11-22T12:19:26.000Z">
-<meta property="article:modified_time" content="2023-12-14T02:52:47.337Z">
+<meta property="article:modified_time" content="2023-12-14T03:14:39.408Z">
 <meta property="article:author" content="Lala Wang">
 <meta property="article:tag" content="MongoDB">
+<meta property="article:tag" content="MongoDB安裝">
+<meta property="article:tag" content="mongodb download教學">
+<meta property="article:tag" content="MongoDB Shell">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.imgur.com/gvWrt7o.jpg">
 
@@ -70,7 +73,7 @@
   };
 </script>
 
-  <title>MongoDB 介紹、安裝 | Lala的前端大補帖</title>
+  <title>MongoDB 安裝與介紹，什麼是 MongoDB | Lala的前端大補帖</title>
   
 
 
@@ -226,7 +229,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          MongoDB 介紹、安裝
+          MongoDB 安裝與介紹，什麼是 MongoDB
         </h1>
 
         <div class="post-meta">
@@ -243,7 +246,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2023-12-14 10:52:47" itemprop="dateModified" datetime="2023-12-14T10:52:47+08:00">2023-12-14</time>
+                <time title="修改時間：2023-12-14 11:14:39" itemprop="dateModified" datetime="2023-12-14T11:14:39+08:00">2023-12-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -288,7 +291,7 @@
 
       
         <p><img src="https://i.imgur.com/gvWrt7o.jpg" alt="Imgur"></p>
-<p>MongoDB 是一種開源的、高性能的 NoSQL（非關聯型資料庫）資料庫系統，它以文件形式儲存資料，適合處理大量非結構化或半結構化的資料。MongoDB 使用 JSON 格式的文件來儲存資料，這使得資料存取相當靈活，並且非常適合在 Web 開發中應用。<br><br/></p>
+<p>MongoDB 是一種開源的、高性能的 NoSQL（非關聯型資料庫）資料庫系統，它以文件形式儲存資料，適合處理大量非結構化或半結構化的資料。MongoDB 使用 BSON 格式的文件來儲存資料，與 JSON 格式幾乎一樣，這使得資料存取相當靈活，並且非常適合在 Web 開發中應用。<br><br/></p>
 <a id="more"></a>
 
 <p>MongoDB 與 Node.js 是一對很好的組合。由於 Node.js 是一個非阻塞的、事件驅動的伺服器端運行環境，而 MongoDB 也是一個非阻塞的資料庫系統，這使得它們能夠非常高效地協同工作。<br><br/><br/></p>
@@ -297,18 +300,18 @@
 </li>
 <li><p><strong>彈性和靈活性</strong>：MongoDB 的文件型資料儲存格式非常靈活，不需要嚴格的結構定義，這讓您能夠輕鬆地修改和擴充資料模型。</p>
 </li>
-<li><p><strong>JSON 格式</strong>：MongoDB 使用 JSON 格式來儲存資料，這與 JavaScript 中的物件表示方式非常相似，使得在 Node.js 中處理資料非常自然和方便。</p>
+<li><p><strong>BSON 格式</strong>：MongoDB 使用 BSON 格式來儲存資料，這與 JSON 格式幾乎一樣，使得在 Node.js 中處理資料非常自然和方便。</p>
 </li>
 <li><p><strong>簡化資料庫操作</strong>：使用 Mongoose 套件，您可以在 Node.js 中使用面向物件的方式來操作 MongoDB 資料庫，這使得資料庫操作變得簡單且易於維護。<br><br/><br/></p>
 </li>
 </ul>
 <h1 id="建立資料流程"><a href="#建立資料流程" class="headerlink" title="建立資料流程"></a>建立資料流程</h1><p>建立 <span style="color: #fc6423">Database</span> 資料庫 ⇒ 建立 <span style="color: #fc6423">Collections</span> 集合 ⇒ 建立 <span style="color: #fc6423">Documents</span> 文件(BSON)</p>
 <ul>
-<li><p><strong>Database</strong>：Database 是一個資料庫系統中的最上層容器，用於分隔不同的資料集合。</p>
+<li><p><strong>Database</strong>：資料庫，Database 是一個資料庫系統中的最上層容器，用於分隔不同的資料集合。</p>
 </li>
-<li><p><strong>Collections</strong>：Collections 是 MongoDB 中的文件集合，相當於傳統 SQL 資料庫中的表格。Collections 是以 JSON 文件形式儲存資料的，每個文件可以有不同的欄位，但通常具有相似的結構。</p>
+<li><p><strong>Collections</strong>：資料表，Collections 是 MongoDB 中的文件集合，一個 databse 中通常會有數個 collection。</p>
 </li>
-<li><p><strong>Documents</strong>：Document 是 MongoDB 中的基本單位，用於儲存資料。每個 Document 是一個 JSON 格式的物件，可以包含各種資料類型，例如文字、數字、日期等。</p>
+<li><p><strong>Documents</strong>：資料，Document 是 MongoDB 中的基本單位，用於存放資料。通常一個 collection 中會有數筆 document，也因此我們稱 MongoDB 是 document database。</p>
 <br/>
 
 </li>
@@ -317,10 +320,10 @@
 <h1 id="Mongo-DB-安裝"><a href="#Mongo-DB-安裝" class="headerlink" title="Mongo DB 安裝"></a><a target="_blank" rel="noopener" href="https://www.mongodb.com/zh-cn">Mongo DB 安裝</a></h1><p>用 Community Edition 安裝，點擊 Enterprise Server</p>
 <p><img src="https://i.imgur.com/h5BmWfo.jpg" alt="Mongo DB"><br><br/><br/></p>
 <p>網站會自動對應 user 的系統，點擊 Download</p>
-<p><img src="https://i.imgur.com/gO7GsPW.jpg" alt="Mongo DB"><br><br/></p>
-<p>更詳細的安裝步驟可以參考兩位大大的文章<br><a target="_blank" rel="noopener" href="https://chalk-freedom-ec6.notion.site/Mongo-DB-6-0-Windows-96f7d1ab284c478cb7346072a796777b">Mongo DB 6.0 安裝與設定流程｜作業系統：Windows（更新版）</a><br><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10311067">使用 Node.js 串接 MongoDB (含CRUD)</a><br><br/><br/></p>
+<p><img src="https://i.imgur.com/gO7GsPW.jpg" alt="Mongo DB"><br><br/><br/></p>
 <h1 id="mongosh-安裝"><a href="#mongosh-安裝" class="headerlink" title="mongosh 安裝"></a><a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/shell">mongosh 安裝</a></h1><p>MongoDB 6.0 以後，已經不再預設安裝 shell 工具，如果要使用 MongoDB Shell，需安裝 mongosh 來執行命令<br><br/><br/></p>
-<h1 id="本站相關文章"><a href="#本站相關文章" class="headerlink" title="本站相關文章"></a>本站相關文章</h1><p>👉 <a href="https://happy9990929.github.io/2023/09/20/nodeJS-module/">三分鐘了解 Node.js 模組原理：import 與 export 的運作</a><br>👉 <a href="https://happy9990929.github.io/2023/09/22/nodeJS-module-http/">Node.js HTTP 模組 | 建立強大的伺服器端應用程式</a><br>👉 <a href="https://happy9990929.github.io/2021/02/08/nodeJS-update/">Node.js 與 npm 更新的方式</a><br>👉 <a href="https://happy9990929.github.io/2023/09/18/nodeJS-initial/">用 Node.js 執行 JavaScript 環境，Node.js 後端開發第一步</a></p>
+<h1 id="本站相關文章"><a href="#本站相關文章" class="headerlink" title="本站相關文章"></a>本站相關文章</h1><p>👉 <a href="https://happy9990929.github.io/2023/09/20/nodeJS-module/">三分鐘了解 Node.js 模組原理：import 與 export 的運作</a><br>👉 <a href="https://happy9990929.github.io/2023/09/22/nodeJS-module-http/">Node.js HTTP 模組 | 建立強大的伺服器端應用程式</a><br>👉 <a href="https://happy9990929.github.io/2021/02/08/nodeJS-update/">Node.js 與 npm 更新的方式</a><br>👉 <a href="https://happy9990929.github.io/2023/09/18/nodeJS-initial/">用 Node.js 執行 JavaScript 環境，Node.js 後端開發第一步</a><br><br/><br/></p>
+<h1 id="參考文獻"><a href="#參考文獻" class="headerlink" title="參考文獻"></a>參考文獻</h1><p><a target="_blank" rel="noopener" href="https://chalk-freedom-ec6.notion.site/Mongo-DB-6-0-Windows-96f7d1ab284c478cb7346072a796777b">Mongo DB 6.0 安裝與設定流程｜作業系統：Windows（更新版）</a><br><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10311067">使用 Node.js 串接 MongoDB (含CRUD)</a></p>
 
         <br/><br/>
         <div>
@@ -355,6 +358,9 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+              <a href="/tags/MongoDB%E5%AE%89%E8%A3%9D/" rel="tag"># MongoDB安裝</a>
+              <a href="/tags/mongodb-download%E6%95%99%E5%AD%B8/" rel="tag"># mongodb download教學</a>
+              <a href="/tags/MongoDB-Shell/" rel="tag"># MongoDB Shell</a>
           </div>
 
         
@@ -447,7 +453,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-MongoDB-%E8%88%87-Node-js-%E7%9A%84%E5%A5%BD%E8%99%95"><span class="nav-number">1.</span> <span class="nav-text">使用 MongoDB 與 Node.js 的好處</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%B3%87%E6%96%99%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">建立資料流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mongo-DB-%E5%AE%89%E8%A3%9D"><span class="nav-number">3.</span> <span class="nav-text">Mongo DB 安裝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mongosh-%E5%AE%89%E8%A3%9D"><span class="nav-number">4.</span> <span class="nav-text">mongosh 安裝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E7%AB%99%E7%9B%B8%E9%97%9C%E6%96%87%E7%AB%A0"><span class="nav-number">5.</span> <span class="nav-text">本站相關文章</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-MongoDB-%E8%88%87-Node-js-%E7%9A%84%E5%A5%BD%E8%99%95"><span class="nav-number">1.</span> <span class="nav-text">使用 MongoDB 與 Node.js 的好處</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%B3%87%E6%96%99%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">建立資料流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mongo-DB-%E5%AE%89%E8%A3%9D"><span class="nav-number">3.</span> <span class="nav-text">Mongo DB 安裝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mongosh-%E5%AE%89%E8%A3%9D"><span class="nav-number">4.</span> <span class="nav-text">mongosh 安裝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E7%AB%99%E7%9B%B8%E9%97%9C%E6%96%87%E7%AB%A0"><span class="nav-number">5.</span> <span class="nav-text">本站相關文章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%8D%BB"><span class="nav-number">6.</span> <span class="nav-text">參考文獻</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -476,7 +482,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">307</span>
+        <span class="site-state-item-count">310</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -634,7 +640,7 @@
   var disqus_config = function() {
     this.page.url = "https://happy9990929.github.io/2023/11/22/nodeJS-mongodb-install/";
     this.page.identifier = "2023/11/22/nodeJS-mongodb-install/";
-    this.page.title = "MongoDB 介紹、安裝";
+    this.page.title = "MongoDB 安裝與介紹，什麼是 MongoDB";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
