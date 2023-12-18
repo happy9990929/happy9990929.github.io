@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/yLTIWcF.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="MongoDB 擁有兩個實用工具分別為 Compass 和 Atlas。Compass 提供直觀、有效的數據分析工具，使我們能夠深入了解數據結構並輕鬆進行查詢。Atlas 作為 MongoDB 的托管服務，讓開發人員能夠輕鬆地部署、運營和擴展MongoDB資料庫。本文將介紹這兩者在數據管理中的功能和價值，探討它們如何協助我們更有效地處理和應用數據。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB常用工具-Compass GUI 資料庫，Atlas 雲端資料庫">
+<meta property="og:url" content="https://happy9990929.github.io/2023/12/17/nodeJS-compass-atlas/index.html">
+<meta property="og:site_name" content="Lala的前端大補帖">
+<meta property="og:description" content="MongoDB 擁有兩個實用工具分別為 Compass 和 Atlas。Compass 提供直觀、有效的數據分析工具，使我們能夠深入了解數據結構並輕鬆進行查詢。Atlas 作為 MongoDB 的托管服務，讓開發人員能夠輕鬆地部署、運營和擴展MongoDB資料庫。本文將介紹這兩者在數據管理中的功能和價值，探討它們如何協助我們更有效地處理和應用數據。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/uiQYtLf.jpg">
+<meta property="og:image" content="https://imgur.com/InBZXNp.jpg">
+<meta property="og:image" content="https://imgur.com/OXzTyHc.jpg">
+<meta property="og:image" content="https://imgur.com/yqOV9Ke.jpg">
+<meta property="og:image" content="https://imgur.com/wGAvPG8.jpg">
+<meta property="og:image" content="https://imgur.com/EKHTIs2.jpg">
+<meta property="og:image" content="https://imgur.com/YZxGYos.jpg">
+<meta property="og:image" content="https://imgur.com/0NoUk34.jpg">
+<meta property="og:image" content="https://imgur.com/IM14xnW.jpg">
+<meta property="og:image" content="https://imgur.com/koVEqEw.jpg">
+<meta property="og:image" content="https://imgur.com/OuxwV9S.jpg">
+<meta property="og:image" content="https://imgur.com/pYauiwo.jpg">
+<meta property="og:image" content="https://imgur.com/qDlrHWj.jpg">
+<meta property="og:image" content="https://imgur.com/7jmKPhv.jpg">
+<meta property="og:image" content="https://imgur.com/S88ABw4.jpg">
+<meta property="article:published_time" content="2023-12-17T13:55:53.000Z">
+<meta property="article:modified_time" content="2023-12-18T07:17:14.936Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="Compass">
+<meta property="article:tag" content="Atlas">
+<meta property="article:tag" content="MongoDB Compass教學">
+<meta property="article:tag" content="MongoDB Atlas教學">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/uiQYtLf.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2023/12/17/nodeJS-compass-atlas/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>MongoDB常用工具-Compass GUI 資料庫，Atlas 雲端資料庫 | Lala的前端大補帖</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala的前端大補帖</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2023/12/17/nodeJS-compass-atlas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/0vzcTMQ.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="專職 Freelancer 自由工作者，專門處理前端 Vue.js、React.js 各大小網站，製作公司官網、購物車系統、公家機構網站、LINE LIFF 活動，歡迎同好一起互相交流 😄 lala9990929@gmail.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala的前端大補帖">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB常用工具-Compass GUI 資料庫，Atlas 雲端資料庫
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2023-12-17 21:55:53" itemprop="dateCreated datePublished" datetime="2023-12-17T21:55:53+08:00">2023-12-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-12-18 15:17:14" itemprop="dateModified" datetime="2023-12-18T15:17:14+08:00">2023-12-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nodeJs/" itemprop="url" rel="index"><span itemprop="name">nodeJs</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2023/12/17/nodeJS-compass-atlas/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/12/17/nodeJS-compass-atlas/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/uiQYtLf.jpg" alt="nodeJS"></p>
+<p>MongoDB 擁有兩個實用工具分別為 Compass 和 Atlas。<br>Compass 提供直觀、有效的數據分析工具，使我們能夠深入了解數據結構並輕鬆進行查詢。Atlas 作為 MongoDB 的托管服務，讓開發人員能夠輕鬆地部署、運營和擴展MongoDB資料庫。本文將介紹這兩者在數據管理中的功能和價值，探討它們如何協助我們更有效地處理和應用數據。</p>
+<a id="more"></a>
+<br />
+
+<h1 id="Compass-MongoDB-GUI-資料庫可視化軟體"><a href="#Compass-MongoDB-GUI-資料庫可視化軟體" class="headerlink" title="Compass - MongoDB GUI 資料庫可視化軟體"></a>Compass - MongoDB GUI 資料庫可視化軟體</h1><p>MongoDB Compass 是一個用於 MongoDB 資料庫的官方圖形用戶界面(GUI)工具，它可以幫助用戶更輕鬆地管理和操作 MongoDB 資料庫。MongoDB Compass 提供了一個直觀的方式來查詢、編輯、可視化和分析 MongoDB 中的數據。以下是 MongoDB Compass 的主要特點和功能：</p>
+<ul>
+<li><p><strong>數據瀏覽和查詢：</strong> 允許用戶瀏覽他們的數據集，查詢文檔，並使用一個直觀的用戶界面來構建和執行查詢。用戶可以使用 MongoDB 的查詢語言來檢索需要的數據。</p>
+</li>
+<li><p><strong>實時數據庫監控：</strong> 提供了一個實時監控面板，用戶可以在其中查看 MongoDB 服務器的運行狀況和性能指標。這有助於識別潛在的性能問題並進行調優。</p>
+</li>
+<li><p><strong>地理空間數據支持：</strong> 具有對地理空間數據的強大支持，用戶可以查詢和可視化地理信息，這對於需要處理地理空間數據的應用程序非常有用。</p>
+</li>
+<li><p><strong>集合和文檔管理：</strong> 用戶可以創建、修改和刪除集合和文檔，而無需進入 MongoDB 的命令行界面。</p>
+</li>
+<li><p><strong>視覺化查詢計劃：</strong> 可以生成查詢的執行計劃，並以可視化的方式顯示。這有助於用戶理解查詢如何在 MongoDB 中執行，並優化其性能。</p>
+</li>
+<li><p><strong>索引管理：</strong> 允許用戶管理數據庫中的索引，並為查詢性能進行優化</p>
+</li>
+<li><p><strong>自動完成和代碼生成：</strong> 在查詢編輯器中，提供了自動完成和代碼生成功能，幫助用戶更輕鬆地構建查詢。</p>
+</li>
+<li><p><strong>文檔驗證和模式探索：</strong> 用戶可以驗證文檔是否符合特定的模式，這在數據質量控制方面很有用。同時，它還可以幫助用戶探索數據集中的模式。</p>
+</li>
+<li><p><strong>安全性：</strong> 支援 MongoDB 的安全功能，例如訪問控制、用戶驗證等，以確保數據的安全性。</p>
+<br />
+
+</li>
+</ul>
+<h2 id="下載-Compass"><a href="#下載-Compass" class="headerlink" title="下載 Compass"></a><a target="_blank" rel="noopener" href="https://www.mongodb.com/">下載 Compass</a></h2><p>在<a target="_blank" rel="noopener" href="https://www.mongodb.com/">官網</a>可以點選 Products ⇒ Tools ⇒ Compass 找到，並下載</p>
+<p><img src="https://imgur.com/InBZXNp.jpg" alt="nodeJS"></p>
+<br />
+
+<p>安裝完後從桌面打開 Compass，<br>輸入你的 DB URI，如沒輸入 URI 預設會是 27017 的 port 號</p>
+<p><img src="https://imgur.com/OXzTyHc.jpg" alt="nodeJS"></p>
+<br />
+
+<p>接著點擊 Connect 就會開始連接囉!</p>
+<p><img src="https://imgur.com/yqOV9Ke.jpg" alt="nodeJS"><br><br /><br /></p>
+<h1 id="Altlas-雲端資料庫"><a href="#Altlas-雲端資料庫" class="headerlink" title="Altlas 雲端資料庫"></a>Altlas 雲端資料庫</h1><p>Atlas 是 MongoDB 提供的一個全托管的雲端資料庫服務，旨在讓開發人員能夠輕鬆地部署、運營和擴展 MongoDB 資料庫，無需擔心基礎架構的管理和維護。Atlas 提供了一個方便且易於使用的平台，讓用戶可以專注於應用程序的開發，而不必擔心資料庫的管理和運維。以下是 MongoDB Atlas 的主要特點和功能：</p>
+<ul>
+<li><p><strong>全托管服務：</strong> Atlas 是一個全托管的資料庫服務，MongoDB 團隊會負責管理硬體、軟體和基礎架構。這樣的設計使得用戶不需要擔心伺服器的設置、配置、升級和維護。</p>
+</li>
+<li><p><strong>自動擴展和調優：</strong> 可以自動擴展以應對數據量的增加，並且能夠自動調優以提供最佳的性能。這消除了擴展和性能優化方面的煩惱。</p>
+</li>
+<li><p><strong>高可用性和容錯性：</strong> 提供了高可用性的配置，包括數據複製和自動故障轉移，確保您的應用程序在發生故障時能夠繼續運行。</p>
+</li>
+<li><p><strong>安全性：</strong> 提供多層次的安全性功能，包括數據加密、身份驗證、訪問控制等，以確保您的數據得到保護。</p>
+</li>
+<li><p><strong>地理分佈：</strong> 支持多個地區的部署，這意味著您可以將數據部署在不同的地理位置以滿足地區性要求。</p>
+</li>
+<li><p><strong>備份和恢復：</strong> 提供定期的自動備份和恢復功能，您可以輕鬆地回復到以前的數據狀態。</p>
+</li>
+<li><p><strong>監控和警報：</strong> 提供了監控和警報功能，您可以實時監控數據庫的性能和狀態，並在需要時接收警報。</p>
+</li>
+<li><p><strong>可視化管理界面：</strong> 提供了一個直觀的管理界面，用於設置、配置和監控資料庫。<br><br /><br /></p>
+</li>
+</ul>
+<h2 id="註冊-Altlas"><a href="#註冊-Altlas" class="headerlink" title="註冊 Altlas"></a>註冊 <a target="_blank" rel="noopener" href="https://www.mongodb.com/cloud/atlas/register">Altlas</a></h2><h2 id="1-本站註冊或是第三方登入註冊，並同意隱私權政策及服務條款"><a href="#1-本站註冊或是第三方登入註冊，並同意隱私權政策及服務條款" class="headerlink" title="1. 本站註冊或是第三方登入註冊，並同意隱私權政策及服務條款"></a>1. 本站註冊或是第三方登入註冊，並同意隱私權政策及服務條款</h2><p><img src="https://imgur.com/wGAvPG8.jpg" alt="Altlas"><br><br /></p>
+<h2 id="2-填寫使用目的"><a href="#2-填寫使用目的" class="headerlink" title="2. 填寫使用目的"></a>2. 填寫使用目的</h2><p><img src="https://imgur.com/EKHTIs2.jpg" alt="Altlas"><br><br /></p>
+<h2 id="3-選用推薦的地區"><a href="#3-選用推薦的地區" class="headerlink" title="3. 選用推薦的地區"></a>3. 選用推薦的地區</h2><p>可直接選擇系統建議的主機位置，接著 Create<br><img src="https://imgur.com/YZxGYos.jpg" alt="Altlas"><br><br /></p>
+<h2 id="4-建立-DB-的-username、password"><a href="#4-建立-DB-的-username、password" class="headerlink" title="4. 建立 DB 的 username、password"></a>4. 建立 DB 的 username、password</h2><p><img src="https://imgur.com/0NoUk34.jpg" alt="Altlas"><br>接著 Create User<br><br /></p>
+<h2 id="5-註冊完成"><a href="#5-註冊完成" class="headerlink" title="5. 註冊完成"></a>5. 註冊完成</h2><p>點擊 Database 後可以看到你已經有一個 Cluster0 的 Database 了</p>
+<p><img src="https://imgur.com/IM14xnW.jpg" alt="Altlas"></p>
+<hr>
+<h1 id="Altas-整合-compass-流程"><a href="#Altas-整合-compass-流程" class="headerlink" title="Altas 整合 compass 流程"></a>Altas 整合 compass 流程</h1><h2 id="1-設定-IP-位置"><a href="#1-設定-IP-位置" class="headerlink" title="1. 設定 IP 位置"></a>1. 設定 IP 位置</h2><p><img src="https://imgur.com/koVEqEw.jpg" alt="Altlas"><br><br /></p>
+<h2 id="2-選擇連線方法"><a href="#2-選擇連線方法" class="headerlink" title="2. 選擇連線方法"></a>2. 選擇連線方法</h2><p>點 Database =&gt; connect</p>
+<p><img src="https://imgur.com/OuxwV9S.jpg" alt="Altlas"><br><br /></p>
+<p>選擇連接 Compass</p>
+<p><img src="https://imgur.com/pYauiwo.jpg" alt="Altlas"><br><br /></p>
+<p>複製 mongodb 路徑</p>
+<p><img src="https://imgur.com/qDlrHWj.jpg" alt="Altlas"><br><br /></p>
+<h2 id="3-到-Compass-將路徑貼上"><a href="#3-到-Compass-將路徑貼上" class="headerlink" title="3. 到 Compass 將路徑貼上"></a>3. 到 Compass 將路徑貼上</h2><p>並將下面的&lt;password&gt;改成自己設定的密碼</p>
+<p><img src="https://imgur.com/7jmKPhv.jpg" alt="Compass"><br><br /></p>
+<p>點擊 Connect 後，Compass 就會成功連接 DB 囉!<br><img src="https://imgur.com/S88ABw4.jpg" alt="Compass"></p>
+
+        <br/><br/>
+        <div>
+          <h1>🚀線上課程分享</h1>
+          線上課程可以加速學習的時間，省去了不少看文件的時間XD，以下是我推薦的一些課程<br/>
+          想學習更多關於前後端的線上課程，可以參考看看。
+
+          <h2><a href="https://tinyurl.com/29pcooue" target="_blank">Hahow</a></h2>
+          Hahow 有各式各樣類型的課程，而且是無限次數觀看，對學生或上班族而言，不用擔心被時間綁住
+          <br/><br/>
+          <a target="_blank" rel="noopener" href='https://affclk.site/track/clicks/4850/ce2bc2bf910026d7fd9cbd2e8d2b891473624acd70ebe3e25826bf016f015f?subid_1=&subid_2=&subid_3=&subid_4=&subid_5=&t=https%3A%2F%2Fhahow.in%2Fapselect-event%3Fmts_s%3Dap%26mts_m%3Dao%26mts_c%3D19ap'><img src='https://affclk.site/track/imp/img/181684/ce2bc2bf910026d7fd9cbd2e8d2b891473624acd70ebe3e25826bf016f015f?subid_1=&subid_2=&subid_3=&subid_4=&subid_5=' border='0' style='max-width: 700px'/></a>
+          <br/><br/>
+
+          <h2><a href="https://affclkr.online/track/clicks/4305/c627c2bf900222dffa8aec35dc2e9753743940ce71e8e0f1113ff40863075feb" target="_blank">六角學院</a></h2>
+          如果你是初學者，非常推薦六角學院哦！<br/>
+          剛開始轉職也是上了六角的課，非常的淺顯易懂，最重要的是，隨時還有線上的助教幫你解決問題！<br/>
+
+          <a target="_blank" rel="noopener" href='https://vbtrax.com/track/clicks/4305/ce2bc2bd9e0522dcefcda67f8835ce13286849cc73e8f0ab416db6066701?subid_1=&subid_2=&subid_3=&subid_4=&subid_5='><img src='https://i.imgur.com/mqjfVQr.jpg' /></a>
+          <br/><br/>
+
+          <h2><a href="https://abzcoupon.com/track/clicks/4546/c627c2bf900222dffb83ec35dc2e9753743940ce71e8e0f1113ff40863015be8" target="_blank">Udemy</a></h2>
+          Udemy 裡的課程非常的多，品質普遍不錯，且價格都滿實惠的，CP值很高！<br/>
+          也是很多工程師推薦的線上課程網站。
+          <a target="_blank" rel="noopener" href='https://abzcoupon.com/track/clicks/4546/c627c2bf900222dffb83ec35dc2e9753743940ce71e8e0f1113ff40863015be8'><img src='https://i.imgur.com/5eOGFSF.jpg' /></a>
+        </div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Compass/" rel="tag"># Compass</a>
+              <a href="/tags/Atlas/" rel="tag"># Atlas</a>
+              <a href="/tags/MongoDB-Compass%E6%95%99%E5%AD%B8/" rel="tag"># MongoDB Compass教學</a>
+              <a href="/tags/MongoDB-Atlas%E6%95%99%E5%AD%B8/" rel="tag"># MongoDB Atlas教學</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/11/22/nodeJS-mongodb-install/" rel="prev" title="MongoDB 安裝與介紹，什麼是 MongoDB">
+      <i class="fa fa-chevron-left"></i> MongoDB 安裝與介紹，什麼是 MongoDB
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <div style="margin-top: 100px;">❤️</div>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 0 auto 100px;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Compass-MongoDB-GUI-%E8%B3%87%E6%96%99%E5%BA%AB%E5%8F%AF%E8%A6%96%E5%8C%96%E8%BB%9F%E9%AB%94"><span class="nav-number">1.</span> <span class="nav-text">Compass - MongoDB GUI 資料庫可視化軟體</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89-Compass"><span class="nav-number">1.1.</span> <span class="nav-text">下載 Compass</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Altlas-%E9%9B%B2%E7%AB%AF%E8%B3%87%E6%96%99%E5%BA%AB"><span class="nav-number">2.</span> <span class="nav-text">Altlas 雲端資料庫</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%BB%E5%86%8A-Altlas"><span class="nav-number">2.1.</span> <span class="nav-text">註冊 Altlas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%9C%AC%E7%AB%99%E8%A8%BB%E5%86%8A%E6%88%96%E6%98%AF%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%85%A5%E8%A8%BB%E5%86%8A%EF%BC%8C%E4%B8%A6%E5%90%8C%E6%84%8F%E9%9A%B1%E7%A7%81%E6%AC%8A%E6%94%BF%E7%AD%96%E5%8F%8A%E6%9C%8D%E5%8B%99%E6%A2%9D%E6%AC%BE"><span class="nav-number">2.2.</span> <span class="nav-text">1. 本站註冊或是第三方登入註冊，並同意隱私權政策及服務條款</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%A1%AB%E5%AF%AB%E4%BD%BF%E7%94%A8%E7%9B%AE%E7%9A%84"><span class="nav-number">2.3.</span> <span class="nav-text">2. 填寫使用目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%81%B8%E7%94%A8%E6%8E%A8%E8%96%A6%E7%9A%84%E5%9C%B0%E5%8D%80"><span class="nav-number">2.4.</span> <span class="nav-text">3. 選用推薦的地區</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%BB%BA%E7%AB%8B-DB-%E7%9A%84-username%E3%80%81password"><span class="nav-number">2.5.</span> <span class="nav-text">4. 建立 DB 的 username、password</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%A8%BB%E5%86%8A%E5%AE%8C%E6%88%90"><span class="nav-number">2.6.</span> <span class="nav-text">5. 註冊完成</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Altas-%E6%95%B4%E5%90%88-compass-%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">Altas 整合 compass 流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%A8%AD%E5%AE%9A-IP-%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">1. 設定 IP 位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%81%B8%E6%93%87%E9%80%A3%E7%B7%9A%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">2. 選擇連線方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%88%B0-Compass-%E5%B0%87%E8%B7%AF%E5%BE%91%E8%B2%BC%E4%B8%8A"><span class="nav-number">3.3.</span> <span class="nav-text">3. 到 Compass 將路徑貼上</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/0vzcTMQ.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">專職 Freelancer 自由工作者，專門處理前端 Vue.js、React.js 各大小網站，製作公司官網、購物車系統、公家機構網站、LINE LIFF 活動，歡迎同好一起互相交流 😄 lala9990929@gmail.com</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">119</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">314</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2023/12/17/nodeJS-compass-atlas/";
+    this.page.identifier = "2023/12/17/nodeJS-compass-atlas/";
+    this.page.title = "MongoDB常用工具-Compass GUI 資料庫，Atlas 雲端資料庫";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
