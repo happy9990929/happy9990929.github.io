@@ -50,7 +50,7 @@
 <meta property="og:image" content="https://imgur.com/fvBwLuq.jpg">
 <meta property="og:image" content="https://imgur.com/9tjZcBW.jpg">
 <meta property="article:published_time" content="2024-03-04T13:15:22.000Z">
-<meta property="article:modified_time" content="2024-03-04T13:40:07.713Z">
+<meta property="article:modified_time" content="2024-03-04T14:20:59.930Z">
 <meta property="article:author" content="Lala Wang">
 <meta property="article:tag" content="React Material UI Modal">
 <meta property="article:tag" content="React Material UI Modal fixed move">
@@ -238,7 +238,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2024-03-04 21:15:22 / 修改時間：21:40:07" itemprop="dateCreated datePublished" datetime="2024-03-04T21:15:22+08:00">2024-03-04</time>
+              <time title="創建時間：2024-03-04 21:15:22 / 修改時間：22:20:59" itemprop="dateCreated datePublished" datetime="2024-03-04T21:15:22+08:00">2024-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,9 +294,9 @@
 <h1 id="錯誤原因"><a href="#錯誤原因" class="headerlink" title="# 錯誤原因"></a># 錯誤原因</h1><p>一旦打開模態框，滾動就會被阻止，Material UI 自動在 body 的地方會自動加上 <code>padding-right: 17px;</code>，讓畫面不隨著卷軸隱藏而移動<br><img src="https://imgur.com/fvBwLuq.jpg" alt="React Material UI Modal"><br><br/></p>
 <p>但 fixed 定位的元素沒辦法吃到此設定，因此會隨著卷軸隱藏而往右移動<br><br/><br><br/></p>
 <h1 id="如何解決"><a href="#如何解決" class="headerlink" title="# 如何解決"></a># 如何解決</h1><p>兩種方法可以避免這個問題</p>
-<h2 id="1-Dialog-設定-disableScrollLock"><a href="#1-Dialog-設定-disableScrollLock" class="headerlink" title="1. Dialog 設定 disableScrollLock"></a>1. Dialog 設定 disableScrollLock</h2><p>為了不讓內容移動，我們不隱藏 Modal 的卷軸</p>
+<h2 id="1-Dialog-設定-disableScrollLock"><a href="#1-Dialog-設定-disableScrollLock" class="headerlink" title="1. Dialog 設定 disableScrollLock"></a>1. Dialog 設定 disableScrollLock</h2><p>為了不讓 fixed 元素移動，我們不隱藏 Modal 的卷軸</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Dialog</span><br><span class="line">  disableScrollLock</span><br><span class="line">&gt;</span><br><span class="line">  <span class="comment">// 省略程式碼</span></span><br><span class="line">&lt;/Dialog&gt;</span><br></pre></td></tr></table></figure>
-<p>在 Dialog 設定 disableScrollLock 之後，就不會隱藏卷軸，內容也就不會隨著移動了<br><br/><br><br/></p>
+<p>在 Dialog 設定 disableScrollLock 之後，就不會隱藏卷軸，fixed 元素也就不會隨著移動了<br><br/><br><br/></p>
 <h2 id="2-fixed-元素加入類別-mui-fixed"><a href="#2-fixed-元素加入類別-mui-fixed" class="headerlink" title="2. fixed 元素加入類別 .mui-fixed"></a>2. fixed 元素加入類別 <code>.mui-fixed</code></h2><p>希望卷軸還是可以隱藏，防止與背景互動，也可以在 fixed 元素加上全域的類別 <code>.mui-fixed</code></p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Box className=&#123;<span class="string">`<span class="subst">$&#123;classes.fixedFilter&#125;</span> mui-fixed`</span>&#125;&gt;</span><br><span class="line">  <span class="comment">// 省略程式碼</span></span><br><span class="line">&lt;/Box&gt;</span><br></pre></td></tr></table></figure>
 <p>可以發現 Material UI 自動在 fixed 元素上，幫我們再加上了 17px，變成 <code>padding-right: 67px;</code> (原本已有 50px)<br><img src="https://imgur.com/9tjZcBW.jpg" alt="React Material UI Modal"></p>
