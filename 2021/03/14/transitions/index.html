@@ -300,13 +300,6 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.bounce-enter-active</span> &#123;</span><br><span class="line">  <span class="attribute">animation</span>: bounce-in <span class="number">0.5s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.bounce-leave-active</span> &#123;</span><br><span class="line">  <span class="attribute">animation</span>: bounce-in <span class="number">0.5s</span> reverse;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@keyframes</span> bounce-in &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1.25</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="有-v-for-時需用-transition-group"><a href="#有-v-for-時需用-transition-group" class="headerlink" title="有 v-for 時需用 transition-group"></a>有 v-for 時需用 transition-group</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;list-demo&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;add&quot;</span>&gt;</span>Add<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;remove&quot;</span>&gt;</span>Remove<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">transition-group</span> <span class="attr">name</span>=<span class="string">&quot;list&quot;</span> <span class="attr">tag</span>=<span class="string">&quot;p&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-for</span>=<span class="string">&quot;item in items&quot;</span> <span class="attr">v-bind:key</span>=<span class="string">&quot;item&quot;</span> <span class="attr">class</span>=<span class="string">&quot;list-item&quot;</span>&gt;</span></span><br><span class="line">      &#123;&#123; item &#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">transition-group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
         <br/><br/>
-        <h1> Hey！想學習更多前端知識嗎? </h1>
-        最近 Lala 開了前端課程 👉<a href="https://www.accupass.com/event/2407061431532017444968" target="_blank">【實地掌握RWD - 12小時新手實戰班】</a>👈<br/>無論您是 0 基礎新手，又或是想學 RWD 的初學者，<br/>
-        我們將帶你從零開始，深入了解並掌握 RWD 響應式網頁設計的核心技術，快來一起看看吧 😊<br/><br/>
-
-        <a target="_blank" rel="noopener" href='https://www.accupass.com/event/2407061431532017444968'><img src='https://imgur.com/tX60aOO.jpg' border='0' width: 100%'/></a>
-        <br/><br/>
-
         <div>
           <h1>🚀線上課程分享</h1>
           線上課程可以加速學習的時間，省去了不少看文件的時間XD，以下是我推薦的一些課程<br/>
@@ -452,7 +445,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -465,7 +458,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">355</span>
+        <span class="site-state-item-count">356</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
