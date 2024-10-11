@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://happy9990929.github.io/2024/10/08/css-css-selector/</loc>
+    
+    <lastmod>2024-10-11</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/2024/10/11/css-type-selectors/</loc>
     
     <lastmod>2024-10-11</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://happy9990929.github.io/2024/10/10/css-universal-selector/</loc>
     
     <lastmod>2024-10-10</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/2024/10/08/css-css-selector/</loc>
-    
-    <lastmod>2024-10-09</lastmod>
     
   </url>
   
@@ -998,6 +998,13 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/Permission-to-git-denied-to-github-actions-bot/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/defineProps/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
@@ -1006,27 +1013,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/defineEmits/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/React-Material-UI-Modal/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/React-Material-UI-Modal-fixed-move/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/Material-UI-Modal-padding/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1054,13 +1040,6 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/Permission-to-git-denied-to-github-actions-bot/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/swiper-slideTo-is-not-a-function/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
@@ -1076,6 +1055,27 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/swiper-slideTo-not-working/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/React-Material-UI-Modal/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/React-Material-UI-Modal-fixed-move/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/Material-UI-Modal-padding/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1152,6 +1152,20 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/CSS/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/CSS%E9%81%B8%E6%93%87%E5%99%A8/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/clip-path/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
@@ -1167,20 +1181,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/drop-shadow/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/CSS/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/CSS%E9%81%B8%E6%93%87%E5%99%A8/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1216,27 +1216,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/dvh/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/%E9%80%9A%E7%94%A8%E9%81%B8%E6%93%87%E5%99%A8/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/%E9%80%9A%E9%85%8D%E9%81%B8%E6%93%87%E5%99%A8/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/Universal-Selector/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1285,27 +1264,6 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/Travis-CI/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/Github-Pages/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/Travis-CI-%E6%95%99%E5%AD%B8/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/ngrok/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
@@ -1341,14 +1299,42 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/Git/</loc>
+    <loc>https://happy9990929.github.io/tags/%E9%80%9A%E7%94%A8%E9%81%B8%E6%93%87%E5%99%A8/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/Git%E6%8C%87%E4%BB%A4/</loc>
+    <loc>https://happy9990929.github.io/tags/%E9%80%9A%E9%85%8D%E9%81%B8%E6%93%87%E5%99%A8/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/Universal-Selector/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/Travis-CI/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/Github-Pages/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/Travis-CI-%E6%95%99%E5%AD%B8/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1370,6 +1356,20 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/vite-scss%E5%85%B1%E7%94%A8%E8%AE%8A%E6%95%B8/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/Git/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/Git%E6%8C%87%E4%BB%A4/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1405,6 +1405,27 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/icoMoon/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/alert/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/comfirm/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/prompt/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1580,27 +1601,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/ready/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/alert/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/comfirm/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/prompt/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1943,34 +1943,6 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/MongoDB/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/MongoDB%E5%AE%89%E8%A3%9D/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/mongodb-download%E6%95%99%E5%AD%B8/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/MongoDB-Shell/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/node-import/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
@@ -1979,6 +1951,20 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/node-export/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/MongoDB/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/MongoDB-Shell/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2007,6 +1993,27 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/MongoDB-Shell-create/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/MongoDB%E5%AE%89%E8%A3%9D/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/mongodb-download%E6%95%99%E5%AD%B8/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/nodemon/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2055,7 +2062,14 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/nodemon/</loc>
+    <loc>https://happy9990929.github.io/tags/nodeJs/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/npm/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2097,14 +2111,21 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/nodeJs/</loc>
+    <loc>https://happy9990929.github.io/tags/npm-ci/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/npm/</loc>
+    <loc>https://happy9990929.github.io/tags/npm-install/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/package-lock%E8%A2%AB%E6%9B%B4%E6%96%B0/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2140,27 +2161,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/ckeditor5%E5%9C%96%E7%89%87/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/npm-ci/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/npm-install/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/package-lock%E8%A2%AB%E6%9B%B4%E6%96%B0/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2426,14 +2426,14 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/event-handler/</loc>
+    <loc>https://happy9990929.github.io/tags/Fetch/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/Fetch/</loc>
+    <loc>https://happy9990929.github.io/tags/event-handler/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2482,6 +2482,20 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/React%E6%99%82%E9%96%93%E8%BB%B8/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/React%E6%AD%B7%E5%8F%B2/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/React-Hooks/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
@@ -2517,20 +2531,6 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/React%E6%99%82%E9%96%93%E8%BB%B8/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/React%E6%AD%B7%E5%8F%B2/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/require/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
@@ -2539,6 +2539,13 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/jsx/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/React-Portal/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2622,13 +2629,6 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/React-Portal/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://happy9990929.github.io/tags/store/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
@@ -2692,14 +2692,14 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/createAsyncThunk/</loc>
+    <loc>https://happy9990929.github.io/tags/Redux-DevTools/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/Redux-DevTools/</loc>
+    <loc>https://happy9990929.github.io/tags/createAsyncThunk/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -3000,14 +3000,7 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/%E4%B8%80%E6%9C%AC%E6%9B%B8%E7%B5%82%E7%B5%90%E4%BD%A0%E7%9A%84%E6%8B%96%E5%BB%B6%E7%97%87/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/%E6%8B%96%E5%BB%B6%E7%97%87/</loc>
+    <loc>https://happy9990929.github.io/tags/useRef/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -3021,7 +3014,14 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/tags/useRef/</loc>
+    <loc>https://happy9990929.github.io/tags/%E4%B8%80%E6%9C%AC%E6%9B%B8%E7%B5%82%E7%B5%90%E4%BD%A0%E7%9A%84%E6%8B%96%E5%BB%B6%E7%97%87/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://happy9990929.github.io/tags/%E6%8B%96%E5%BB%B6%E7%97%87/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -3413,6 +3413,13 @@
   </url>
   
   <url>
+    <loc>https://happy9990929.github.io/tags/HTTP-Header/</loc>
+    <lastmod>2024-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://happy9990929.github.io/tags/HTTP-%E7%8B%80%E6%85%8B%E7%A2%BC/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
@@ -3421,13 +3428,6 @@
   
   <url>
     <loc>https://happy9990929.github.io/tags/HTTP-Status-Codes/</loc>
-    <lastmod>2024-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://happy9990929.github.io/tags/HTTP-Header/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -3548,14 +3548,14 @@
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/categories/jQuery/</loc>
+    <loc>https://happy9990929.github.io/categories/Javascript/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://happy9990929.github.io/categories/Javascript/</loc>
+    <loc>https://happy9990929.github.io/categories/jQuery/</loc>
     <lastmod>2024-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
