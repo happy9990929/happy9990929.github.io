@@ -4,7 +4,34 @@
   
     
     <entry>
-      <title>:first-of-type &amp; :last-of-type 第一與最後的類型元素</title>
+      <title>Day18-:nth-of-type 針對類型元素任你挑</title>
+      <link href="2024/10/27/css-nth-of-type/"/>
+      <url>2024/10/27/css-nth-of-type/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://imgur.com/ClD2DAT.jpg" alt="nth-of-type"></p><p>在先前的文章中，我們介紹了 <a href="https://ithelp.ithome.com.tw/articles/10360878">:nth-child</a>，它讓我們能根據所有同層元素的位置進行選取。而這次要介紹的 <code>:nth-of-type</code>，則是針對<strong>相同類型</strong>的元素進行篩選。</p><a id="more"></a><p>這意味著，如果有不同類型的元素混合在同一層中，<code>:nth-of-type</code> 只會對指定的元素類型生效，忽略其他類型的元素。例如，如果你要選取一個層級中的第三個 <code>&lt;div&gt;</code> 元素，其他類型的元素如 <code>&lt;p&gt;</code> 就不會干擾選取結果。<br><img src="https://imgur.com/qdRM7CX.jpg" alt="nth-of-type"></p><h1 id="💠-nth-of-type-基本用法"><a href="#💠-nth-of-type-基本用法" class="headerlink" title="💠:nth-of-type 基本用法"></a>💠<code>:nth-of-type</code> 基本用法</h1><p><code>:nth-of-type</code> 的使用方式與 <code>:nth-child</code> 幾乎相同。如果你了解 <code>:nth-child</code> 的語法，使用 <code>:nth-of-type</code> 也會輕而易舉。它會根據<strong>相同類型</strong>的兄弟元素來進行篩選。</p><h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">選擇器<span class="selector-pseudo">:nth-of-type(an+b)</span> &#123;</span><br><span class="line">屬性名: 屬性值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>選取<strong>同層同類型</strong>的元素中，符合 <code>an+b</code> 位置的元素：</p><ul><li><code>a</code>：元素的間隔數值，決定每隔幾個元素選一次</li><li><code>n</code>：一個自然數，從 0 開始遞增 (0, 1, 2, 3…)，代表每次計算的倍數</li><li><code>b</code>：起始位置的偏移量，決定從哪個位置開始選取<br/><br/></li></ul><h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p>一起試試：<a href="https://codepen.io/bobee/pen/rNXxaJz">[CODEPEN]</a></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;outer&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>p<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>p<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>p<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>p<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>p<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span>div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><br/><br/><h3 id="1-選中單個同類型元素"><a href="#1-選中單個同類型元素" class="headerlink" title="1. 選中單個同類型元素"></a><strong>1. 選中單個同類型元素</strong></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-of-type(3)</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: gold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>選中 <code>.outer</code> 底下第三個為 <code>&lt;div&gt;</code> 的元素，這裡的 <code>:nth-of-type(3)</code> 等同於公式 <code>0n + 3</code></p><p><img src="https://imgur.com/h2VPczz.jpg" alt="nth-of-type"><br><br/><br><br/></p><h3 id="2-選中偶數同類型元素"><a href="#2-選中偶數同類型元素" class="headerlink" title="2. 選中偶數同類型元素"></a><strong>2. 選中偶數同類型元素</strong></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-of-type(2n)</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: gold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>這會選取所有偶數位置的 <code>&lt;div&gt;</code> 元素，類似寫法還可以使用 <code>even</code> 關鍵字：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-of-type(even)</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: gold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="https://imgur.com/QfqV7Py.jpg" alt="nth-of-type"><br><br/><br><br/></p><h3 id="3-選中奇數同類型元素"><a href="#3-選中奇數同類型元素" class="headerlink" title="3. 選中奇數同類型元素"></a><strong>3. 選中奇數同類型元素</strong></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-of-type(2n+1)</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: gold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>這樣會選中所有奇數位置的 <code>&lt;div&gt;</code> 元素，<code>odd</code> 關鍵字也能達到相同效果：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-of-type(odd)</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: gold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="https://imgur.com/8uZzcY3.jpg" alt="nth-of-type"><br><br/><br><br/></p><h3 id="4-選中特定規則同類型元素"><a href="#4-選中特定規則同類型元素" class="headerlink" title="4. 選中特定規則同類型元素"></a><strong>4. 選中特定規則同類型元素</strong></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-of-type(3n+2)</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: gold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>這將選擇 <code>.outer</code> 中的第 2、5、8、11… 等等位置的 <code>&lt;div&gt;</code> 元素，偏移量為 2，且每次間隔 3 個。</p><p><img src="https://imgur.com/RkVR9Py.jpg" alt="nth-of-type"><br><br/><br><br/></p><h3 id="隨堂小測驗"><a href="#隨堂小測驗" class="headerlink" title="隨堂小測驗"></a>隨堂小測驗</h3><p>Q：如果要選中前五個 <code>&lt;div&gt;</code> 元素怎麼寫呢？</p><p><img src="https://imgur.com/KIkfH4i.jpg" alt="nth-of-type"></p><p>Ａ：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-of-type(-n</span> + 5) &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: gold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>-n+5</code> 的意思是選擇<strong>前 5 個</strong> <code>&lt;div&gt;</code> 元素。這種寫法的邏輯是通過使用負數範圍來逆向選取，也就是從第 1 個元素到第 5 個元素的範圍內都會被選中。</p><hr><h1 id="💠-總結"><a href="#💠-總結" class="headerlink" title="💠 總結"></a>💠 總結</h1><p><code>:nth-of-type</code> 是一個非常實用的選擇器，能幫助我們在相同類型的元素中依次篩選特定項目。無論是選中單個元素、偶數或奇數位置，還是根據複雜的規則進行篩選，<code>:nth-of-type</code> 提供了靈活的控制方式，特別是在處理含有不同類型混合的兄弟元素時，能夠精準地針對指定類型進行樣式設置。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CSS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CSS </tag>
+            
+            <tag> :nth-of-type </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Day17-:first-of-type &amp; :last-of-type 第一與最後的類型元素</title>
       <link href="2024/10/26/css-first-of-type/"/>
       <url>2024/10/26/css-first-of-type/</url>
       
@@ -2405,13 +2432,13 @@
             
             <tag> Redux Toolkit </tag>
             
+            <tag> createAsyncThunk </tag>
+            
             <tag> configureStore </tag>
             
             <tag> useSelector </tag>
             
             <tag> useDispatch </tag>
-            
-            <tag> createAsyncThunk </tag>
             
             <tag> Redux 教學 </tag>
             
@@ -2831,9 +2858,9 @@
       
         <tags>
             
-            <tag> Javascript </tag>
-            
             <tag> Math </tag>
+            
+            <tag> Javascript </tag>
             
             <tag> Math.max </tag>
             
@@ -3708,9 +3735,9 @@
             
             <tag> ES6 </tag>
             
-            <tag> promise </tag>
-            
             <tag> Javascript </tag>
+            
+            <tag> promise </tag>
             
         </tags>
       
