@@ -205,6 +205,119 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/10/12/vue-nuxt-localStorage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/0vzcTMQ.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="專職 Freelancer 自由工作者，專門處理前端 Vue.js、React.js 各大小網站，製作公司官網、購物車系統、公家機構網站、LINE LIFF 活動，歡迎同好一起互相交流 😄 lala9990929@gmail.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala Code">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/12/vue-nuxt-localStorage/" class="post-title-link" itemprop="url">在 Nuxt 重新包裝 cookie 與 localStorage 等方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-10-12 20:37:20" itemprop="dateCreated datePublished" datetime="2021-10-12T20:37:20+08:00">2021-10-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-10-14 00:13:25" itemprop="dateModified" datetime="2021-10-14T00:13:25+08:00">2021-10-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue-Nuxt/" itemprop="url" rel="index"><span itemprop="name">Vue-Nuxt</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/10/12/vue-nuxt-localStorage/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/10/12/vue-nuxt-localStorage/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://imgur.com/mRrJH3R.jpg" alt="Imgur"></p>
+<p>在開發網頁時，或多或少會用到 localStorage 的方法去存取資料，在取得物件時，需做一些 JSON 的轉換，便能將資料取出</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">localStorage</span>.setItem(<span class="string">&#x27;data&#x27;</span>, <span class="built_in">JSON</span>.stringify(&#123; <span class="attr">name</span>: <span class="string">&#x27;bobee&#x27;</span> &#125;));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.parse(<span class="built_in">localStorage</span>.getItem(<span class="string">&#x27;data&#x27;</span>)));</span><br></pre></td></tr></table></figure>
+<p>但每次都要這樣轉換其實有點麻煩，如果有很多地方都要使用這個方法，就必須寫一堆 JSON.stringify、JSON.parse，為了更方便使用，可以將方法包裝，供全站使用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/12/vue-nuxt-localStorage/" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <div style="margin-top: 100px;">❤️</div>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 0 auto 100px;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/10/11/vue-nuxt-plugins/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1195,143 +1308,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2021/08/16/js-cookie/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.imgur.com/0vzcTMQ.jpg">
-      <meta itemprop="name" content="Lala Wang">
-      <meta itemprop="description" content="專職 Freelancer 自由工作者，專門處理前端 Vue.js、React.js 各大小網站，製作公司官網、購物車系統、公家機構網站、LINE LIFF 活動，歡迎同好一起互相交流 😄 lala9990929@gmail.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lala Code">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/16/js-cookie/" class="post-title-link" itemprop="url">瀏覽器資料儲存-Cookie、LocalStorage、SessionStorage</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-08-16 20:47:34" itemprop="dateCreated datePublished" datetime="2021-08-16T20:47:34+08:00">2021-08-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2022-04-21 11:37:03" itemprop="dateModified" datetime="2022-04-21T11:37:03+08:00">2022-04-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2021/08/16/js-cookie/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/08/16/js-cookie/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <table>
-<thead>
-<tr>
-<th></th>
-<th>Cookie</th>
-<th>LocalStorage</th>
-<th>SessionStorage</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>資料大小</td>
-<td>≤4KB</td>
-<td>≥5MB</td>
-<td>≥5MB</td>
-</tr>
-<tr>
-<td>生命週期</td>
-<td>預設資料失效是關閉瀏覽器，也可以設定失效時間</td>
-<td>不會過期，除非手動清除</td>
-<td>每次分頁或瀏覽器關掉後就會清除</td>
-</tr>
-<tr>
-<td>與 Server 溝通</td>
-<td>每次都會攜帶在 HTTP 中，保存過多數據會帶來效能問題</td>
-<td>僅在瀏覽器保存，不參與 Server 溝通</td>
-<td>僅在瀏覽器保存，不參與 Server 溝通</td>
-</tr>
-</tbody></table>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/16/js-cookie/" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-  <!-- 文章內廣告 -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
-  crossorigin="anonymous"></script>
-  <div style="margin-top: 100px;">❤️</div>
-  <ins class="adsbygoogle"
-      style="display:block; text-align:center; margin: 0 auto 100px;"
-      data-ad-layout="in-article"
-      data-ad-format="fluid"
-      data-ad-client="ca-pub-3584202217117217"
-      data-ad-slot="6664330716"></ins>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1403,7 +1379,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-count">152</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -1416,7 +1392,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">388</span>
+        <span class="site-state-item-count">390</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
