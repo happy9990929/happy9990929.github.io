@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="EnfPA05znVllHLKOxBPrH2mAB6zWCP-35P7b_MHEPmM">
+
+<meta property="og:image" content="https://imgur.com/yLTIWcF.jpg" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="565" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3R8WG0BM0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3R8WG0BM0H');
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"happy9990929.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="除了結構偽類外，還有一些可以控制外觀的「UI 偽類」，UI 偽類選擇器專門用於選擇與用戶介面元素狀態相關的元素，如複選框、單選框等。這些選擇器能夠根據元素的狀態進行樣式調整。 本篇將會介紹 :checked ，用於表單中複選框、單選框被選中的樣式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day24-:checked 玩轉複選框和單選框的選中效果">
+<meta property="og:url" content="https://happy9990929.github.io/2024/11/02/css-checked/index.html">
+<meta property="og:site_name" content="Lala Code">
+<meta property="og:description" content="除了結構偽類外，還有一些可以控制外觀的「UI 偽類」，UI 偽類選擇器專門用於選擇與用戶介面元素狀態相關的元素，如複選框、單選框等。這些選擇器能夠根據元素的狀態進行樣式調整。 本篇將會介紹 :checked ，用於表單中複選框、單選框被選中的樣式。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://imgur.com/QHY9EmF.jpg">
+<meta property="og:image" content="https://imgur.com/5W6CvDB.jpg">
+<meta property="og:image" content="https://imgur.com/15aJx0z.jpg">
+<meta property="og:image" content="https://imgur.com/Wo0aF22.jpg">
+<meta property="article:published_time" content="2024-11-02T03:15:07.000Z">
+<meta property="article:modified_time" content="2024-11-02T03:21:17.059Z">
+<meta property="article:author" content="Lala Wang">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content=":checked">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgur.com/QHY9EmF.jpg">
+
+<link rel="canonical" href="https://happy9990929.github.io/2024/11/02/css-checked/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Day24-:checked 玩轉複選框和單選框的選中效果 | Lala Code</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lala Code</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Lala 的前端大補帖，歡迎一起鑽研前端技術😊</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://happy9990929.github.io/2024/11/02/css-checked/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/0vzcTMQ.jpg">
+      <meta itemprop="name" content="Lala Wang">
+      <meta itemprop="description" content="專職 Freelancer 自由工作者，專門處理前端 Vue.js、React.js 各大小網站，製作公司官網、購物車系統、公家機構網站、LINE LIFF 活動，歡迎同好一起互相交流 😄 lala9990929@gmail.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lala Code">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day24-:checked 玩轉複選框和單選框的選中效果
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2024-11-02 11:15:07 / 修改時間：11:21:17" itemprop="dateCreated datePublished" datetime="2024-11-02T11:15:07+08:00">2024-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2024/11/02/css-checked/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/11/02/css-checked/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://imgur.com/QHY9EmF.jpg" alt="checked"></p>
+<p>除了結構偽類外，還有一些可以控制外觀的「UI 偽類」，UI 偽類選擇器專門用於選擇與用戶介面元素狀態相關的元素，如複選框、單選框等。這些選擇器能夠根據元素的狀態進行樣式調整。</p>
+<p>本篇將會介紹 <code>:checked</code> ，用於表單中<strong>複選框</strong>、<strong>單選框</strong>被選中的樣式。</p>
+<a id="more"></a>
+<br/>
+<br/>
+
+<h1 id="💠-checked-基本用法"><a href="#💠-checked-基本用法" class="headerlink" title="💠 :checked 基本用法"></a>💠 <code>:checked</code> 基本用法</h1><h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">選擇器<span class="selector-pseudo">:checked</span> &#123;</span><br><span class="line">  屬性名: 屬性值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>適用於被選中的 <code>radio</code> 或 <code>checkbox</code> 元素</li>
+</ul>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><h3 id="範例一：選中-radio-單選框"><a href="#範例一：選中-radio-單選框" class="headerlink" title="範例一：選中 radio 單選框"></a>範例一：選中 <code>radio</code> 單選框</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">id</span>=<span class="string">&quot;male&quot;</span> <span class="attr">value</span>=<span class="string">&quot;male&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">checked</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;male&quot;</span>&gt;</span>male<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">id</span>=<span class="string">&quot;female&quot;</span> <span class="attr">value</span>=<span class="string">&quot;female&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;female&quot;</span>&gt;</span>female<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&quot;radio&quot;</span>]</span><span class="selector-pseudo">:checked</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://imgur.com/5W6CvDB.jpg" alt="checked"><br><br/><br><br/></p>
+<h3 id="範例二：選中-checkbox-單選框"><a href="#範例二：選中-checkbox-單選框" class="headerlink" title="範例二：選中 checkbox 單選框"></a>範例二：選中 <code>checkbox</code> 單選框</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;apple&quot;</span> <span class="attr">value</span>=<span class="string">&quot;apple&quot;</span> <span class="attr">name</span>=<span class="string">&quot;fruit&quot;</span> <span class="attr">checked</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;apple&quot;</span>&gt;</span>apple<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;banana&quot;</span> <span class="attr">value</span>=<span class="string">&quot;banana&quot;</span> <span class="attr">name</span>=<span class="string">&quot;fruit&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;banana&quot;</span>&gt;</span>banana<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;grape&quot;</span> <span class="attr">value</span>=<span class="string">&quot;grape&quot;</span> <span class="attr">name</span>=<span class="string">&quot;fruit&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;grape&quot;</span>&gt;</span>grape<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&quot;checkbox&quot;</span>]</span><span class="selector-pseudo">:checked</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://imgur.com/15aJx0z.jpg" alt="checked"></p>
+<br/>
+但你可能會發現，不管是 radio 或是 checkbox，我們設定了背景色卻沒有變化，這些元素的樣式是由瀏覽器本身進行預設渲染的，瀏覽器通常不允許直接更改它們的內建樣式，不過如果我們只是想改變它的主題顏色，可以使用 accent-color
+
+<h3 id="accent-color"><a href="#accent-color" class="headerlink" title="accent-color"></a>accent-color</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:checked</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">accent-color</span>: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p class="codepen" data-height="300" data-default-tab="css,result" data-slug-hash="yLmJYdr" data-pen-title="checked" data-user="bobee" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/bobee/pen/yLmJYdr">
+  checked</a> by Lala (<a target="_blank" rel="noopener" href="https://codepen.io/bobee">@bobee</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+<p>當你只需要修改 <code>checkbox</code> 或 <code>radio</code> 的外觀，且不希望過多影響原生的樣式和行為時，<code>accent-color</code> 可以快速解決顏色一致性的問題。</p>
+<p>瀏覽器會自動計算與 <code>accent-color</code> 對應的其他顏色，通常會依據<strong>無障礙設計標準</strong>，以確保對比度與選中狀態下的可讀性，不過有時候的配色可能不會依我們的預期顯示，或是需要更多其他的樣式(如圓角、線框等)，就得自己再客製表單元素的樣式。<br><br/><br><br/></p>
+<h1 id="💠-實務應用：客製化-checkbox-元素"><a href="#💠-實務應用：客製化-checkbox-元素" class="headerlink" title="💠 實務應用：客製化 checkbox 元素"></a>💠 實務應用：客製化 <code>checkbox</code> 元素</h1><p>網站設計經常需要客製化 <code>checkbox</code> 的外觀。我們可以隱藏原生的 <code>checkbox</code>，並用 <code>&lt;label&gt;</code> 製作一個自定義的勾選樣式。</p>
+<p><strong>步驟一</strong>：先把 <code>checkbox</code>、<code>&lt;label&gt;</code> 放上，這沒什麼問題</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;checkbox&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;agree&quot;</span> <span class="attr">value</span>=<span class="string">&quot;agree&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__input&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;agree&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__text&quot;</span>&gt;</span>我同意以上條款<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<br/>
+
+<p><strong>步驟二</strong>：將 <code>checkbox</code> 隱藏，並用 <code>&lt;label&gt;</code> 做一個仿的 <code>checkbox</code> 樣式，利用 <code>&lt;label&gt;</code> 屬性 <code>for</code> 與 <code>id</code> 的關聯特性，可以直接勾選到真正的 <code>&lt;input type=”checkbox”&gt;</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;checkbox&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;agree&quot;</span> <span class="attr">value</span>=<span class="string">&quot;agree&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__input&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;agree&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__label&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__box&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__check&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__icon&quot;</span>&gt;</span>✔<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;agree&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__text&quot;</span>&gt;</span>我同意以上條款<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.checkbox</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 隱藏 checkbox input */</span></span><br><span class="line"><span class="selector-class">.checkbox__input</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Label 文字樣式 */</span></span><br><span class="line"><span class="selector-class">.checkbox__label</span> &#123;</span><br><span class="line">  <span class="attribute">cursor</span>: pointer;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">28px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">28px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 自定義的方框 */</span></span><br><span class="line"><span class="selector-class">.checkbox__box</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#4d4d4d</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: white;</span><br><span class="line">  <span class="attribute">transition</span>: border-color <span class="number">0.3s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 勾選的樣式 */</span></span><br><span class="line"><span class="selector-class">.checkbox__check</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">color</span>: black;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://imgur.com/Wo0aF22.jpg" alt="checked"><br><br/></p>
+<p><strong>步驟三</strong>：加上選中時 <code>checked</code> 、<code>hover</code> 樣式，搭配顏色樣式，將勾勾變成白色</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.checkbox__check</span> &#123;</span><br><span class="line">	...</span><br><span class="line">  <span class="selector-tag">color</span>: <span class="selector-tag">white</span>;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* checkbox hover 時的邊框變化 */</span></span><br><span class="line"><span class="selector-class">.checkbox</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.checkbox__box</span> &#123;</span><br><span class="line">  <span class="attribute">border-color</span>: gold;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 勾選狀態下的樣式 */</span></span><br><span class="line"><span class="selector-class">.checkbox__input</span><span class="selector-pseudo">:checked</span> + <span class="selector-class">.checkbox__label</span> <span class="selector-class">.checkbox__check</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.checkbox__input</span><span class="selector-pseudo">:checked</span> + <span class="selector-class">.checkbox__label</span> <span class="selector-class">.checkbox__box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: gold;</span><br><span class="line">  <span class="attribute">border-color</span>: orange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p class="codepen" data-height="300" data-default-tab="css,result" data-slug-hash="mdNEPPo" data-pen-title="custom-checked" data-user="bobee" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/bobee/pen/mdNEPPo">
+  custom-checked</a> by Lala (<a target="_blank" rel="noopener" href="https://codepen.io/bobee">@bobee</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+
+<p>這樣就完成了一個簡單的客製化 <code>checkbox</code><br><br/><br/></p>
+<p><strong>完整程式碼</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;checkbox&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;agree&quot;</span> <span class="attr">value</span>=<span class="string">&quot;agree&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__input&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;agree&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__label&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__box&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__check&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__icon&quot;</span>&gt;</span>✔<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;agree&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox__text&quot;</span>&gt;</span>我同意以上條款<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.checkbox</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 隱藏 checkbox input */</span></span><br><span class="line"><span class="selector-class">.checkbox__input</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Label 文字樣式 */</span></span><br><span class="line"><span class="selector-class">.checkbox__label</span> &#123;</span><br><span class="line">  <span class="attribute">cursor</span>: pointer;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">28px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">28px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 自定義的方框 */</span></span><br><span class="line"><span class="selector-class">.checkbox__box</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#4d4d4d</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: white;</span><br><span class="line">  <span class="attribute">transition</span>: border-color <span class="number">0.3s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 勾選的樣式 */</span></span><br><span class="line"><span class="selector-class">.checkbox__check</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Checkbox hover 時的邊框變化 */</span></span><br><span class="line"><span class="selector-class">.checkbox</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.checkbox__box</span> &#123;</span><br><span class="line">  <span class="attribute">border-color</span>: gold;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 勾選狀態下的樣式 */</span></span><br><span class="line"><span class="selector-class">.checkbox__input</span><span class="selector-pseudo">:checked</span> + <span class="selector-class">.checkbox__label</span> <span class="selector-class">.checkbox__check</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.checkbox__input</span><span class="selector-pseudo">:checked</span> + <span class="selector-class">.checkbox__label</span> <span class="selector-class">.checkbox__box</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: gold;</span><br><span class="line">  <span class="attribute">border-color</span>: orange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="💠-總結"><a href="#💠-總結" class="headerlink" title="💠 總結"></a>💠 總結</h1><ul>
+<li><code>:checked</code> 是一個 UI 偽類選擇器，專門處理表單元素的狀態樣式，如單選框或複選框。</li>
+<li>瀏覽器對表單元素有預設的樣式控制，但透過 <code>accent-color</code> 可以輕鬆修改其主題色。</li>
+<li>如果需要更複雜的樣式客製化，可以結合隱藏原生元素並用 <code>label</code> 自定義外觀。</li>
+</ul>
+
+        <br/><br/>
+        <div>
+          <h1>🚀實體工作坊分享</h1>
+          <h2><a target="_blank" rel="noopener" href="https://www.accupass.com/event/2410261144571655847569">玩轉 Web頁面的前端技術(HTML/CSS/JS) 一日體驗課</a></h2>
+          最近時賦學苑開了實體體驗課，即使你對程式碼沒有概念也能上手！Lala 會帶你一起做出一個個人品牌形象網站，帶你快速了解前端的開發流程，快跟我們一起玩轉 Web 吧！<br /><br />
+          <a target="_blank" rel="noopener" href="https://www.accupass.com/event/2410261144571655847569">
+            <img src='https://imgur.com/WOJDlkw.jpg' />
+          </a>
+
+          <br/><br/>
+          <h1>🚀線上課程分享</h1>
+          線上課程可以加速學習的時間，省去了不少看文件的時間XD，以下是我推薦的一些課程<br/>
+          想學習更多關於前後端的線上課程，可以參考看看。
+
+          <h2><a href="https://tinyurl.com/29pcooue" target="_blank">Hahow</a></h2>
+          Hahow 有各式各樣類型的課程，而且是無限次數觀看，對學生或上班族而言，不用擔心被時間綁住
+          <br/><br/>
+          <a target="_blank" rel="noopener" href='https://affclk.site/track/clicks/4850/ce2bc2bf910026d7fd9cbd2e8d2b891473624acd70ebe3e25826bf016f015f?subid_1=&subid_2=&subid_3=&subid_4=&subid_5=&t=https%3A%2F%2Fhahow.in%2Fapselect-event%3Fmts_s%3Dap%26mts_m%3Dao%26mts_c%3D19ap'><img src='https://affclk.site/track/imp/img/181684/ce2bc2bf910026d7fd9cbd2e8d2b891473624acd70ebe3e25826bf016f015f?subid_1=&subid_2=&subid_3=&subid_4=&subid_5=' border='0' style='max-width: 700px; width: 100%'/></a>
+          <br/><br/>
+
+          <h2><a href="https://affclkr.online/track/clicks/4305/c627c2bf900222dffa8aec35dc2e9753743940ce71e8e0f1113ff40863075feb" target="_blank">六角學院</a></h2>
+          如果你是初學者，非常推薦六角學院哦！<br/>
+          剛開始轉職也是上了六角的課，非常的淺顯易懂，最重要的是，隨時還有線上的助教幫你解決問題！<br/>
+
+          <a target="_blank" rel="noopener" href='https://vbtrax.com/track/clicks/4305/ce2bc2bd9e0522dcefcda67f8835ce13286849cc73e8f0ab416db6066701?subid_1=&subid_2=&subid_3=&subid_4=&subid_5='><img src='https://i.imgur.com/mqjfVQr.jpg' /></a>
+          <br/><br/>
+
+          <h2><a href="https://abzcoupon.com/track/clicks/4546/c627c2bf900222dffb83ec35dc2e9753743940ce71e8e0f1113ff40863015be8" target="_blank">Udemy</a></h2>
+          Udemy 裡的課程非常的多，品質普遍不錯，且價格都滿實惠的，CP值很高！<br/>
+          也是很多工程師推薦的線上課程網站。
+          <a target="_blank" rel="noopener" href='https://abzcoupon.com/track/clicks/4546/c627c2bf900222dffb83ec35dc2e9753743940ce71e8e0f1113ff40863015be8'><img src='https://i.imgur.com/5eOGFSF.jpg' /></a>
+        </div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/checked/" rel="tag"># :checked</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/11/01/css-not/" rel="prev" title="Day23-:not 不選擇的藝術，如何用 CSS 控制排除">
+      <i class="fa fa-chevron-left"></i> Day23-:not 不選擇的藝術，如何用 CSS 控制排除
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  <!-- 文章內廣告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+  crossorigin="anonymous"></script>
+  <div style="margin-top: 100px;">❤️</div>
+  <ins class="adsbygoogle"
+      style="display:block; text-align:center; margin: 0 auto 100px;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="6664330716"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%F0%9F%92%A0-checked-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">💠 :checked 基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AA%9E%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">語法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">範例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B%E4%B8%80%EF%BC%9A%E9%81%B8%E4%B8%AD-radio-%E5%96%AE%E9%81%B8%E6%A1%86"><span class="nav-number">1.2.1.</span> <span class="nav-text">範例一：選中 radio 單選框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B%E4%BA%8C%EF%BC%9A%E9%81%B8%E4%B8%AD-checkbox-%E5%96%AE%E9%81%B8%E6%A1%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">範例二：選中 checkbox 單選框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#accent-color"><span class="nav-number">1.2.3.</span> <span class="nav-text">accent-color</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%F0%9F%92%A0-%E5%AF%A6%E5%8B%99%E6%87%89%E7%94%A8%EF%BC%9A%E5%AE%A2%E8%A3%BD%E5%8C%96-checkbox-%E5%85%83%E7%B4%A0"><span class="nav-number">2.</span> <span class="nav-text">💠 實務應用：客製化 checkbox 元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%F0%9F%92%A0-%E7%B8%BD%E7%B5%90"><span class="nav-number">3.</span> <span class="nav-text">💠 總結</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lala Wang"
+      src="https://i.imgur.com/0vzcTMQ.jpg">
+  <p class="site-author-name" itemprop="name">Lala Wang</p>
+  <div class="site-description" itemprop="description">專職 Freelancer 自由工作者，專門處理前端 Vue.js、React.js 各大小網站，製作公司官網、購物車系統、公家機構網站、LINE LIFF 活動，歡迎同好一起互相交流 😄 lala9990929@gmail.com</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">396</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+      </div>
+
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+     crossorigin="anonymous"></script>
+    <!-- 右側欄廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block; margin-top: 50px;"
+        data-ad-client="ca-pub-3584202217117217"
+        data-ad-slot="7965750193"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lala Wang</span>
+</div>
+
+  <!--底部廣告-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3584202217117217"
+      crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="7822279960"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!--底部廣告-->
+
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-3584202217117217"
+      data-ad-slot="5706240756"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://happy9990929.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://happy9990929.github.io/2024/11/02/css-checked/";
+    this.page.identifier = "2024/11/02/css-checked/";
+    this.page.title = "Day24-:checked 玩轉複選框和單選框的選中效果";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://happy9990929.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
