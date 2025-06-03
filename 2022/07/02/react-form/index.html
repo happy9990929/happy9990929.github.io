@@ -53,8 +53,8 @@
 <meta property="article:tag" content="react form">
 <meta property="article:tag" content="react input">
 <meta property="article:tag" content="react select">
-<meta property="article:tag" content="react checkbox">
 <meta property="article:tag" content="react radio">
+<meta property="article:tag" content="react checkbox">
 <meta property="article:tag" content="react file">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://imgur.com/PWYji3a.jpg">
@@ -306,14 +306,6 @@
 <h1 id="檔案上傳與圖片預覽-file"><a href="#檔案上傳與圖片預覽-file" class="headerlink" title="檔案上傳與圖片預覽-file"></a>檔案上傳與圖片預覽-file</h1><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">file</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    img: <span class="string">&#x27;&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  changeImg = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 取得第0筆檔案</span></span><br><span class="line">    <span class="keyword">const</span> file = e.target.files[<span class="number">0</span>];</span><br><span class="line">    <span class="comment">// FileReader 讀取瀏覽器選中的檔案</span></span><br><span class="line">    <span class="keyword">const</span> fileReader = <span class="keyword">new</span> FileReader();</span><br><span class="line">    <span class="comment">// 讀取完改變 img</span></span><br><span class="line">    fileReader.addEventListener(<span class="string">&#x27;load&#x27;</span>, <span class="built_in">this</span>.fileLoad);</span><br><span class="line">    <span class="comment">// 將圖片繪出，轉換成 Base64 編碼</span></span><br><span class="line">    fileReader.readAsDataURL(file);</span><br><span class="line">  &#125;</span><br><span class="line">  fileLoad = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 此處的 e 為 fileReader</span></span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      img: e.target.result</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input type=<span class="string">&quot;file&quot;</span> onChange=&#123;<span class="built_in">this</span>.changeImg&#125;/&gt;</span><br><span class="line">        &lt;img src=&#123;<span class="built_in">this</span>.state.img&#125; width=<span class="string">&quot;100%&quot;</span> /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> file;</span><br></pre></td></tr></table></figure>
         <br/><br/>
         <div>
-          <h1>🚀實體工作坊分享</h1>
-          <h2><a target="_blank" rel="noopener" href="https://www.accupass.com/event/2412270735131862049065">玩轉 Web 頁面的前端技術(HTML/CSS/JS) 一日體驗課</a></h2>
-          最近時賦學苑開了實體體驗課，即使你對程式碼沒有概念也能上手！Lala 會帶你一起做出一個個人品牌形象網站，帶你快速了解前端的開發流程，快跟我們一起玩轉 Web 吧！<br /><br />
-          <a target="_blank" rel="noopener" href="https://www.accupass.com/event/2412270735131862049065">
-            <img src='https://imgur.com/WOJDlkw.jpg' />
-          </a>
-
-          <br/><br/>
           <h1>🚀線上課程分享</h1>
           線上課程可以加速學習的時間，省去了不少看文件的時間XD，以下是我推薦的一些課程<br/>
           想學習更多關於前後端的線上課程，可以參考看看。
@@ -347,8 +339,8 @@
               <a href="/tags/react-form/" rel="tag"># react form</a>
               <a href="/tags/react-input/" rel="tag"># react input</a>
               <a href="/tags/react-select/" rel="tag"># react select</a>
-              <a href="/tags/react-checkbox/" rel="tag"># react checkbox</a>
               <a href="/tags/react-radio/" rel="tag"># react radio</a>
+              <a href="/tags/react-checkbox/" rel="tag"># react checkbox</a>
               <a href="/tags/react-file/" rel="tag"># react file</a>
           </div>
 
@@ -461,20 +453,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">164</span>
+          <span class="site-state-item-count">165</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">408</span>
+        <span class="site-state-item-count">410</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
